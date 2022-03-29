@@ -21,10 +21,10 @@ class Stahlhuth extends AVOrgan {
     const ODF="Stahlhuth_positive_ext_four_channels.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
-              "Baumgartner organ from Stahlhuth (Transylvania)\n"
-            . "https://hauptwerk-augustine.info/Stahlhuth.php\n"
+              "Stahlhuth positive organ\n"
+            . "https://hauptwerk-augustine.info/Stahlhuth_positive.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Stahlhuth_positive_ext_four_channels.1.0.organ";
+    const TARGET=self::ROOT . "Stahlhuth_positive_ext_four_channels.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     

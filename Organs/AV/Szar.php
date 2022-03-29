@@ -22,7 +22,7 @@ class Szar extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Renaissance replica from Szár (Paulus Organ Factory, Hungary)\n"
-            . "https://hauptwerk-augustine.info/Szar.php\n"
+            . "https://hauptwerk-augustine.info/Szár-sample--set.php\n"
             . "\n";
     const TARGET=self::ROOT . "Szar-surround two manuals_demo.1.0.organ";
 

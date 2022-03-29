@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class AVOrgan extends \Import\Organ {
     
-    protected int $releaseCrossfadeLengthMs=30;
+    protected int $releaseCrossfadeLengthMs=-1;
 
     /*
      * Create Windchest Groups. 1 per position/division + 1 for all noise effects

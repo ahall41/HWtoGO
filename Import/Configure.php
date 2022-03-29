@@ -464,8 +464,13 @@ abstract Class Configure extends Create {
         elseif(isset($hwdata["Pitch_NormalMIDINoteNumber"])
                 && !empty($hwdata["Pitch_NormalMIDINoteNumber"]))
             return floatval($hwdata["Pitch_NormalMIDINoteNumber"]);
-        else
-            return NULL;
+        elseif(isset($hwdata["SampleFilename"])
+                && !empty($hwdata["SampleFilename"])) {
+            $paths=explode("/", $hwdata["SampleFilename"]);
+            $midi=intval($paths[array_key_last($paths)]);
+            if ($midi>=0 && $midi<=127) return floatval($midi);
+        }
+        return NULL;
     }
 
     /**

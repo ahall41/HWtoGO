@@ -98,10 +98,10 @@ class HWData extends HWReader {
         return $this->cache["ImageSet"][$imageSetid];
     }
 
-    public function imageSetInstance(int $imageSetInstanceid, bool $checkexists=FALSE) : ?array {
+    public function imageSetInstance(int $imageSetInstanceid, bool $softfail=FALSE) : ?array {
         if (!isset($this->cache["ImageSetInstance"]))
             $this->imageSetInstances();
-        if ($checkexists && !isset($this->cache["ImageSetInstance"][$imageSetInstanceid]))
+        if ($softfail && !isset($this->cache["ImageSetInstance"][$imageSetInstanceid]))
             return NULL;
         return $this->cache["ImageSetInstance"][$imageSetInstanceid];
     }
