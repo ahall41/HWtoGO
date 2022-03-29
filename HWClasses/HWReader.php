@@ -21,7 +21,21 @@ class HWReader {
     
     private static $maps=
         ["Combination"=>[	
+                "a"=>"CombinationID",
+                "b"=>"Name",
+                "c"=>"CombinationTypeCode",
+                "d"=>"ActivatingSwitchID",
+                "e"=>"CanEngageControlledSwitches",
+                "f"=>"CanDisengageControlledSwitches",
+                "g"=>"AllowsCapture",
         ],"CombinationElement"=>[	
+                "a"=>"CombinationElementID",
+                "b"=>"CombinationID",
+                "c"=>"ControlledSwitchID",
+                "d"=>"CapturedSwitchID",
+                "e"=>"InitialStoredStateIsEngaged",
+                "f"=>"InvertStoredStateWhenActivating",
+                "g"=>"MemorySwitchID",
         ],"ContinuousControl"=>[	
                 "a"=>"ControlID",
                 "b"=>"Name",
@@ -395,6 +409,14 @@ class HWReader {
     
     public function general() {
         return $this->read("_General")[0];
+    }
+
+    public function combinations() {
+        return $this->read("Combination", "CombinationID");
+    }
+
+    public function combinationElements() {
+        return $this->read("CombinationElement", "CombinationElementID");
     }
 
     public function continuousControls() {

@@ -55,6 +55,52 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("4.4e+2", $walcker["AudioEngine_BasePitchHz"]);
     }
     
+    public function testCombination() {
+        $walcker=self::HWReader(self::Walcker)->combinations();
+        $this->assertEquals(127, sizeof($walcker));
+        $this->assertEquals([
+            'CombinationID' => '1537',
+            'AllowsCapture' => '6',
+            'CombinationTypeCode' => '100',
+            'CanDisengageControlledSwitches' => 'N',
+            'Name' => 'General cancel'
+        ], $walcker[1537]);
+        
+        $skrzatusz=self::HWReader(self::Skrzatusz)->combinations();
+        $this->assertEquals(1, sizeof($skrzatusz));
+        $this->assertEquals([
+            'CombinationID' => '1',
+            'Name' => 'Master',
+            'ActivatingSwitchID' => '',
+            'CanEngageControlledSwitches' => 'Y',
+            'CanDisengageControlledSwitches' => 'Y',
+            'AllowsCapture' => 'Y'
+        ], $skrzatusz[1]);
+    }
+
+    public function testCombinationElement() {
+        $walcker=self::HWReader(self::Walcker)->combinationElements();
+        $this->assertEquals(2623, sizeof($walcker));
+        $this->assertEquals([
+            'CombinationElementID' => '193',
+            'CombinationID' => '1',
+            'ControlledSwitchID' => '2001',
+            'CapturedSwitchID' => '2001'
+        ], $walcker[193]);
+        
+        $skrzatusz=self::HWReader(self::Skrzatusz)->combinationElements();
+        $this->assertEquals(23, sizeof($skrzatusz));
+        $this->assertEquals([
+            'CombinationElementID' => '21',
+            'CombinationID' => '1',
+            'ControlledSwitchID' => '31',
+            'CapturedSwitchID' => '31',
+            'InitialStoredStateIsEngaged' => 'N',
+            'InvertStoredStateWhenActivating' => 'N',
+            'MemorySwitchID' => ''
+        ], $skrzatusz[21]);
+    }
+
     public function testContinuousControl() {
         $utrecht=self::HWReader(self::Utrecht)->continuousControls();
         $this->assertEquals(1322, sizeof($utrecht));
