@@ -390,6 +390,7 @@ class HWReader {
 
         foreach ($xpath->query("//ObjectList$filter") as $objectlist) {
             foreach ($objectlist->childNodes as $node) {
+                if (!$node instanceof \DOMElement) continue;
                 $data=[];
                 foreach ($node->childNodes as $element) {
                     if (array_key_exists($nodename=$element->nodeName, $map))
@@ -399,7 +400,7 @@ class HWReader {
                     if (empty($index))
                         $result[]=$data;
                     else
-                        $result[$data[$index]]=$data;
+                         $result[$data[$index]]=$data;
                 }
             }
         }

@@ -179,10 +179,13 @@ class HWData extends HWReader {
         return $this->cache["Sample"][$sampleid];
     }
     
-    public function rank(int $rankid) : array {
+    public function rank(int $rankid, bool $hardfail=TRUE) : ? array {
         if (!isset($this->cache["Rank"]))
             $this->ranks();
-        return $this->cache["Rank"][$rankid];
+        if ($hardfail || isset($this->cache["Rank"][$rankid]))
+            return $this->cache["Rank"][$rankid];
+        else
+            return [];
     }
     
     public function patchRanks(array $data) {
