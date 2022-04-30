@@ -55,8 +55,11 @@ abstract class SPOrgan extends \Import\Organ {
             foreach ($data["Panels"] as $panelid=>$instances) {
                 foreach ($instances as $layout=>$instanceid) {
                     if ($instanceid!==NULL) {
-                        $pe=$this->getPanel(($panelid*10)+$layout)->GUIElement($enclosure);
-                        $this->configureEnclosureImage($pe, ["InstanceID"=>$instanceid], $layout);
+                        $panel=$this->getPanel(($panelid*10)+$layout, FALSE);
+                        if ($panel!==NULL) {
+                            $pe=$this->getPanel(($panelid*10)+$layout)->GUIElement($enclosure);
+                            $this->configureEnclosureImage($pe, ["InstanceID"=>$instanceid], $layout);
+                        }
                     }
                 }
             }
@@ -79,8 +82,11 @@ abstract class SPOrgan extends \Import\Organ {
                 if ($instance!==NULL 
                         && $this->hwdata->switch($id, TRUE)!==NULL
                         && $instance["DisplayPageID"]==$pageid) {
-                    $pe=$this->getPanel(($pageid*10)+$layoutid)->GUIElement($switch);
-                    $this->configureImage($pe, ["SwitchID"=>$id], $layoutid);
+                    $panel=$this->getPanel(($pageid*10)+$layoutid, FALSE);
+                    if ($panel!==NULL) {
+                        $pe=$panel->GUIElement($switch);
+                        $this->configureImage($pe, ["SwitchID"=>$id], $layoutid);
+                    }
                 }
             }
         }
@@ -187,7 +193,8 @@ abstract class SPOrgan extends \Import\Organ {
     }  
 
     protected function isNoiseSample(array $hwdata): bool {
-        return isset(($rankdata=$this->hwdata->rank($hwdata["RankID"]))["Noise"])
+        $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
+        return isset($rankdata["Noise"])
                 && in_array($rankdata["Noise"], ["StopOn","StopOff","Ambient"]);
     }
 
