@@ -58,7 +58,9 @@ class Pipe extends GOBase {
                     $release=$this->release();
                     parent::set($release, $value);
                     $this->storeRelease=TRUE;
-                    parent::set("${attack}LoadRelease","N"); /** @todo Multiple attacks ??? */
+                    parent::set("LoadRelease","N");
+                    for ($a=1; $a<=$this->AttackCount; $a++)
+                        parent::set(sprintf("Attack%03dLoadRelease", $a), "N");
                     parent::set("${release}MaxKeyPressTime", -1);
                 }
                 break;
