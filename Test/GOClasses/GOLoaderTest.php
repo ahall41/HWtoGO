@@ -15,7 +15,7 @@
 namespace GOClasses;
 require_once (__DIR__ . "/../../GOClasses/GOLoader.php");
 
-class TestClass extends GOLoader {
+class LoaderClass extends GOLoader {
 }
 
 class GOLoaderTest extends \PHPUnit\Framework\TestCase {

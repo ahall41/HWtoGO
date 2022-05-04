@@ -12,25 +12,19 @@ namespace Organs\SP;
 require_once __DIR__ . "/SPOrgan.php";
 
 /**
- * Import Sonus Paradisi Skinner Op 497 to GrandOrgue
+ * Import Sonus Paradisi Doesburg, Martinikerk Walcker Organ to GrandOrgue
  * 
- * Version 1.1
- * - Blower on/off
- * - Enclosure MinAmp=20 + add to Console and Left pages
- * - Manual Bass
- * - Mixer Panel
- *  
  * @author andrew
  */
-class Skinner497 extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Skinner497/";
-    const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.2.organ";
+class Doesburg extends SPOrgan {
+    const ROOT="/GrandOrgue/Organs/Doesburg/";
+    const SOURCE="OrganDefinitions/Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Doesburg, St. Martini, Walcker, DEMO (%s) 1.0.organ";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
-        0=>self::RANKS_DIRECT,   9=>self::RANKS_DIRECT,
-        1=>self::RANKS_DIFFUSE,  7=>self::RANKS_DIFFUSE,
+        1=>self::RANKS_DIRECT,   // x=>self::RANKS_DIRECT !!!
+        0=>self::RANKS_DIFFUSE,  9=>self::RANKS_DIFFUSE,
         4=>self::RANKS_REAR,     8=>self::RANKS_REAR
     ];
     
@@ -40,72 +34,72 @@ class Skinner497 extends SPOrgan {
             1=>[
                 0=>["SetID"=>1030]
                ],
-            2=>[
-                0=>["Group"=>"Simple", "Name"=>"Landscape", "Instance"=>13000, "SetID"=>1036],
-                1=>[],
-                2=>["Group"=>"Simple", "Name"=>"Portrait", "Instance"=>13000, "SetID"=>1040],
-               ],
-            3=>[
-                0=>["Group"=>"Left", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1031],
-                1=>[],
-                2=>["Group"=>"Left", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1033],
-               ],
-            4=>[
+            2=>"DELETE", /* [
+                0=>["SetID"=>1037]
+               ], */
+            3=>"DELETE", /* [
+                0=>["Group"=>"Left", "Name"=>"Landscape", "Instance"=>11000, "SetID"=>1031],
+                //1=>[],
+                //2=>["Group"=>"Left", "Name"=>"Portrait", "Instance"=>11000, "SetID"=>1031],
+               ], */
+            4=>"DELETE", /* [
                 0=>["Group"=>"Right", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
                 1=>[],
                 2=>["Group"=>"Right", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
-               ],
+               ], */
             5=>[
-                0=>["Name"=>"Mixer", "SetID"=>1035],
+                0=>["Name"=>"Stops", "Instance"=>13000, "SetID"=>1035],
+                //1=>["Group"=>"Single", "Name"=>"Portrait", "Instance"=>13000, "SetID"=>1036],
                ],
-            7=>"DELETE", // Crescendo
-            8=>"DELETE", // Crescendo contd
+            6=>[
+                0=>["Name"=>"Mixer", "SetID"=>1038],
+               ],
+            7=>"DELETE",
+            8=>"DELETE", 
+            9=>"DELETE", 
+           10=>"DELETE",
+           11=>"DELETE",
+           12=>"DELETE",
     ];
 
     protected $patchDivisions=[
-            6=>"DELETE", // Echo
+            4=>"DELETE",
+            5=>"DELETE",
             8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
             9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
     ];
 
     protected $patchTremulants=[
-        126=>["Type"=>"Switched", "DivisionID"=>5], // Solo
-        125=>"DELETE", // Echo
-         38=>["Type"=>"Switched", "DivisionID"=>4], // Swell
-        127=>["Type"=>"Synth",    "DivisionID"=>3, "GroupIDs"=>[301,302,303,304]], // Great
-        128=>["Type"=>"Switched", "DivisionID"=>2], // Choir
+         31=>["Type"=>"Switched", "DivisionID"=>3], // II - but not Dry !!!
+        120=>"DELETE", // III
+         45=>"DELETE", // IV
     ];
 
     protected $patchEnclosures=[
-        995=>"DELETE", // Echo
-        996=>["GroupIDs"=>[501,503,504], "AmpMinimumLevel"=>40], // Solo
-        997=>["GroupIDs"=>[401,403,404], "AmpMinimumLevel"=>40], // Swell
-        998=>["GroupIDs"=>[201,203,204], "AmpMinimumLevel"=>40], // Choir
+        996=>"DELETE", // IV
+        997=>"DELETE", // III
+        998=>["GroupIDs"=>[301,303,304], "AmpMinimumLevel"=>40], // II
         
-        901=>["Panels"=>[5=>[800]], "EnclosureID"=>901, "Name"=>"Direct Mixer",
-            "GroupIDs"=>[101,201,301,401,501], "AmpMinimumLevel"=>0],
-        903=>["Panels"=>[5=>[810]], "EnclosureID"=>903,"Name"=>"Diffuse Mixer",
-            "GroupIDs"=>[103,203,303,403,503], "AmpMinimumLevel"=>0],
-        904=>["Panels"=>[5=>[820]], "EnclosureID"=>904,"Name"=>"Rear Mixer",
-            "GroupIDs"=>[104,204,304,404,504], "AmpMinimumLevel"=>0],
-        908=>["Panels"=>[5=>[1595]], "EnclosureID"=>908,"Name"=>"Blower Mixer",
+        901=>["Panels"=>[6=>[800]], "EnclosureID"=>901, "Name"=>"Direct Mixer",
+            "GroupIDs"=>[101,201,301], "AmpMinimumLevel"=>0],
+        903=>["Panels"=>[6=>[810]], "EnclosureID"=>903,"Name"=>"Diffuse Mixer",
+            "GroupIDs"=>[103,203,303], "AmpMinimumLevel"=>0],
+        904=>["Panels"=>[6=>[820]], "EnclosureID"=>903,"Name"=>"Rear Mixer",
+            "GroupIDs"=>[104,204,304], "AmpMinimumLevel"=>0],
+        908=>["Panels"=>[6=>[1595]], "EnclosureID"=>908,"Name"=>"Blower Mixer",
             "GroupIDs"=>[800], "AmpMinimumLevel"=>0],
-        909=>["Panels"=>[5=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker Mixer",
+        909=>["Panels"=>[6=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker Mixer",
             "GroupIDs"=>[900], "AmpMinimumLevel"=>0],
     ];
 
     protected $patchStops=[
-         124=>["StopID"=> 124, "DivisionID"=>1, "Name"=>"Blower",         "ControllingSwitchID"=>124,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
-        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Pedale Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"Choir Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"Great key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -114=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"Swell key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -115=>["StopID"=>-115, "DivisionID"=>5, "Name"=>"Solo key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"Pedale Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"Choir Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"Great key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"Swell key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -125=>["StopID"=>-125, "DivisionID"=>5, "Name"=>"Solo key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+         124=>["StopID"=> 124, "DivisionID"=>1, "Name"=>"Blower",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
+        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Pedaal Key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"I Key On",         "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"II key On",        "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"Pedaal Key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"I Key Off",        "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"II key Off",       "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
     ];
     
     protected $patchRanks=[
@@ -115,25 +109,13 @@ class Skinner497 extends SPOrgan {
         981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-111]],
         982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-112]],
         983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-113]],
-        984=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-114]],
-        985=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-115]],
+        984=>"DELETE",
+        985=>"DELETE",
         991=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-121]],
         992=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-122]],
         993=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-123]],
-        994=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-124]],
-        995=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-125]],
-        360=>["DivisionID"=>4], // Chimney Flute
-        361=>["DivisionID"=>4],
-        364=>["DivisionID"=>4],
-        367=>["DivisionID"=>4],
-        368=>["DivisionID"=>4],
-        369=>["DivisionID"=>4],
-        440=>["DivisionID"=>4], // Flute Celeste
-        441=>["DivisionID"=>4],
-        444=>["DivisionID"=>4],
-        447=>["DivisionID"=>4],
-        448=>["DivisionID"=>4],
-        449=>["DivisionID"=>4],
+        994=>"DELETE",
+        995=>"DELETE",
     ];
 
     public function import(): void {
@@ -148,7 +130,7 @@ class Skinner497 extends SPOrgan {
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
-        $hwdata["Identification_UniqueOrganID"]=2304; 
+        $hwdata["Identification_UniqueOrganID"]=1307; 
         return parent::createOrgan($hwdata);
     }
     
@@ -193,10 +175,12 @@ class Skinner497 extends SPOrgan {
                         foreach($layouts as $layoutid=>$layout) {
                             if (isset($instance["${layout}ImageSetID"])
                                 && !empty($instance["${layout}ImageSetID"])) {
-                                $panel=$this->getPanel(($instance["DisplayPageID"]*10)+$layoutid);
-                                if ($panel!==NULL) {
+                                $panel=$this->getPanel(($instance["DisplayPageID"]*10)+$layoutid, FALSE);
+                                $instanceid=$instance["ImageSetInstanceID"];
+                                if ($panel!==NULL 
+                                        && !($instanceid==968 && $layoutid==1)) {
                                     $pe=$panel->GUIElement($enclosure);
-                                    $this->configureEnclosureImage($pe, ["InstanceID"=>$instance["ImageSetInstanceID"]], $layoutid);
+                                    $this->configureEnclosureImage($pe, ["InstanceID"=>$instanceid], $layoutid);
                                 }
                             }
                         }
@@ -208,46 +192,46 @@ class Skinner497 extends SPOrgan {
             parent::configurePanelEnclosureImages($enclosure, $data);
     }
     
-    public function configureRelease(array $hwdata, \GOClasses\Pipe $pipe): void {
-        //if (!isset($hwdata["ReleaseSelCriteria_LatestKeyReleaseTimeMs"]))
-            parent::configureRelease($hwdata, $pipe);
+    protected function samplePitchMidi(array $hwdata) : ?float {
+        // The pipes start at 024C but are actually 036C !
+        return parent::samplePitchMidi($hwdata)+12;
     }
 
-    protected function sampleTuning(array $hwdata) : ?float {
-        return NULL;
+    protected function configureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
+        if (strpos($hwdata["SampleFilename"], "_bis")===FALSE 
+                && strpos($hwdata["SampleFilename"], "_ter")===FALSE )
+            parent::configureAttack($hwdata, $pipe);
     }
-    
+
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]); // =30;
+        // unset($hwdata["ReleaseCrossfadeLengthMs"]); // =30;
         return parent::processSample($hwdata, $isattack);
     }
-    
     /**
      * Run the import
      */
-    public static function Skinner497(array $positions=[], string $target="") {
+    public static function Doesburg(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         if (sizeof($positions)>0) {
-            $hwi=new Skinner497(self::ROOT . self::SOURCE);
+            $hwi=new Doesburg(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace(", Demo", " ($target)", $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace(" Demo", " ($target)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->getManual(4)->NumberOfLogicalKeys=73;
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            self::Skinner497(
+            self::Doesburg(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            self::Skinner497(
+            self::Doesburg(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            self::Skinner497(
+            self::Doesburg(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::Skinner497(
+            self::Doesburg(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
@@ -257,4 +241,9 @@ class Skinner497 extends SPOrgan {
         }
     }
 }
-Skinner497::Skinner497();
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
+    throw new \Exception("Error $errstr");
+    die();
+}
+set_error_handler("Organs\SP\ErrorHandler");
+Doesburg::Doesburg();

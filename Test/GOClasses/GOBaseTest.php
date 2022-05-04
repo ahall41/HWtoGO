@@ -15,13 +15,13 @@
 namespace GOClasses;
 require_once (__DIR__ . "/../../GOClasses/GOBase.php");
 
-class TestClass extends GOBase {
+class BaseClass extends GOBase {
 }
 
 class GOBaseTest extends \PHPUnit\Framework\TestCase {
     
     public function testBase() {
-        $object=new TestClass();
+        $object=new BaseClass();
         $this->assertTrue($object instanceof GOBase);
         $this->assertEquals("", (string) $object);
         

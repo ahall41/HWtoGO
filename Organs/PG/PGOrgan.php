@@ -109,7 +109,7 @@ abstract class PGOrgan extends \Import\Organ {
     
     public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
         if (empty($hwdata["DestDivisionID"])) $hwdata["DestDivisionID"]=$hwdata["DestKeyboardID"];
-        $hwdata["ConditionSwitchID"]=$hwdata["ConditionSwitchID"] % 1000;
+        if (empty($hwdata["ConditionSwitchID"])) $hwdata["ConditionSwitchID"]=$hwdata["ConditionSwitchID"] % 1000;
         return parent::createCoupler ($hwdata);
     }
 

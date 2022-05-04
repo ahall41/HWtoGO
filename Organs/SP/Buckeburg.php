@@ -25,7 +25,8 @@ require_once __DIR__ . "/SPOrgan.php";
 class Buckeburg extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.0.organ";
+    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.1.organ";
+    const REVISIONS="\n1.1 Removed additional attacks\n\n";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -189,6 +190,11 @@ class Buckeburg extends SPOrgan {
         return NULL;
     }
     
+    protected function configureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
+        if ($pipe->AttackCount<0)
+            parent::configureAttack($hwdata, $pipe);
+    }
+    
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
         return parent::processSample($hwdata, $isattack);
@@ -207,7 +213,7 @@ class Buckeburg extends SPOrgan {
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
             self::Buckeburg(

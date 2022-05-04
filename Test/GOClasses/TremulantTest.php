@@ -26,10 +26,10 @@ class TremulantTest extends \PHPUnit\Framework\TestCase {
             "[Tremulant001]\n" .
             "Name=Synth Tremulant\n" .
             "DispLabelColour=Blue\n" .
-            "Period=196\n" .
-            "AmpModDepth=15\n" .
-            "StartRate=10\n" .
-            "StopRate=6\n", (string) $synth);
+            "Period=200\n" .
+            "AmpModDepth=10\n" .
+            "StartRate=30\n" .
+            "StopRate=30\n", (string) $synth);
         
         $wave=new Tremulant("Wave Tremulant", TRUE);
         $this->assertEquals(
