@@ -12,14 +12,14 @@ namespace Organs\SP;
 require_once __DIR__ . "/SPOrgan.php";
 
 /**
- * Model of the Old Brampton Organ, based on Buckeburg sammples
+ * Model of the (new) Saints Augustine Organ, based on Buckeburg sammples
  * 
  * @author andrew`
  */
-class BuckeburgExtOB extends \Import\Organ {
+class BuckeburgExtStAugustines extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Old Brampton (Buckeburg Model) %s.organ";
+    const TARGET=self::ROOT . "Saints Augustine (Buckeburg Model) %s.organ";
 
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -51,33 +51,51 @@ class BuckeburgExtOB extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-       1=>["Name"=>"Tremulant", "SwitchID"=>202, "Type"=>"Switched", "DivisionID"=>2, "Position"=>[4, 4]],
+        1=>["Name"=>"Tremulant", "SwitchID"=>201, "Type"=>"Switched", "Position"=>[6, 1]],
+        2=>["Name"=>"Tremulant", "SwitchID"=>202, "Type"=>"Switched", "Position"=>[7, 3]],
     ];
 
     private $couplers=[
-       301=>["Name"=>"Gt Ped",    "SourceKeyboardID"=>0, "DestKeyboardID"=>1, "Position"=>[6, 4]],
-       302=>["Name"=>"Sw Ped",    "SourceKeyboardID"=>0, "DestKeyboardID"=>2, "Position"=>[7, 4]],
-       303=>["Name"=>"Sw Sup",    "SourceKeyboardID"=>2, "DestKeyboardID"=>2, "Position"=>[2, 4], "MIDINoteNumberIncrement"=>12],
-       304=>["Name"=>"Sw Sub",    "SourceKeyboardID"=>2, "DestKeyboardID"=>2, "Position"=>[3, 4], "MIDINoteNumberIncrement"=>-12],
-       305=>["Name"=>"Sw Gt",     "SourceKeyboardID"=>1, "DestKeyboardID"=>2, "Position"=>[3, 2]],
-       306=>["Name"=>"Sw Sup Gt", "SourceKeyboardID"=>1, "DestKeyboardID"=>2, "Position"=>[4, 2], "MIDINoteNumberIncrement"=>12],
+       301=>["Name"=>"Gt/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>1, "Position"=>[11, 2]],
+       302=>["Name"=>"Sw/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>2, "Position"=>[11, 3]],
+       303=>["Name"=>"Sw/Gt",   "SourceKeyboardID"=>1, "DestKeyboardID"=>2, "Position"=>[6, 2]],
+       304=>["Name"=>"Ped/Gt",  "SourceKeyboardID"=>1, "DestKeyboardID"=>0, "Position"=>[7, 2], "ActionTypeCode"=>2],
     ];
     
     private $stops=[
-        20=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 1], "TremulantID"=>1, "Name"=>"Diapason 8'"],
-        21=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 1], "TremulantID"=>1, "Name"=>"Principal 4'"],
-        23=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 1], "TremulantID"=>1, "Name"=>"Octave 2'"],
-        13=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 2], "TremulantID"=>1, "Name"=>"St Diapason 8'"],
-        12=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 2], "TremulantID"=>1, "Name"=>"Dulciana 8'"],
+         7=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 1], "Name"=>"Subbass 16'"], // Ped Principal 16'
+         1=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 1], "Name"=>"Lieblich Gedackt 16'"], // Ped Subbass 16
+        10=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[11, 1], "Name"=>"Mixture III"], // Ped Mixtur 2 2/3x
+         8=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 2], "Name"=>"Octave 8'"], // Ped Octavbass 8
+         2=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 2], "Name"=>"Flute 8'"], // Ped Gemshorn 8
+         9=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 3], "Name"=>"Choral Bass 4'"], // Ped Octave 4
+        14=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 3], "Name"=>"Nachthorn 4'"], // HW Gemshorn 4
+         3=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 4], "Name"=>"Pausaune 16'"], // Ped Posaune 16
+         5=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 4], "Name"=>"Clairon 4'"], // Ped Trompete 4
 
-         1=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[6, 1], "Name"=>"Bourdon 16'"],
-        42=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 1], "Name"=>"Bass 8'"],
+        20=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 1], "TremulantID"=>1, "Name"=>"Principal 8'"], // HW Principal 8
+        21=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 1], "TremulantID"=>1, "Name"=>"Octave 4'"], // HW Octave 4
+        23=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 1], "TremulantID"=>1, "Name"=>"Super Octave 2'"], // HW Octave 2
+        11=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 1],                   "Name"=>"Mixture III"], // HW Mixtur 1 1/3
+        12=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 1], "TremulantID"=>1, "Name"=>"Gambe 8'"], // HW Viola da gamba 8
+        13=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 2], "TremulantID"=>1, "Name"=>"Spitzflote 8'"], // HW Holzflote 8
+        33=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 2], "TremulantID"=>1, "Name"=>"Open Flute 4'"], // OW Flote 4
+        35=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 2], "TremulantID"=>1, "Name"=>"Waldflote 2'"], // OW Waldflote 2
+        28=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 2], "TremulantID"=>1, "Name"=>"Larigot 1-1/3"], // OW Quinta 1 1/3
+        17=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 2], "TremulantID"=>1, "Name"=>"Trompette 8'"], //HW Trompete 8
 
-        32=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 3], "TremulantID"=>1, "Name"=>"Vox Angelica 8'"],
-        25=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 3], "TremulantID"=>1, "Name"=>"Diapason 8'"],
-        26=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 3], "TremulantID"=>1, "Name"=>"Gemshorn 4'"], 
-        30=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[4, 3],                   "Name"=>"Mixture II"],
-        36=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 4], "TremulantID"=>1, "Name"=>"Oboe 8'"],
+        25=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 1, 3], "TremulantID"=>2, "Name"=>"Viola Pomposa 8'"], // OW Principal 8
+        26=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 2, 3], "TremulantID"=>2, "Name"=>"Prestant 4'"], // OW Octave 4
+        47=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 3, 3], "TremulantID"=>2, "Name"=>"Sifflet 1'"], // BW Sifflote 1
+        30=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 4, 3],                   "Name"=>"Mixture III'"], // OW Mixtur 1
+        16=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 5, 3], "TremulantID"=>2, "Name"=>"Contre Trompette 16'"], // HW Fagott 16
+        48=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 3], "TremulantID"=>2, "Name"=>"Trompette 8'"], // BW Regal 8
+        18=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 1, 4], "TremulantID"=>2, "Name"=>"Bourdon Doux 16'"], // HW Bordun 16
+        32=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 2, 4], "TremulantID"=>2, "Name"=>"Rohrflote 8'"], // OW Rohrflote 8
+        43=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 3, 4], "TremulantID"=>2, "Name"=>"Gedackt 4'"], // BW Holzflote 4
+        34=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 4, 4], "TremulantID"=>2, "Name"=>"Nasard 2 2/3'"], // OW Nasat 2 2/3
+        45=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 5, 4], "TremulantID"=>2, "Name"=>"Blockflote 2'"], // BW Hohlflote 
+        46=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 4], "TremulantID"=>2, "Name"=>"Tierce 1 3/5'"], // BW Terzflote 1 3/5
     ];
 
     protected \HWClasses\HWData $hwdata;
@@ -90,7 +108,7 @@ class BuckeburgExtOB extends \Import\Organ {
     
     public function build() : void {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=54;
+        \GOClasses\Manual::$keys=61;
         $hwd=$this->hwdata;
         $this->buildOrgan();
         $this->buildWindchestGroups();
@@ -108,14 +126,14 @@ class BuckeburgExtOB extends \Import\Organ {
         $general=$this->hwdata->general();
         $general["Identification_UniqueOrganID"]=2306; 
         $this->createOrgan($general);
-        $general["Name"]="Old Brampton (Buckeburg Model)";
+        $general["Name"]="Saints Augustine (Buckeburg Model)";
         $general["PanelID"]=0;
         $panel=$this->createPanel($general);
         
-        $panel->DispScreenSizeHoriz=intval(600*19/11);
-        $panel->DispScreenSizeVert=600;
+        $panel->DispScreenSizeHoriz=intval(800*19/11);
+        $panel->DispScreenSizeVert=800;
         $panel->DispDrawstopCols=4;
-        $panel->DispDrawstopRows=8;
+        $panel->DispDrawstopRows=11;
 
         /* $go=$panel->Label("Great");
         $go->FreeXPlacement=$go->FreeYPlacement=$go->DispSpanDrawstopColToRight="N";
@@ -288,26 +306,26 @@ class BuckeburgExtOB extends \Import\Organ {
     /**
      * Run the build
      */
-    public static function BuckeburgExtOB(array $positions=[], string $target="") {
+    public static function BuckeburgExtStAugustines(array $positions=[], string $target="") {
         if (sizeof($positions)>0) {
-            $hwi=new BuckeburgExtOB(self::ROOT . self::SOURCE);
+            $hwi=new BuckeburgExtStAugustines(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->build();
-            $hwi->getOrgan()->ChurchName=$hwi->getPanel(0)->Name="Old Brampton (Buckeburg Model - $target)";
+            $hwi->getOrgan()->ChurchName=$hwi->getPanel(0)->Name="Saints Augustine (Buckeburg Model - $target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            //self::BuckeburgExtOB(
+            //self::BuckeburgExtStAugustines(
             //        [self::RANKS_DIRECT=>"Direct"],
             //        "Direct");
-            self::BuckeburgExtOB(
+            self::BuckeburgExtStAugustines(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            self::BuckeburgExtOB(
+            self::BuckeburgExtStAugustines(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::BuckeburgExtOB(
+            self::BuckeburgExtStAugustines(
                     [
                         //self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
@@ -317,4 +335,4 @@ class BuckeburgExtOB extends \Import\Organ {
         }
     }
 }
-BuckeburgExtOB::BuckeburgExtOB();
+BuckeburgExtStAugustines::BuckeburgExtStAugustines();
