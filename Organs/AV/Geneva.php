@@ -16,7 +16,6 @@ require_once(__DIR__ . "/AVOrgan.php");
  * 
  * NB. The HW Model has an internal SWELL keyboard to handle the split coupler,
  *     which has taken some "adjusting"!
- * @todo: Rossignol
  * 
  * @author andrew
  */
@@ -28,12 +27,17 @@ class Geneva extends AVOrgan {
               "Grenzing Organ from Geneva\n"
             . "https://hauptwerk-augustine.info/Grenzing_Geneva.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Grenzing_Geneva_surround.0.1.organ";
+    const TARGET=self::ROOT . "Grenzing_Geneva_surround.1.0.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
+    ];
+    
+    protected $patchDivisions=[
+        3=>["Name"=>"POSITIVE"],
+        4=>"DELETE"
     ];
     
     protected $patchEnclosures=[
@@ -59,20 +63,23 @@ class Geneva extends AVOrgan {
       1216=>"DELETE", // Coupler
       1710=>"DELETE", // Tremulant 
       1720=>"DELETE", // Tremulant 
+      2117=>"DELETE", // Cornet C# 
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700], // Blower
-      2691=>"DELETE", /** @todo Rossignol (dry) */
-      2692=>"DELETE"  /** @todo Rossignol (wet) */
+      2691=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>101], // Rossignol dry
+      2692=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>102, "SwitchID"=>10187], // Rossignol wet
     ];
 
     protected $patchRanks=[
+        17=>"DELETE", // Cornet C# dry
+       117=>"DELETE", // Cornet C# wet
         91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
         93=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
         94=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[+2]],
-        95=>"DELETE", /** Rossignol @todo */
+        95=>["Noise"=>"Ambient",    "GroupID"=>101, "StopIDs"=>[2691]],
         96=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+3]],
         97=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[+4]],
-       195=>"DELETE", /** Rossignol @todo */
+       195=>["Noise"=>"Ambient",    "GroupID"=>102, "StopIDs"=>[2692]],
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -91,6 +98,33 @@ class Geneva extends AVOrgan {
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
         if ($hwdata["DivisionID"]==4) $hwdata["DivisionID"]=3;
         return parent::createStop($hwdata);
+    }
+    
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        $rankid=$hwdata["RankID"];
+        $pos=[];
+        if (!isset($hwdata["StopIDs"])) {
+            $hwdata["StopIDs"]=[];
+            foreach ($this->hwdata->rankStop($rankid) as $rankstop) {
+                $stopid=$rankstop["StopID"];
+                if ($stopid>2300) {
+                    $stopid-=(2327-2219); // POS->SWELL
+                    $pos[]=$stopid;
+                }
+                $hwdata["StopIDs"][]=$stopid;
+                $division=$this->hwdata->stop($stopid)["DivisionID"];
+                $hwdata["GroupID"]=($division*100) +1 +intval($rankid/100);
+            }
+        }
+        $rank= \Import\Configure::createRank($hwdata);
+        foreach($pos as $stopid) {
+            $stop=$this->getStop($stopid);
+            if ($stop) {
+                $rankno=$stop->int2str($stop->NumberOfRanks);
+                $stop->set("Rank${rankno}FirstAccessibleKeyNumber", 26);
+            }
+        }
+        return $rank;
     }
 
     public function createSwitchNoise(string $type, array $switchdata): void {
@@ -160,8 +194,10 @@ class Geneva extends AVOrgan {
     }
 
     protected function isNoiseSample(array $hwdata): bool {
-        if (in_array($hwdata["RankID"], [95,195]))
+        if (in_array($hwdata["RankID"], [95,195])) // Rossignol
             return TRUE;
+        if (in_array($hwdata["RankID"], [17,117])) // C# Cornet
+            return FALSE;
         return parent::isNoiseSample($hwdata);
     }
 
@@ -169,13 +205,12 @@ class Geneva extends AVOrgan {
         $pipe=$this->pipePitchMidi($hwdata);
         $sample=$this->samplePitchMidi($hwdata);
         if ((($hwdata["RankID"] % 100)<=5) && $pipe>65) return NULL; // Pedal
+        if (in_array($hwdata["RankID"], [17,117]))      return NULL; // C# Cornet
         if ($pipe>91) return NULL; // Cornet in particular
-        //if (($hwdata["RankID"] % 100)==11)
-        //echo ($hwdata["RankID"]), "\t", $pipe, "\t", $sample, "\n";
         return parent::processSample($hwdata, $isattack);
     }
 
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
+    public function xxprocessNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
         if (!in_array($hwdata["RankID"], [95,195])) {
             $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
             if ($type=="Ambient") {
@@ -214,19 +249,20 @@ class Geneva extends AVOrgan {
                 unset($stop->Rank004PipeCount);
                 unset($stop->Rank005PipeCount);
                 unset($stop->Rank006PipeCount);
-                if (intval($id/100)==22)
+                if ($id==2116) {
+                    $stop->Rank001FirstAccessibleKeyNumber=25;
                     $stop->Rank002FirstAccessibleKeyNumber=25;
+                }
             }
-            // Move POS to SWL and rename
-            foreach($hwi->getRanks() as $rank)
-                if (in_array($rank->WindchestGroup,[7,8])) $rank->WindchestGroup-=2;
 
+            $hwi->getManual(3)->Name="POSITIVE";
+            
             // Patch Grt/Pos split couplers
-            $int=$hwi->getCoupler(10199);
+            $int=$hwi->getCoupler(10197);
             $int->FirstMIDINoteNumber=36;
-            $int->NumberOfKeys=24;
+            $int->NumberOfKeys=25;
             $sup=$hwi->getCoupler(10199);
-            $int->FirstMIDINoteNumber=36+24;
+            $int->FirstMIDINoteNumber=36+25;
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
