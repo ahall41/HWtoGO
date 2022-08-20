@@ -14,6 +14,10 @@ require_once(__DIR__ . "/AVOrgan.php");
 /**
  * Import Grenzing Organ from Geneva to GrandOrgue
  * 
+ * NB. The HW Model has an internal SWELL keyboard to handle the split coupler,
+ *     which has taken some "adjusting"!
+ * @todo: Rossignol
+ * 
  * @author andrew
  */
 class Geneva extends AVOrgan {
@@ -33,10 +37,8 @@ class Geneva extends AVOrgan {
     ];
     
     protected $patchEnclosures=[
-      //220=>[                     "Name"=>"Swell", "GroupIDs"=>[301,302],     "InstanceIDs"=>[1=>40]],
          11=>["EnclosureID"=>"11", "Name"=>"Dry",   "GroupIDs"=>[101,201,301], "InstanceIDs"=>[1=>85132], "AmpMinimumLevel"=>0],
          12=>["EnclosureID"=>"12", "Name"=>"Wet",   "GroupIDs"=>[102,202,302], "InstanceIDs"=>[1=>85133], "AmpMinimumLevel"=>0],
-      // 17=>["EnclosureID"=>"17", "Name"=>"Noises","GroupIDs"=>[700],         "InstanceIDs"=>[1=>85135], "AmpMinimumLevel"=>0],
     ];
     
     protected $patchTremulants=[
@@ -81,13 +83,13 @@ class Geneva extends AVOrgan {
     }
 
     public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
-        if ($hwdata["DestDivisionID"]==4) return NULL;
+        if (in_array($hwdata["ConditionSwitchID"],[10195,10201])) return NULL;
+        if ($hwdata["DestDivisionID"]==4) $hwdata["DestDivisionID"]=3;
         return parent::createCoupler($hwdata);
     }
 
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
         if ($hwdata["DivisionID"]==4) $hwdata["DivisionID"]=3;
-        //error_log(print_r($hwdata,TRUE));
         return parent::createStop($hwdata);
     }
 
@@ -169,7 +171,7 @@ class Geneva extends AVOrgan {
         if ((($hwdata["RankID"] % 100)<=5) && $pipe>65) return NULL; // Pedal
         if ($pipe>91) return NULL; // Cornet in particular
         //if (($hwdata["RankID"] % 100)==11)
-        echo ($hwdata["RankID"]), "\t", $pipe, "\t", $sample, "\n";
+        //echo ($hwdata["RankID"]), "\t", $pipe, "\t", $sample, "\n";
         return parent::processSample($hwdata, $isattack);
     }
 
@@ -205,19 +207,31 @@ class Geneva extends AVOrgan {
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
-            foreach($hwi->getStops() as $stop) {
+            foreach($hwi->getStops() as $id=>$stop) {
                 unset($stop->Rank001PipeCount);
                 unset($stop->Rank002PipeCount);
                 unset($stop->Rank003PipeCount);
                 unset($stop->Rank004PipeCount);
                 unset($stop->Rank005PipeCount);
                 unset($stop->Rank006PipeCount);
+                if (intval($id/100)==22)
+                    $stop->Rank002FirstAccessibleKeyNumber=25;
             }
+            // Move POS to SWL and rename
+            foreach($hwi->getRanks() as $rank)
+                if (in_array($rank->WindchestGroup,[7,8])) $rank->WindchestGroup-=2;
+
+            // Patch Grt/Pos split couplers
+            $int=$hwi->getCoupler(10199);
+            $int->FirstMIDINoteNumber=36;
+            $int->NumberOfKeys=24;
+            $sup=$hwi->getCoupler(10199);
+            $int->FirstMIDINoteNumber=36+24;
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Geneva(
-                    [1=>"Front", 2=>"Rear"],
+                    [1=>"Dry", 2=>"Wet"],
                     "surround");
         }
     }   

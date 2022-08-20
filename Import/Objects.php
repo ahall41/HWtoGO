@@ -204,6 +204,13 @@ class Objects {
         return $this->Model[self::Couplers][$id];
     }
 
+    public function getCouplers() {
+        if (isset($this->Model[self::Couplers]))
+            return $this->Model[self::Couplers];
+        else
+            return [];
+    }
+
     protected function newTremulant($id, $name) : \GOClasses\Tremulant {
         return $this->Model[self::Tremulants][$id]=new \GOClasses\Tremulant($name);
     }
