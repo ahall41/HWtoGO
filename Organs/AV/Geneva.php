@@ -26,8 +26,10 @@ class Geneva extends AVOrgan {
     const COMMENTS=
               "Grenzing Organ from Geneva\n"
             . "https://hauptwerk-augustine.info/Grenzing_Geneva.php\n"
+            . "\n"
+            . "Version 1.1 - Added C# Cornet, Fix Pos Int/Sup"
             . "\n";
-    const TARGET=self::ROOT . "Grenzing_Geneva_surround.1.0.organ";
+    const TARGET=self::ROOT . "Grenzing_Geneva_surround.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -63,15 +65,12 @@ class Geneva extends AVOrgan {
       1216=>"DELETE", // Coupler
       1710=>"DELETE", // Tremulant 
       1720=>"DELETE", // Tremulant 
-      2117=>"DELETE", // Cornet C# 
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700], // Blower
       2691=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>101], // Rossignol dry
       2692=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>102, "SwitchID"=>10187], // Rossignol wet
     ];
 
     protected $patchRanks=[
-        17=>"DELETE", // Cornet C# dry
-       117=>"DELETE", // Cornet C# wet
         91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
         93=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
@@ -196,8 +195,6 @@ class Geneva extends AVOrgan {
     protected function isNoiseSample(array $hwdata): bool {
         if (in_array($hwdata["RankID"], [95,195])) // Rossignol
             return TRUE;
-        if (in_array($hwdata["RankID"], [17,117])) // C# Cornet
-            return FALSE;
         return parent::isNoiseSample($hwdata);
     }
 
@@ -205,28 +202,12 @@ class Geneva extends AVOrgan {
         $pipe=$this->pipePitchMidi($hwdata);
         $sample=$this->samplePitchMidi($hwdata);
         if ((($hwdata["RankID"] % 100)<=5) && $pipe>65) return NULL; // Pedal
-        if (in_array($hwdata["RankID"], [17,117]))      return NULL; // C# Cornet
+        if (in_array($hwdata["RankID"], [16,116]) 
+                                           && $pipe>60) return NULL; // C Cornet
         if ($pipe>91) return NULL; // Cornet in particular
         return parent::processSample($hwdata, $isattack);
     }
 
-    public function xxprocessNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        if (!in_array($hwdata["RankID"], [95,195])) {
-            $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
-            if ($type=="Ambient") {
-                $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-                $stopid=$this->hwdata->rank($hwdata["RankID"])["StopIDs"][0];
-                if ($isattack)
-                    $this->configureAttack($hwdata, $this->getStop($stopid)->Ambience());
-                else
-                    $this->configureRelease($hwdata, $this->getStop($stopid)->Ambience());
-            }
-            else 
-                parent::processNoise($hwdata, $isattack);
-        }
-        return NULL;
-    }
-    
     /**
      * Run the import
      */
@@ -252,6 +233,14 @@ class Geneva extends AVOrgan {
                 if ($id==2116) {
                     $stop->Rank001FirstAccessibleKeyNumber=25;
                     $stop->Rank002FirstAccessibleKeyNumber=25;
+                    foreach ([17,117] as $rankid)
+                        $stop->Rank($hwi->getRank($rankid));
+                    $stop->Rank003FirstAccessibleKeyNumber=26;
+                    $stop->Rank004FirstAccessibleKeyNumber=26;
+                }
+                elseif ($id==2117) {
+                    $stop->Rank001FirstAccessibleKeyNumber=26;
+                    $stop->Rank002FirstAccessibleKeyNumber=26;
                 }
             }
 
@@ -262,7 +251,7 @@ class Geneva extends AVOrgan {
             $int->FirstMIDINoteNumber=36;
             $int->NumberOfKeys=25;
             $sup=$hwi->getCoupler(10199);
-            $int->FirstMIDINoteNumber=36+25;
+            $sup->FirstMIDINoteNumber=36+25;
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
