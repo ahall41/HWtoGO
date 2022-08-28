@@ -102,7 +102,8 @@ abstract class AVOrgan extends \Import\Organ {
      * May be OK for other providers 
      */
     protected function isNoiseSample(array $hwdata): bool {
-        return isset(($rankdata=$this->hwdata->rank($hwdata["RankID"]))["Noise"])
+        $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
+        return isset($rankdata["Noise"])
                 && in_array($rankdata["Noise"], ["StopOn","StopOff","Ambient"]);
     }
     
@@ -134,7 +135,8 @@ abstract class AVOrgan extends \Import\Organ {
      * May be OK for other providers ...
      */
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $rankdata=$this->hwdata->rank($hwdata["RankID"]);
+        $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
+        if ($rankdata==[]) return NULL;
         if (isset($rankdata["Noise"])) {
             switch ($rankdata["Noise"]) {
                 case "Ambient":
