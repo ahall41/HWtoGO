@@ -14,9 +14,6 @@ require_once(__DIR__ . "/AVOrgan.php");
 /**
  * Import Végh & Bencz  Organ of the St. Michaels Parish Church from Lenti (Hungary) to GrandOrgue
  * 
- * NB (de) tuning information for Vox Humana and Vox Celestis is missing so these
- * stops are omitted.
- * 
  * @author andrew
  */
 class Lenti extends AVOrgan {
@@ -54,18 +51,10 @@ class Lenti extends AVOrgan {
         -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      2118=>"DELETE", // Vox Humana
-      2227=>"DELETE", // Vox Celestis
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
     protected $patchRanks=[
-        18=>"DELETE",
-        27=>"DELETE",
-       118=>"DELETE",
-       127=>"DELETE",
-       218=>"DELETE",
-       227=>"DELETE",
         91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
         93=>["Noise"=>"StopOff",    "GroupID"=>700, "StopIDs"=>[]],
@@ -145,6 +134,9 @@ class Lenti extends AVOrgan {
                 unset($stop->Rank005PipeCount);
                 unset($stop->Rank006PipeCount);
             }
+            foreach([18,118,218,27,127,227] as $rankid) // Vox Humana/Cel
+                $hwi->getRank($rankid)->PitchTuning=10;
+            
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
