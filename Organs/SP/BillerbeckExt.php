@@ -12,14 +12,14 @@ namespace Organs\SP;
 require_once __DIR__ . "/../../Import/Organ.php";
 
 /**
- * Create bespoke organ based on Billerbeck Dom demo from SP
+ * Create bespoke organ (for Studio 170) based on Billerbeck Dom demo from SP
  * 
  * @author andrew
  */
 class BillerbeckExt extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.3.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.4.organ";
 
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -314,7 +314,9 @@ class BillerbeckExt extends \Import\Organ {
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        return parent::processSample($hwdata, $isattack);
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe) unset($pipe->PitchTuning);
+        return $pipe;
     }
 
     /**
