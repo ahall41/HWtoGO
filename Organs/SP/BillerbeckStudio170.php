@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  * 
  * @author andrew
  */
-class BillerbeckExt extends \Import\Organ {
+class BillerbeckStudio170 extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.4.organ";
@@ -322,9 +322,9 @@ class BillerbeckExt extends \Import\Organ {
     /**
      * Run the build
      */
-    public static function BillerbeckExt(array $positions=[], string $target="") {
+    public static function BillerbeckStudio170(array $positions=[], string $target="") {
         if (sizeof($positions)>0) {
-            $hwi=new BillerbeckExt(self::ROOT . self::SOURCE);
+            $hwi=new BillerbeckStudio170(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->build();
             $hwi->getOrgan()->ChurchName=str_replace("8ch Demo", "$target (Extended Demo)", $hwi->getOrgan()->ChurchName);
@@ -333,19 +333,19 @@ class BillerbeckExt extends \Import\Organ {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            self::BillerbeckExt(
+            self::BillerbeckStudio170(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            self::BillerbeckExt(
+            self::BillerbeckStudio170(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
-            self::BillerbeckExt(
+            self::BillerbeckStudio170(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            self::BillerbeckExt(
+            self::BillerbeckStudio170(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::BillerbeckExt(
+            self::BillerbeckStudio170(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_SEMI_DRY=>"Semi-dry",
@@ -356,4 +356,4 @@ class BillerbeckExt extends \Import\Organ {
         }
     }
 }
-BillerbeckExt::BillerbeckExt();
+BillerbeckStudio170::BillerbeckStudio170();
