@@ -16,7 +16,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * 
  * @author andrew`
  */
-class BuckeburgExtStAugustines extends \Import\Organ {
+class BuckeburgExtStsAugustine extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Saints Augustine (Buckeburg Model) %s.organ";
@@ -306,9 +306,9 @@ class BuckeburgExtStAugustines extends \Import\Organ {
     /**
      * Run the build
      */
-    public static function BuckeburgExtStAugustines(array $positions=[], string $target="") {
+    public static function BuckeburgExtStsAugustine(array $positions=[], string $target="") {
         if (sizeof($positions)>0) {
-            $hwi=new BuckeburgExtStAugustines(self::ROOT . self::SOURCE);
+            $hwi=new BuckeburgExtStsAugustine(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->build();
             $hwi->getOrgan()->ChurchName=$hwi->getPanel(0)->Name="Saints Augustine (Buckeburg Model - $target)";
@@ -316,16 +316,16 @@ class BuckeburgExtStAugustines extends \Import\Organ {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            //self::BuckeburgExtStAugustines(
+            //self::BuckeburgExtStsAugustine(
             //        [self::RANKS_DIRECT=>"Direct"],
             //        "Direct");
-            self::BuckeburgExtStAugustines(
+            self::BuckeburgExtStsAugustine(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            self::BuckeburgExtStAugustines(
+            self::BuckeburgExtStsAugustine(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::BuckeburgExtStAugustines(
+            self::BuckeburgExtStsAugustine(
                     [
                         //self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
@@ -335,4 +335,4 @@ class BuckeburgExtStAugustines extends \Import\Organ {
         }
     }
 }
-BuckeburgExtStAugustines::BuckeburgExtStAugustines();
+BuckeburgExtStsAugustine::BuckeburgExtStsAugustine();
