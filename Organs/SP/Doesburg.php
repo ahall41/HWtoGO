@@ -23,7 +23,7 @@ class Doesburg extends SPOrgan {
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
-        1=>self::RANKS_DIRECT,   // x=>self::RANKS_DIRECT !!!
+        1=>self::RANKS_DIRECT,   
         0=>self::RANKS_DIFFUSE,  9=>self::RANKS_DIFFUSE,
         4=>self::RANKS_REAR,     8=>self::RANKS_REAR
     ];
@@ -34,28 +34,19 @@ class Doesburg extends SPOrgan {
             1=>[
                 0=>["SetID"=>1030]
                ],
-            2=>"DELETE", /* [
-                0=>["SetID"=>1037]
-               ], */
-            3=>"DELETE", /* [
-                0=>["Group"=>"Left", "Name"=>"Landscape", "Instance"=>11000, "SetID"=>1031],
-                //1=>[],
-                //2=>["Group"=>"Left", "Name"=>"Portrait", "Instance"=>11000, "SetID"=>1031],
-               ], */
-            4=>"DELETE", /* [
-                0=>["Group"=>"Right", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
-                1=>[],
-                2=>["Group"=>"Right", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
-               ], */
+            2=>"DELETE",
+            3=>"DELETE", 
+            4=>"DELETE", 
             5=>[
                 0=>["Name"=>"Stops", "Instance"=>13000, "SetID"=>1035],
-                //1=>["Group"=>"Single", "Name"=>"Portrait", "Instance"=>13000, "SetID"=>1036],
                ],
             6=>[
                 0=>["Name"=>"Mixer", "SetID"=>1038],
                ],
             7=>"DELETE",
-            8=>"DELETE", 
+            8=>[
+                0=>["Name"=>"Simple", "Instance"=>11000, "SetID"=>1040],
+               ],
             9=>"DELETE", 
            10=>"DELETE",
            11=>"DELETE",
@@ -105,6 +96,11 @@ class Doesburg extends SPOrgan {
     protected $patchRanks=[
           8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
           9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
+        160=>["GroupID"=>300+self::RANKS_DIFFUSE],
+        161=>["GroupID"=>300+self::RANKS_DIRECT],
+        164=>["GroupID"=>300+self::RANKS_REAR],
+        168=>["GroupID"=>300+self::RANKS_REAR],
+        169=>["GroupID"=>300+self::RANKS_DIFFUSE],
         950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[124]],
         981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-111]],
         982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-112]],
@@ -204,9 +200,11 @@ class Doesburg extends SPOrgan {
     }
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        // unset($hwdata["ReleaseCrossfadeLengthMs"]); // =30;
+        //unset($hwdata["ReleaseCrossfadeLengthMs"]); 
+        //$hwdata["ReleaseCrossfadeLengthMs"]=30;
         return parent::processSample($hwdata, $isattack);
     }
+
     /**
      * Run the import
      */

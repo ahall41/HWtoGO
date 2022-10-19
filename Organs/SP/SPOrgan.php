@@ -147,7 +147,8 @@ abstract class SPOrgan extends \Import\Organ {
             else
                 $divid=$this->hwdata->stop(abs($stopids[0]))["DivisionID"];
             $posid=$this->rankpositions[$rankid % 10];
-            $hwdata["GroupID"]=($divid*100) + $posid;
+            if (!isset($hwdata["GroupID"]))
+                $hwdata["GroupID"]=($divid*100) + $posid;
         }
         $rank=parent::createRank($hwdata);
         return $rank;
