@@ -12,16 +12,15 @@ namespace Organs\SP;
 require_once __DIR__ . "/SPOrgan.php";
 
 /**
- * Import Sonus Paradisi Doesburg, Martinikerk Walcker Organ to GrandOrgue
+ * Import Sonus Paradisi Menesterol Organ Model to GrandOrgue
  * 
  * @author andrew
  */
-class Doesburg extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Doesburg/";
-    const SOURCE="OrganDefinitions/Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Doesburg, St. Martini, Walcker, DEMO (%s) 1.1.organ";
+class Menesterol extends SPOrgan {
+    const ROOT="/GrandOrgue/Organs/Menesterol/";
+    const SOURCE="OrganDefinitions/Menesterol 4-chan Surround.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Menesterol 4-chan Surround (%s) 1.0.organ";
     
-    private static string $Comments="/nVersion 1.1 Ordered releases\n";
     protected string $root=self::ROOT;
     protected array $rankpositions=[
         1=>self::RANKS_DIRECT,   
@@ -201,7 +200,7 @@ class Doesburg extends SPOrgan {
     }
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]); 
+        //unset($hwdata["ReleaseCrossfadeLengthMs"]); 
         //$hwdata["ReleaseCrossfadeLengthMs"]=30;
         return parent::processSample($hwdata, $isattack);
     }
@@ -209,28 +208,28 @@ class Doesburg extends SPOrgan {
     /**
      * Run the import
      */
-    public static function Doesburg(array $positions=[], string $target="") {
+    public static function Menesterol(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         if (sizeof($positions)>0) {
-            $hwi=new Doesburg(self::ROOT . self::SOURCE);
+            $hwi=new Menesterol(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace(" Demo", " ($target)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::$Comments);
+            $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            self::Doesburg(
+            self::Menesterol(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            self::Doesburg(
+            self::Menesterol(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            self::Doesburg(
+            self::Menesterol(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::Doesburg(
+            self::Menesterol(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
@@ -245,4 +244,4 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
     die();
 }
 set_error_handler("Organs\SP\ErrorHandler");
-Doesburg::Doesburg();
+Menesterol::Menesterol();

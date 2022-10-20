@@ -354,15 +354,28 @@ abstract class Organ extends Images {
      * @return void
      */
     public function processSamples(array $hwdata, bool $isattack) : void {
+        $array=[];
         foreach($hwdata as $datum) {
             $layer=$this->hwdata->layer($datum["LayerID"]);
             $pipe=$this->hwdata->pipe($layer["PipeID"]);
             $sample=$this->hwdata->sample($datum["SampleID"]);
-            $data=array_merge($datum, $layer, $sample, $pipe);
-            if ($this->isNoiseSample($data))
-                $this->processNoise($data, $isattack);
+            $array[]=array_merge(
+                    $isattack ? [] : ["ReleaseSelCriteria_LatestKeyReleaseTimeMs"=>999999], 
+                    $datum, $layer, $sample, $pipe);
+        }
+
+        if (!$isattack) { // Sort by PipeID and ReleaseTime
+            array_multisort(array_column($array, "PipeID"), SORT_ASC,
+                       array_column($array, "ReleaseSelCriteria_LatestKeyReleaseTimeMs"), SORT_ASC,
+                       array_column($array, "UniqueID"), SORT_ASC,
+                       $array);
+        }
+
+        foreach($array as $record) {
+            if ($this->isNoiseSample($record))
+                $this->processNoise($record, $isattack);
             else
-                $this->processSample($data, $isattack);
+                $this->processSample($record, $isattack);
         }
     }
     
