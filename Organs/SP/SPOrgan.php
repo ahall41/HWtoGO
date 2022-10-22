@@ -253,16 +253,16 @@ abstract class SPOrgan extends \Import\Organ {
 
     
     public function getImageData(array $data, int $layout=0) : array {
-       $imagedata=parent::getImageData($data, $layout);
-       if ((!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))
-               || (!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))) {
-           $filename=reset($imagedata["Images"]);
-           $sizes=getimagesize(getenv("HOME") . $this->root . $filename);
-           if (is_array($sizes)) {
-               $imagedata["ImageWidthPixels"]=$sizes[0];
-               $imagedata["ImageHeightPixels"]=$sizes[1];
-           }
-       }
+        $imagedata=parent::getImageData($data, $layout);
+        if ((!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))
+                || (!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))) {
+            $filename=reset($imagedata["Images"]);
+            $sizes=getimagesize(getenv("HOME") . $this->root . $filename);
+            if (is_array($sizes)) {
+                $imagedata["ImageWidthPixels"]=$sizes[0];
+                $imagedata["ImageHeightPixels"]=$sizes[1];
+            }
+        }
        return $imagedata;
     }
 

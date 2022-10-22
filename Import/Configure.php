@@ -349,6 +349,12 @@ abstract Class Configure extends Create {
         if (isset($hwdata["MIDINoteNumberIncrement"])
                 && !empty($hwdata["MIDINoteNumberIncrement"]))
             $coupler->DestinationKeyshift=$hwdata["MIDINoteNumberIncrement"];
+        if (isset($hwdata["MIDINoteNumOfFirstSourceKey"])
+                && !empty($hwdata["MIDINoteNumOfFirstSourceKey"]))
+            $coupler->FirstMIDINoteNumber=$hwdata["MIDINoteNumOfFirstSourceKey"];
+        if (isset($hwdata["NumberOfKeys"])
+                && !empty($hwdata["NumberOfKeys"]))
+            $coupler->NumberOfKeys=$hwdata["NumberOfKeys"];
         if (isset($hwdata["ActionTypeCode"])) {
             switch ($hwdata["ActionTypeCode"]) {
                 case 1: // Regular
@@ -369,7 +375,6 @@ abstract Class Configure extends Create {
         if (empty($coupler->DestinationKeyshift) &&
                 $hwdata["SourceKeyboardID"]==$manualid) {
             $coupler->UnisonOff="Y";
-            echo "Coupler ", $coupler->Name, " is Unison Off?\n";
         }
         $coupler->Displayed="N";
         return $switch;
