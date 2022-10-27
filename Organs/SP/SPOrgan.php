@@ -233,7 +233,9 @@ abstract class SPOrgan extends \Import\Organ {
         $hwdata["SwitchID"]=$hwdata["TremulantID"];
         return parent::createTremulant($hwdata);
     }
-   
+    
+    // The attribute "Noise" is now misleading, as SP have started recording
+    // sound effects at each listening position
     public function createWindchestGroup(array $divisiondata): ?\GOClasses\WindchestGroup {
         $divid=$divisiondata["DivisionID"];
         if (isset($divisiondata["Noise"]) && $divisiondata["Noise"]) {
@@ -275,9 +277,11 @@ abstract class SPOrgan extends \Import\Organ {
     public function processSample(array $hwdata, bool $isattack) : ?\GOClasses\Pipe {
         $rankid=$hwdata["RankID"];
         
-        if (isset($this->patchRanks[$rankid]["Noise"])) 
-            $isattack=$this->patchRanks[$rankid]["Noise"]=="KeyOn";
-        
+        if (isset($this->patchRanks[$rankid]["Noise"])) {
+            $rankdata=$this->patchRanks[$rankid];
+            $isattack=$rankdata["Noise"]=="KeyOn";
+            if (isset($rankdata["Attack"])) $hwdata["RankID"]=$rankdata["Attack"];
+        }
 
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)

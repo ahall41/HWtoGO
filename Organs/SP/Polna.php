@@ -92,21 +92,22 @@ class Polna extends SPOrgan {
         -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"HW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"OW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"BW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-    ];
+    ]; */
     
     protected $patchRanks=[
-          8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
-          9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
-        950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[124]],
-        981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-111]],
-        982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-112]],
-        983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-113]],
-        984=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-114]],
-        991=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-121]],
-        992=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-122]],
-        993=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-123]],
-        994=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-124]],
-    ]; */
+        999800=>"DELETE", // Front A (organist): Stop noise Off
+        999810=>"DELETE", // Front B (direct): Stop noise Off
+        999820=>"DELETE", // Front C (diffuse): Stop noise Off
+        999840=>"DELETE", // Rear: Stop noise Off
+        999900=>"DELETE", // Front A (organist): Stop noise On
+        999901=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (organist): Blower noise
+        999910=>"DELETE", // Front B (direct): Stop noise On
+        999911=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (direct): Blower noise
+        999920=>"DELETE", // Front C (diffuse): Stop noise On
+        999921=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (diffuse): Blower noise
+        999940=>"DELETE", // Rear: Stop noise On
+        999941=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Blower noise
+    ];
 
     public function import(): void {
         parent::import();
@@ -119,8 +120,19 @@ class Polna extends SPOrgan {
         }
     }
 
+    public function createRanks(array $ranksdata): void {
+        ksort($ranksdata);
+        parent::createRanks($ranksdata);
+        exit();
+    }
+
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        return $hwdata["RankID"]>990000 ? NULL : parent::createRank($hwdata, $keynoise);
+        if ($hwdata["RankID"]>990000) {
+            echo $hwdata["RankID"], '=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // ', $hwdata["Name"],"\n";
+            return NULL;
+        }
+        else
+            return parent::createRank($hwdata, $keynoise);
     }
     
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
