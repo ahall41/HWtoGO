@@ -167,10 +167,17 @@ abstract class PGOrgan extends \Import\Organ {
     }
     
     public function createStop(array $hwdata) : ?\GOClasses\Sw1tch {
-        if (isset($this->patchStops[$hwdata["StopID"]]))
+        if (isset($this->patchStops[$hwdata["StopID"]])) {
+            if (($switchid=$hwdata["ControllingSwitchID"])) {
+                $switchdata=$this->hwdata->switch($switchid);
+                if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
+            }
             return parent::createStop($hwdata);
+        }
         else {
-            $hwdata["ControllingSwitchID"]=$hwdata["StopID"];
+            $switchid=$hwdata["ControllingSwitchID"]=$hwdata["StopID"];
+            $switchdata=$this->hwdata->switch($switchid);
+            if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
             $switch=parent::createStop($hwdata);
             if ($switch===NULL) return NULL;
 
