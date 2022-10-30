@@ -9,7 +9,7 @@
  */
 
 namespace Organs\SP;
-require_once __DIR__ . "/SPOrgan.php";
+require_once __DIR__ . "/SPOrganV2.php";
 
 /**
  * Import Sonus Paradisi Noordwolde, Janke Organ to GrandOrgue
@@ -18,7 +18,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * 
  * @author andrewZ`
  */
-class Noordwolde extends SPOrgan {
+class Noordwolde extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/Noordwolde/";
     const SOURCE="OrganDefinitions/Noordwolde, Huis-Freytag-Lohman, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Noordwolde, Huis-Freytag-Lohma %s Demo 1.0.organ";
@@ -60,7 +60,7 @@ class Noordwolde extends SPOrgan {
     protected $patchDivisions=[
             6=>["DivisionID"=>6, "Name"=>"Tremulant"],
             7=>["DivisionID"=>7, "Name"=>"Stops"],
-            8=>["DivisionID"=>8, "Name"=>"Ambient"],
+            8=>["DivisionID"=>8, "Name"=>"Ambience"],
             9=>["DivisionID"=>9, "Name"=>"Tracker"]
     ];
 
@@ -69,19 +69,20 @@ class Noordwolde extends SPOrgan {
     ];
 
     protected $patchEnclosures=[
+        // NB There is a bug in GO when AmpMinimumLevel is set to 0
         901=>["Panels"=>[5=>[1600]], "EnclosureID"=>901, "Name"=>"Semi-Dry",
-            "GroupIDs"=>[101,201,301,801,901], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[101,201,301,601,701,801,901], "AmpMinimumLevel"=>1],
         902=>["Panels"=>[5=>[1610]], "EnclosureID"=>902, "Name"=>"Diffuse",
-            "GroupIDs"=>[102,202,302,802,902], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[102,202,302,602,702,802,902], "AmpMinimumLevel"=>1],
         903=>["Panels"=>[5=>[1620]], "EnclosureID"=>903,"Name"=>"Distant",
-            "GroupIDs"=>[103,203,303,803,903], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[103,203,303,603,703,803,903], "AmpMinimumLevel"=>1],
         904=>["Panels"=>[5=>[1630]], "EnclosureID"=>904,"Name"=>"Rear",
-            "GroupIDs"=>[104,204,304,904,904], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[104,204,304,604,704,904,904], "AmpMinimumLevel"=>1],
         906=>["Panels"=>[5=>[1694]], "EnclosureID"=>906,"Name"=>"Tremulant",
             "GroupIDs"=>[601,602,603,604], "AmpMinimumLevel"=>1],
         907=>["Panels"=>[5=>[1690]], "EnclosureID"=>907,"Name"=>"Stops",
             "GroupIDs"=>[701,702,703,704], "AmpMinimumLevel"=>1],
-        908=>["Panels"=>[5=>[1691]], "EnclosureID"=>908,"Name"=>"Ambient",
+        908=>["Panels"=>[5=>[1691]], "EnclosureID"=>908,"Name"=>"Ambience",
             "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>1],
         909=>["Panels"=>[5=>[1692]], "EnclosureID"=>909,"Name"=>"Tracker",
             "GroupIDs"=>[901,902,903,904], "AmpMinimumLevel"=>1],
@@ -156,74 +157,13 @@ class Noordwolde extends SPOrgan {
         999944=>["Noise"=>"Ambient",  "GroupID"=>804, "StopIDs"=>[-114]], // Rear: Tremulant noise */
     ];
 
-    public function import(): void {
-        parent::import();
-        foreach ($this->getStops() as $stop) {
-            for ($rn=1; $rn<10; $rn++) {
-                $r=sprintf("Rank%03dPipeCount", $rn);
-                if ($stop->isset($r) && $stop->get($r)>61)
-                    $stop->set($r, 61);
-            }
-        }
-    }
-
-    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        if ($hwdata["RankID"]>990000 && !isset($hwdata["StopIDs"])) 
-            return NULL;
-        else
-            return parent::createRank($hwdata, $keynoise);
-    }
-    
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
         // The one tremulant switch needs to act across all divisions
         $this->patchTremulants[23]["DivisionID"]=$hwdata["DivisionID"];
         $stop=parent::createStop($hwdata);
-        //ho $stop->Name, " ", get_class($this->getStop($hwdata["StopID"])), "\n";
         return $stop;
     }
 
-    public function createSwitchNoise(string $type, array $hwdata) : void {
-        $switchid=NULL;
-        switch ($type) {
-            case self::TremulantNoise:
-                return;
-            
-            case self::CouplerNoise:
-                $switchid=$hwdata["ConditionSwitchID"] % 1000;
-                break;
-                
-            case self::SwitchNoise:
-                if (isset($this->patchStops[$hwdata["StopID"]]))
-                    return;
-                else 
-                    $switchid=$hwdata["StopID"];
-                break;
-        }
-        
-        if ($switchid!==NULL && ($switch=$this->getSwitch($switchid, FALSE))!==NULL) {
-            $switchid*=100;
-            foreach ([701,702,703,704] as $groupid) {
-                $switchid++;
-                if ($windchestgroup=$this->getWindchestGroup($groupid)) {
-                    $name=$switch->Name . " (" . $windchestgroup->Name . ")";
-                    $manual=$this->getManual(
-                            isset($hwdata["DivisionID"]) && !empty($hwdata["DivisionID"])
-                            ? $hwdata["DivisionID"] : 1);
-                    $on=$this->newSwitchNoise($switchid, "$name (on)");
-                    $on->WindchestGroup($windchestgroup);
-                    $on->Switch($switch);
-                    $manual->Stop($on);
-                    $off=$this->newSwitchNoise(-$switchid, "$name (off)");
-                    $off->WindchestGroup($windchestgroup);
-                    $manual->Stop($off);
-                    $off->Function="Not";
-                    $off->Switch($switch);
-                    unset($off->SwitchCount);
-                }
-            }
-        }
-    }  
-    
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2308;
         return parent::createOrgan($hwdata);
@@ -252,89 +192,12 @@ class Noordwolde extends SPOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
 
-    protected function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        static $layouts=[0=>"", 1=>"AlternateScreenLayout1_",
-            2=>"AlternateScreenLayout2_", 3=>"AlternateScreenLayout3_"];
-
-        if (isset($data["ShutterPositionContinuousControlID"]) 
-                && !empty($data["ShutterPositionContinuousControlID"])) {
-            $hwd=$this->hwdata;
-            $slink=$hwd->continuousControlLink($data["ShutterPositionContinuousControlID"])["D"][0];
-            $dlinks=$hwd->continuousControlLink($slink["SourceControlID"]);
-            foreach($dlinks["S"] as $dlink) {
-                $control=$hwd->continuousControl($dlink["DestControlID"]);
-                if (isset($control["ImageSetInstanceID"])) {
-                    $instance=$hwd->imageSetInstance($control["ImageSetInstanceID"]);
-                    if ($instance!==NULL
-                            && isset($this->patchDisplayPages[$instance["DisplayPageID"]])) {
-                        foreach($layouts as $layoutid=>$layout) {
-                            if (isset($instance["${layout}ImageSetID"])
-                                && !empty($instance["${layout}ImageSetID"])) {
-                                $panel=$this->getPanel(($instance["DisplayPageID"]*10)+$layoutid);
-                                if ($panel!==NULL) {
-                                    $pe=$panel->GUIElement($enclosure);
-                                    $this->configureEnclosureImage($pe, ["InstanceID"=>$instance["ImageSetInstanceID"]], $layoutid);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else
-            parent::configurePanelEnclosureImages($enclosure, $data);
-    }
-    
     protected function sampleTuning(array $hwdata) : ?float {
-        return NULL;
-    }
-    
-    public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-        $rankdata=$this->patchRanks[$hwdata["RankID"]];
-        
-        if ($rankdata["Noise"]=="Ambient") {
-            $stop=$this->getStop($rankdata["StopIDs"][0]);
-            if ($stop!==NULL) {
-                $ambience=$stop->Ambience();
-                if ($isattack) {
-                    $this->configureAttack($hwdata, $ambience);
-                    $ambience->LoadRelease="Y";
-                }
-                else {
-                    $this->configureRelease($hwdata, $ambience);
-                    $ambience->LoadRelease="N";
-                }
-                return $ambience;
-            }
-        }
-        else {
-            $stop=$this->getSwitchNoise(
-                    ($rankdata["Noise"]=="StopOn" ? -1 : +1) * (100*($hwdata["PipeID"] % 100)+$rankdata["GroupID"]-700), FALSE);
-            if ($stop!==NULL) {
-                $noise=$stop->Noise();
-                $this->configureAttack($hwdata, $noise);
-                return $noise;
-            }
-        }
         return NULL;
     }
     
     protected function sampleMidiKey(array $hwdata) : int {
         return \Import\Configure::sampleMidiKey($hwdata);
-    }
-    
-    /** @deprecated */
-    public function xprocessSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        if ($hwdata["RankID"]==998102)
-            echo $this->sampleMidiKey($hwdata), " ",$hwdata["SampleFilename"], "\n";
-        if ($hwdata["RankID"]==998152) 
-            echo $this->sampleMidiKey($hwdata), " ",$hwdata["SampleFilename"], "\n";
-        $pipe=parent::processSample($hwdata, $isattack);
-        //if ($hwdata["RankID"]>90000) 
-        //    echo $hwdata["RankID"], " ", $hwdata["SampleFilename"], "\n", $pipe;
-        return $pipe;
     }
     
     /**
@@ -349,6 +212,7 @@ class Noordwolde extends SPOrgan {
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
+            unset($hwi->getSwitch(23)->GCState);
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
