@@ -112,7 +112,8 @@ abstract Class Create extends Objects {
         $this->getManual($stopdata["DivisionID"])->Stop($stop);
         if (isset($stopdata["SwitchID"])
                 && !empty($stopdata["SwitchID"])) {
-            $switch=$this->makeSwitch($stopdata["SwitchID"], "Stop $name");
+            $switchame=isset($stopdata["SwitchName"]) ? $stopdata["SwitchName"] : "Stop $name";
+            $switch=$this->makeSwitch($stopdata["SwitchID"], $switchame);
             $stop->Switch($switch);
             return $switch;
         }

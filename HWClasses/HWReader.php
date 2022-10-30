@@ -262,6 +262,7 @@ class HWReader {
         ],"Switch"=>[	
                 "a"=>"SwitchID",
                 "b"=>"Name",
+                "c"=>"DefaultInputOutputSwitchAsgnCode",
                 "e"=>"DefaultToEngaged",
                 "g"=>"AccessibleForInput",
                 "h"=>"AccessibleForOutput",

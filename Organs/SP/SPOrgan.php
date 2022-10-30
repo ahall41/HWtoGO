@@ -98,6 +98,10 @@ abstract class SPOrgan extends \Import\Organ {
     }
 
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
+        if (($switchid=$hwdata["ControllingSwitchID"])) {
+            $switchdata=$this->hwdata->switch($switchid);
+            if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
+        }
         if (!isset($this->patchStops[$hwdata["StopID"]]))
             $hwdata["ControllingSwitchID"]=$hwdata["StopID"];
         $switch=parent::createStop($hwdata);
@@ -207,7 +211,7 @@ abstract class SPOrgan extends \Import\Organ {
             $stop=$this->getStop($rankdata["StopIDs"][0]);
             if ($stop!==NULL) {
                 $ambience=$stop->Ambience();
-                $this->configureAttack($hwdata, $ambience);
+                    $this->configureAttack($hwdata, $ambience);
                 return $ambience;
             }
         }
@@ -216,7 +220,7 @@ abstract class SPOrgan extends \Import\Organ {
                     ($rankdata["Noise"]=="StopOn" ? -1 : +1) * ($hwdata["PipeID"] % 1000), FALSE);
             if ($stop!==NULL) {
                 $noise=$stop->Noise();
-                $this->configureAttack($hwdata, $noise);
+                    $this->configureAttack($hwdata, $noise);
                 return $noise;
             }
         }
@@ -280,7 +284,6 @@ abstract class SPOrgan extends \Import\Organ {
         if (isset($this->patchRanks[$rankid]["Noise"])) {
             $rankdata=$this->patchRanks[$rankid];
             $isattack=$rankdata["Noise"]=="KeyOn";
-            if (isset($rankdata["Attack"])) $hwdata["RankID"]=$rankdata["Attack"];
         }
 
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 

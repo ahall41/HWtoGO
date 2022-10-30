@@ -364,12 +364,16 @@ abstract class Organ extends Images {
                     $datum, $layer, $sample, $pipe);
         }
 
-        if (!$isattack) { // Sort by PipeID and ReleaseTime
+        if (!$isattack) // Sort by PipeID and ReleaseTime
             array_multisort(array_column($array, "PipeID"), SORT_ASC,
                        array_column($array, "ReleaseSelCriteria_LatestKeyReleaseTimeMs"), SORT_ASC,
                        array_column($array, "UniqueID"), SORT_ASC,
                        $array);
-        }
+        else
+            array_multisort(array_column($array, "PipeID"), SORT_ASC,
+                       array_column($array, "UniqueID"), SORT_ASC,
+                       $array);
+        
 
         foreach($array as $record) {
             if ($this->isNoiseSample($record))
