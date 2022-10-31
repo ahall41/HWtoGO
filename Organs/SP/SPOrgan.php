@@ -217,7 +217,7 @@ abstract class SPOrgan extends \Import\Organ {
         }
         else {
             $stop=$this->getSwitchNoise( /** sic !!! @todo !!! */
-                    ($rankdata["Noise"]=="StopOn" ? -1 : +1) * ($hwdata["PipeID"] % 1000), FALSE);
+                    ($rankdata["Noise"]=="StopOn" ? +1 : -1) * ($hwdata["PipeID"] % 1000), FALSE);
             if ($stop!==NULL) {
                 $noise=$stop->Noise();
                     $this->configureAttack($hwdata, $noise);

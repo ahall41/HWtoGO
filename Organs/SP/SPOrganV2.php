@@ -124,7 +124,7 @@ abstract class SPOrganV2 extends SPOrgan {
         }
         else {
             $stop=$this->getSwitchNoise(
-                    ($rankdata["Noise"]=="StopOn" ? -1 : +1) * (100*($hwdata["PipeID"] % 100)+$rankdata["GroupID"]-700), FALSE);
+                    ($rankdata["Noise"]=="StopOn" ? +1 : -1) * (100*($hwdata["PipeID"] % 100)+$rankdata["GroupID"]-700), FALSE);
             if ($stop!==NULL) {
                 $noise=$stop->Noise();
                 $this->configureAttack($hwdata, $noise);
