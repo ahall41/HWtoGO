@@ -257,6 +257,7 @@ class Arnstadt extends SPOrganV2 {
                 }
             }
             echo $hwi->getOrgan()->ChurchName, "\n";
+            unset($hwi->getSwitch(26)->GCState);
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
