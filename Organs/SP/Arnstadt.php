@@ -9,14 +9,14 @@
  */
 
 namespace Organs\SP;
-require_once __DIR__ . "/SPOrgan.php";
+require_once __DIR__ . "/SPOrganV2.php";
 
 /**
  * Import Sonus Paradisi Arnstadt, Bach organ (Wender 1703) Demo to GrandOrgue
  * 
  * @author andrewZ`
  */
-class Arnstadt extends SPOrgan {
+class Arnstadt extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/Arnstadt/";
     const SOURCE="OrganDefinitions/Arnstadt, Bachkirche Wender Organ, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Arnstadt, Bachkirche Wender Organ %s Demo 1.0.organ";
@@ -55,8 +55,10 @@ class Arnstadt extends SPOrgan {
     ];
 
     protected $patchDivisions=[
-            8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
-            9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
+            6=>["DivisionID"=>6, "Name"=>"Tremulant"],
+            7=>["DivisionID"=>7, "Name"=>"Stops"],
+            8=>["DivisionID"=>8, "Name"=>"Ambience"],
+            9=>["DivisionID"=>9, "Name"=>"Tracker"]
     ];
 
     protected $patchTremulants=[
@@ -64,81 +66,90 @@ class Arnstadt extends SPOrgan {
     ];
 
     protected $patchEnclosures=[
+        // NB There is a bug in GO when AmpMinimumLevel is set to 0!
         901=>["Panels"=>[5=>[1600]], "EnclosureID"=>901, "Name"=>"Semi-Dry",
-            "GroupIDs"=>[101,201,301], "AmpMinimumLevel"=>0],
+            "GroupIDs"=>[101,201,301,601,701,801,901], "AmpMinimumLevel"=>1],
         902=>["Panels"=>[5=>[1610]], "EnclosureID"=>902, "Name"=>"Diffuse",
-            "GroupIDs"=>[102,202,302], "AmpMinimumLevel"=>0],
+            "GroupIDs"=>[102,202,302,602,702,802,902], "AmpMinimumLevel"=>1],
         903=>["Panels"=>[5=>[1620]], "EnclosureID"=>903,"Name"=>"Distant",
-            "GroupIDs"=>[103,203,303], "AmpMinimumLevel"=>0],
+            "GroupIDs"=>[103,203,303,603,703,803,903], "AmpMinimumLevel"=>1],
         904=>["Panels"=>[5=>[1630]], "EnclosureID"=>904,"Name"=>"Rear",
-            "GroupIDs"=>[104,204,304], "AmpMinimumLevel"=>0],
-        /* 908=>["Panels"=>[5=>[1691]], "EnclosureID"=>908,"Name"=>"Blower",
-            "GroupIDs"=>[800], "AmpMinimumLevel"=>0],
+            "GroupIDs"=>[104,204,304,604,704,904,904], "AmpMinimumLevel"=>1],
+        906=>["Panels"=>[5=>[1695]], "EnclosureID"=>906,"Name"=>"Tremulant",
+            "GroupIDs"=>[601,602,603,604], "AmpMinimumLevel"=>1],
+        907=>["Panels"=>[5=>[1690]], "EnclosureID"=>907,"Name"=>"Stops",
+            "GroupIDs"=>[701,702,703,704], "AmpMinimumLevel"=>1],
+        908=>["Panels"=>[5=>[1691]], "EnclosureID"=>908,"Name"=>"Ambience",
+            "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>1],
         909=>["Panels"=>[5=>[1692]], "EnclosureID"=>909,"Name"=>"Tracker",
-            "GroupIDs"=>[900], "AmpMinimumLevel"=>0], */
+            "GroupIDs"=>[901,902,903,904], "AmpMinimumLevel"=>1],
     ];
 
     protected $patchKeyActions=[
         1=>"DELETE",
-        2=>["MIDINoteNumOfFirstSourceKey"=>36, "NumberOfKeys"=>30],
         3=>"DELETE",
         4=>"DELETE",
     ];
     
-    /*
     protected $patchStops=[
-         124=>["StopID"=> 124, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>124,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
-        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"HW Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"OW key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -114=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"BW key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"HW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"OW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"BW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-    ]; */
+        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower (Semi Dry)",    "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
+        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower (Diffuse)",     "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>802],
+        -103=>["StopID"=>-103, "DivisionID"=>1, "Name"=>"Blower (Distant)",     "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>803],
+        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower (Rear)",        "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>804],
+        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Tremulant (Semi Dry)", "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>601],
+        -112=>["StopID"=>-112, "DivisionID"=>1, "Name"=>"Tremulant (Diffuse)",  "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>602],
+        -113=>["StopID"=>-113, "DivisionID"=>1, "Name"=>"Tremulant (Distant)",  "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>603],
+        -114=>["StopID"=>-114, "DivisionID"=>1, "Name"=>"Tremulant (Rear)",     "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>604],
+
+        -121=>["StopID"=>-121, "DivisionID"=>2, "Name"=>"HW Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -122=>["StopID"=>-122, "DivisionID"=>3, "Name"=>"OW Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -123=>["StopID"=>-123, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -131=>["StopID"=>-131, "DivisionID"=>2, "Name"=>"HW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -132=>["StopID"=>-132, "DivisionID"=>3, "Name"=>"OW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -133=>["StopID"=>-133, "DivisionID"=>1, "Name"=>"P Key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+    ];
     
     protected $patchRanks=[
-        998102=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise On 1. man.
-        998112=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise On 1. man.
-        998122=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise On 1. man.
-        998142=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise On 1. man.
-        998152=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise Off 1. man.
-        998162=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise Off 1. man.
-        998172=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise Off 1. man.
-        998192=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise Off 1. man.
-        998202=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise On 2. man.
-        998212=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise On 2. man.
-        998222=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise On 2. man.
-        998242=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise On 2. man.
-        998252=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise Off 2. man.
-        998262=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise Off 2. man.
-        998272=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise Off 2. man.
-        998292=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise Off 2. man.
-        998602=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise On Pedal
-        998612=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise On Pedal
-        998622=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise On Pedal
-        998642=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise On Pedal
-        998652=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Keyboard noise Off Pedal
-        998662=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Keyboard noise Off Pedal
-        998672=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Keyboard noise Off Pedal
-        998692=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Keyboard noise Off Pedal
-        999800=>"DELETE", // Front A (direct): Stop noise Off
-        999810=>"DELETE", // Front B (diffuse): Stop noise Off
-        999820=>"DELETE", // Front C (distant): Stop noise Off
-        999840=>"DELETE", // Rear: Stop noise Off
-        999900=>"DELETE", // Front A (direct): Stop noise On
-        999901=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Blower noise
-        999905=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front A (direct): Tremulant noise
-        999910=>"DELETE", // Front B (diffuse): Stop noise On
-        999911=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Blower noise
-        999915=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front B (diffuse): Tremulant noise
-        999920=>"DELETE", // Front C (distant): Stop noise On
-        999921=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Blower noise
-        999925=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Front C (distant): Tremulant noise
-        999940=>"DELETE", // Rear: Stop noise On
-        999941=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Blower noise
-        999945=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // Rear: Tremulant noise
+        999800=>["Noise"=>"StopOn",  "GroupID"=>701, "StopIDs"=>[]], // Front A (direct): Stop noise Off
+        999810=>["Noise"=>"StopOn",  "GroupID"=>702, "StopIDs"=>[]], // Front B (diffuse): Stop noise Off
+        999820=>["Noise"=>"StopOn",  "GroupID"=>703, "StopIDs"=>[]], // Front C (distant): Stop noise Off
+        999840=>["Noise"=>"StopOn",  "GroupID"=>704, "StopIDs"=>[]], // Rear: Stop noise Off
+        999900=>["Noise"=>"StopOff", "GroupID"=>701, "StopIDs"=>[]], // Front A (direct): Stop noise On
+        999910=>["Noise"=>"StopOff", "GroupID"=>702, "StopIDs"=>[]], // Front B (diffuse): Stop noise On
+        999920=>["Noise"=>"StopOff", "GroupID"=>703, "StopIDs"=>[]], // Front C (distant): Stop noise On
+        999940=>["Noise"=>"StopOff", "GroupID"=>704, "StopIDs"=>[]], // Rear: Stop noise On
+        998102=>["Noise"=>"KeyOn",  "GroupID"=>901, "StopIDs"=>[-121]], // Front A (direct): Keyboard noise On 1. man.
+        998112=>["Noise"=>"KeyOn",  "GroupID"=>902, "StopIDs"=>[-121]], // Front B (diffuse): Keyboard noise On 1. man.
+        998122=>["Noise"=>"KeyOn",  "GroupID"=>903, "StopIDs"=>[-121]], // Front C (distant): Keyboard noise On 1. man.
+        998142=>["Noise"=>"KeyOn",  "GroupID"=>904, "StopIDs"=>[-121]], // Rear: Keyboard noise On 1. man.
+        998152=>["Noise"=>"KeyOff", "GroupID"=>901, "StopIDs"=>[-131]], // Front A (direct): Keyboard noise Off 1. man.
+        998162=>["Noise"=>"KeyOff", "GroupID"=>902, "StopIDs"=>[-131]], // Front B (diffuse): Keyboard noise Off 1. man.
+        998172=>["Noise"=>"KeyOff", "GroupID"=>903, "StopIDs"=>[-131]], // Front C (distant): Keyboard noise Off 1. man.
+        998192=>["Noise"=>"KeyOff", "GroupID"=>904, "StopIDs"=>[-131]], // Rear: Keyboard noise Off 1. man.
+        998202=>["Noise"=>"KeyOn",  "GroupID"=>901, "StopIDs"=>[-122]], // Front A (direct): Keyboard noise On 2. man.
+        998212=>["Noise"=>"KeyOn",  "GroupID"=>902, "StopIDs"=>[-122]], // Front B (diffuse): Keyboard noise On 2. man.
+        998222=>["Noise"=>"KeyOn",  "GroupID"=>903, "StopIDs"=>[-122]], // Front C (distant): Keyboard noise On 2. man.
+        998242=>["Noise"=>"KeyOn",  "GroupID"=>904, "StopIDs"=>[-122]], // Rear: Keyboard noise On 2. man.
+        998252=>["Noise"=>"KeyOff", "GroupID"=>901, "StopIDs"=>[-132]], // Front A (direct): Keyboard noise Off 2. man.
+        998262=>["Noise"=>"KeyOff", "GroupID"=>902, "StopIDs"=>[-132]], // Front B (diffuse): Keyboard noise Off 2. man.
+        998272=>["Noise"=>"KeyOff", "GroupID"=>903, "StopIDs"=>[-132]], // Front C (distant): Keyboard noise Off 2. man.
+        998292=>["Noise"=>"KeyOff", "GroupID"=>904, "StopIDs"=>[-132]], // Rear: Keyboard noise Off 2. man.
+        998602=>["Noise"=>"KeyOn",  "GroupID"=>901, "StopIDs"=>[-113]], // Front A (direct): Keyboard noise On Pedal
+        998612=>["Noise"=>"KeyOn",  "GroupID"=>902, "StopIDs"=>[-123]], // Front B (diffuse): Keyboard noise On Pedal
+        998622=>["Noise"=>"KeyOn",  "GroupID"=>903, "StopIDs"=>[-123]], // Front C (distant): Keyboard noise On Pedal
+        998642=>["Noise"=>"KeyOn",  "GroupID"=>904, "StopIDs"=>[-123]], // Rear: Keyboard noise On Pedal
+        998652=>["Noise"=>"KeyOff", "GroupID"=>901, "StopIDs"=>[-133]], // Front A (direct): Keyboard noise Off Pedal
+        998662=>["Noise"=>"KeyOff", "GroupID"=>902, "StopIDs"=>[-133]], // Front B (diffuse): Keyboard noise Off Pedal
+        998672=>["Noise"=>"KeyOff", "GroupID"=>903, "StopIDs"=>[-133]], // Front C (distant): Keyboard noise Off Pedal
+        998692=>["Noise"=>"KeyOff", "GroupID"=>904, "StopIDs"=>[-133]], // Rear: Keyboard noise Off Pedal
+        999901=>["Noise"=>"Ambient",  "GroupID"=>801, "StopIDs"=>[-101]], // Front A (direct): Blower noise
+        999905=>["Noise"=>"Ambient",  "GroupID"=>601, "StopIDs"=>[-111]], // Front A (direct): Tremulant noise
+        999911=>["Noise"=>"Ambient",  "GroupID"=>802, "StopIDs"=>[-102]], // Front B (diffuse): Blower noise
+        999915=>["Noise"=>"Ambient",  "GroupID"=>602, "StopIDs"=>[-112]], // Front B (diffuse): Tremulant noise
+        999921=>["Noise"=>"Ambient",  "GroupID"=>803, "StopIDs"=>[-103]], // Front C (distant): Blower noise
+        999925=>["Noise"=>"Ambient",  "GroupID"=>603, "StopIDs"=>[-113]], // Front C (distant): Tremulant noise
+        999941=>["Noise"=>"Ambient",  "GroupID"=>804, "StopIDs"=>[-104]], // Rear: Blower noise
+        999945=>["Noise"=>"Ambient",  "GroupID"=>604, "StopIDs"=>[-114]], // Rear: Tremulant noise
     ];
 
     public function import(): void {
@@ -152,21 +163,6 @@ class Arnstadt extends SPOrgan {
         }
     }
 
-    public function createRanks(array $ranksdata): void {
-        ksort($ranksdata);
-        parent::createRanks($ranksdata);
-        exit();
-    }
-
-    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        if ($hwdata["RankID"]>990000) {
-            echo $hwdata["RankID"], '=>["Noise"=>"",  "GroupID"=>900, "StopIDs"=>[]], // ', $hwdata["Name"],"\n";
-            return NULL;
-        }
-        else
-            return parent::createRank($hwdata, $keynoise);
-    }
-    
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
         // The one tremulant switch needs to act across all divisions
         $this->patchTremulants[26]["DivisionID"]=$hwdata["DivisionID"];
@@ -269,11 +265,11 @@ class Arnstadt extends SPOrgan {
                     "Semi-Dry");
             self::Arnstadt(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
-                     "Diffuse"); */
+                     "Diffuse");
             self::Arnstadt(
                     [self::RANKS_DISTANT=>"Distant"],
                      "Distant");
-            /* self::Arnstadt(
+            self::Arnstadt(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear"); */
             self::Arnstadt(
