@@ -22,7 +22,7 @@ class Brasov extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Wegenstein Organ from Reformed Church in Brasov\n"
-            . "https://hauptwerk-augustine.info/Brasov_Reformed.php\n"
+            . "https://hauptwerk-augustine.info/Brasov.php\n"
             . "\n";
     const TARGET=self::ROOT . "Brasov Reformed Surround Demo.1.0.organ";
 
