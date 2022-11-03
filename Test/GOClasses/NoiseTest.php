@@ -55,8 +55,8 @@ class NoiseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(245, $noise->MaxTimeSinceLastRelease);
         $noise->AttackMaxKeyPressTime=321;
         $this->assertEquals(321, $noise->MaxKeyPressTime);
-        $noise->AttackIsTremulant="N";
-        $this->assertEquals("N", $noise->IsTremulant);
+        $noise->AttackIsTremulant=0;
+        $this->assertEquals(0, $noise->IsTremulant);
         $noise->AttackReleaseEnd=498;
         $this->assertEquals(498, $noise->ReleaseEnd);
         $noise->LoopStart=111;
@@ -80,8 +80,8 @@ class NoiseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(542, $noise->Attack002MaxTimeSinceLastRelease);
         $noise->AttackMaxKeyPressTime=798;
         $this->assertEquals(798, $noise->Attack002MaxKeyPressTime);
-        $noise->AttackIsTremulant="Y";
-        $this->assertEquals("Y", $noise->Attack002IsTremulant);
+        $noise->AttackIsTremulant=1;
+        $this->assertEquals(1, $noise->Attack002IsTremulant);
         $noise->AttackReleaseEnd=501;
         $this->assertEquals(501, $noise->Attack002ReleaseEnd);
         $noise->LoopStart=333;

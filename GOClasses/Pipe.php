@@ -25,7 +25,7 @@ class Pipe extends GOBase {
     }
     
     public function set(string $property, ?string $value) : void  {
-        if ($value==="" || $value===NULL) return;
+            if ($value==="" || $value===NULL) return;
         
         switch ($property) {
             case "Pipe":

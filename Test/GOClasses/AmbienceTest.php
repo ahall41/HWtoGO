@@ -51,8 +51,8 @@ class AmbienceTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(245, $pipe->MaxTimeSinceLastRelease);
         $pipe->AttackMaxKeyPressTime=321;
         $this->assertEquals(321, $pipe->MaxKeyPressTime);
-        $pipe->AttackIsTremulant="N";
-        $this->assertEquals("N", $pipe->IsTremulant);
+        $pipe->AttackIsTremulant=0;
+        $this->assertEquals(0, $pipe->IsTremulant);
         $pipe->AttackReleaseEnd=498;
         $this->assertEquals(498, $pipe->ReleaseEnd);
         $pipe->LoopStart=111;
@@ -76,8 +76,8 @@ class AmbienceTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(542, $pipe->Attack002MaxTimeSinceLastRelease);
         $pipe->AttackMaxKeyPressTime=798;
         $this->assertEquals(798, $pipe->Attack002MaxKeyPressTime);
-        $pipe->AttackIsTremulant="Y";
-        $this->assertEquals("Y", $pipe->Attack002IsTremulant);
+        $pipe->AttackIsTremulant=1;
+        $this->assertEquals(1, $pipe->Attack002IsTremulant);
         $pipe->AttackReleaseEnd=501;
         $this->assertEquals(501, $pipe->Attack002ReleaseEnd);
         $pipe->LoopStart=333;

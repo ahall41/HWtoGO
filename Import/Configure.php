@@ -540,6 +540,7 @@ abstract Class Configure extends Create {
                 ["Gain","AmpLvl_LevelAdjustDecibels"]
             ];
         $this->map($map, $hwdata, $pipe);
+        if (isset($hwdata["IsTremulant"])) $pipe->AttackIsTremulant=$hwdata["IsTremulant"];
     }
 
     /**
@@ -573,6 +574,7 @@ abstract Class Configure extends Create {
                 ["ReleaseMaxKeyPressTime","ReleaseSelCriteria_LatestKeyReleaseTimeMs"],
             ];
         $this->map($map, $hwdata, $pipe);
+        if (isset($hwdata["IsTremulant"])) $pipe->ReleaseIsTremulant=$hwdata["IsTremulant"];
     }
 
     /**

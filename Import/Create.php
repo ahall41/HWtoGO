@@ -183,8 +183,10 @@ abstract Class Create extends Objects {
             return $on;
         }
         else {
-            $tremulant=$this->newTremulant($tremulantdata["TremulantID"], $tremulantdata["Name"]);
-            $tremulant->TremulantType=$tremulantdata["Type"];
+            $tremulant=$this->newTremulant(
+                    $tremulantdata["TremulantID"], 
+                    $tremulantdata["Name"],
+                    $tremulantdata["Type"]=="Wave");
             $switch=$this->newSwitch($tremulantdata["SwitchID"], "Tremulant $name");
             $tremulant->Switch($switch);
             foreach($tremulantdata["GroupIDs"] as $groupid) {

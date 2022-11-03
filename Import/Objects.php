@@ -211,8 +211,8 @@ class Objects {
             return [];
     }
 
-    protected function newTremulant($id, $name) : \GOClasses\Tremulant {
-        return $this->Model[self::Tremulants][$id]=new \GOClasses\Tremulant($name);
+    protected function newTremulant($id, $name, $wave=FALSE) : \GOClasses\Tremulant {
+        return $this->Model[self::Tremulants][$id]=new \GOClasses\Tremulant($name, $wave);
     }
 
     public function getTremulant($id, bool $hardfail=TRUE) : ?\GOClasses\Tremulant {
