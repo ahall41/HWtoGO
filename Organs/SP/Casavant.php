@@ -71,8 +71,8 @@ class Casavant extends SPOrgan {
     ];
 
     protected $patchTremulants=[
-        25=>["Type"=>"Switched", "DivisionID"=>4], // Rec
-        72=>["Type"=>"Switched", "DivisionID"=>3], // Pos
+        25=>["Type"=>"Wave", "GroupIDs"=>[401,404]], // Rec
+        72=>["Type"=>"Wave", "GroupIDs"=>[301,304]], // Pos
     ];
 
     protected $patchEnclosures=[
@@ -102,67 +102,10 @@ class Casavant extends SPOrgan {
             "GroupIDs"=>[301,304], "AmpMinimumLevel"=>20], 
     ];
 
-    /* protected $patchStops=[
-        250=>["StopID"=>250, "DivisionID"=>1, "Name"=>"Blower",        "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>900],
-        -11=>["StopID"=>-11, "DivisionID"=>1, "Name"=>"Pedal Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -12=>["StopID"=>-12, "DivisionID"=>2, "Name"=>"Pos Key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -13=>["StopID"=>-13, "DivisionID"=>3, "Name"=>"GO key On",      "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -14=>["StopID"=>-14, "DivisionID"=>4, "Name"=>"Rec key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -15=>["StopID"=>-15, "DivisionID"=>5, "Name"=>"Cham key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -21=>["StopID"=>-21, "DivisionID"=>1, "Name"=>"Pedal Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -22=>["StopID"=>-22, "DivisionID"=>2, "Name"=>"Pos Key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -23=>["StopID"=>-23, "DivisionID"=>3, "Name"=>"GO key Off",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -24=>["StopID"=>-24, "DivisionID"=>4, "Name"=>"Rec key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -25=>["StopID"=>-25, "DivisionID"=>5, "Name"=>"Cham key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-    ]; */
-    
-    /* protected $patchRanks=[
-          8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
-          9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
-        950=>["Noise"=>"Ambient", "GroupID"=>900, "StopIDs"=>[250]],
-        981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-11]],
-        982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-12]],
-        983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-13]],
-        984=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-14]],
-        985=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-15]],
-        991=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-21]],
-        992=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-22]],
-        993=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-23]],
-        994=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-24]],
-        995=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-25]],
-    ]; */
-
-    public function xximport() : void {
-        $hwd=$this->hwdata;
-        foreach($hwd->imageSetElements() as $imagesetelements) {
-            foreach($imagesetelements as $imagesetelement) {
-                /* if (strpos($imagesetelement["BitmapFilename"], "montre8_on")>0) {
-                    print_r($imagesetelement);
-                    foreach($hwd->imageSetInstances() as $imagesetinstance) {
-                        if ($imagesetinstance["ImageSetID"]==$imagesetelement["ImageSetID"]) {
-                            print_r($imagesetinstance);
-                        }
-                    }
-                } */
-                // if (strpos($imagesetelement["BitmapFilename"], "000.bmp")>0) {
-                if (strpos($imagesetelement["BitmapFilename"], "sliders/001.bmp")!==FALSE) {
-                    //print_r($imagesetelement);
-                    foreach($hwd->imageSetInstances() as $imagesetinstance) {
-                        if ($imagesetinstance["ImageSetID"]==$imagesetelement["ImageSetID"]) {
-                            echo $imagesetinstance["ImageSetInstanceID"], " ", 
-                                 $imagesetinstance["ImageSetID"], " ",
-                                 // $imagesetinstance["AlternateScreenLayout2_ImageSetID"], " ",
-                                 $imagesetinstance["DisplayPageID"], " ",
-                                 $imagesetelement["BitmapFilename"], " ",
-                                 $imagesetinstance["Name"], "\n";
-                        }
-                    }
-                }
-            }
-        }
-        parent::import();
+    public function createSwitchNoise(string $type, array $hwdata) : void {
+        return; // No Op
     }
-
+    
     public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
         if ($hwdata["DestDivisionID"]>4) return NULL;
         return parent::createCoupler($hwdata);
@@ -196,23 +139,21 @@ class Casavant extends SPOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
 
-    /* public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $hwdata): void {
-        if (isset($hwdata["StopID"]) && $hwdata["StopID"]==250) {
-            $pe20=$this->getPanel(20)->GUIElement($switch);
-            $this->configureImage($pe20, ["SwitchID"=>1050]);
-            $pe20->PositionX=2236;
-            $pe20->PositionY=107;
-            $pe20->MouseRectWidth=160;
-            $pe22=$this->getPanel(22)->GUIElement($switch);
-            $this->configureImage($pe22,["SwitchID"=>1050]);
-            $pe22->PositionX=1361;
-            $pe22->PositionY=1797;
-            $pe22->MouseRectWidth=160;
+    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
         }
-        else
-            parent::configurePanelSwitchImages ($switch, $hwdata);
-    } */
- 
+        return parent::processSample($hwdata, $isattack);
+    }
+
     /**
      * Run the import
      */
@@ -229,13 +170,7 @@ class Casavant extends SPOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            /* self::Casavant(
-                    [self::RANKS_DIRECT=>"Front"],
-                    "Front");
             self::Casavant(
-                    [self::RANKS_REAR=>"Rear"],
-                    "Rear"); */
-             self::Casavant(
                     [
                         self::RANKS_DIRECT=>"Front", 
                         self::RANKS_REAR=>"Rear"
