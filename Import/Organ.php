@@ -25,6 +25,7 @@ abstract class Organ extends Images {
     protected $patchDisplayPages=[];
     protected $patchDivisions=[];
     protected $patchEnclosures=[];
+    protected $patchImageSets=[];
     protected $patchKeyActions=[];
     protected $patchKeyboards=[];
     protected $patchKeyImageSets=[];
@@ -66,6 +67,7 @@ abstract class Organ extends Images {
         $hwd->patchDisplayPages($this->patchDisplayPages);
         $hwd->patchDivisions($this->patchDivisions);
         $hwd->patchEnclosures($this->patchEnclosures);
+        $hwd->patchImageSets($this->patchImageSets);
         $hwd->patchKeyActions($this->patchKeyActions);
         $hwd->patchKeyboard($this->patchKeyboards);
         $hwd->patchKeyImageSets($this->patchKeyImageSets);

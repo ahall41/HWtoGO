@@ -113,6 +113,12 @@ class HWData extends HWReader {
     }
     
     // Cave - not indexed
+    public function patchImageSets(array $data) {
+        $this->ImageSets();
+        $this->patch("ImageSet", $data);
+    }
+
+    // Cave - not indexed
     public function patchKeyActions(array $data) {
         $this->keyActions();
         $this->patch("KeyAction", $data);
