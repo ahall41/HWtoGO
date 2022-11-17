@@ -12,7 +12,7 @@ namespace Organs\SP;
 require_once __DIR__ . "/SPOrganV2.php";
 
 /**
- * Import Sonus Paradisi Polná, organ by J. D. Sieber (1708) Demo to GrandOrgue
+ * Import Sonus Paradisi Rosales, opus 11, Portland, Oregon Demo to GrandOrgue
  * 
  * @author andrewZ`
  */
@@ -24,8 +24,7 @@ class PortlandRosales extends SPOrganV2 {
     
     const RANKS_DIRECT=1;
     const RANKS_DIFFUSE=2;
-    const RANKS_SEMIDRY=3;
-    const RANKS_REAR=4;
+    const RANKS_REAR=3;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
