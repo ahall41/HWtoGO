@@ -51,8 +51,10 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-        1=>["Name"=>"Tremulant", "SwitchID"=>201, "Type"=>"Switched", "Position"=>[6, 1]],
-        2=>["Name"=>"Tremulant", "SwitchID"=>202, "Type"=>"Switched", "Position"=>[7, 3]],
+        1=>["TremulantID"=>1, "Name"=>"Great", "SwitchID"=>201, "Type"=>"Wave",
+            "Position"=>[6, 1], "GroupIDs"=>[101,102,103,104]],
+        2=>["TremulantID"=>2, "Name"=>"Swell", "SwitchID"=>203, "Type"=>"Wave",
+            "Position"=>[7, 3], "GroupIDs"=>[201,202,203,204]],
     ];
 
     private $couplers=[
@@ -216,26 +218,18 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
             $stopdata["StopID"]=$stopdata["SwitchID"]=$stopid;
             $manualid=$stopdata["DivisionID"]=$stopdata["ManualID"];
             $switch=$this->createStop($stopdata);
-            if (isset($stopdata["TremulantID"])) {
-                $tswitchid=$this->tremulants[$stopdata["TremulantID"]]["SwitchID"];
-                $on=$this->getSwitch($tswitchid);
-                $off=$this->getSwitch(-$tswitchid);
-
-                $this->getStop($stopid)->switch($off);
-                $stop=$this->newStop(-$stopid, $this->stops[$stopid]["Name"] . " (tremulant)");
-                $this->getManual($manualid)->Stop($stop);
-                $stop->switch($switch);
-                $stop->switch($on);
-            }
         }
     }
 
-    protected function buildRank(int $stopid, array $rankdata) : ?\GOClasses\Rank {
+    protected function buildRank(int $stopid, array $rankdata) : void {      
         $rankid=$rankdata["RankID"];
+        if ($rankid % 10>4) return;
+        
         $divid=$this->stops["$stopid"]["DivisionID"];
         $posid=$this->rankpositions[$rankid % 10];
         $wcg=$this->getWindchestGroup(($divid*100) + $posid);
-        if ($wcg===NULL) return NULL;
+        if ($wcg===NULL) return;
+        
         $rank=$this->newRank($rankid, $rankdata["Name"]);
         $rank->WindchestGroup($wcg);
         foreach ($this->stops as $id=>$stopdata) {
@@ -255,14 +249,13 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
                 }
             }
         }
-        return $rank;
     }
     
     protected function buildRanks() : void {
         foreach($this->hwdata->ranks() as $rankdata) {
-            $stopid=intval($rankid=($rankdata["RankID"]/10));
+            $stopid=intval($rankdata["RankID"]/10);
             if (isset($this->stops[$stopid]))
-                $rank=$this->buildRank($stopid, $rankdata);
+                $this->buildRank($stopid, $rankdata);
         }
         
     }
@@ -300,6 +293,20 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
         return parent::processSample($hwdata, $isattack);
     }
 
@@ -316,22 +323,22 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            //self::BuckeburgExtStsAugustine(
-            //        [self::RANKS_DIRECT=>"Direct"],
-            //        "Direct");
+            /* self::BuckeburgExtStsAugustine(
+                    [self::RANKS_DIRECT=>"Direct"],
+                    "Direct"); */
             self::BuckeburgExtStsAugustine(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
             self::BuckeburgExtStsAugustine(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-            self::BuckeburgExtStsAugustine(
+            /* self::BuckeburgExtStsAugustine(
                     [
                         //self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "4ch");
+                   "4ch"); */
         }
     }
 }

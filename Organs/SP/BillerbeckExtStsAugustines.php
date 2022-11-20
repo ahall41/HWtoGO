@@ -33,7 +33,7 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
         2=>self::RANKS_DIFFUSE,  6=>self::RANKS_DIFFUSE,
         4=>self::RANKS_REAR,     8=>self::RANKS_REAR
     ];
-
+    
     private $divisions=[
         0=>"Pedale",
         1=>"Grand Orgue",
@@ -51,8 +51,12 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-        2=>["Name"=>"Swell", "SwitchID"=>203, "Type"=>"Switched", "Position"=>[7, 3]],
+        1=>["TremulantID"=>1, "Name"=>"Great", "SwitchID"=>201, "Type"=>"Synth",
+            "Position"=>[6, 1], "GroupIDs"=>[101,102,103,104]],
+        2=>["TremulantID"=>2, "Name"=>"Swell", "SwitchID"=>203, "Type"=>"Wave",
+            "Position"=>[7, 3], "GroupIDs"=>[201,202,203,204]],
     ];
+
     private $couplers=[
        301=>["Name"=>"Gt/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>1, "Position"=>[11, 2]],
        302=>["Name"=>"Sw/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>2, "Position"=>[11, 3]],
@@ -63,37 +67,37 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
     private $stops=[
         27=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 1], "Name"=>"Subbass 16'"], // P. Principalbass 16
         26=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 1], "Name"=>"Lieblich Gedackt 16'", "FirstKey"=>13], // P. Soubasse 16
-        15=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[11, 1], "Name"=>"Mixture III"], // 2. Mixture major
+        15=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[11, 1], "Name"=>"Mixture III", "PitchTuning"=>-1200], // 2. Mixture major
        104=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 2], "Name"=>"Octave 8'", "Rank"=>4], // 2. Principal major 8
         32=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 2], "Name"=>"Flute 8'"], // P. Flute 8
         58=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 3], "Name"=>"Choral Bass 4'"], // 3. Fugara 4
        178=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 3], "Name"=>"Nachthorn 4'", "Rank"=>78], // 1. Holzflote 4
         38=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[ 9, 4], "Name"=>"Pausaune 16'"], // P. Posaune 16
-       143=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 4], "Name"=>"Clairon 4'", "Rank"=>43], // 4. Trompeta real 8
+        43=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[10, 4], "Name"=>"Clairon 4'", "FirstKey"=>13], // 4. Trompeta real 8
 
-         4=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 1], /* "TremulantID"=>1, */ "Name"=>"Principal 8'"], // 2. Principal major 8
-         9=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 1], /* "TremulantID"=>1, */ "Name"=>"Octave 4'"], // 2. Octave major 4
-        13=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 1], /* "TremulantID"=>1, */ "Name"=>"Super Octave 2'"], // 2. Octave 2
-        16=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 1],                   "Name"=>"Mixture III"], // 2. Mixture minor
-         7=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 1], /* "TremulantID"=>1, */ "Name"=>"Gambe 8'"], // 2. Viola da Gamba 8
-         8=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 2], /* "TremulantID"=>1, */ "Name"=>"Spitzflote 8'"], // 2. Gedackt 8
-        78=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 2], /* "TremulantID"=>1, */ "Name"=>"Open Flute 4'"], // 1. Holzflote 4
-        79=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 2], /* "TremulantID"=>1, */ "Name"=>"Waldflote 2'"], // 1. Waldflote 2
-        //28=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 2], /* "TremulantID"=>1, */ "Name"=>"Larigot 1-1/3"], // OW Quinta 1 1/3
-        64=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 2], /* "TremulantID"=>1, */ "Name"=>"Trompette 8'"], // 3. Trompette harmonique 8
+         4=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 1], "Name"=>"Principal 8'"], // 2. Principal major 8
+         9=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 1], "Name"=>"Octave 4'"], // 2. Octave major 4
+        13=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 1], "Name"=>"Super Octave 2'"], // 2. Octave 2
+        16=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 1], "Name"=>"Mixture III"], // 2. Mixture minor
+         7=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 1], "Name"=>"Gambe 8'"], // 2. Viola da Gamba 8
+         8=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 2],  "Name"=>"Spitzflote 8'"], // 2. Gedackt 8
+        78=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 2], "Name"=>"Open Flute 4'"], // 1. Holzflote 4
+       179=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 2], "Name"=>"Waldflote 2'", "Rank"=>79], // 1. Waldflote 2
+       160=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 2], "Name"=>"Larigot 1-1/3", "Rank"=>60], // 3. Octavin 2
+       143=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 2], "Name"=>"Trompette 8'", "Rank"=>43], // 4. Trompeta real 8
 
         51=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 1, 3], "TremulantID"=>2, "Name"=>"Viola Pomposa 8'"], // 3. Geigenprincipal 8
         77=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 2, 3], "TremulantID"=>2, "Name"=>"Prestant 4'"], // 1. Praestant 4
-        //47=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 3, 3], "TremulantID"=>2, "Name"=>"Sifflet 1'"], // BW Sifflote 1
+        60=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 3, 3], "TremulantID"=>2, "Name"=>"Sifflet 1'", "FirstKey"=>13], // 3. Octavin 2
         82=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 4, 3],                   "Name"=>"Mixture III'"], // 1. Mixtur 4f.
-        //16=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 5, 3], "TremulantID"=>2, "Name"=>"Contre Trompette 16'"], // HW Fagott 16
-        43=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 3], "TremulantID"=>2, "Name"=>"Trompette 8'"], // 4. Trompeta real 8
+        84=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 5, 3], "TremulantID"=>2, "Name"=>"Contre Trompette 16'", "PitchTuning"=>-1200], // 1. Cromone 8
+        64=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 3], "TremulantID"=>2, "Name"=>"Trompette 8'"], // 3. Trompette harmonique 8
          2=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 1, 4], "TremulantID"=>2, "Name"=>"Bourdon Doux 16'"], // 2. Principal 16
-        46=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 2, 4], "TremulantID"=>2, "Name"=>"Rohrflote 8'"], // 4. Flute harmonique 8
+        74=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 2, 4], "TremulantID"=>2, "Name"=>"Rohrflote 8'"], // 1. Rohrflote 8
         57=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 3, 4], "TremulantID"=>2, "Name"=>"Gedackt 4'"], // 3. Flute octaviante 4
         59=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 4, 4], "TremulantID"=>2, "Name"=>"Nasard 2 2/3'"], // 3. Nazard harmonique 2 2/3
         79=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 5, 4], "TremulantID"=>2, "Name"=>"Blockflote 2'"], // 1. Waldflote  
-        //46=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 4], "TremulantID"=>2, "Name"=>"Tierce 1 3/5'"], // BW Terzflote 1 3/5
+       279=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 6, 4], "TremulantID"=>2, "Name"=>"Tierce 1 3/5'", "Rank"=>79, "PitchTuning"=>400], // 1. Waldflote 
     ];
 
     protected \HWClasses\HWData $hwdata;
@@ -115,7 +119,6 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
         $this->buildTremulants();
         $this->buildCouplers();
         $this->buildStops();
-        $this->buildRanks();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
     }
@@ -214,56 +217,32 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
             $stopdata["StopID"]=$stopdata["SwitchID"]=$stopid;
             $manualid=$stopdata["DivisionID"]=$stopdata["ManualID"];
             $switch=$this->createStop($stopdata);
-            if (isset($stopdata["TremulantID"])) {
-                $tswitchid=$this->tremulants[$stopdata["TremulantID"]]["SwitchID"];
-                $on=$this->getSwitch($tswitchid);
-                $off=$this->getSwitch(-$tswitchid);
-
-                $this->getStop($stopid)->switch($off);
-                $stop=$this->newStop(-$stopid, $this->stops[$stopid]["Name"] . " (tremulant)");
-                $this->getManual($manualid)->Stop($stop);
-                $stop->switch($switch);
-                $stop->switch($on);
-            }
-        }
-    }
-
-    protected function buildRank(int $stopid, array $rankdata) : ?\GOClasses\Rank {
-        $rankid=$rankdata["RankID"];
-        $tremmed=(($rankid % 10)>4);
-        $divid=$this->stops["$stopid"]["DivisionID"];
-        $posid=$this->rankpositions[$rankid % 10];
-        $wcg=$this->getWindchestGroup(($divid*100) + $posid);
-        if ($wcg===NULL) return NULL;
-        $rank=NULL;
-        foreach ($this->stops as $id=>$stopdata) {
-            if ($stopid==$id || (isset($stopdata["Rank"]) && $stopdata["Rank"]==$stopid)) {
-                if (empty($stopdata["TremulantID"]) && $tremmed) continue;
-                $stop=$this->getStop($tremmed ? -$id : +$id);
-                if ($stop==NULL) continue;
-                if (empty($rank)) {
-                    $rank=$this->newRank($rankid, $rankdata["Name"]);
-                    $rank->WindchestGroup($wcg);
-                }
-                $stop->Rank($rank);
-                if (isset($stopdata["FirstKey"])) {
-                    $ranknum=$stop->int2str($stop->NumberOfRanks);
-                    $stop->set("Rank${ranknum}FirstPipeNumber", $stopdata["FirstKey"]);
-                }
-                if (isset($stopdata["FirstNote"])) {
-                    $ranknum=$stop->int2str($stop->NumberOfRanks);
-                    $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $stopdata["FirstNote"]);
+            $stop=$this->getStop($stopid);
+            $baseid=isset($stopdata["Rank"]) ? $stopdata["Rank"] : $stopdata["StopID"];
+            $tremmed=isset($stopdata["TremulantID"]);
+            foreach($this->rankpositions as $offset=>$groupid) {
+                if ($offset>4) continue;
+                $rankdata=$this->hwdata->rank($baseid*10+$offset, FALSE);
+                if ($rankdata) {
+                    $divid=$this->stops[$stopid]["DivisionID"];
+                    $wcg=$this->getWindchestGroup(($divid*100) + $groupid);
+                    if ($wcg) {
+                        $rank=$this->newRank(($stopid*10)+$offset, $rankdata["Name"] . " (" . $stopdata["Name"] . ")");
+                        $rank->WindchestGroup($wcg);
+                        $stop->Rank($rank);
+                        if (isset($stopdata["PitchTuning"])) {
+                            $rank->PitchTuning=$stopdata["PitchTuning"];
+                        }
+                        $ranknum=$stop->int2str($stop->NumberOfRanks);
+                        if (isset($stopdata["FirstKey"])) {
+                            $stop->set("Rank${ranknum}FirstPipeNumber", $stopdata["FirstKey"]);
+                        }
+                        if (isset($stopdata["FirstNote"])) {
+                            $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $stopdata["FirstNote"]);
+                        }
+                    }
                 }
             }
-        }
-        return $rank;
-    }
-    
-    protected function buildRanks() : void {
-        foreach($this->hwdata->ranks() as $rankdata) {
-            $stopid=intval($rankid=($rankdata["RankID"]/10));
-            if (isset($this->stops[$stopid]))
-                $rank=$this->buildRank($stopid, $rankdata);
         }
     }
 
@@ -300,9 +279,40 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe) unset($pipe->PitchTuning);
-        return $pipe;
+        switch (($rankid=$hwdata["RankID"]) % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $tremulant=TRUE;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $tremulant=TRUE;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $tremulant=TRUE;
+                break;
+            case 6:
+                $hwdata["RankID"]-=4;
+                $tremulant=TRUE;
+                break;
+            default:
+                $tremulant=FALSE;
+        }
+        if ($tremulant) $hwdata["IsTremulant"]=1;
+
+        foreach([0,1,2] as $offset) {
+            $stopid=intval($hwdata["RankID"]/10);
+            if (isset($this->stops[$stopid])) {
+                if (isset($this->stops[$stopid]["TremulantID"]) || !$tremulant) {
+                    $pipe=parent::processSample($hwdata, $isattack);
+                    if ($pipe) unset($pipe->PitchTuning);
+                }
+            }
+            $hwdata["RankID"]+=1000;
+            $hwdata["PipeID"]+=100000;
+        }
+        return NULL;
     }
 
     /**
@@ -325,10 +335,10 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
             self::BillerbeckExtStsAugustine(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
-            self::BillerbeckExtStsAugustine(
+            /* self::BillerbeckExtStsAugustine(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
-            /* self::BillerbeckExtStsAugustine(
+            self::BillerbeckExtStsAugustine(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
             self::BillerbeckExtStsAugustine(
@@ -338,7 +348,7 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "8ch"); */
+                   "8ch");  */
         }
     }
 }
