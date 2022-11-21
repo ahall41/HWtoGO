@@ -98,4 +98,8 @@ abstract class GOObject extends GOBase {
         $number=GOBase::int2str($n);
         $this->set("$type$number",intval($object->instance()));
     }
+    
+    public static function getObjects() : array {
+        return self::$Objects;
+    }
 }
