@@ -19,13 +19,13 @@ require_once __DIR__ . "/SPOrgan.php";
 class Luedingworth extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Luedingworth/";
     const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Demo (%s) 0.1.organ";
+    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.0.organ";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
-        0=>self::RANKS_DIRECT,   9=>self::RANKS_DIRECT,
-        1=>self::RANKS_DIFFUSE,  7=>self::RANKS_DIFFUSE,
-        2=>self::RANKS_REAR,     6=>self::RANKS_REAR,
+        0=>self::RANKS_DIRECT,  9=>self::RANKS_DIRECT,
+        1=>self::RANKS_DIFFUSE, 7=>self::RANKS_DIFFUSE,
+        2=>self::RANKS_REAR,    6=>self::RANKS_REAR,
     ];
     
     public $positions=[];
@@ -35,122 +35,165 @@ class Luedingworth extends SPOrgan {
                 0=>["SetID"=>1030]
                ],
             2=>[
-                0=>["Group"=>"Simple", "Name"=>"Landscape", "Instance"=>13000, "SetID"=>1036],
+                0=>["Group"=>"Landscape", "Instance"=>11000, "SetID"=>1035],
                 1=>[],
-                2=>["Group"=>"Simple", "Name"=>"Portrait", "Instance"=>13000, "SetID"=>1039],
+                2=>["Group"=>"Portrait", "Instance"=>11000, "SetID"=>1037],
                ],
             3=>[
-                0=>["Group"=>"Left", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1031],
+                0=>["Group"=>"Landscape", "Instance"=>12000, "SetID"=>1031],
                 1=>[],
-                2=>["Group"=>"Left", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1033],
+                2=>["Group"=>"Portrait", "Instance"=>12000, "SetID"=>1033],
                ],
             4=>[
-                0=>["Group"=>"Right", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
+                0=>["Group"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
                 1=>[],
-                2=>["Group"=>"Right", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
+                2=>["Group"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
                ],
-            5=>"DELETE", /** Mixer @todo */
-            6=>"DELETE", /** Stops @todo */
+            5=>[
+                0=>["Instance"=>800, "SetID"=>1036],
+               ],
+            6=>[
+                0=>["Instance"=>13000, "SetID"=>1038],
+               ],
     ];
 
     protected $patchDivisions=[
-            9=>["DivisionID"=>9, "Name"=>"Noises", "Noise"=>TRUE]
+            8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
+            9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
     ];
 
     protected $patchTremulants=[
-        89=>["Type"=>"Switched", "DivisionID"=>2],
-        24=>["Type"=>"Synth",    "DivisionID"=>3, "GroupIDs"=>[301,302,303]],
-        72=>["Type"=>"Switched", "DivisionID"=>4],
+        36=>["Type"=>"Wave", "GroupIDs"=>[101,102,104,201,202,204,301,302,304,401,402,404]],
     ];
 
     protected $patchEnclosures=[
-        996=>["Panels"=>[2=>[987, NULL, 987]], "GroupIDs"=>[501,502,503,504], "AmpMinimumLevel"=>1], // Chamade
-        997=>["Panels"=>[2=>[984, NULL, 984]], "GroupIDs"=>[401,402,403,404], "AmpMinimumLevel"=>1], // Schw
-        998=>["Panels"=>[2=>[981, NULL, 981]], "GroupIDs"=>[201,202,203,204], "AmpMinimumLevel"=>1], // Pos
+        /* 801=>["Name"=>"Pedal",  "EnclosureID"=>801, "X"=>1400, "Y"=>700,
+            "GroupIDs"=>[101,102,104]],
+        802=>["Name"=>"RPtif",     "EnclosureID"=>802, "X"=>1400, "Y"=>800,
+            "GroupIDs"=>[201,202,204]],
+        803=>["Name"=>"OW",        "EnclosureID"=>803, "X"=>1400, "Y"=>900, 
+            "GroupIDs"=>[301,302,304]], */
+        901=>["Panels"=>[5=>[1600]], "EnclosureID"=>901, "Name"=>"Direct",
+            "GroupIDs"=>[101,201,301,401], "AmpMinimumLevel"=>1],
+        902=>["Panels"=>[5=>[1610]], "EnclosureID"=>902, "Name"=>"Diffuse",
+            "GroupIDs"=>[102,202,302,402], "AmpMinimumLevel"=>1],
+        903=>["Panels"=>[5=>[1620]], "EnclosureID"=>903,"Name"=>"Rear",
+            "GroupIDs"=>[104,204,304], "AmpMinimumLevel"=>1],
+        908=>["Panels"=>[5=>[1595]], "EnclosureID"=>908,"Name"=>"Blower",
+            "GroupIDs"=>[800], "AmpMinimumLevel"=>1],
+        909=>["Panels"=>[5=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker",
+            "GroupIDs"=>[900], "AmpMinimumLevel"=>1]
     ];
 
     protected $patchStops=[
-        250=>["StopID"=>250, "DivisionID"=>1, "Name"=>"Blower",        "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>900],
-        -11=>["StopID"=>-11, "DivisionID"=>1, "Name"=>"Pedal Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -12=>["StopID"=>-12, "DivisionID"=>2, "Name"=>"Pos Key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -13=>["StopID"=>-13, "DivisionID"=>3, "Name"=>"GO key On",      "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -14=>["StopID"=>-14, "DivisionID"=>4, "Name"=>"Rec key On",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -15=>["StopID"=>-15, "DivisionID"=>5, "Name"=>"Cham key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -21=>["StopID"=>-21, "DivisionID"=>1, "Name"=>"Pedal Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -22=>["StopID"=>-22, "DivisionID"=>2, "Name"=>"Pos Key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -23=>["StopID"=>-23, "DivisionID"=>3, "Name"=>"GO key Off",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -24=>["StopID"=>-24, "DivisionID"=>4, "Name"=>"Rec key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -25=>["StopID"=>-25, "DivisionID"=>5, "Name"=>"Cham key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        250=>["StopID"=>250, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
+        -11=>["StopID"=>-11, "DivisionID"=>1, "Name"=>"PE Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -12=>["StopID"=>-12, "DivisionID"=>2, "Name"=>"PO Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -13=>["StopID"=>-13, "DivisionID"=>3, "Name"=>"HW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -14=>["StopID"=>-14, "DivisionID"=>4, "Name"=>"BW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -21=>["StopID"=>-21, "DivisionID"=>1, "Name"=>"PE Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -22=>["StopID"=>-22, "DivisionID"=>2, "Name"=>"PO Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -23=>["StopID"=>-23, "DivisionID"=>3, "Name"=>"GO key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -24=>["StopID"=>-24, "DivisionID"=>4, "Name"=>"BW key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
     ];
     
     protected $patchRanks=[
+          5=>"DELETE", //
+          6=>"DELETE", // Toys
+          7=>"DELETE", //
           8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
           9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
-        950=>["Noise"=>"Ambient", "GroupID"=>900, "StopIDs"=>[250]],
+        950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[250]],
         981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-11]],
         982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-12]],
         983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-13]],
         984=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-14]],
-        985=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-15]],
         991=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-21]],
         992=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-22]],
         993=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-23]],
         994=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-24]],
-        995=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-25]],
     ];
 
     protected function patchData(\HWClasses\HWData $hwd) : void {
         $stopranks=$hwd->read("StopRank");
-        foreach($stopranks as $id=>$stoprank) {
-            if (($id % 4)==0 
-                    && isset($stopranks[$id+1]["AlternateRankID"])
-                    && !empty($stopranks[$id+1]["AlternateRankID"])) {
-                $this->patchStopRanks[$id]=["AlternateRankID"=>$stopranks[$id+1]["AlternateRankID"]+2];
-            }
-        }
         parent::patchData($hwd);
+        return;
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if ($instance["DisplayPageID"]==5) {
+                echo $instance["ImageSetInstanceID"], " ",
+                     $instance["DisplayPageID"], " ",
+                     $instance["Name"], "\n";
+            }
+        } 
+        exit();
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
-        $hwdata["Identification_UniqueOrganID"]=2283; 
+        $hwdata["Identification_UniqueOrganID"]=2302; 
         return parent::createOrgan($hwdata);
     }
     
-    protected function correctFileName(string $filename): string {
-        $root=getenv("HOME") . self::ROOT;
-        $filename=str_replace(
-                ["\\", "/keyboard_console.bmp", "Pos_HolzFl4TREM/", "SW_GeigenPrinc8TREM/", "AB_SW_nazard223TREM/"],
-                ["/" , "/keyboard_console.png", "Pos_HolzFl4trem/", "SW_GeigenPrinc8Trem/", "AB_SW_nazard223Trem/"],
-                $filename
-        );
-        if (file_exists("$root/$filename")) 
-            return $filename;
-
-        foreach([".bmp", ".BMP", ".jpg"] as $sfx) {
-            $newfile=substr($filename, 0, -strlen($sfx)) . $sfx;
-            if (file_exists("$root/$newfile")) 
-                return $newfile;        
+    private function treeWalk($root, $dir="", &$results=[]) {
+        $files=scandir("$root$dir");
+        foreach ($files as $key => $value) {
+            if (!is_dir("$root$dir/$value")) {
+                $results[strtolower("$dir/$value")] = "$dir/$value";
+            } else if ($value != "." && $value != "..") {
+                $this->treeWalk($root, ltrim("$dir/$value", "/"), $results);
+            }
         }
-        throw new \Exception ("File $filename does not exist!");
+        return $results;
     }
 
-    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $hwdata): void {
-        if (isset($hwdata["StopID"]) && $hwdata["StopID"]==250) {
-            $pe20=$this->getPanel(20)->GUIElement($switch);
-            $this->configureImage($pe20, ["SwitchID"=>1050]);
-            $pe20->PositionX=2236;
-            $pe20->PositionY=107;
-            $pe20->MouseRectWidth=160;
-            $pe22=$this->getPanel(22)->GUIElement($switch);
-            $this->configureImage($pe22,["SwitchID"=>1050]);
-            $pe22->PositionX=1361;
-            $pe22->PositionY=1797;
-            $pe22->MouseRectWidth=160;
+    protected function correctFileName(string $filename): string {
+        static $files=[];
+        if (sizeof($files)==0)
+            $files=$this->treeWalk(getenv("HOME") . self::ROOT);
+        $filename=str_replace("//", "/", $filename);
+        if (isset($files[strtolower($filename)])) {
+            $result=$files[strtolower($filename)];
+            if (strpos($filename, "backgrounds"))
+                $result=str_replace("OrganInstallationPackages/002302/", "", $result);
+            return $result;
         }
         else
-            parent::configurePanelSwitchImages ($switch, $hwdata);
+            throw new \Exception ("File $filename does not exist!");
     }
- 
+    
+    public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
+        if (isset($data["Panels"]))
+            parent::configurePanelEnclosureImages($enclosure, $data);
+        else {
+            $panel=$this->getPanel(50); // Mixer
+            $pe=$panel->GUIElement($enclosure);
+            print_r($data);
+            $pe->PositionX=$data["X"];
+            $pe->PositionY=$data["Y"];
+            echo $pe, "\n";
+        }
+    }
+
+    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        // unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 6:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
+        return parent::processSample($hwdata, $isattack);
+    }
+    
     /**
      * Run the import
      */
@@ -161,21 +204,27 @@ class Luedingworth extends SPOrgan {
             $hwi=new Luedingworth(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("8ch", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName.= " ($target)";
+            foreach($hwi->getStops() as $stop) {
+                unset($stop->Rank001PipeCount);
+                unset($stop->Rank002PipeCount);
+                unset($stop->Rank003PipeCount);
+            }
+            unset($hwi->getManual(1)->Key027Width);
+            
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            self::Luedingworth(
+            /* self::Luedingworth(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            exit();
             self::Luedingworth(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
             self::Luedingworth(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear");
+                    "Rear"); */
              self::Luedingworth(
                     [
                         self::RANKS_DIRECT=>"Direct", 
