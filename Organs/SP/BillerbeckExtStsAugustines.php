@@ -83,7 +83,7 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
          8=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 1, 2],  "Name"=>"Spitzflote 8'"], // 2. Gedackt 8
         78=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 2, 2], "Name"=>"Open Flute 4'"], // 1. Holzflote 4
        179=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 3, 2], "Name"=>"Waldflote 2'", "Rank"=>79], // 1. Waldflote 2
-       160=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 2], "Name"=>"Larigot 1-1/3", "Rank"=>60], // 3. Octavin 2
+       160=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 4, 2], "Name"=>"Larigot 1-1/3", "Rank"=>60, "PitchTuning"=>700], // 3. Octavin 2
        143=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[ 5, 2], "Name"=>"Trompette 8'", "Rank"=>43], // 4. Trompeta real 8
 
         51=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[ 1, 3], "TremulantID"=>2, "Name"=>"Viola Pomposa 8'"], // 3. Geigenprincipal 8
