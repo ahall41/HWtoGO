@@ -21,7 +21,7 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlin extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Burton-Berlin/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.0.1.organ";
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.0.organ";
     
     protected string $root=self::ROOT;
     protected array  $rankpositions=[
@@ -40,14 +40,14 @@ class BurtonBerlin extends SPOrgan {
                 0=>["Name"=>"Simple", "Instance"=>11000, "SetID"=>1036],
                ],
             3=>[
-                0=>["Group"=>"Left", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1031],
+                0=>["Group"=>"Landscape", "Instance"=>12000, "SetID"=>1031],
                 1=>[],
-                2=>["Group"=>"Left", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1033],
+                2=>["Group"=>"Portrait", "Instance"=>12000, "SetID"=>1033],
                ],
             4=>[
-                0=>["Group"=>"Right", "Name"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
+                0=>["Group"=>"Landscape", "Instance"=>12000, "SetID"=>1032],
                 1=>[],
-                2=>["Group"=>"Right", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
+                2=>["Group"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
                ],
             5=>"DELETE", // Mixer
             6=>"DELETE", // Pedal matrix
@@ -56,28 +56,28 @@ class BurtonBerlin extends SPOrgan {
             9=>"DELETE", // Combinations
            10=>[
                 0=>["Name"=>"Stops", "Instance"=>13000, "SetID"=>1041],
-                // 1=>["Group"=>"Stops", "Name"=>"Wide",   "Instance"=>13000, "SetID"=>1042],
                ],
     ];
 
     protected $patchDivisions=[
+            8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
             9=>["DivisionID"=>9, "Name"=>"Noises", "Noise"=>TRUE]
     ];
 
     protected $patchTremulants=[
-         1=>["Type"=>"Synth",    "DivisionID"=>4, "GroupIDs"=>[401,402,403]],
-        45=>["Type"=>"Switched", "DivisionID"=>2],
+         1=>"DELETE", // ["Type"=>"Wave", "DivisionID"=>4, "GroupIDs"=>[401,402,404]],
+        45=>["Type"=>"Wave",  "DivisionID"=>2, "GroupIDs"=>[201,202,204]],
     ];
 
     protected $patchEnclosures=[
         997=>["Panels"=>[2=>[987], 4=>[986,NULL,986], 10=>[984]], 
-            "GroupIDs"=>[201,202,203], "AmpMinimumLevel"=>10], // Choir
+            "GroupIDs"=>[201,202,204], "AmpMinimumLevel"=>10], // Choir
         998=>["Panels"=>[2=>[981], 4=>[980,NULL,980], 10=>[978]], 
-            "GroupIDs"=>[401,402,403], "AmpMinimumLevel"=>10], // Swell
+            "GroupIDs"=>[401,402,404], "AmpMinimumLevel"=>10], // Swell
     ];
 
     protected $patchStops=[
-       +250=>["StopID"=>+250, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>900],
+       +250=>["StopID"=>+250, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Ped Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
        -102=>["StopID"=>-102, "DivisionID"=>2, "Name"=>"Ch Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
        -103=>["StopID"=>-103, "DivisionID"=>3, "Name"=>"Gt key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
@@ -106,31 +106,45 @@ class BurtonBerlin extends SPOrgan {
         $hwdata["Identification_UniqueOrganID"]=2261; 
         return parent::createOrgan($hwdata);
     }
-    
-    protected function correctFileName(string $filename): string {
-        $root=getenv("HOME") . self::ROOT;
-        $filename=str_replace(
-                ["\\", "jamb.png", "jambw.png", "choir", "/go/", "ortf", "_hw_", "clarinet/", 
-                    "_tierce_tr/", "viol8_tr", "_flute4", "_aeoline8_tr", "_oboe_tr", "_gedackt_tr",
-                    "_viol8", "_aeoline8/", "_larigot/", "_larigot_tr", "_oboe/", "_gedackt/",
-                    "nazard_tr", "tierce/", "piccolo/", "nazard/", "_piccolo_tr", "_clarinet_tr",
-                    "-ab_", "-rea_", "stopsw.png"],
-                ["/" , "Jamb.png", "JambW.png", "Choir", "/GO/", "ORTF", "_HW_", "Clarinet/", 
-                    "_Tierce_tr/", "Viol8_tr", "_Flute4", "_Aeoline8_tr", "_Oboe_tr", "_Gedackt_tr",
-                    "_Viol8", "_Aeoline8/", "_Larigot/", "_Larigot_tr", "_Oboe/", "_Gedackt/",
-                    "Nazard_tr", "Tierce/", "Piccolo/", "Nazard/", "_Piccolo_tr", "_Clarinet_tr",
-                    "-AB_", "-Rea_", "stopsW.png"],
-                $filename
-        );
-        if (file_exists("$root/$filename")) 
-            return $filename;
 
-        foreach([".bmp", ".BMP", ".jpg"] as $sfx) {
-            $newfile=substr($filename, 0, -strlen($sfx)) . $sfx;
-            if (file_exists("$root/$newfile")) 
-                return $newfile;        
+    public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
+        if (($switchid=$hwdata["ControllingSwitchID"])) {
+            $switchdata=$this->hwdata->switch($switchid, TRUE);
+            if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
         }
-        throw new \Exception ("File $filename does not exist!");
+        if (!isset($this->patchStops[$hwdata["StopID"]]))
+            $hwdata["ControllingSwitchID"]=$hwdata["StopID"];
+        $switch= \Import\Configure::createStop($hwdata);
+        return $switch;
+    }
+    
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (($hwdata["RankID"] % 10)>4) return NULL;
+        return parent::createRank($hwdata, $keynoise);
+    }
+    
+    private function treeWalk($root, $dir="", &$results=[]) {
+        $files=scandir("$root$dir");
+        foreach ($files as $key => $value) {
+            if (!is_dir("$root$dir/$value")) {
+                $results[strtolower("$dir/$value")] = "$dir/$value";
+            } else if ($value != "." && $value != "..") {
+                $this->treeWalk($root, ltrim("$dir/$value", "/"), $results);
+            }
+        }
+        return $results;
+    }
+
+    protected function correctFileName(string $filename): string {
+        static $files=[];
+        if (sizeof($files)==0)
+            $files=$this->treeWalk(getenv("HOME") . self::ROOT);
+        
+        $filename=str_replace("//", "/", $filename);
+        if (isset($files[strtolower($filename)]))
+            return $files[strtolower($filename)];
+        else
+            throw new \Exception ("File $filename does not exist!");
     }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $hwdata): void {    
@@ -148,6 +162,26 @@ class BurtonBerlin extends SPOrgan {
             parent::configurePanelSwitchImages ($switch, $hwdata);
     }
 
+    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
+        return parent::processSample($hwdata, $isattack);
+    }
+    
+    
     /**
      * Run the import
      */
@@ -159,6 +193,11 @@ class BurtonBerlin extends SPOrgan {
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("Surr.", "$target ", $hwi->getOrgan()->ChurchName);
+            foreach($hwi->getStops() as $stop) {
+                unset($stop->Rank001PipeCount);
+                unset($stop->Rank002PipeCount);
+                unset($stop->Rank003PipeCount);
+            }
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
