@@ -121,6 +121,13 @@ class BillerbeckExtStsAugustine extends \Import\Organ {
         $this->buildStops();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
+        $pe=new \GOClasses\PanelElement("Panel000Element");
+        $pe->Type="GC";
+        $pe->DispLabelText="General Cancel";
+        $pe->DispDrawstopRow=8;
+        $pe->DispDrawstopCol=4;
+        $pe->DispLabelColour="Dark Red";
+        $this->getPanel(0)->NumberOfGUIElements++;
     }
 
     protected function buildOrgan() : void {
