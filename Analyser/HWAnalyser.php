@@ -44,9 +44,9 @@ class HWAnalyser {
         $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
         //$this->samples();
-        $this->buildpanels();
-        $this->switchImages();
-        //$this->switchLinks();
+        //$this->buildpanels();
+        //$this->switchImages();
+        $this->stops();
     }
     
     /**
@@ -110,13 +110,38 @@ class HWAnalyser {
         if (isset($data[$source]) && $data[$source]!=="") 
             $object->set($dest, $data[$source]);
     }
+    
+    /**
+     * 
+     * @param string $type
+     * @param int $switchid
+     * @param array $result
+     * @return void
+     */
+    private function switchLinks(string $type, int $switchid, array &$result) : void {
+        static $types=[
+            "S"=>"DestSwitchID",
+            "D"=>"SourceSwitchID"
+        ];
+        $attribute=$types[$type];
+        $links=$this->hwd->switchLink($switchid);
+        if (isset($links[$type])) {
+            foreach($links[$type] as $link) {
+                if (isset($link[$attribute])) {
+                    if (!isset($result[$link[$attribute]])) {
+                        $result[$link[$attribute]]=TRUE;
+                        $this->switchLinks($type, $link[$attribute], $result);
+                    }
+                }
+            }
+        }
+    }
 
     /**
-     * Analyse samples. We need to know how they relate to sample, and how we can map
-     * (if possible)
+     * Analyse samples, and map where possible
      * - Percussive
      * - AmplitudeLevel (N/A - use Gain)
-     * - Gain
+     * + Gain
      * - TrackerDelay
      * - LoadRelease (N/A - derived from presence of release samples)
      * - AttackVelocity
@@ -124,20 +149,20 @@ class HWAnalyser {
      * - IsTremulant 
      * - MaxKeyPressTime
      * + HarmonicNumber
-     * + MIDIKeyNumber (in GO this defines its position in the rank)
+     * + MIDIKeyNumber (in GO this will define its position in the rank)
      * - PitchCorrection
      * - AcceptsRetuning
      * - WindchestGroup
      * - MinVelocityVolume
      * - MaxVelocityVolume
-     * - Attack999
+     * + Attack999
      * - Attack999LoadRelease (N/A - derived from presence of release samples)
      * - Attack999AttackVelocity
      * - Attack999IsTremulant **
-     * - Attack999MaxKeyPressTime
-     * - Release999
+     * + Attack999MaxTimeSinceLastRelease
+     * + Release999
      * - Release999IsTremulant **
-     * - Release999MaxKeyPressTime
+     * + Release999MaxKeyPressTime
      * + LoopCrossfadeLength
      * - ReleaseCrossfadeLength
      * 
@@ -193,8 +218,7 @@ class HWAnalyser {
             $this->dosample($release, FALSE);
         }
         
-        // Each pipe needs a midi note and a filename
-        // Apart from ambient noises - how do we detect them?
+        // Each pipe needs a midi note (apart from ambient noises?) and a filename
         foreach($this->pipes as $pipeid=>$pipe) {
             $attack=$pipe->Attack;
             if ($pipe->MIDIKeyNumber==0)
@@ -205,8 +229,7 @@ class HWAnalyser {
     }
     
     /**
-     * Analyse switch images. We need to know how they work, and how they relate to 
-     * images
+     * Analyse switch images.
      */
     private function switchImages() {
         $instances=[];
@@ -247,14 +270,6 @@ class HWAnalyser {
     }
     
     /**
-     * Analyse switch linkages. We need to know how they work, and how they relate to 
-     * images
-     */
-    private function switchLinks() {
-        
-    }
-
-    /**
      * Analyse tremulants. We need to know how they work, and how they relate to 
      * images, pipes and windchests
      */
@@ -271,11 +286,34 @@ class HWAnalyser {
     }
 
     /**
-     * Analyse stops. We need to know how they work, and how they relate to 
-     * images, switches, ranks and pipes
+     * Analyse switches by destination index
+     * @param array $stop
+     * @return void
+     */
+    private function destSwitches(array $stop) : void {
+        $switchid=$stop["ControllingSwitchID"];
+        $links=[];
+        $this->switchLinks("D", $switchid, $links);
+        if (sizeof($links) > 0) {
+            $links[$switchid]=TRUE;
+            foreach($links as $linkid=>$dummy) {
+                $switch=$this->hwd->switch($linkid);
+                // If it has an image we can then display it ...
+            }
+        }
+    }
+
+    /**
+     * Analyse stops. 
      */
     private function stops() {
-        
+        foreach($this->hwd->stops() as $stopid=>$stop) {
+            $this->destSwitches($stop);
+            $ranks=$this->hwd->stopRank($stopid);
+            if (sizeof($ranks)==0) {
+                echo "No ranks for stop $stopid ($stop[Name])\n";
+            }
+        }
     }
     
 }
