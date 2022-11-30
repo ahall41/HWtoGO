@@ -107,7 +107,7 @@ class HWAnalyser {
      * @return void
      */
     private function map (\GOClasses\GOBase $object, array $data, string $source, string $dest) : void {
-        if (isset($data[$source]) && !empty($data[$source])) 
+        if (isset($data[$source]) && $data[$source]!=="") 
             $object->set($dest, $data[$source]);
     }
 
@@ -214,6 +214,7 @@ class HWAnalyser {
             if (isset($switch["Disp_ImageSetInstanceID"]) &&
                     !empty($switch["Disp_ImageSetInstanceID"])) {
                 $instanceid=$switch["Disp_ImageSetInstanceID"];
+                $instances[$instanceid]=TRUE;
                 $instance=$this->hwd->imageSetInstance($instanceid);
                 foreach([0=>"",
                          1=>"AlternateScreenLayout1_",
