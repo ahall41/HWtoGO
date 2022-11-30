@@ -13,6 +13,8 @@ namespace Analyser;
 require_once (__DIR__ . "/../HWClasses/HWData.php");
 require_once (__DIR__ . "/../GOClasses/Organ.php");
 require_once (__DIR__ . "/../GOClasses/Pipe.php");
+require_once (__DIR__ . "/../GOClasses/Panel.php");
+require_once (__DIR__ . "/../GOClasses/PanelElement.php");
 
 
 /**
@@ -27,6 +29,8 @@ class HWAnalyser {
     
     private \HWClasses\HWData $hwd;
     private $pipes=[];
+    private $panels=[];
+    private $organ=NULL;
     
     const ROOT="/GrandOrgue/Organs/";
     
@@ -36,12 +40,72 @@ class HWAnalyser {
     public function __construct(string $dir, string $xml) {
         $source=getenv("HOME") . self::ROOT . "${dir}/OrganDefinitions/${xml}";
         $this->hwd=new \HWClasses\HWData($source);
+        $general=$this->hwd->general();
+        $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
-        $this->samples();
+        //$this->samples();
+        $this->buildpanels();
+        $this->switchImages();
+        //$this->switchLinks();
     }
     
-    
+    /**
+     * Build panels for later use
+     */
+    private function buildpanels() : void {
+        $this->panels=[];
+        foreach ($this->hwd->displayPages() as $pageid=>$page) {
+            $this->panels[$pageid][0]=new \GOClasses\Panel($page["Name"]);
+            foreach([1,2,3] as $l) {
+                if (isset($page["AlternateConsoleScreenLayout${l}_Include"]) 
+                       && $page["AlternateConsoleScreenLayout${l}_Include"]=="Y") {
+                    $panel=$this->panels[$pageid][$l]=new \GOClasses\Panel($page["Name"]);
+                    $panel->Group="Alternate Layout $l";
+                }
+            }
+        }
+    }
 
+
+    /**
+     * Extract image filename
+     * 
+     * @param int $setid
+     * @param int $index
+     * @return string
+     */
+    private function getImage(int $setid, int $index) : ? string {
+        $set=$this->hwd->imageSet($setid, TRUE);
+        if (empty($set)) {
+            echo "Missing imageSet: $setid\n";
+            return NULL;
+        }
+        $package=$set["InstallationPackageID"];
+        $elements=$this->hwd->imageSetElement($setid, TRUE);
+        if (empty($elements)) {;
+            echo "Missing imageSetElements: $setid\n";
+            return NULL;
+        }
+        if (isset($elements[$index]["BitmapFilename"]) 
+                && !empty($elements[$index]["BitmapFilename"])) {
+            $filename=$elements[$index]["BitmapFilename"];
+            return "InstallationPackages/$package/$filename";
+        }
+        else {
+            echo "Missing imageSetElement: ${setid}[${index}]\n";
+            return NULL;
+        }
+    }
+
+    
+    /**
+     * Helper function to copy HW Data to GO if set and not empty
+     * @param \GOClasses\GOBase $object
+     * @param array $data
+     * @param string $source
+     * @param string $dest
+     * @return void
+     */
     private function map (\GOClasses\GOBase $object, array $data, string $source, string $dest) : void {
         if (isset($data[$source]) && !empty($data[$source])) 
             $object->set($dest, $data[$source]);
@@ -122,7 +186,6 @@ class HWAnalyser {
     }
 
     private function samples() {
-        $organ=new \GOClasses\Organ("Test");
         foreach($this->hwd->attacks() as $attack) {
             $this->dosample($attack, TRUE);
         }
@@ -142,13 +205,54 @@ class HWAnalyser {
     }
     
     /**
-     * Analyse switches. We need to know how they work, and how they relate to 
-     * images and stops
+     * Analyse switch images. We need to know how they work, and how they relate to 
+     * images
      */
-    private function switches() {
-        
+    private function switchImages() {
+        $instances=[];
+        foreach($this->hwd->switches() as $switch) {
+            if (isset($switch["Disp_ImageSetInstanceID"]) &&
+                    !empty($switch["Disp_ImageSetInstanceID"])) {
+                $instanceid=$switch["Disp_ImageSetInstanceID"];
+                $instance=$this->hwd->imageSetInstance($instanceid);
+                foreach([0=>"",
+                         1=>"AlternateScreenLayout1_",
+                         2=>"AlternateScreenLayout2_",
+                         3=>"AlternateScreenLayout3_"] as $l=>$layout) {
+                    if (isset($instance["${layout}ImageSetID"]) &&
+                            !empty($instance["${layout}ImageSetID"])) {
+                        $setid=$instance["${layout}ImageSetID"];
+                        $pageid=$instance["DisplayPageID"];
+                        if (isset($this->panels[$pageid][$l])) {
+                            $panel=$this->panels[$pageid][$l];
+                            $pi=$panel->instance();
+                            $pe=new \GOClasses\PanelElement("Panel${pi}Element");
+                            $pe->Type="Switch";
+                            $this->map($pe, $instance, "${layout}LeftXPosPixels", "PositionX");
+                            if (!isset($pe->PositionX))
+                                echo "Missing PositionX in instance ${instanceid}[${l}]\n";
+                            $this->map($pe, $instance, "${layout}TopYPosPixels", "PositionY");
+                            if (!isset($pe->PositionY))
+                                echo "Missing PositionY in instance ${instanceid}[${l}]\n";
+                            $pe->ImageOn=$this->getImage($setid, $switch["Disp_ImageSetIndexEngaged"]);
+                            $pe->ImageOff=$this->getImage($setid, $switch["Disp_ImageSetIndexDisengaged"]);
+                        } else {
+                            echo "Missing panel ${pageid}[${l}]\n";
+                        }
+                    }
+                }
+            }
+        }
     }
     
+    /**
+     * Analyse switch linkages. We need to know how they work, and how they relate to 
+     * images
+     */
+    private function switchLinks() {
+        
+    }
+
     /**
      * Analyse tremulants. We need to know how they work, and how they relate to 
      * images, pipes and windchests

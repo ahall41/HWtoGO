@@ -86,15 +86,19 @@ class HWData extends HWReader {
         return $this->cache["EnclosurePipe"][$enclosurePipeid];
     }
 
-    public function imageSetElement(int $imageSetElementid) : array {
+    public function imageSetElement(int $imageSetElementid, $softfail=FALSE) : ? array {
         if (!isset($this->cache["ImageSetElementIndex"]))
             $this->imageSetElements();
+        if ($softfail && !isset($this->cache["ImageSetElementIndex"][$imageSetElementid]))
+            return NULL;
         return $this->cache["ImageSetElementIndex"][$imageSetElementid];
     }
 
-    public function imageSet(int $imageSetid) : array {
+    public function imageSet(int $imageSetid, $softfail=FALSE) : ? array {
         if (!isset($this->cache["ImageSet"]))
             $this->imageSets();
+        if ($softfail && !isset($this->cache["ImageSet"][$imageSetid]))
+            return NULL;
         return $this->cache["ImageSet"][$imageSetid];
     }
 
