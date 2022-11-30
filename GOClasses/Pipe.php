@@ -18,6 +18,7 @@ require_once(__DIR__ . "/GOBase.php");
 class Pipe extends GOBase {
     private $pipe="000";
     private $storeRelease=TRUE;
+    private $midikey=0;
         
     public function __construct() {
         $this->AttackCount=-1;
@@ -25,7 +26,7 @@ class Pipe extends GOBase {
     }
     
     public function set(string $property, ?string $value) : void  {
-            if ($value==="" || $value===NULL) return;
+        if ($value==="" || $value===NULL) return;
         
         switch ($property) {
             case "Pipe":
@@ -127,10 +128,25 @@ class Pipe extends GOBase {
                 if (!empty($value))
                     parent::set($property, floatval($value));
                 break;
-                
+
+            case "MIDIKeyNumber":
+                $this->midikey=$value;
+                break;
+            
             default:
                 parent::set($property, $value);
 
+        }
+    }
+
+    public function get(string $property, ?string $default=NULL) : ? string {
+        switch ($property) {
+            case "Attack":
+                return $this->get("");
+            case "MIDIKeyNumber":
+                return $this->midikey;
+            default:
+                return parent::get($property, $default);
         }
     }
 
