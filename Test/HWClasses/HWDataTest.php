@@ -38,7 +38,7 @@ class HWDataTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(25, sizeof($skrzatusz->imageSetInstance(5)));
         $this->assertEquals(14, sizeof($skrzatusz->keyAction(2)));
         $this->assertEquals(22, sizeof($skrzatusz->keyImageSet(2)));
-        $this->assertEquals(20, sizeof($skrzatusz->keyboard(3)));
+        $this->assertEquals(21, sizeof($skrzatusz->keyboard(3)));
         $this->assertEquals(18, sizeof($skrzatusz->pipe(101)));
         $this->assertEquals(10, sizeof($skrzatusz->attack(102)));
         $this->assertEquals(4, sizeof($skrzatusz->layer(103)));
@@ -51,11 +51,13 @@ class HWDataTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(2, sizeof($utrecht->altStopRank(60)));
         $this->assertEquals(1, sizeof($skrzatusz->rankStop(8)));
         $this->assertEquals(1, sizeof($utrecht->altRankStop(608)));
-        $this->assertEquals(8, sizeof($skrzatusz->switch(11)));
+        $this->assertEquals(9, sizeof($skrzatusz->switch(11)));
         $this->assertEquals(1, sizeof($skrzatusz->switchLink(33)));
         $this->assertEquals(1, sizeof($walcker->textInstance(65)));
         $this->assertEquals(9, sizeof($walcker->textStyle(7)));
         $this->assertEquals(3, sizeof($skrzatusz->tremulant(1)));
+        $this->assertEquals(7, sizeof($skrzatusz->tremulantWaveForm(1)));
+        $this->assertEquals(4, sizeof($skrzatusz->tremulantWaveFormPipe(1501)));
         $this->assertEquals(2, sizeof($skrzatusz->windCompartment(2)));        
     }
     

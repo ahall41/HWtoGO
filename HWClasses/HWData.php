@@ -141,15 +141,19 @@ class HWData extends HWReader {
     }
 
     
-    public function keyboardKey(int $keyboardKeyid) : array {
+    public function keyboardKey(int $keyboardKeyid, $softfail=FALSE) : array {
         if (!isset($this->cache["KeyboardKey"]))
             $this->keyboardKeys();
+        if ($softfail && !isset($this->cache["KeyboardKey"][$keyboardKeyid]))
+            return [];
         return $this->cache["KeyboardKey"][$keyboardKeyid];
     }
     
-    public function keyImageSet(int $keyImageSetid) : array {
+    public function keyImageSet(int $keyImageSetid, $softfail=FALSE) : array {
         if (!isset($this->cache["KeyImageSet"]))
             $this->keyImageSets();
+        if ($softfail && !isset($this->cache["KeyImageSet"][$keyImageSetid]))
+            return [];
         return $this->cache["KeyImageSet"][$keyImageSetid];
     }
 
@@ -310,6 +314,21 @@ class HWData extends HWReader {
     }
 
 
+    public function tremulantWaveForm(int $tremulantWaveformID) : array {
+        if (!isset($this->cache["TremulantWaveForm"]))
+            print_r($this->tremulantWaveForms());
+        
+        return $this->cache["TremulantWaveform"][$tremulantWaveformID];
+    }
+
+    
+    public function tremulantWaveFormPipe(int $pipeID) : array {
+        if (!isset($this->cache["TremulantWaveFormPipe"]))
+            $this->tremulantWaveFormPipes();
+        return $this->cache["TremulantWaveformPipe"][$pipeID];
+    }
+
+    
     public function textInstance(int $attachedToImageSetInstanceID) : array {
         if (!isset($this->cache["TextInstanceIndex"])) {
             $instances=[];

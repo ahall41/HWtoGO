@@ -455,6 +455,7 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'KeyboardID' => '4',
             'Name' => '3. manual',
             'ShortName' => '3.man',
+            'KeyGen_GenerateKeysAutomatically' => 'N',
             'Hint_PrimaryAssociatedDivisionID' => '4',
         ], $groningen[4]);
     }
@@ -948,7 +949,52 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'ControllingSwitchID' => '33'
         ], $skrzatusz[1]);
     }
+
+    public function testTremulantWaveforms() {
+        $utrecht=self::HWReader(self::Utrecht)->tremulantWaveforms();
+        print_r($utrecht);
+        $this->assertEquals(138, sizeof($utrecht));
+        $this->assertEquals([
+            'TremulantWaveformID' => '30055',
+            'TremulantID' => '65',
+            'PitchAndFundamentalWaveformSampleID' => '300554',
+            'ThirdHarmonicWaveformSampleID' => '300559',
+            'LoopCrossfadeLengthInSrcSampleMs' => '4'
+        ], $utrecht[30055]);
+
+        $skrzatusz=self::HWReader(self::Skrzatusz)->tremulantWaveforms();
+        $this->assertEquals(1, sizeof($skrzatusz));
+        $this->assertEquals([
+            'TremulantWaveformID' => '1',
+            'Name' => 'Ged8 1',
+            'TremulantID' => '1',
+            'PitchAndFundamentalWaveformSampleID' => '10101',
+            'ThirdHarmonicWaveformSampleID' => '10111',
+            'LoopCrossfadeLengthInSrcSampleMs' => '50',
+            'PitchOutputContinuousControlID' => ''
+        ], $skrzatusz[1]);
+    }
     
+    public function testTremulantWaveformPipes() {
+        $utrecht=self::HWReader(self::Utrecht)->tremulantWaveformPipes();
+        $this->assertEquals(702, sizeof($utrecht));
+        $this->assertEquals([
+            'PipeID' => '60491',
+            'TremulantWaveformID' => '60479',
+            'AmplitudeModDepthAdjustDecibels' => '8.129604e-1',
+            'PitchModDepthAdjustPercent' => '8.531615638733e+1'
+        ], $utrecht[60491]);
+
+        $skrzatusz=self::HWReader(self::Skrzatusz)->tremulantWaveformPipes();
+        $this->assertEquals(270, sizeof($skrzatusz));
+        $this->assertEquals([
+            'PipeID' => '1501',
+            'TremulantWaveformID' => '1',
+            'AmplitudeModDepthAdjustDecibels' => '-1',
+            'PitchModDepthAdjustPercent' => '50'
+        ], $skrzatusz[1501]);
+    }
+
     public function testWindCompartments() {
         $utrecht=self::HWReader(self::Utrecht)->windCompartments();
         $this->assertEquals(65, sizeof($utrecht));

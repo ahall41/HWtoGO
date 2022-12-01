@@ -108,32 +108,32 @@ class HWReader {
                 "b"=>"ImageIndexWithinSet",
                 "c"=>"Name",
                 "d"=>"BitmapFilename",
-],"ImageSetInstance"=>[	
-	"a"=>"ImageSetInstanceID",
-	"b"=>"Name",
-	"c"=>"ImageSetID",
-	"d"=>"DefaultImageIndexWithinSet",
-	"e"=>"DisplayPageID",
-	"f"=>"ScreenLayerNumber",
-	"g"=>"LeftXPosPixels",
-	"h"=>"TopYPosPixels",
-	"i"=>"RightXPosPixelsIfTiling",
-	"j"=>"BottomYPosPixelsIfTiling",
-	"k"=>"AlternateScreenLayout1_ImageSetID",
-	"l"=>"AlternateScreenLayout1_LeftXPosPixels",
-	"m"=>"AlternateScreenLayout1_TopYPosPixels",
-	"n"=>"AlternateScreenLayout1_RightXPosPixelsIfTiling",
-	"p"=>"AlternateScreenLayout1_BottomYPosPixelsIfTiling",
-	"q"=>"AlternateScreenLayout2_ImageSetID",
-	"r"=>"AlternateScreenLayout2_LeftXPosPixels",
-	"s"=>"AlternateScreenLayout2_TopYPosPixels",
-	"t"=>"AlternateScreenLayout2_RightXPosPixelsIfTiling",
-	"u"=>"AlternateScreenLayout2_BottomYPosPixelsIfTiling",
-	"v"=>"AlternateScreenLayout3_ImageSetID",
-	"w"=>"AlternateScreenLayout3_LeftXPosPixels",
-	"x"=>"AlternateScreenLayout3_TopYPosPixels",
-	"y"=>"AlternateScreenLayout3_RightXPosPixelsIfTiling",
-	"z"=>"AlternateScreenLayout3_BottomYPosPixelsIfTiling",
+        ],"ImageSetInstance"=>[	
+                "a"=>"ImageSetInstanceID",
+                "b"=>"Name",
+                "c"=>"ImageSetID",
+                "d"=>"DefaultImageIndexWithinSet",
+                "e"=>"DisplayPageID",
+                "f"=>"ScreenLayerNumber",
+                "g"=>"LeftXPosPixels",
+                "h"=>"TopYPosPixels",
+                "i"=>"RightXPosPixelsIfTiling",
+                "j"=>"BottomYPosPixelsIfTiling",
+                "k"=>"AlternateScreenLayout1_ImageSetID",
+                "l"=>"AlternateScreenLayout1_LeftXPosPixels",
+                "m"=>"AlternateScreenLayout1_TopYPosPixels",
+                "n"=>"AlternateScreenLayout1_RightXPosPixelsIfTiling",
+                "p"=>"AlternateScreenLayout1_BottomYPosPixelsIfTiling",
+                "q"=>"AlternateScreenLayout2_ImageSetID",
+                "r"=>"AlternateScreenLayout2_LeftXPosPixels",
+                "s"=>"AlternateScreenLayout2_TopYPosPixels",
+                "t"=>"AlternateScreenLayout2_RightXPosPixelsIfTiling",
+                "u"=>"AlternateScreenLayout2_BottomYPosPixelsIfTiling",
+                "v"=>"AlternateScreenLayout3_ImageSetID",
+                "w"=>"AlternateScreenLayout3_LeftXPosPixels",
+                "x"=>"AlternateScreenLayout3_TopYPosPixels",
+                "y"=>"AlternateScreenLayout3_RightXPosPixelsIfTiling",
+                "z"=>"AlternateScreenLayout3_BottomYPosPixelsIfTiling",
         ],"KeyAction"=>[	
                 "a"=>"SourceKeyboardID",
                 "b"=>"DestIsKeyboardNotDivision",
@@ -160,7 +160,7 @@ class HWReader {
                 "?"=>"Hint_SecondAssociatedDivisionID",
                 "?"=>"Hint_ThirdAssociatedDivisionID",
                 "?"=>"Hint_MasterCouplersKeyboardAsgnCode",
-                "?"=>"KeyGen_GenerateKeysAutomatically",
+                "g"=>"KeyGen_GenerateKeysAutomatically",
                 "h"=>"KeyGen_NumberOfKeys",
                 "i"=>"KeyGen_MIDINoteNumberOfFirstKey",
                 "j"=>"KeyGen_KeyImageSetID",
@@ -168,14 +168,14 @@ class HWReader {
                 "l"=>"KeyGen_DispKeyboardLeftXPos",
                 "m"=>"KeyGen_DispKeyboardTopYPos",
                 "n"=>"KeyGen_AlternateScreenLayout1_KeyImageSetID",
-                "o"=>"KeyGen_AlternateScreenLayout1_DispKeyboardLeftXPos",
-                "p"=>"KeyGen_AlternateScreenLayout1_DispKeyboardTopYPos",
-                "q"=>"KeyGen_AlternateScreenLayout2_KeyImageSetID",
-                "r"=>"KeyGen_AlternateScreenLayout2_DispKeyboardLeftXPos",
-                "s"=>"KeyGen_AlternateScreenLayout2_DispKeyboardTopYPos",
-                "t"=>"KeyGen_AlternateScreenLayout3_KeyImageSetID",
-                "u"=>"KeyGen_AlternateScreenLayout3_DispKeyboardLeftXPos",
-                "v"=>"KeyGen_AlternateScreenLayout3_DispKeyboardTopYPos",
+                "p"=>"KeyGen_AlternateScreenLayout1_DispKeyboardLeftXPos",
+                "q"=>"KeyGen_AlternateScreenLayout1_DispKeyboardTopYPos",
+                "r"=>"KeyGen_AlternateScreenLayout2_KeyImageSetID",
+                "s"=>"KeyGen_AlternateScreenLayout2_DispKeyboardLeftXPos",
+                "t"=>"KeyGen_AlternateScreenLayout2_DispKeyboardTopYPos",
+                "u"=>"KeyGen_AlternateScreenLayout3_KeyImageSetID",
+                "v"=>"KeyGen_AlternateScreenLayout3_DispKeyboardLeftXPos",
+                "w"=>"KeyGen_AlternateScreenLayout3_DispKeyboardTopYPos",
         ],"KeyboardKey"=>[	
                 "a"=>"KeyboardID",
                 "b"=>"SwitchID",
@@ -359,6 +359,20 @@ class HWReader {
                 "i"=>"BoundingBoxHeightPixelsIfWordWrap",
                 "j"=>"AttachedToAnImageSetInstance",
                 "k"=>"AttachedToImageSetInstanceID",
+                "l "=>"PosRelativeToTopLeftOfImageSetInstance",
+        ],"TremulantWaveform"=>[	
+                "a"=>"TremulantWaveformID",
+                "b"=>"Name",
+                "c"=>"TremulantID",
+                "d"=>"PitchAndFundamentalWaveformSampleID",
+                "e"=>"ThirdHarmonicWaveformSampleID",
+                "f"=>"LoopCrossfadeLengthInSrcSampleMs",
+                "g"=>"PitchOutputContinuousControlID",
+        ],"TremulantWaveformPipe"=>[	
+                "a"=>"PipeID",
+                "b"=>"TremulantWaveformID",
+                "c"=>"AmplitudeModDepthAdjustDecibels",
+                "d"=>"PitchModDepthAdjustPercent",
         ]];	
 
     /**
@@ -615,6 +629,14 @@ class HWReader {
 
     public function tremulants() {
         return $this->read("Tremulant", "TremulantID");
+    }
+
+    public function tremulantWaveforms() {
+        return $this->read("TremulantWaveform", "TremulantWaveformID");
+    }
+
+    public function tremulantWaveformPipes() {
+        return $this->read("TremulantWaveformPipe", "PipeID");
     }
     
     public function windCompartments() {

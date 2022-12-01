@@ -46,7 +46,9 @@ class HWAnalyser {
         //$this->samples();
         //$this->buildpanels();
         //$this->switchImages();
-        $this->stops();
+        //$this->stops();
+        //$this->tremulants();
+        $this->manuals();
     }
     
     /**
@@ -242,20 +244,20 @@ class HWAnalyser {
                 foreach([0=>"",
                          1=>"AlternateScreenLayout1_",
                          2=>"AlternateScreenLayout2_",
-                         3=>"AlternateScreenLayout3_"] as $l=>$layout) {
-                    if (isset($instance["${layout}ImageSetID"]) &&
-                            !empty($instance["${layout}ImageSetID"])) {
-                        $setid=$instance["${layout}ImageSetID"];
+                         3=>"AlternateScreenLayout3_"] as $l=>$lv) {
+                    if (isset($instance["${lv}ImageSetID"]) &&
+                            !empty($instance["${lv}ImageSetID"])) {
+                        $setid=$instance["${lv}ImageSetID"];
                         $pageid=$instance["DisplayPageID"];
                         if (isset($this->panels[$pageid][$l])) {
                             $panel=$this->panels[$pageid][$l];
                             $pi=$panel->instance();
                             $pe=new \GOClasses\PanelElement("Panel${pi}Element");
                             $pe->Type="Switch";
-                            $this->map($pe, $instance, "${layout}LeftXPosPixels", "PositionX");
+                            $this->map($pe, $instance, "${lv}LeftXPosPixels", "PositionX");
                             if (!isset($pe->PositionX))
                                 echo "Missing PositionX in instance ${instanceid}[${l}]\n";
-                            $this->map($pe, $instance, "${layout}TopYPosPixels", "PositionY");
+                            $this->map($pe, $instance, "${lv}TopYPosPixels", "PositionY");
                             if (!isset($pe->PositionY))
                                 echo "Missing PositionY in instance ${instanceid}[${l}]\n";
                             $pe->ImageOn=$this->getImage($setid, $switch["Disp_ImageSetIndexEngaged"]);
@@ -270,19 +272,67 @@ class HWAnalyser {
     }
     
     /**
-     * Analyse tremulants. We need to know how they work, and how they relate to 
-     * images, pipes and windchests
+     * Analyse tremulants. In HW tremulants are allocated to each pipe.
+     * In GO, they are allocated to Windchests, however we can set the
+     * windchest explicitly for each pipe?
+     * 
+     * @todo
      */
     private function tremulants() {
         
     }
     
     /**
-     * Analyse manuals. We need to know how they work, and how they relate to 
-     * images, switches divisions, stops and ranks
+     * Analyse manuals (aka Keyboards)
      */
     private function manuals() {
-        
+        $keyboardkeys=$this->hwd->keyboardKeys();
+        foreach($this->hwd->keyboards() as $kbdid=>$keyboard) {
+            foreach(
+                [0=>"KeyGen_",
+                 1=>"KeyGen_AlternateScreenLayout1_",
+                 2=>"KeyGen_AlternateScreenLayout2_",
+                 3=>"KeyGen_AlternateScreenLayout3_"] as $l=>$lv) {
+                $k = $lv . "KeyImageSetID";
+                if (isset($keyboard[$k]) && !empty($keyboard[$k])) {
+                    foreach($keyboardkeys as $keyboardkey) {
+                        if ($keyboardkey["KeyboardID"]==$kbdid) {
+                                echo "Keyboard $kbdid layout $l has key image set and keyboard keys\n";
+                                break;
+                        }
+                    }
+                    $keyimages=$this->hwd->keyImageSet($keyboard[$k], TRUE);
+                    if (sizeof($keyimages)==0)
+                        echo "Keyboard $kbdid layout $l has missing key image set\n";
+                }
+                else {
+                    $keycount=0;
+                    foreach($keyboardkeys as $keyboardkey) {
+                        if ($keyboardkey["KeyboardID"]==$kbdid) {
+                            $keycount++;
+                            $switch=$this->hwd->switch($keyboardkey["SwitchID"], TRUE);
+                            if ($switch) {
+                                $id=intval($switch["Disp_ImageSetInstanceID"]);
+                                $imageset=$this->hwd->imageSetInstance($id, TRUE);
+                                if ($imageset==NULL) {
+                                    echo "Missing image set for switch ", $keyboardkey["SwitchID"], " in keyboard $kbdid\n";
+                                }
+                            }
+                            else {
+                                echo "Missing switch", $keyboardkey["SwitchID"], " in keyboard $kbdid\n";
+                            }
+                        }
+                    }
+                    if ($keycount==0) {
+                        echo "Missing key images for keyboard $kbdid\n";
+                    }
+                }
+            }
+            if (!isset($keyboard["Hint_PrimaryAssociatedDivisionID"]) || 
+                    empty($keyboard["Hint_PrimaryAssociatedDivisionID"])) {
+                echo "Missing primary division hint keyboard $kbdid\n";
+            }
+        }
     }
 
     /**
