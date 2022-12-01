@@ -43,13 +43,15 @@ class HWAnalyser {
         $general=$this->hwd->general();
         $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
-        $this->samples();
+        /* $this->samples();
         $this->buildpanels();
         $this->switchImages();
         $this->stops();
         $this->tremulants();
         $this->manuals();
         $this->windcompartments();
+        $this->layers(); */
+        $this->enclosureImages();
     }
     
     /**
@@ -115,6 +117,7 @@ class HWAnalyser {
     }
     
     /**
+     * Find associated links for a switch
      * 
      * @param string $type
      * @param int $switchid
@@ -140,6 +143,33 @@ class HWAnalyser {
         }
     }
 
+    /**
+     * Find associated continuous controls for a control
+     * 
+     * @param string $type
+     * @param int $switchid
+     * @param array $result
+     * @return void
+     */
+    private function ccLinks(string $type, int $ccid, array &$result) : void {
+        static $types=[
+            "S"=>"DestControlID",
+            "D"=>"SourceControlID"
+        ];
+        $attribute=$types[$type];
+        $links=$this->hwd->continuousControlLink($ccid);
+        if (isset($links[$type])) {
+            foreach($links[$type] as $link) {
+                if (isset($link[$attribute])) {
+                    if (!isset($result[$link[$attribute]])) {
+                        $result[$link[$attribute]]=TRUE;
+                        $this->ccLinks($type, $link[$attribute], $result);
+                    }
+                }
+            }
+        }
+    }
+    
     /**
      * Analyse samples, and map where possible
      * - Percussive
@@ -393,6 +423,49 @@ class HWAnalyser {
                 }
             }
             echo "\n";
+        }
+    }
+    
+    /**
+     * Analyse layers
+     */
+    private function layers() {
+        $layers=[];
+        foreach ($this->hwd->layers() as $layer) {
+            if (isset($layer["PipeLayerNumber"])) {
+                $ln=$layer["PipeLayerNumber"];
+                if (!empty($ln)) $layers[$ln]=$ln;
+            }
+        }
+        if (sizeof($layers)>0) {
+            echo "Layers used:";
+            foreach ($layers as $ln)
+                echo " $ln";
+            echo "\n";
+        }
+    }
+    
+    /**
+     * Analyse enclosure [images]
+     */
+    private function enclosureImages() {
+        foreach ($this->hwd->enclosures() as $enclosure) {
+            $ctrlid=$enclosure["ShutterPositionContinuousControlID"];
+            $links=[];
+            $this->ccLinks("D", $ctrlid, $links);
+            $hasimage=FALSE;
+            $links[$ctrlid]=TRUE;
+            foreach($links as $linkid=>$dummy) {
+                $cc=$this->hwd->continuousControl($linkid);
+                if (isset($cc["ImageSetInstanceID"]) &&
+                        !empty($cc["ImageSetInstanceID"])) {
+                    $hasimage=TRUE;
+                    break;
+                }
+            }
+            if (!$hasimage) {
+                echo "No image[s] for enclosure ", $enclosure["Name"], "\n";
+            }
         }
     }
 }
