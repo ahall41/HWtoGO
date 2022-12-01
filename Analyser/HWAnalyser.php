@@ -43,12 +43,13 @@ class HWAnalyser {
         $general=$this->hwd->general();
         $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
-        //$this->samples();
-        //$this->buildpanels();
-        //$this->switchImages();
-        //$this->stops();
-        //$this->tremulants();
+        $this->samples();
+        $this->buildpanels();
+        $this->switchImages();
+        $this->stops();
+        $this->tremulants();
         $this->manuals();
+        $this->windcompartments();
     }
     
     /**
@@ -365,7 +366,35 @@ class HWAnalyser {
             }
         }
     }
-    
+
+    /**
+     * Analyse wind compartments. 
+     */
+    private function windcompartments() {
+        // SELECT DISTINCT WindSupply_SourceWindCompartmentID, EnclosureID
+        // FROM Pipe_SoundEngine01
+        // LEFT JOIN EcnlosurePipe ON PipeID
+        $source=[];
+        foreach ($this->hwd->pipes() as $pipeid=>$pipe) {
+            $ep=$this->hwd->enclosurePipe($pipeid, TRUE);
+            if (isset($ep["EnclosureID"]) && !empty($ep["EnclosureID"]))
+                $eid=$ep["EnclosureID"];
+            else 
+                $eid=0;
+            $source[$pipe["WindSupply_SourceWindCompartmentID"]][$eid]=$eid;
+        }
+        
+        foreach ($source as $id=>$enclosures) {
+            $compartment=$this->hwd->windCompartment($id);
+            echo $compartment["Name"], ":";
+            foreach ($enclosures as $eid) {
+                if ($eid>0) {
+                    echo " ", $this->hwd->enclosure($eid)["Name"];
+                }
+            }
+            echo "\n";
+        }
+    }
 }
 
 new HWAnalyser("Arnstadt","Arnstadt, Bachkirche Wender Organ, Demo.Organ_Hauptwerk_xml");
