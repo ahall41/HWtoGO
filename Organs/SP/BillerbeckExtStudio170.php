@@ -19,7 +19,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
 class BillerbeckExtStudio170 extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.4.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.5.organ";
 
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -54,8 +54,10 @@ class BillerbeckExtStudio170 extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-        2=>["Name"=>"Rec", "SwitchID"=>203, "Type"=>"Switched", "Position"=>[4, 6]],
-        3=>["Name"=>"Pos", "SwitchID"=>204, "Type"=>"Switched", "Position"=>[8, 6]],
+        2=>["TremulantID"=>2, "Name"=>"Rec", "SwitchID"=>203, "Type"=>"Wave", 
+            "Position"=>[4, 6], "GroupIDs"=>[201,202,203,204]],
+        3=>["TremulantID"=>3, "Name"=>"Pos", "SwitchID"=>204, "Type"=>"Wave",
+            "Position"=>[8, 6], "GroupIDs"=>[301,302,303,304]], 
     ];
 
     private $couplers=[
@@ -109,12 +111,6 @@ class BillerbeckExtStudio170 extends \Import\Organ {
 
     protected \HWClasses\HWData $hwdata;
     
-    public function __construct($xmlfile) {
-        if (!file_exists($xmlfile))
-            $xmlfile=getenv("HOME") . $xmlfile;
-        $this->hwdata = new \HWClasses\HWData($xmlfile);
-    }
-    
     public function build() : void {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
@@ -126,7 +122,6 @@ class BillerbeckExtStudio170 extends \Import\Organ {
         $this->buildTremulants();
         $this->buildCouplers();
         $this->buildStops();
-        $this->buildRanks();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
     }
@@ -230,55 +225,33 @@ class BillerbeckExtStudio170 extends \Import\Organ {
             $stopdata["StopID"]=$stopdata["SwitchID"]=$stopid;
             $manualid=$stopdata["DivisionID"]=$stopdata["ManualID"];
             $switch=$this->createStop($stopdata);
-            if (isset($stopdata["TremulantID"])) {
-                $tswitchid=$this->tremulants[$stopdata["TremulantID"]]["SwitchID"];
-                $on=$this->getSwitch($tswitchid);
-                $off=$this->getSwitch(-$tswitchid);
-
-                $this->getStop($stopid)->switch($off);
-                $stop=$this->newStop(-$stopid, $this->stops[$stopid]["Name"] . " (tremulant)");
-                $this->getManual($manualid)->Stop($stop);
-                $stop->switch($switch);
-                $stop->switch($on);
-            }
-        }
-    }
-
-    protected function buildRank(int $stopid, array $rankdata) : ?\GOClasses\Rank {
-        $rankid=$rankdata["RankID"];
-        $divid=$this->stops["$stopid"]["DivisionID"];
-        $posid=$this->rankpositions[$rankid % 10];
-        $wcg=$this->getWindchestGroup(($divid*100) + $posid);
-        if ($wcg===NULL) return NULL;
-        $rank=$this->newRank($rankid, $rankdata["Name"]);
-        $rank->WindchestGroup($wcg);
-        foreach ($this->stops as $id=>$stopdata) {
-            if ($stopid==$id || (isset($stopdata["Rank"]) && $stopdata["Rank"]==$stopid)) {
-                if (($rankid % 10)<5)
-                    $stop=$this->getStop($id);
-                else
-                    $stop=$this->getStop(-$id);
-                if ($stop!==NULL)  $stop->Rank($rank);
-                if (isset($stopdata["FirstKey"])) {
-                    $ranknum=$stop->int2str($stop->NumberOfRanks);
-                    $stop->set("Rank${ranknum}FirstPipeNumber", $stopdata["FirstKey"]);
-                }
-                if (isset($stopdata["FirstNote"])) {
-                    $ranknum=$stop->int2str($stop->NumberOfRanks);
-                    $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $stopdata["FirstNote"]);
+            $stop=$this->getStop($stopid);
+            $baseid=isset($stopdata["Rank"]) ? $stopdata["Rank"] : $stopdata["StopID"];
+            $tremmed=isset($stopdata["TremulantID"]);
+            foreach($this->rankpositions as $offset=>$groupid) {
+                if ($offset>4) continue;
+                $rankdata=$this->hwdata->rank($baseid*10+$offset, FALSE);
+                if ($rankdata) {
+                    $divid=$this->stops[$stopid]["DivisionID"];
+                    $wcg=$this->getWindchestGroup(($divid*100) + $groupid);
+                    if ($wcg) {
+                        $rank=$this->newRank(($stopid*10)+$offset, $rankdata["Name"] . " (" . $stopdata["Name"] . ")");
+                        $rank->WindchestGroup($wcg);
+                        $stop->Rank($rank);
+                        if (isset($stopdata["PitchTuning"])) {
+                            $rank->PitchTuning=$stopdata["PitchTuning"];
+                        }
+                        $ranknum=$stop->int2str($stop->NumberOfRanks);
+                        if (isset($stopdata["FirstKey"])) {
+                            $stop->set("Rank${ranknum}FirstPipeNumber", $stopdata["FirstKey"]);
+                        }
+                        if (isset($stopdata["FirstNote"])) {
+                            $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $stopdata["FirstNote"]);
+                        }
+                    }
                 }
             }
         }
-        return $rank;
-    }
-    
-    protected function buildRanks() : void {
-        foreach($this->hwdata->ranks() as $rankdata) {
-            $stopid=intval($rankid=($rankdata["RankID"]/10));
-            if (isset($this->stops[$stopid]))
-                $rank=$this->buildRank($stopid, $rankdata);
-        }
-        
     }
 
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -314,9 +287,40 @@ class BillerbeckExtStudio170 extends \Import\Organ {
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe) unset($pipe->PitchTuning);
-        return $pipe;
+        switch (($rankid=$hwdata["RankID"]) % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $tremulant=TRUE;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $tremulant=TRUE;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $tremulant=TRUE;
+                break;
+            case 6:
+                $hwdata["RankID"]-=4;
+                $tremulant=TRUE;
+                break;
+            default:
+                $tremulant=FALSE;
+        }
+        if ($tremulant) $hwdata["IsTremulant"]=1;
+
+        foreach([0,1,2] as $offset) {
+            $stopid=intval($hwdata["RankID"]/10);
+            if (isset($this->stops[$stopid])) {
+                if (isset($this->stops[$stopid]["TremulantID"]) || !$tremulant) {
+                    $pipe=parent::processSample($hwdata, $isattack);
+                    if ($pipe) unset($pipe->PitchTuning);
+                }
+            }
+            $hwdata["RankID"]+=1000;
+            $hwdata["PipeID"]+=100000;
+        }
+        return NULL;
     }
 
     /**
@@ -339,7 +343,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
             self::BillerbeckExtStudio170(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
-            self::BillerbeckExtStudio170(
+            /* self::BillerbeckExtStudio170(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
             self::BillerbeckExtStudio170(
@@ -352,7 +356,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "8ch");
+                   "8ch"); */
         }
     }
 }
