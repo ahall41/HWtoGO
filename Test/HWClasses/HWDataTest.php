@@ -31,7 +31,7 @@ class HWDataTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(5, sizeof($skrzatusz->displayPage(2)));
         $this->assertEquals(2, sizeof($skrzatusz->division(3)));
         $this->assertEquals(3, sizeof($utrecht->enclosure(998)));
-        $this->assertEquals(2, sizeof($utrecht->enclosurePipe(40975)));
+        $this->assertEquals(1, sizeof($utrecht->enclosurePipe(40975)));
         $this->assertEquals(3, sizeof($skrzatusz->divisionInput(5)));
         $this->assertEquals(9, sizeof($skrzatusz->imageSet(5)));
         $this->assertEquals(2, sizeof($skrzatusz->imageSetElement(5)));

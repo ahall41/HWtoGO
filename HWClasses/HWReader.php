@@ -483,7 +483,14 @@ class HWReader {
     }
 
     public function enclosurePipes() {
-        return $this->read("EnclosurePipe", "PipeID");
+        if (!isset($this->cache["EnclosurePipeIndex"])) {
+            $result=[];
+            foreach($this->read("EnclosurePipe") as $ep) {
+                $result[$ep["PipeID"]][$ep["EnclosureID"]]=$ep;
+            }
+            $this->cache["EnclosurePipeIndex"]=$result;
+        }
+        return $this->cache["EnclosurePipeIndex"];
     }
 
     public function imageSets() {

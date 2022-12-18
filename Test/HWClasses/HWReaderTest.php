@@ -260,12 +260,10 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
         $utrecht=self::HWReader(self::Utrecht)->enclosurePipes();
         $this->assertEquals(508, sizeof($utrecht));
         $this->assertEquals([
-            'PipeID' => '40480',
-            'EnclosureID' => '998'
+            998=>['EnclosureID' => '998', 'PipeID' => '40480']
         ], $utrecht[40480]);
         $this->assertEquals([
-            'PipeID' => '36477',
-            'EnclosureID' => '998'
+            998=>['EnclosureID' => '998', 'PipeID' => '36477']
         ], $utrecht[36477]);
 
         $groningen=self::HWReader(self::Groningen)->enclosurePipes();

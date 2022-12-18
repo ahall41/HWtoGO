@@ -43,14 +43,14 @@ class HWAnalyser {
         $general=$this->hwd->general();
         $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
-        /* $this->samples();
+        $this->samples();
         $this->buildpanels();
         $this->switchImages();
         $this->stops();
         $this->tremulants();
         $this->manuals();
         $this->windcompartments();
-        $this->layers(); */
+        $this->layers();
         $this->enclosureImages();
     }
     
@@ -406,12 +406,13 @@ class HWAnalyser {
         // LEFT JOIN EcnlosurePipe ON PipeID
         $source=[];
         foreach ($this->hwd->pipes() as $pipeid=>$pipe) {
-            $ep=$this->hwd->enclosurePipe($pipeid, TRUE);
-            if (isset($ep["EnclosureID"]) && !empty($ep["EnclosureID"]))
-                $eid=$ep["EnclosureID"];
-            else 
-                $eid=0;
-            $source[$pipe["WindSupply_SourceWindCompartmentID"]][$eid]=$eid;
+            foreach($this->hwd->enclosurePipe($pipeid, TRUE) as $ep) {
+                if (isset($ep["EnclosureID"]) && !empty($ep["EnclosureID"]))
+                    $eid=$ep["EnclosureID"];
+                else 
+                    $eid=0;
+                $source[$pipe["WindSupply_SourceWindCompartmentID"]][$eid]=$eid;
+            }
         }
         
         foreach ($source as $id=>$enclosures) {

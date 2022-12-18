@@ -81,11 +81,11 @@ class HWData extends HWReader {
 
 
     public function enclosurePipe(int $pipeid, bool $softfail=FALSE) : array {
-        if (!isset($this->cache["EnclosurePipe"]))
+        if (!isset($this->cache["EnclosurePipeIndex"]))
             $this->enclosurePipes();
-        if ($softfail & !isset($this->cache["EnclosurePipe"][$pipeid]))
+        if ($softfail & !isset($this->cache["EnclosurePipeIndex"][$pipeid]))
             return [];
-        return $this->cache["EnclosurePipe"][$pipeid];
+        return $this->cache["EnclosurePipeIndex"][$pipeid];
     }
 
     public function imageSetElement(int $imageSetElementid, $softfail=FALSE) : ? array {
