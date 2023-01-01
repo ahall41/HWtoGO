@@ -233,8 +233,9 @@ class Duren extends PGOrgan {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipemidi=$this->pipePitchMidi($hwdata);
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        $rankid=$hwdata["RankID"];
+        if ((intval($rankid/100) % 10)==5) $hwdata["RankID"]=-($rankid-500);
         return parent::processSample($hwdata, $isattack);
     }
    
