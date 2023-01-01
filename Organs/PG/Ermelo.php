@@ -71,8 +71,14 @@ class Ermelo extends PGOrgan {
     // Switch 28 = Tremulant
     // Switches 29-31 disable trem for P/HW/RW - ignore for now
     public $patchTremulants=[
-            1=>["TremulantID"=>1, "ControllingSwitchID"=>28, "Type"=>"Wave", 
-                "Name"=>"Tremulant", "GroupIDs"=>[101,102,103, 201,202,203, 301,302,303]],
+            0=>["TremulantID"=>0, "ControllingSwitchID"=>28, "Type"=>"Wave", 
+                "Name"=>"Tremulant", "GroupIDs"=>[]],
+            1=>["TremulantID"=>1, "ControllingSwitchID"=>29, "Type"=>"Wave", 
+                "Name"=>"P", "GroupIDs"=>[101,102,103]],
+            2=>["TremulantID"=>2, "ControllingSwitchID"=>30, "Type"=>"Wave", 
+                "Name"=>"HW", "GroupIDs"=>[201,202,203]],
+            3=>["TremulantID"=>3, "ControllingSwitchID"=>31, "Type"=>"Wave", 
+                "Name"=>"RW", "GroupIDs"=>[301,302,303]],
     ];
     
     
@@ -157,20 +163,6 @@ class Ermelo extends PGOrgan {
             }
         } 
         parent::patchData($hwd);
-        /* $instances=$this->hwdata->imageSetInstances();
-        foreach ($instances as $instance) {
-            switch ($instance["DisplayPageID"]) {
-                case 6:
-                    echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
-                         $instance["Name"], "\n";
-                    foreach ($this->hwdata->switches() as $switch) {
-                        if ($switch["Disp_ImageSetInstanceID"]==$instance)
-                            echo $switch["SwitchID"], " ",
-                                 $switch["Name"], "\n";
-                    }
-            }
-        } 
-        exit(); */
     }
     
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
@@ -200,41 +192,25 @@ class Ermelo extends PGOrgan {
         return parent::createCoupler($hwdata);
     }
 
-    public function createStop(array $hwdata) : ?\GOClasses\Sw1tch {
-        if (isset($this->patchStops[$hwdata["StopID"]])) {
-            if (($switchid=$hwdata["ControllingSwitchID"])) {
-                $switchdata=$this->hwdata->switch($switchid, TRUE);
-                if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
-            }
-            return \Import\Organ::createStop($hwdata);
-        }
-        else {
-            $switchid=$hwdata["ControllingSwitchID"]=$hwdata["StopID"];
-            $switchdata=$this->hwdata->switch($switchid);
-            if (isset($switchdata["Name"])) $hwdata["SwitchName"]=$switchdata["Name"];
-            $switch=\Import\Organ::createStop($hwdata);
-            if ($switch===NULL) return NULL;
+    public function createTremulants(array $tremulants) : void {
+        parent::createTremulants($tremulants);
 
-            $divid=$hwdata["DivisionID"];
-            $tremid=NULL;
-            foreach($this->hwdata->tremulants() as $data) {
-                if ($data["Type"]=="Switched" && $data["DivisionID"]==$divid) {
-                    $tremid=$data["ControllingSwitchID"];
-                    print_r($data); exit();
-                    break;
-                }
-            }
-
-            if ($tremid!==NULL) {
-                $stopid=$hwdata["StopID"];
-                $this->getStop($stopid)->Switch($this->getSwitch(-$tremid));
-                $hwdata["StopID"]=-$stopid;   // tremmed stops
-                $hwdata["Name"].= " (tremulant)";
-                \Import\Organ::createStop($hwdata);
-                $this->getStop(-$stopid)->Switch($this->getSwitch(+$tremid));
-            }
-            return $switch;
+        // Fix tremulants
+        $sw28=$this->getSwitch(28);
+        foreach ([1,2,3] as $id) {
+            // Create a 'Not' switch
+            $disabled=$this->getSwitch(28+$id);
+            $enabled=$this->newSwitch(-28-$id, "Enable " . $disabled->Name);
+            $disabled->Name="Disable " . $disabled->Name;
+            $disabled->GCState=-1;
+            $enabled->Function="Not";
+            $enabled->Switch($disabled);
+            $trem=$this->getTremulant($id);
+            $trem->Switch001=$enabled->instance();
+            $trem->Switch($sw28);
+            echo $disabled, "\n\n";
         }
+        exit();
     }
     
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
@@ -309,8 +285,6 @@ class Ermelo extends PGOrgan {
                     $stop->unset("Rank00${i}FirstPipeNumber");
                 }
             }
-            /* foreach([80, 1080, 2080] as $stopid)
-                echo $hwi->getStop($stopid); */
             $hwi->saveODF(sprintf(self::TARGET, $target));
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
