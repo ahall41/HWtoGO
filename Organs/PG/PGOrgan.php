@@ -20,6 +20,8 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class PGOrgan extends \Import\Organ {
     
+    protected bool $switchedtremulants=TRUE;
+    
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $organ=parent::createOrgan($hwdata);
         $organ->RecordingDetails="Recorded by Piotr Grabowski";
@@ -200,7 +202,7 @@ abstract class PGOrgan extends \Import\Organ {
             }
             return $switch;
         }
-   }
+    }
     
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
         $rankid=$hwdata["RankID"];
@@ -217,16 +219,18 @@ abstract class PGOrgan extends \Import\Organ {
         }
         if (isset($hwdata["GroupID"])) {
             $rank=parent::createRank($hwdata);
-            $stopids=[];
-            foreach($hwdata["StopIDs"] as $id=>$stopid) {
-                if ($this->getStop(-$stopid)!==NULL) 
-                    $stopids[$id]=-$stopid;
-            }
-            if (sizeof($stopids)>0) {
-                $hwdata["StopIDs"]=$stopids;
-                $hwdata["RankID"]=-$hwdata["RankID"];
-                $hwdata["Name"].=" (tremulant)";
-                parent::createRank($hwdata);
+            if ($this->switchedtremulants) {
+                $stopids=[];
+                foreach($hwdata["StopIDs"] as $id=>$stopid) {
+                    if ($this->getStop(-$stopid)!==NULL) 
+                        $stopids[$id]=-$stopid;
+                }
+                if (sizeof($stopids)>0) {
+                    $hwdata["StopIDs"]=$stopids;
+                    $hwdata["RankID"]=-$hwdata["RankID"];
+                    $hwdata["Name"].=" (tremulant)";
+                    parent::createRank($hwdata);
+                }
             }
             return $rank;
         }
@@ -265,8 +269,12 @@ abstract class PGOrgan extends \Import\Organ {
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=$this->loopCrossfadeLengthInSrcSampleMs;
         if ($hwdata["PipeLayerNumber"]==2) {
-            $hwdata["RankID"]=-$hwdata["RankID"];
-            $hwdata["PipeID"]=-$hwdata["PipeID"];
+            if ($this->switchedtremulants) {
+                $hwdata["RankID"]=-$hwdata["RankID"];
+                $hwdata["PipeID"]=-$hwdata["PipeID"];
+            }
+            else 
+                $hwdata["IsTremulant"]=1;
         }
         return parent::processSample($hwdata, $isattack);
     }
