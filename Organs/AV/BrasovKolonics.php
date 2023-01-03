@@ -12,7 +12,7 @@ namespace Organs\AV;
 require_once(__DIR__ . "/AVOrgan.php");
 
 /**
- * Import Wegenstein Organ from Reformed Church in BrasovKolonics to GrandOrgue
+ * Import Kolonics Organ from Franciscan Church in Brasov to GrandOrgue
  * 
  * @author andrew
  */
