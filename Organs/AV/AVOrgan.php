@@ -115,10 +115,12 @@ abstract class AVOrgan extends \Import\Organ {
         $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
         if ($type=="Ambient") {
             $stopid=$this->hwdata->rank($hwdata["RankID"])["StopIDs"][0];
-            if ($isattack)
-                $this->configureAttack($hwdata, $this->getStop($stopid)->Ambience());
-            else
-                $this->configureRelease($hwdata, $this->getStop($stopid)->Ambience());
+            if (($stop=$this->getStop($stopid))) {
+                if ($isattack)
+                    $this->configureAttack($hwdata, $stop->Ambience());
+                else
+                    $this->configureRelease($hwdata, $stop->Ambience());
+            }
         }
         else {
             foreach($this->getSwitchNoises() as $id=>$stop) {
@@ -130,7 +132,7 @@ abstract class AVOrgan extends \Import\Organ {
         }
         return NULL;
     }
-
+    
     /*
      * May be OK for other providers ...
      */
