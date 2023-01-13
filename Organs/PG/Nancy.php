@@ -24,11 +24,14 @@ class Nancy extends PGOrgan {
     const COMMENTS=
               "Nancy, Cathédrale Notre-Dame-de-l'Annonciation, France (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nancy/\n"
+            . "\n"
+            . "1.1 Functional couplers; Wave based tremulant (on Positif)"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nancy (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Nancy (demo - %s) 1.1.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
+    protected bool $switchedtremulants=FALSE;
     
     public $positions=[];
 
@@ -68,11 +71,11 @@ class Nancy extends PGOrgan {
 
     public $patchTremulants=[
             1=>["Type"=>"Synth", "GroupIDs"=>[501,502,503,504]],
-            2=>["ControllingSwitchID"=>77, "Type"=>"Switched", "Name"=>"Pos Tremulant", "DivisionID"=>2],
+            2=>["TremulantID"=>2, "ControllingSwitchID"=>77, "Type"=>"Wave", "Name"=>"Pos Tremulant", "GroupIDs"=>[201,202,203,204]],
     ];
     
     public $patchKeyActions=[
-            4=>"DELETE" // Unison GO ???
+            4=>["ConditionSwitchID"=>20070]
     ];
     
     public $patchEnclosures=[
@@ -112,10 +115,10 @@ class Nancy extends PGOrgan {
         1080=>["StopID"=> 1080, "DivisionID"=>1, "Name"=>"Ambient (front)",     "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
         2080=>["StopID"=> 2080, "DivisionID"=>1, "Name"=>"Ambient (middle)",    "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
         3080=>["StopID"=> 3080, "DivisionID"=>1, "Name"=>"Ambient (rear)",      "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>904],
-          81=>["StopID"=>   81, "DivisionID"=>1, "Name"=>"Main Motor (close)",  "ControllingSwitchID"=>101, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
-        1081=>["StopID"=> 1081, "DivisionID"=>1, "Name"=>"Main Motor (front)",  "ControllingSwitchID"=>101, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
-        2081=>["StopID"=> 2081, "DivisionID"=>1, "Name"=>"Main Motor (rear)",   "ControllingSwitchID"=>101, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
-        3081=>["StopID"=> 3081, "DivisionID"=>1, "Name"=>"Main Motor (rear)",   "ControllingSwitchID"=>101, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>904],
+          81=>["StopID"=>   81, "DivisionID"=>1, "Name"=>"Main Motor (close)",  "ControllingSwitchID"=>101,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
+        1081=>["StopID"=> 1081, "DivisionID"=>1, "Name"=>"Main Motor (front)",  "ControllingSwitchID"=>101,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
+        2081=>["StopID"=> 2081, "DivisionID"=>1, "Name"=>"Main Motor (rear)",   "ControllingSwitchID"=>101,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
+        3081=>["StopID"=> 3081, "DivisionID"=>1, "Name"=>"Main Motor (rear)",   "ControllingSwitchID"=>101,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>904],
           83=>["StopID"=>   83, "DivisionID"=>1, "Name"=>"P Key On",            "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
           84=>["StopID"=>   84, "DivisionID"=>1, "Name"=>"P Key Off",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
           85=>["StopID"=>   85, "DivisionID"=>2, "Name"=>"POS Key On",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
@@ -218,8 +221,14 @@ class Nancy extends PGOrgan {
         return parent::createCoupler($hwdata);
     }
 
+    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
+        $data["SwitchID"]=$data["SwitchID"] % 1000;
+        parent::configurePanelSwitchImages($switch, $data);
+    }
+    
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return parent::processSample($hwdata, $isattack);
     }
 
@@ -233,20 +242,13 @@ class Nancy extends PGOrgan {
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                unset($stop->Rank001FirstAccessibleKeyNumber);
-                unset($stop->Rank002FirstAccessibleKeyNumber);
-                unset($stop->Rank003FirstAccessibleKeyNumber);
-                unset($stop->Rank004FirstAccessibleKeyNumber);
-                unset($stop->Rank005FirstAccessibleKeyNumber);
-                unset($stop->Rank006FirstAccessibleKeyNumber);
+                for ($i=1; $i<6; $i++) {
+                    $stop->unset("Rank00${i}PipeCount");
+                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                }
             }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->getSwitch(20070)->DisplayInInvertedState="Y";
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Nancy(
