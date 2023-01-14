@@ -22,11 +22,14 @@ class Goch extends PGOrgan {
     const COMMENTS=
               "Pfarrkirche St. Maria Magdalena in Goch, Germany (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/goch/\n"
+            . "\n"
+            . "1.1 wave based tremulant model\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Goch (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Goch (demo - %s) 1.1.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
+    protected bool $switchedtremulants=FALSE;
     
     public $positions=[];
 
@@ -65,7 +68,7 @@ class Goch extends PGOrgan {
     ];
 
     public $patchTremulants=[
-            1=>["ControllingSwitchID"=>56, "Type"=>"Switched", "Name"=>"Recit", "DivisionID"=>3],
+            1=>["TremulantID"=>1, "ControllingSwitchID"=>56, "Type"=>"Wave", "Name"=>"Recit", "GroupIDs"=>[301,302,303]],
     ];
     
     public $patchEnclosures=[
@@ -218,8 +221,8 @@ class Goch extends PGOrgan {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipemidi=$this->pipePitchMidi($hwdata);
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return parent::processSample($hwdata, $isattack);
     }
    
@@ -232,20 +235,12 @@ class Goch extends PGOrgan {
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                unset($stop->Rank001FirstAccessibleKeyNumber);
-                unset($stop->Rank002FirstAccessibleKeyNumber);
-                unset($stop->Rank003FirstAccessibleKeyNumber);
-                unset($stop->Rank004FirstAccessibleKeyNumber);
-                unset($stop->Rank005FirstAccessibleKeyNumber);
-                unset($stop->Rank006FirstAccessibleKeyNumber);
+                for ($i=1; $i<6; $i++) {
+                    $stop->unset("Rank00${i}PipeCount");
+                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                }
             }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Goch(

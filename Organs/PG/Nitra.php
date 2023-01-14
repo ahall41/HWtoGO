@@ -24,11 +24,14 @@ class Nitra extends PGOrgan {
     const COMMENTS=
               "Nitra, Katedrála sv. Emeráma, Slovakia (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nitra/\n"
+            . "\n"
+            . "1.1 Wave based tremulant\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Nitra (demo - %s) 1.1.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
+    protected bool $switchedtremulants=FALSE;
     
     public $positions=[];
 
@@ -67,7 +70,7 @@ class Nitra extends PGOrgan {
     ];
 
     public $patchTremulants=[
-            1=>["ControllingSwitchID"=>34, "Type"=>"Switched", "Name"=>"RP Tremulant", "DivisionID"=>3],
+            1=>["TremulantID"=>1, "ControllingSwitchID"=>34, "Type"=>"Wave", "Name"=>"RP Tremulant", "GroupIDs"=>[201,202,203]],
     ];
     
     public $patchEnclosures=[
@@ -196,8 +199,8 @@ class Nitra extends PGOrgan {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipemidi=$this->pipePitchMidi($hwdata);
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return parent::processSample($hwdata, $isattack);
     }
    
@@ -211,20 +214,12 @@ class Nitra extends PGOrgan {
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                unset($stop->Rank001FirstAccessibleKeyNumber);
-                unset($stop->Rank002FirstAccessibleKeyNumber);
-                unset($stop->Rank003FirstAccessibleKeyNumber);
-                unset($stop->Rank004FirstAccessibleKeyNumber);
-                unset($stop->Rank005FirstAccessibleKeyNumber);
-                unset($stop->Rank006FirstAccessibleKeyNumber);
+                for ($i=1; $i<6; $i++) {
+                    $stop->unset("Rank00${i}PipeCount");
+                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                }
             }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Nitra(
