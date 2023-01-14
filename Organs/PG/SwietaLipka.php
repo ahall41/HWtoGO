@@ -24,9 +24,11 @@ class SwietaLipka extends PGOrgan {
     const COMMENTS=
               "Święta Lipka, Sanktuarium Nawiedzenia Najświętszej Maryi Panny, Poland (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/swieta-lipka/\n"
+            . "\n"
+            . "1.1 Functional couplers; Wave based tremulants"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Swieta Lipka (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Swieta Lipka (demo - %s) 1.1.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     
@@ -67,9 +69,9 @@ class SwietaLipka extends PGOrgan {
     ];
 
     public $patchTremulants=[
-            1=>["ControllingSwitchID"=>50, "Type"=>"Synth",    "Name"=>"P Tremulant",  "TremulantID"=>50, "GroupIDs"=>[101,102,103,104]],
-            2=>["ControllingSwitchID"=>51, "Type"=>"Switched", "Name"=>"I Tremulant",  "DivisionID"=>2],
-            3=>["ControllingSwitchID"=>52, "Type"=>"Switched", "Name"=>"II Tremulant", "DivisionID"=>3],
+            1=>["TremulantID"=>1, "ControllingSwitchID"=>50, "Type"=>"Wave", "Name"=>"P Tremulant",  "GroupIDs"=>[101,102,103,104]],
+            2=>["TremulantID"=>2, "ControllingSwitchID"=>51, "Type"=>"Wave", "Name"=>"I Tremulant",  "GroupIDs"=>[201,202,203,204]],
+            3=>["TremulantID"=>3, "ControllingSwitchID"=>52, "Type"=>"Wave", "Name"=>"II Tremulant", "GroupIDs"=>[301,302,303,304]],
     ];
     
     public $patchEnclosures=[     // ImageSetInstance, Name=SimpleJamb ?_C1
@@ -190,6 +192,11 @@ class SwietaLipka extends PGOrgan {
         return NULL;
     }
 
+    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
+        $data["SwitchID"]=$data["SwitchID"] % 1000;
+        parent::configurePanelSwitchImages($switch, $data);
+    }
+    
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Noise {
         $method=$isattack ? "configureAttack" : "configureRelease";
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
@@ -220,7 +227,8 @@ class SwietaLipka extends PGOrgan {
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
-        return parent::processSample($hwdata, $isattack);
+        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
+        return \Import\Configure::processSample($hwdata, $isattack);
     }
     
     public static function SwietaLipka(array $positions=[], string $target="") {
@@ -233,20 +241,12 @@ class SwietaLipka extends PGOrgan {
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                unset($stop->Rank001FirstAccessibleKeyNumber);
-                unset($stop->Rank002FirstAccessibleKeyNumber);
-                unset($stop->Rank003FirstAccessibleKeyNumber);
-                unset($stop->Rank004FirstAccessibleKeyNumber);
-                unset($stop->Rank005FirstAccessibleKeyNumber);
-                unset($stop->Rank006FirstAccessibleKeyNumber);
+                for ($i=1; $i<6; $i++) {
+                    $stop->unset("Rank00${i}PipeCount");
+                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                }
             }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::SwietaLipka(
