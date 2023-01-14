@@ -21,7 +21,11 @@ require_once __DIR__ . "/SPOrgan.php";
 class Casavant extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Casavant/";
     const SOURCE="OrganDefinitions/Bellevue, Casavant Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Bellevue, Casavant (Demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Bellevue, Casavant (Demo - %s) 1.1.organ";
+    const REVISIONS=
+              "\n"
+            . "1.1 Correct voix celeste pitch; remove empty tremulant ranks\n"
+            . "\n";
 
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -116,6 +120,13 @@ class Casavant extends SPOrgan {
         return parent::createOrgan($hwdata);
     }
     
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (($hwdata["RankID"] % 10)<5)
+            return parent::createRank($hwdata, $keynoise);
+        else
+            return NULL;
+    }
+    
     private function treeWalk($root, $dir="", &$results=[]) {
         $files=scandir("$root$dir");
         foreach ($files as $key => $value) {
@@ -167,7 +178,11 @@ class Casavant extends SPOrgan {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            foreach([440,440] as $rankid) {
+                $rank=$hwi->getRank($rankid);
+                foreach ($rank->Pipes() as $pipe) unset($pipe->PitchTuning);
+            }
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
             self::Casavant(
