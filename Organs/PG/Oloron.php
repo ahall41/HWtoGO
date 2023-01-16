@@ -15,8 +15,7 @@ require_once __DIR__ . "/PGOrgan.php";
  * Import Oloron Demo
  * 
  * @todo: OG Coupler, Appelles etc
- *        Issues: Manuals assigned incorrectly
- *                Sample pitches are missing from HW ODF
+ *        NB. Requires UNPACKED .wav samples
  */
 
 class Oloron extends PGOrgan {
@@ -94,6 +93,8 @@ class Oloron extends PGOrgan {
     ];
     
     public $patchKeyActions=[
+            0=>["DestDivisionID"=>3],
+            1=>["DestDivisionID"=>4],
             4=>"DELETE"
     ];
     
