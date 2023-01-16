@@ -120,8 +120,15 @@ class Pipe extends GOBase {
                 break;
 
             case "PitchTuning":
-                if (!empty($value)) 
-                    parent::set($property, $value);
+                if (empty($value)) 
+                    parent::unset($property);
+                else {
+                    $value=sprintf("%f",$value);
+                    if (floatval($value)==0.0)
+                        parent::unset($property);
+                    else
+                        parent::set($property, sprintf("%f",$value));
+                }
                 break;
 
             case "Gain":

@@ -26,9 +26,12 @@ class Oloron extends PGOrgan {
     const COMMENTS=
               "Oloron, Cathédrale Notre-Dame-de-l'Annonciation, France (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nancy/\n"
+            . "\n"
+            . "1.1 wave based tremulant model\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Oloron-Sainte-Marie %s 0.1.organ";
+    const TARGET=self::ROOT . "Oloron-Sainte-Marie %s 0.2.organ";
+    protected bool $switchedtremulants=FALSE;
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     
@@ -87,7 +90,7 @@ class Oloron extends PGOrgan {
     ];
 
     public $patchTremulants=[
-            1=>["ControllingSwitchID"=>33, "Name"=>"Tremblant", "Type"=>"Switched", "DivisionID"=>3],
+            1=>["TremulantID"=>1, "ControllingSwitchID"=>33, "Name"=>"Tremblant", "Type"=>"Wave", "GroupIDs"=>[301,302,303]],
     ];
     
     public $patchKeyActions=[
@@ -103,12 +106,12 @@ class Oloron extends PGOrgan {
         2081=>["StopID"=> 2081, "DivisionID"=>1, "Name"=>"Main Motor (rear)",   "ControllingSwitchID"=>101, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
           83=>["StopID"=>   83, "DivisionID"=>1, "Name"=>"P Key On",            "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
           84=>["StopID"=>   84, "DivisionID"=>1, "Name"=>"P Key Off",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          85=>["StopID"=>   85, "DivisionID"=>1, "Name"=>"Acc Key On",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          86=>["StopID"=>   86, "DivisionID"=>1, "Name"=>"Acc Key Off",         "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          87=>["StopID"=>   87, "DivisionID"=>2, "Name"=>"GO Key On",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          88=>["StopID"=>   88, "DivisionID"=>2, "Name"=>"GO Key Off",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          89=>["StopID"=>   89, "DivisionID"=>3, "Name"=>"Rec Key On",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-          90=>["StopID"=>   90, "DivisionID"=>3, "Name"=>"Rec Key Off",         "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          85=>["StopID"=>   85, "DivisionID"=>2, "Name"=>"Acc Key On",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          86=>["StopID"=>   86, "DivisionID"=>2, "Name"=>"Acc Key Off",         "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          87=>["StopID"=>   87, "DivisionID"=>3, "Name"=>"GO Key On",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          88=>["StopID"=>   88, "DivisionID"=>3, "Name"=>"GO Key Off",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          89=>["StopID"=>   89, "DivisionID"=>4, "Name"=>"Rec Key On",          "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+          90=>["StopID"=>   90, "DivisionID"=>4, "Name"=>"Rec Key Off",         "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
     ];
     protected $patchRanks=[
           80=>["Noise"=>"Ambient",    "GroupID"=>901, "StopIDs"=>[]],
@@ -163,6 +166,34 @@ class Oloron extends PGOrgan {
         return NULL;
     }
     
+    public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
+        if ($hwdata["DivisionID"]>1 && $hwdata["StopID"]<80) $hwdata["DivisionID"]++;
+        return parent::createStop($hwdata);
+    }
+
+    public function createSwitchNoise(string $type, array $switchdata): void {
+        if ($type==self::SwitchNoise 
+                && $switchdata["DivisionID"]>1 
+                && $switchdata["StopID"]<80) $switchdata["DivisionID"]++;
+        parent::createSwitchNoise($type, $switchdata);
+    }
+
+    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
+        $pipe=parent::processSample($hwdata, $isattack); 
+        if ($pipe && empty($hwdata["Pitch_ExactSamplePitch"])) {
+            $hwdata["Pitch_ExactSamplePitch"]=
+                $this->readSamplePitch(self::ROOT . $this->sampleFilename($hwdata));
+            $pipe->PitchTuning=$this->sampleTuning($hwdata);
+            if ($pipe && floatval($pipe->PitchTuning)>1200) {
+                echo $pipe, "\n";
+                exit();
+            }
+        }
+        return $pipe;
+    }
+   
     public static function Oloron(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop
                 ="OrganInstallationPackages/002220/Noises/BlankLoop.wav";
@@ -173,26 +204,17 @@ class Oloron extends PGOrgan {
             $hwi->getOrgan()->ChurchName.=" $target";
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                unset($stop->Rank001FirstAccessibleKeyNumber);
-                unset($stop->Rank002FirstAccessibleKeyNumber);
-                unset($stop->Rank003FirstAccessibleKeyNumber);
-                unset($stop->Rank004FirstAccessibleKeyNumber);
-                unset($stop->Rank005FirstAccessibleKeyNumber);
-                unset($stop->Rank006FirstAccessibleKeyNumber);
+                for ($i=1; $i<6; $i++) {
+                    $stop->unset("Rank00${i}PipeCount");
+                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                }
             }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Oloron(
                     [3=>"(dry)"],
                     "dry");
-            exit();
             self::Oloron(
                     [1=>"(front)"],
                     "front");

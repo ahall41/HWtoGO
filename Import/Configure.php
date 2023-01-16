@@ -440,6 +440,15 @@ abstract Class Configure extends Create {
         return  12 * log(floatval($hz) / 220.0) / log(2.0) + 57;
     }
 
+    /**
+     * Convert  Midi note+fraction to Hz
+     * @param float $hz Pitch in Hz
+     * @return float Midi note+fraction
+     * https://www.music.mcgill.ca/~gary/307/week1/node28.html
+     */
+    private function MidiToHz(float $midi) {
+        return  440 * pow(2.0, ($midi-69)/12);
+    }
 
     /**
      * Determine midi note of a pipe (exact if possible) for Pitch Correction
@@ -721,5 +730,19 @@ abstract Class Configure extends Create {
             . "https://sites.google.com/view/andrews-odfs/home\n"
             . "\n";
         \GOClasses\GOObject::save($organfile, $comments);
+    }
+    
+    public function readSamplePitch($filename) : float {
+        require_once (__DIR__ . "/WavReader.php");
+        $reader=new WavReader(getenv("HOME") . $filename);
+        $reader->header();
+        while (!$reader->isEof()) {
+            $chunk=$reader->chunk();
+            if ($chunk["id"]=="smpl" && $chunk["size"]>20) {
+                $midi=$chunk["MIDINote"] + ($chunk["MIDICents"]/100);
+                return $this->MidiToHz($midi);
+            }
+        }
+        return 0.0;
     }
 }
