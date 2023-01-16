@@ -23,6 +23,7 @@ abstract class SPOrgan extends \Import\Organ {
     
     protected string $root="";
     protected array  $rankpositions=[];
+    protected int    $switchwcg=900;
     
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -180,7 +181,7 @@ abstract class SPOrgan extends \Import\Organ {
         
         if ($switchid!==NULL && ($switch=$this->getSwitch($switchid, FALSE))!==NULL) {
             $name=$switch->Name;
-            $windchestgroup=$this->getWindchestGroup(900);
+            $windchestgroup=$this->getWindchestGroup($this->switchwcg);
             $manual=$this->getManual(
                     isset($hwdata["DivisionID"]) && !empty($hwdata["DivisionID"])
                     ? $hwdata["DivisionID"] : 1);
