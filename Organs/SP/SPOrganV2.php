@@ -14,9 +14,8 @@ require_once __DIR__ . "/SPOrgan.php";
 /**
  * Version 2 extension of SPOrgan to handle 
  * 
- * The main feature is for sampled tremulants. Sonus Paradis have separate tremmed
- * ranks, but only one stop. However StopRank does make use of AlternateRankID 
- * (element p in the condensed model).
+ * In this extension, there are separate sound effects in each listening 
+ * perspective.
  * 
  */
 abstract class SPOrganV2 extends SPOrgan {

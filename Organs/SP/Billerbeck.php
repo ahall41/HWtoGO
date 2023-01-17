@@ -14,14 +14,14 @@ require_once __DIR__ . "/SPOrgan.php";
 /**
  * Import Sonus Paradisi Billerbeck Dom Demo to GrandOrgue
  * The mixer panel could not be completed as the HW ODF references
- * to the corresponding images are missing
+ * to the corresponding images appear to be missing
  *  
  * @author andrew
  */
 class Billerbeck extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.1.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.2.organ";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -63,9 +63,9 @@ class Billerbeck extends SPOrgan {
     ];
 
     protected $patchTremulants=[
-        89=>["Type"=>"Switched", "DivisionID"=>2],
-        24=>["Type"=>"Synth",    "DivisionID"=>3, "GroupIDs"=>[301,302,303]],
-        72=>["Type"=>"Switched", "DivisionID"=>4],
+        89=>["Type"=>"Wave",  "DivisionID"=>2, "GroupIDs"=>[201,202,203,204]],
+        24=>["Type"=>"Synth", "DivisionID"=>3, "GroupIDs"=>[301,302,303,304]],
+        72=>["Type"=>"Wave",  "DivisionID"=>4, "GroupIDs"=>[401,402,403,404]],
     ];
 
     protected $patchEnclosures=[
@@ -104,7 +104,7 @@ class Billerbeck extends SPOrgan {
         995=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-25]],
     ];
 
-    protected function patchData(\HWClasses\HWData $hwd) : void {
+    protected function xxpatchData(\HWClasses\HWData $hwd) : void {
         $stopranks=$hwd->read("StopRank");
         foreach($stopranks as $id=>$stoprank) {
             if (($id % 4)==0 
@@ -121,6 +121,13 @@ class Billerbeck extends SPOrgan {
         return parent::createOrgan($hwdata);
     }
     
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (($hwdata["RankID"] % 10)<5)
+            return parent::createRank($hwdata, $keynoise);
+        else
+            return NULL;
+    }
+
     protected function correctFileName(string $filename): string {
         $root=getenv("HOME") . self::ROOT;
         $filename=str_replace(
@@ -155,7 +162,37 @@ class Billerbeck extends SPOrgan {
         else
             parent::configurePanelSwitchImages ($switch, $hwdata);
     }
- 
+
+    protected function sampleMidiKey(array $hwdata) : int {
+        $key=12+$hwdata["PipeID"] % 100;
+        return $key;
+    }
+    
+    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 6:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe) unset($pipe->PitchTuning);
+        return $pipe;
+    }
+    
     /**
      * Run the import
      */
