@@ -20,7 +20,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlinFull extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/Burton-Berlin/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.0.organ";
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.1.organ";
+    const COMMENTS="/n"
+            . "Corrected tremulants and Diffuse expression\n"
+            . "\n";
     
     protected string $root=self::ROOT;
     protected array  $rankpositions=[
@@ -64,15 +67,15 @@ class BurtonBerlinFull extends SPOrgan {
     ];
 
     protected $patchTremulants=[
-         1=>["Type"=>"Wave", "DivisionID"=>4, "GroupIDs"=>[401,402,404]],
-        45=>["Type"=>"Wave", "DivisionID"=>2, "GroupIDs"=>[201,202,204]],
+         1=>["Type"=>"Wave", "DivisionID"=>4, "GroupIDs"=>[401,403,404]],
+        45=>["Type"=>"Wave", "DivisionID"=>2, "GroupIDs"=>[201,203,204]],
     ];
 
     protected $patchEnclosures=[
         997=>["Panels"=>[2=>[987], 4=>[986,NULL,986], 10=>[984]], 
-            "GroupIDs"=>[201,202,204], "AmpMinimumLevel"=>20], // Choir
+            "GroupIDs"=>[201,203,204], "AmpMinimumLevel"=>20], // Choir
         998=>["Panels"=>[2=>[981], 4=>[980,NULL,980], 10=>[978]], 
-            "GroupIDs"=>[401,402,404], "AmpMinimumLevel"=>20], // Swell
+            "GroupIDs"=>[401,403,404], "AmpMinimumLevel"=>20], // Swell
     ];
 
     protected $patchStops=[
@@ -168,6 +171,7 @@ class BurtonBerlinFull extends SPOrgan {
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         //$hwdata["ReleaseCrossfadeLengthMs"]=100;
+        $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
             case 9:
                 $hwdata["RankID"]-=9;
@@ -203,8 +207,19 @@ class BurtonBerlinFull extends SPOrgan {
                 unset($stop->Rank002PipeCount);
                 unset($stop->Rank003PipeCount);
             }
+            foreach ([70,71,74,120,121,124] as $rankid) {
+                $rank=$hwi->getRank($rankid);
+                if ($rank) {
+                    foreach($rank->Pipes() as $pipe) {
+                        unset($pipe->IsTremulant);
+                        unset($pipe->Release001IsTremulant);
+                        unset($pipe->Release002IsTremulant);
+                        unset($pipe->Release003IsTremulant);
+                    }
+                }
+            }
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::BurtonBerlinFull(
