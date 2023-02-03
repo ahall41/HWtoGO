@@ -17,16 +17,16 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class BrasovKolonics extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/BrasovKolonics/";
+    const ROOT="/GrandOrgue/Organs/Kolonics_Brasov/";
     const ODF="Kolonics Brasov Surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Wegenstein Organ from Reformed Church in BrasovKolonics\n"
             . "https://hauptwerk-augustine.info/BrasovKolonics_Reformed.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Kolonics Brasov Surround.1.0.organ";
+    const TARGET=self::ROOT . "Kolonics Brasov Surround.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    protected int $releaseCrossfadeLengthMs=100;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Console"],

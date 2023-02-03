@@ -343,12 +343,12 @@ class BillerbeckExtStudio170 extends \Import\Organ {
             self::BillerbeckExtStudio170(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
-            /* self::BillerbeckExtStudio170(
+            self::BillerbeckExtStudio170(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
             self::BillerbeckExtStudio170(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear");
+                    "Rear"); /*
             self::BillerbeckExtStudio170(
                     [
                         self::RANKS_DIRECT=>"Direct", 

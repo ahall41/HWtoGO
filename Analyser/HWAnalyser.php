@@ -19,7 +19,7 @@ require_once (__DIR__ . "/../GOClasses/PanelElement.php");
 
 /**
  * Analyse a HW Organ Definition File
- * I am going to adopt a bottom up approac. First we will investigate
+ * I am going to adopt a bottom up approach. First we will investigate
  * fundamental objects (pipes and images) and then work backwards to see how they 
  * fit in with the rest of the model 
  *
