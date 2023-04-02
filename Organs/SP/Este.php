@@ -35,7 +35,8 @@ class Este extends SPOrganV2 {
     ];
     
     public $positions=[];
-
+    protected $switchGroups=[801, 802, 803, 804];
+    
     protected $patchDisplayPages=[ // Set is for background, Switch/Layout is for controls
             1=>[
                 0=>["SetID"=>1030]
@@ -56,10 +57,10 @@ class Este extends SPOrganV2 {
                 2=>["Group"=>"Right", "Name"=>"Portrait", "Instance"=>12000, "SetID"=>1034],
                ],
             5=>[
-                0=>["Name"=>"Mixer", "SetID"=>1035],
+                0=>["Name"=>"Mixer", "Instance"=>1000, "SetID"=>1035],
                ],
             6=>"DELETE", // Pedal Matrix
-            7=>"DELETE", /*[
+            7=>"DELETE", /* [
                 0=>["Group"=>"Stops", "Name"=>"A", "Instance"=>13000, "SetID"=>1040],
                 1=>["Group"=>"Stops", "Name"=>"B", "Instance"=>13000, "SetID"=>1041],
                ], */
@@ -67,10 +68,10 @@ class Este extends SPOrganV2 {
     ];
 
     protected $patchDivisions=[
-            6=>["DivisionID"=>6, "Name"=>"Blower",      "Noise"=>TRUE],
-            7=>["DivisionID"=>7, "Name"=>"Tracker",     "Noise"=>TRUE],
-            8=>["DivisionID"=>8, "Name"=>"Stop",        "Noise"=>TRUE],
-            9=>["DivisionID"=>9, "Name"=>"Tremulant",   "Noise"=>TRUE]
+            6=>["DivisionID"=>6, "Name"=>"Blower"],
+            7=>["DivisionID"=>7, "Name"=>"Tracker"],
+            8=>["DivisionID"=>8, "Name"=>"Stop"],
+            9=>["DivisionID"=>9, "Name"=>"Tremulant"]
     ];
 
     protected $patchTremulants=[
@@ -97,7 +98,7 @@ class Este extends SPOrganV2 {
             "GroupIDs"=>[901,902,903,904], "AmpMinimumLevel"=>1],
         
         998=>["Panels"=>[2=>[987, NULL, 987], 4=>[983, NULL, 983], /* 7=>[985, 985] */], 
-            "GroupIDs"=>[301,302,303,304], "AmpMinimumLevel"=>1], // sw
+            "GroupIDs"=>[301,302,303,304], "AmpMinimumLevel"=>30], // sw
        
     ];
 
@@ -112,17 +113,17 @@ class Este extends SPOrganV2 {
         -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"GO Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"R Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"P key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -131=>["StopID"=>-131, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
-        -132=>["StopID"=>-132, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
-        -133=>["StopID"=>-133, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
-        -134=>["StopID"=>-134, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>904],
+        -131=>["StopID"=>-131, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Ambient"=>TRUE, "GroupID"=>901],
+        -132=>["StopID"=>-132, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Ambient"=>TRUE, "GroupID"=>902],
+        -133=>["StopID"=>-133, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Ambient"=>TRUE, "GroupID"=>903],
+        -134=>["StopID"=>-134, "DivisionID"=>1, "Name"=>"Tremulant",  "ControllingSwitchID"=>33,   "Ambient"=>TRUE, "GroupID"=>904],
     ];
     
     protected $patchRanks=[
-        999901=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[101]],
-        999911=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[102]],
-        999921=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[103]],
-        999941=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[104]],
+        999901=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[-101]],
+        999911=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[-102]],
+        999921=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[-103]],
+        999941=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[-104]],
         
         998102=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-111]],
         998112=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-111]],
@@ -137,19 +138,19 @@ class Este extends SPOrganV2 {
         998212=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-112]],
         998222=>["Noise"=>"KeyOn",   "GroupID"=>703, "StopIDs"=>[-112]],
         998242=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-112]],
-        998252=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-113]],
-        998262=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-113]],
-        998272=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-113]],
-        998292=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-113]],
+        998252=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-122]],
+        998262=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-122]],
+        998272=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-122]],
+        998292=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-122]],
         
-        998602=>["Noise"=>"KeyOn",   "GroupID"=>901, "StopIDs"=>[-114]],
-        998612=>["Noise"=>"KeyOn",   "GroupID"=>902, "StopIDs"=>[-114]],
-        998622=>["Noise"=>"KeyOn",   "GroupID"=>903, "StopIDs"=>[-114]],
-        998642=>["Noise"=>"KeyOn",   "GroupID"=>904, "StopIDs"=>[-114]],
-        998652=>["Noise"=>"KeyOff",  "GroupID"=>901, "StopIDs"=>[-122]],
-        998662=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-122]],
-        998672=>["Noise"=>"KeyOff",  "GroupID"=>903, "StopIDs"=>[-122]],
-        998692=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-122]],
+        998602=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-113]],
+        998612=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-113]],
+        998622=>["Noise"=>"KeyOn",   "GroupID"=>703, "StopIDs"=>[-113]],
+        998642=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-113]],
+        998652=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-123]],
+        998662=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-123]],
+        998672=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-123]],
+        998692=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-123]],
         
         999900=>["Noise"=>"StopOn",  "GroupID"=>801, "StopIDs"=>[]],
         999910=>["Noise"=>"StopOn",  "GroupID"=>802, "StopIDs"=>[]],
@@ -160,35 +161,11 @@ class Este extends SPOrganV2 {
         999820=>["Noise"=>"StopOff", "GroupID"=>803, "StopIDs"=>[]],
         999840=>["Noise"=>"StopOff", "GroupID"=>804, "StopIDs"=>[]],
         
-        999905=>["Noise"=>"Ambient", "GroupID"=>901, "StopIDs"=>[131]],
-        999915=>["Noise"=>"Ambient", "GroupID"=>902, "StopIDs"=>[132]],
-        999925=>["Noise"=>"Ambient", "GroupID"=>903, "StopIDs"=>[133]],
-        999945=>["Noise"=>"Ambient", "GroupID"=>904, "StopIDs"=>[134]],
+        999905=>["Noise"=>"Ambient", "GroupID"=>901, "StopIDs"=>[-131]],
+        999915=>["Noise"=>"Ambient", "GroupID"=>902, "StopIDs"=>[-132]],
+        999925=>["Noise"=>"Ambient", "GroupID"=>903, "StopIDs"=>[-133]],
+        999945=>["Noise"=>"Ambient", "GroupID"=>904, "StopIDs"=>[-134]],
     ];
-
-    protected function xxpatchData(\HWClasses\HWData $hwd) : void {
-        parent::patchData($hwd);
-        print_r($hwd->displayPages());
-        exit();
-        $ranks=$hwd->ranks();
-        ksort($ranks);
-        foreach($ranks as $id=>$rank)
-            echo $id, " ", (isset($rank["Name"]) ? $rank["Name"] : ""), "\n";
-        exit();
-    }
-    
-    public function xximport(): void {
-        parent::import();
-        foreach ($this->getStops() as $stop) {
-            for ($rn=1; $rn<10; $rn++) {
-                $r=sprintf("Rank%03dPipeCount", $rn);
-                if ($stop->isset($r) && $stop->get($r)>61)
-                    $stop->set($r, 61);
-            }
-        }
-    }
-    
-    
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         /* Uncomment to determine image instances on each page ...
@@ -196,27 +173,40 @@ class Este extends SPOrganV2 {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 7:
+                case 5:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
-                         $instance["Name"], "\n";
+                         $instance["Name"], ": "; 
                     foreach ($this->hwdata->switches() as $switch) {
-                        if (isset($switch["Disp_ImageSetInstanceID"]) && 
-                                $switch["Disp_ImageSetInstanceID"]==$instance)
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
                             echo $switch["SwitchID"], " ",
-                                 $switch["Name"], "\n";
+                                 $switch["Name"], ", ";
                     }
+                    echo "\n";
             }
         } 
-        exit(); */
+        exit(); //*/
         $hwdata["Identification_UniqueOrganID"]=2709;
         return parent::createOrgan($hwdata);
     }
     
-    public function xxcreateStop(array $hwdata): ?\GOClasses\Sw1tch {
-        //error_log(print_r($hwdata, TRUE));
-        return parent::createStop($hwdata);
+    public function configureImage(\GOClasses\GOObject $object, array $data, int $layout=0) : void {
+        parent::configureImage($object, $data, $layout);
+        if ($object->section()=="Panel001Element" && $object->instance()==9){
+            $width=$object->MouseRectWidth;
+            $object->MouseRectWidth=$object->MouseRectHeight;
+            $object->MouseRectHeight=$width;
+        }
     }
     
+    public function createStops(array $stopsdata) : void {
+        parent::createStops($stopsdata);
+        $switch=$this->getSwitch(50);
+        
+        $this->configurePanelSwitchImages($switch, ["StopID"=>50]);
+        
+    }
+
     private function treeWalk($root, $dir="", &$results=[]) {
         $files=scandir("$root$dir");
         foreach ($files as $key => $value) {
@@ -277,14 +267,35 @@ class Este extends SPOrganV2 {
         return NULL;
     }
     
-    protected function xxconfigureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
-        if ($pipe->AttackCount<0)
-            parent::configureAttack($hwdata, $pipe);
-    }
-    
-    public function xxprocessNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        error_log(print_r($hwdata, TRUE));
-        return parent::processNoise($hwdata, $isattack);
+    public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
+        $rankdata=$this->patchRanks[$hwdata["RankID"]];
+        
+        if ($rankdata["Noise"]=="Ambient") {
+            $stop=$this->getStop($rankdata["StopIDs"][0]);
+            if ($stop!==NULL) {
+                $ambience=$stop->Ambience();
+                if ($isattack) {
+                    $this->configureAttack($hwdata, $ambience);
+                    $ambience->LoadRelease="Y";
+                }
+                else {
+                    $this->configureRelease($hwdata, $ambience);
+                    $ambience->LoadRelease="N";
+                }
+                return $ambience;
+            }
+        }
+        else {
+            $stopid=($rankdata["Noise"]=="StopOn" ? +1 : -1) * (100*($hwdata["PipeID"] % 100)+$rankdata["GroupID"]-800);
+            $stop=$this->getSwitchNoise($stopid, FALSE);
+            if ($stop!==NULL) {
+                $noise=$stop->Noise();
+                $this->configureAttack($hwdata, $noise);
+                return $noise;
+            }
+        }
+        return NULL;
     }
     
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {

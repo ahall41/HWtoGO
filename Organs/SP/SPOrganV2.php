@@ -19,6 +19,8 @@ require_once __DIR__ . "/SPOrgan.php";
  * 
  */
 abstract class SPOrganV2 extends SPOrgan {
+    
+    protected $switchGroups=[701, 702, 703, 704];
 
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
         if ($hwdata["RankID"]>990000 && !isset($hwdata["StopIDs"])) 
@@ -47,7 +49,7 @@ abstract class SPOrganV2 extends SPOrgan {
         
         if ($switchid!==NULL && ($switch=$this->getSwitch($switchid, FALSE))!==NULL) {
             $switchid*=100;
-            foreach ([701,702,703,704] as $groupid) {
+            foreach ($this->switchGroups as $groupid) {
                 $switchid++;
                 if ($windchestgroup=$this->getWindchestGroup($groupid)) {
                     $name=$switch->Name . " (" . $windchestgroup->Name . ")";
