@@ -21,8 +21,8 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Este extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Este/";
     const SOURCE="OrganDefinitions/Este, Mascioni, op. 498, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Este, Mascioni, op. 498, Demo (%s) 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Este, Mascioni, op. 498, Demo (%s) 1.1.organ";
+    const REVISIONS="1.1 Corrected tremulant";
     
     const RANKS_DISTANT=2;
     
@@ -204,9 +204,13 @@ class Este extends SPOrganV2 {
         $switch=$this->getSwitch(50);
         
         $this->configurePanelSwitchImages($switch, ["StopID"=>50]);
-        
     }
 
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (($hwdata["RankID"] % 10)>4) return NULL;
+        return parent::createRank($hwdata, $keynoise);
+    }
+ 
     private function treeWalk($root, $dir="", &$results=[]) {
         $files=scandir("$root$dir");
         foreach ($files as $key => $value) {
@@ -299,8 +303,28 @@ class Este extends SPOrganV2 {
     }
     
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        return parent::processSample($hwdata, $isattack);
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9:
+                $hwdata["RankID"]-=9;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7:
+                $hwdata["RankID"]-=6;
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 6:
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
+        $pipe=parent::processSample($hwdata, $isattack);
+        // if ($pipe) unset($pipe->PitchTuning);
+        return $pipe;
     }
     
     /**
