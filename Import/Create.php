@@ -114,6 +114,7 @@ abstract Class Create extends Objects {
                 && !empty($stopdata["SwitchID"])) {
             $switchame=isset($stopdata["SwitchName"]) ? $stopdata["SwitchName"] : "Stop $name";
             $switch=$this->makeSwitch($stopdata["SwitchID"], $switchame);
+            $this->getManual($stopdata["DivisionID"])->Switch($switch);
             $stop->Switch($switch);
             return $switch;
         }
@@ -153,7 +154,9 @@ abstract Class Create extends Objects {
         $coupler=$this->newCoupler($couplerdata["CouplerID"], $name);
         $switch=$this->newSwitch($couplerdata["SwitchID"], "Coupler $name");
         $coupler->Switch($switch);
-        $this->getManual($couplerdata["ManualID"])->Coupler($coupler);
+        $manual=$this->getManual($couplerdata["ManualID"]);
+        $manual->Coupler($coupler);
+        $manual->Switch($switch);
         return $switch;
     }
 
@@ -167,9 +170,11 @@ abstract Class Create extends Objects {
      * @return \GOClasses\Coupler
      */
     public function createTremulant(array $tremulantdata) : ?\GOClasses\Sw1tch {
+        $manual=isset($tremulantdata["DivisionID"]) ? $this->getManual($tremulantdata["DivisionID"]) : FALSE;
         $name=$tremulantdata["Name"];
         if ($tremulantdata["Type"]=="Switched") {
             $on=$this->newSwitch($tremulantdata["SwitchID"], "Tremulant $name (on)");
+            if ($manual) $manual->Switch($on);
             $on->GCState=0;
             $on->StoreInDivisional="Y";
             $on->StoreInGeneral="Y";
@@ -188,6 +193,7 @@ abstract Class Create extends Objects {
                     $tremulantdata["Name"],
                     $tremulantdata["Type"]=="Wave");
             $switch=$this->newSwitch($tremulantdata["SwitchID"], "Tremulant $name");
+            if ($manual) $manual->Switch($switch);
             $tremulant->Switch($switch);
             foreach($tremulantdata["GroupIDs"] as $groupid) {
                 $wcg=$this->getWindchestGroup($groupid);

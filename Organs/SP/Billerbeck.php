@@ -19,9 +19,9 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Billerbeck extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Billerbeck/";
+    const ROOT="/GrandOrgue/Organs/SP/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.2.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.3.organ";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -209,9 +209,9 @@ class Billerbeck extends SPOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            self::Billerbeck(
+            /* self::Billerbeck(
                     [self::RANKS_DIRECT=>"Direct"],
-                    "Direct");
+                    "Direct"); */
             self::Billerbeck(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
@@ -223,12 +223,12 @@ class Billerbeck extends SPOrgan {
                     "Rear");
              self::Billerbeck(
                     [
-                        self::RANKS_DIRECT=>"Direct", 
+                        // self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_SEMI_DRY=>"Semi-dry",
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "8ch");
+                   "6ch");
         }
     }
 }

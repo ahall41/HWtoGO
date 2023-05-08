@@ -17,9 +17,9 @@ require_once __DIR__ . "/../../Import/Organ.php";
  * @author andrew
  */
 class BillerbeckExtStudio170 extends \Import\Organ {
-    const ROOT="/GrandOrgue/Organs/Billerbeck/";
+    const ROOT="/GrandOrgue/Organs/SP/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.5.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.6.organ";
 
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -55,9 +55,9 @@ class BillerbeckExtStudio170 extends \Import\Organ {
 
     private $tremulants=[ 
         2=>["TremulantID"=>2, "Name"=>"Rec", "SwitchID"=>203, "Type"=>"Wave", 
-            "Position"=>[4, 6], "GroupIDs"=>[201,202,203,204]],
+            "DivisionID"=>2, "Position"=>[4, 6], "GroupIDs"=>[201,202,203,204]],
         3=>["TremulantID"=>3, "Name"=>"Pos", "SwitchID"=>204, "Type"=>"Wave",
-            "Position"=>[8, 6], "GroupIDs"=>[301,302,303,304]], 
+            "DivisionID"=>3, "Position"=>[8, 6], "GroupIDs"=>[301,302,303,304]], 
     ];
 
     private $couplers=[

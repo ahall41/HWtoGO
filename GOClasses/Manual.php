@@ -51,6 +51,10 @@ class Manual extends GOObject {
         $this->setObject("Stop", "NumberOfStops", $stop);
     }
 
+    public function Switch(Sw1tch $switch) : void {
+        $this->setObject("Switch", "NumberOfSwitches", $switch);
+    }
+
     public function Coupler(Coupler $coupler) {
         $this->setObject("Coupler", "NumberOfCouplers", $coupler);
     }
