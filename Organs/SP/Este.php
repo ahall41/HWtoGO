@@ -21,8 +21,10 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Este extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Este/";
     const SOURCE="OrganDefinitions/Este, Mascioni, op. 498, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Este, Mascioni, op. 498, Demo (%s) 1.1.organ";
-    const REVISIONS="1.1 Corrected tremulant";
+    const TARGET=self::ROOT . "Este, Mascioni, op. 498, Demo (%s) 1.3.organ";
+    const REVISIONS=
+            "1.1 Corrected tremulant\n" .
+            "1.2 Add switches to manuals for divisional combinations\n";
     
     const RANKS_DISTANT=2;
     
