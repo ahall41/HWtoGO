@@ -22,6 +22,7 @@ class Manual extends GOObject {
     public static $firstMidiNote=36;
     protected string $section="Manual";
     private int $currentX=-1;
+    private $switches=[];
     
     public function __construct(string $name) {
         $section=$this->section;
@@ -52,17 +53,16 @@ class Manual extends GOObject {
     }
 
     public function Switch(Sw1tch $switch) : void {
-        $this->setObject("Switch", "NumberOfSwitches", $switch);
+        if (!isset($this->switches[$switch->instance()])) {
+            $this->switches[$switch->instance()]=TRUE;
+            $this->setObject("Switch", "NumberOfSwitches", $switch);
+        }
     }
 
     public function Coupler(Coupler $coupler) {
         $this->setObject("Coupler", "NumberOfCouplers", $coupler);
     }
 
-    public function Sw1tch(Sw1tch $switch) {
-        $this->setObject("Switch", "NumberOfSwitches", $switch);
-    }
-    
     public function Key(?int $key=NULL) : string {
         if ($key===NULL) {
             if (isset($this->DisplayKeys))

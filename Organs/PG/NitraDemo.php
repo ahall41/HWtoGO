@@ -12,23 +12,24 @@ namespace Organs\PG;
 require_once __DIR__ . "/PGOrgan.php";
 
 /**
- * Import Nitra Demo
+ * Transform Nitra Demo
  * 
- * @todo: Cuculus, short octave, etc; Keys on alternate console layout
+ * @todo: Pauke, Alt console, Short octave. 
  */
 
-class Nitra extends PGOrgan {
+class NitraDemo extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Nitra/";
+    const ROOT="/GrandOrgue/Organs/PG/Nitra/";
     const ODF="Nitra (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Nitra, Katedrála sv. Emeráma, Slovakia (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nitra/\n"
             . "\n"
             . "1.1 Wave based tremulant\n"
+            . "1.2 Add switches to manuals (for divisionals)"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (demo - %s) 1.1.organ";
+    const TARGET=self::ROOT . "Nitra (demo - %s) 1.2.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected bool $switchedtremulants=FALSE;
@@ -45,7 +46,7 @@ class Nitra extends PGOrgan {
             1=>[
                 0=>["SetID"=>1000]
                ],
-            2=>"DELETE", // Alt console - not quite right!
+            2=>"DELETE", // Alt Console
             3=>[
                 0=>["Group"=>"Left", "Name"=>"1",   "SetID"=>3000],
                 1=>["Group"=>"Left", "Name"=>"2",   "SetID"=>3200],
@@ -148,12 +149,6 @@ class Nitra extends PGOrgan {
         2088=>["Noise"=>"KeyOff",     "GroupID"=>703, "StopIDs"=>[88]],
     ];
     
-    public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
-        $switch=$this->hwdata->switch($switchid);
-        if (!empty($switch["Disp_ImageSetIndexEngaged"])) 
-            parent::configureKeyboardKey($manual, $switchid, $midikey);
-    }
-
     public function createPanel($hwdata): ?\GOClasses\Panel {
         $pageid=$hwdata["PageID"];
         $hwdata["AlternateConsoleScreenLayout0_Include"]="Y";
@@ -204,17 +199,17 @@ class Nitra extends PGOrgan {
         return parent::processSample($hwdata, $isattack);
     }
    
-    public static function Nitra(array $positions=[], string $target="") {
+    public static function NitraDemo(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop
                 ="./OrganInstallationPackages/002516/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
-            $hwi=new Nitra(self::SOURCE);
+            $hwi=new NitraDemo(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
-                for ($i=1; $i<6; $i++) {
+                for ($i=1; $i<=6; $i++) {
                     $stop->unset("Rank00${i}PipeCount");
                     $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
                 }
@@ -222,20 +217,20 @@ class Nitra extends PGOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
-            self::Nitra(
+            self::NitraDemo(
                     [1=>"(close)"],
                     "close");
-            self::Nitra( 
+            self::NitraDemo( 
                     [2=>"(front)"],
                     "front");
-            self::Nitra(
+            self::NitraDemo(
                     [3=>"(rear)"],
                     "rear");
-            self::Nitra( 
+            self::NitraDemo( 
                     [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
                     "surround");
         }
     }   
     
 }
-Nitra::Nitra();
+NitraDemo::NitraDemo();
