@@ -24,12 +24,31 @@ class ErmeloFull extends Ermelo {
             . "https://piotrgrabowski.pl/ermelo/\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (%s) 0.3.organ";
+    const TARGET=self::ROOT . "Ermelo (%s) 1.0.organ";
     
+    // Create dummy sample file for testing ...
+    public function createSample($hwdata) {
+        $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
+        if (!file_exists($file)) {
+            $dir=dirname($file);
+            if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
+            $blank=getenv("HOME") . self::ROOT . \GOClasses\Ambience::$blankloop;
+            symlink($blank, $file);
+        }
+    }
+
+    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
+        $noise=parent::processNoise($hwdata, $isattack);
+        if ($noise) $this->createSample($hwdata);
+        return $noise;
+    }
+
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120) $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        return parent::processSample($hwdata, $isattack);
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe) $this->createSample($hwdata);
+        return $pipe;
     }
    
     public static function ErmeloFull(array $positions=[], string $target="") {

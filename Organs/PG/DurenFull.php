@@ -32,7 +32,7 @@ class DurenFull extends Duren {
             parent::configureKeyboardKey($manual, $switchid, $midikey);
     }
 
-   // Create dummy sample file for testing ...
+    // Create dummy sample file for testing ...
     public function createSample($hwdata) {
         $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
         if (!file_exists($file)) {
