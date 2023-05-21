@@ -17,15 +17,6 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Ermelo extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Ermelo/";
-    const ODF="Ermelo (demo).Organ_Hauptwerk_xml";
-    const COMMENTS=
-              "Immanuelkerk in Ermelo, Netherlands (" . self::ODF . ")\n"
-            . "https://piotrgrabowski.pl/ermelo/\n"
-            . "\n";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (demo - %s) 1.0.organ";
-    
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     
     public $positions=[];
@@ -68,16 +59,16 @@ class Ermelo extends PGOrgan {
     ];
 
     // ObjectType="Tremulant" is empty
-    // Switch 28 = Tremulant
+    // Switch 28 = Dummy tremulant (we just need a switch)
     // Switches 29-31 disable trem for P/HW/RW - ignore for now
     public $patchTremulants=[
-            0=>["TremulantID"=>0, "ControllingSwitchID"=>28, "Type"=>"Wave", 
+            0=>["TremulantID"=>28, "ControllingSwitchID"=>28, "Type"=>"Wave", 
                 "Name"=>"Tremulant", "GroupIDs"=>[]],
-            1=>["TremulantID"=>1, "ControllingSwitchID"=>29, "Type"=>"Wave", 
+            1=>["TremulantID"=>29, "ControllingSwitchID"=>29, "Type"=>"Wave", 
                 "Name"=>"P", "GroupIDs"=>[101,102,103]],
-            2=>["TremulantID"=>2, "ControllingSwitchID"=>30, "Type"=>"Wave", 
+            2=>["TremulantID"=>30, "ControllingSwitchID"=>30, "Type"=>"Wave", 
                 "Name"=>"HW", "GroupIDs"=>[201,202,203]],
-            3=>["TremulantID"=>3, "ControllingSwitchID"=>31, "Type"=>"Wave", 
+            3=>["TremulantID"=>31, "ControllingSwitchID"=>31, "Type"=>"Wave", 
                 "Name"=>"RW", "GroupIDs"=>[301,302,303]],
     ];
     
@@ -197,20 +188,16 @@ class Ermelo extends PGOrgan {
 
         // Fix tremulants
         $sw28=$this->getSwitch(28);
-        foreach ([1,2,3] as $id) {
-            // Create a 'Not' switch
-            $disabled=$this->getSwitch(28+$id);
-            $enabled=$this->newSwitch(-28-$id, "Enable " . $disabled->Name);
-            $disabled->Name="Disable " . $disabled->Name;
-            $disabled->GCState=-1;
-            $enabled->Function="Not";
-            $enabled->Switch($disabled);
+        
+        foreach ([29,30,31] as $id) {
+            $sw=$this->getSwitch($id);
+            $sw->DisplayInInvertedState="Y";
+            $sw->DefaultToEngaged="Y";
+            
             $trem=$this->getTremulant($id);
-            $trem->Switch001=$enabled->instance();
+            $trem->Function="And";
             $trem->Switch($sw28);
-            echo $disabled, "\n\n";
         }
-        exit();
     }
     
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
@@ -268,46 +255,4 @@ class Ermelo extends PGOrgan {
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return \Import\Organ::processSample($hwdata, $isattack);
     }
-   
-    public static function Ermelo(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
-                "OrganInstallationPackages/002522/Noises/BlankLoop.wav";
-        if (sizeof($positions)>0) {
-            $hwi=new Ermelo(self::SOURCE);
-            $hwi->positions=$positions;
-            $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
-            foreach($hwi->getStops() as $stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                    $stop->unset("Rank00${i}FirstPipeNumber");
-                }
-            }
-            $hwi->saveODF(sprintf(self::TARGET, $target));
-            echo $hwi->getOrgan()->ChurchName, "\n";
-        }
-        else {
-            self::Ermelo(
-                    [1=>"(close)"],
-                    "close");
-            self::Ermelo( 
-                    [2=>"(front)"],
-                    "front");
-            self::Ermelo(
-                    [3=>"(rear)"],
-                    "rear");
-            self::Ermelo( 
-                    [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
-                    "surround");
-        }
-    }   
-    
 }
-function ErrorHandler($errno, $errstr, $errfile, $errline) {
-    throw new \Exception("Error $errstr");
-    die();
-}
-//set_error_handler("Organs\PG\ErrorHandler");
-Ermelo::Ermelo();

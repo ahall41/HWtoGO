@@ -17,15 +17,6 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Duren extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Duren/";
-    const ODF="Duren (demo).Organ_Hauptwerk_xml";
-    const COMMENTS=
-              "Annakirche in Düren, Germany (" . self::ODF . ")\n"
-            . "https://piotrgrabowski.pl/duren/\n"
-            . "\n";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (demo - %s) 1.0.organ";
-    
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     
     public $positions=[];
@@ -148,32 +139,16 @@ class Duren extends PGOrgan {
         $index=10000;
         foreach ($hwd->stops() as $stopid=>$stop) {
             $nodes=($stopid<10 ? 29 : 61);
-            $increment=($stopid==5 ? 12 : 0);
             foreach([0, 1000, 2000] as $baseid) {
                 $rankid=$baseid + $stopid;
                 $this->patchStopRanks[$index++]=[
                     "StopID"=>$stopid, 
                     "RankID"=>$rankid,
                     "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
-                    "NumberOfMappedDivisionInputNodes"=>$nodes,
-                        "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+                    "NumberOfMappedDivisionInputNodes"=>$nodes];
             }
         } 
         parent::patchData($hwd);
-        /* $instances=$this->hwdata->imageSetInstances();
-        foreach ($instances as $instance) {
-            switch ($instance["DisplayPageID"]) {
-                case 6:
-                    echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
-                         $instance["Name"], "\n";
-                    foreach ($this->hwdata->switches() as $switch) {
-                        if ($switch["Disp_ImageSetInstanceID"]==$instance)
-                            echo $switch["SwitchID"], " ",
-                                 $switch["Name"], "\n";
-                    }
-            }
-        } 
-        exit(); */
     }
     
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
@@ -238,48 +213,4 @@ class Duren extends PGOrgan {
         if ((intval($rankid/100) % 10)==5) $hwdata["RankID"]=-($rankid-500);
         return parent::processSample($hwdata, $isattack);
     }
-   
-    public static function Duren(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
-                "OrganInstallationPackages/002526/Noises/BlankLoop.wav";
-        if (sizeof($positions)>0) {
-            $hwi=new Duren(self::SOURCE);
-            $hwi->positions=$positions;
-            $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
-            foreach($hwi->getStops() as $stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                    $stop->unset("Rank00${i}FirstPipeNumber");
-                }
-            }
-            /* foreach([80, 1080, 2080] as $stopid)
-                echo $hwi->getStop($stopid); */
-            $hwi->saveODF(sprintf(self::TARGET, $target));
-            echo $hwi->getOrgan()->ChurchName, "\n";
-        }
-        else {
-            self::Duren(
-                    [1=>"(close)"],
-                    "close");
-            self::Duren( 
-                    [2=>"(front)"],
-                    "front");
-            self::Duren(
-                    [3=>"(rear)"],
-                    "rear");
-            self::Duren( 
-                    [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
-                    "surround");
-        }
-    }   
-    
 }
-function ErrorHandler($errno, $errstr, $errfile, $errline) {
-    throw new \Exception("Error $errstr");
-    die();
-}
-set_error_handler("Organs\PG\ErrorHandler");
-Duren::Duren();
