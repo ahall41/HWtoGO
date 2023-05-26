@@ -9,13 +9,13 @@
  */
 
 namespace Organs\PG;
-require_once __DIR__ . "/NitraDemo.php";
+require_once __DIR__ . "/Nitra.php";
 
 /**
  * Transform Nitra Full - see Nitra Demo
  */
 
-class NitraFull extends NitraDemo {
+class NitraFull extends Nitra {
 
     const ROOT="/GrandOrgue/Organs/PG/NitraFull/";
     const ODF="Nitra.Organ_Hauptwerk_xml";
@@ -24,7 +24,7 @@ class NitraFull extends NitraDemo {
             . "https://piotrgrabowski.pl/nitra/\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (full - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Nitra (%s) 1.0.organ";
   
     // Create dummy sample file for testing ...
     public function createSample($hwdata) {

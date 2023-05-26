@@ -24,7 +24,7 @@ class DurenFull extends Duren {
             . "https://piotrgrabowski.pl/duren/\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (%s) 0.2.organ";
+    const TARGET=self::ROOT . "Duren (%s) 0.4.organ";
     
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
         $switch=$this->hwdata->switch($switchid);
@@ -61,41 +61,15 @@ class DurenFull extends Duren {
                 "OrganInstallationPackages/002525/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new DurenFull(self::SOURCE);
-            $hwi->positions=$positions;
-            $hwi->import();
+            self::Duren($hwi, $positions, $target);
             $hwi->getOrgan()->ChurchName.=sprintf(" (%s)", $target);
-            foreach($hwi->getStops() as $id=>$stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                    $stop->unset("Rank00${i}FirstPipeNumber");
-                }
-                for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
-                    $r=$stop->int2str($rankid);
-                    switch ($id) {
-                        case 32: // HW Cornet V
-                            $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
-                            break;
-                        case 38: // SW Celeste
-                            $stop->set("Rank{$r}FirstAccessibleKeyNumber",13);
-                            break;
-                    } 
-                }
-            }
-            
-            /* foreach($hwi->getRanks() as $rankid=>$rank) {
-                $pipes=$rank->Pipes();
-                $min=(sizeof($pipes)>0) ? min(array_keys($pipes)) : 0;
-                echo $rankid, " ", $min, " ", $rank->Name, "\n";
-            } */
-            
             $hwi->saveODF(sprintf(self::TARGET, $target));
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {
             self::DurenFull(
                     [1=>"(close)"],
-                    "close");
+                    "close"); 
             self::DurenFull( 
                     [2=>"(front)"],
                     "front");

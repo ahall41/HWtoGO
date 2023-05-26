@@ -24,7 +24,7 @@ class DurenDemo extends Duren {
             . "https://piotrgrabowski.pl/duren/\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Duren (demo - %s) 1.1.organ";
     
     public static function DurenDemo(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
@@ -32,31 +32,9 @@ class DurenDemo extends Duren {
                 "OrganInstallationPackages/002526/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new DurenDemo(self::SOURCE);
-            $hwi->positions=$positions;
-            $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
-            foreach($hwi->getStops() as $id=>$stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                    $stop->unset("Rank00${i}FirstPipeNumber");
-                }
-                
-                for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
-                    $r=$stop->int2str($rankid);
-                    switch ($id) {
-                        case 32: // HW Cornet V
-                            $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
-                            break;
-                        case 38: // SW Celeste
-                            $stop->set("Rank{$r}FirstAccessibleKeyNumber",13);
-                            break;
-                    } 
-                }
-            }
-            /* foreach([80, 1080, 2080] as $stopid)
-                echo $hwi->getStop($stopid); */
+            self::Duren($hwi, $positions, $target);
             $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->getOrgan()->ChurchName.=sprintf(" (%s)", $target);
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {

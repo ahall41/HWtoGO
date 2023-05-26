@@ -138,9 +138,29 @@ class Duren extends PGOrgan {
     public function patchData(\HWClasses\HWData $hwd): void {
         $index=10000;
         foreach ($hwd->stops() as $stopid=>$stop) {
-            $nodes=($stopid<10 ? 29 : 61);
+            $nodes=($stopid<10 ? 32 : 61);
             foreach([0, 1000, 2000] as $baseid) {
-                $rankid=$baseid + $stopid;
+                switch ($stopid) {                    
+                    case 3: // P Principalbass 16
+                        $rankid=$baseid + 22;
+                        break;
+                    
+                    case 4: // P Subbass 16
+                        $rankid=$baseid + 1;
+                        break;
+                    
+                    case 6: // P Viola 8 
+                        $rankid=$baseid + 24;
+                        break;
+
+                    case 9: // P Fagott 16
+                        $rankid=$baseid + 33;
+                        break;
+
+                    default:
+                    $rankid=$baseid + $stopid;
+                }
+
                 $this->patchStopRanks[$index++]=[
                     "StopID"=>$stopid, 
                     "RankID"=>$rankid,
@@ -212,5 +232,45 @@ class Duren extends PGOrgan {
         $rankid=$hwdata["RankID"];
         if ((intval($rankid/100) % 10)==5) $hwdata["RankID"]=-($rankid-500);
         return parent::processSample($hwdata, $isattack);
+    }
+    
+    protected static function Duren(Duren $hwi, array $positions, string $target) {
+        \GOClasses\Manual::$keys=61;
+        \GOClasses\Manual::$pedals=32;
+        $hwi->positions=$positions;
+        $hwi->import();
+        
+        foreach([1,2,3,4] as $mid) {
+            $manual=$hwi->getManual($mid);
+            $manual->NumberOfLogicalKeys=$manual->NumberOfAccessibleKeys=$mid==0 ? 32 : 61;
+        }
+        foreach($hwi->getStops() as $id=>$stop) {
+            for ($i=1; $i<6; $i++) {
+                $stop->unset("Rank00${i}PipeCount");
+                $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                $stop->unset("Rank00${i}FirstPipeNumber");
+            }
+            for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
+                $r=$stop->int2str($rankid);
+                switch ($id) {
+                    case 4: // P Subbass 16
+                         $stop->set("Rank{$r}FirstPipeNumber",13);
+                        break;
+                    case 32: // HW Cornet V
+                        $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
+                        break;
+                    case 38: // SW Celeste
+                        $stop->set("Rank{$r}FirstAccessibleKeyNumber",13);
+                        break;
+                } 
+            }
+        }
+
+        /* foreach($hwi->getRanks() as $rankid=>$rank) {
+            $pipes=$rank->Pipes();
+            $size=sizeof($pipes);
+            $min=($size>0) ? min(array_keys($pipes)) : 0;
+            echo $rankid, " ", $size, " ", $min, " ", $rank->Name, "\n";
+        } */
     }
 }

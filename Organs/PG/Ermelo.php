@@ -141,7 +141,7 @@ class Ermelo extends PGOrgan {
     public function patchData(\HWClasses\HWData $hwd): void {
         $index=10000;
         foreach ($hwd->stops() as $stopid=>$stop) {
-            $nodes=($stopid<10 ? 29 : 61);
+            $nodes=($stopid<10 ? 30 : 54);
             $increment=($stopid==5 ? 12 : 0);
             foreach([0, 1000, 2000] as $baseid) {
                 $rankid=$baseid + $stopid;
@@ -255,4 +255,49 @@ class Ermelo extends PGOrgan {
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return \Import\Organ::processSample($hwdata, $isattack);
     }
+    
+     protected static function Ermelo(Ermelo $hwi, array $positions, string $target) {
+        \GOClasses\Manual::$keys=58;
+        \GOClasses\Manual::$pedals=29;
+        
+        $hwi->positions=$positions;
+        $hwi->import();
+        $hwi->getOrgan()->ChurchName.=sprintf(" (%s)", $target);
+        foreach($hwi->getStops() as $id=>$stop) {
+            for ($i=1; $i<6; $i++) {
+                $stop->unset("Rank00${i}PipeCount");
+                $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+                $stop->unset("Rank00${i}FirstPipeNumber");
+            }
+
+            for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
+                $r=$stop->int2str($rankid);
+                switch ($id) {
+                    case 14: // HW Cornet III
+                        $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
+                        break;
+
+                    case 15: // HW Mix bass etc
+                    case 17:
+                    case 19:#
+                        $stop->set("Rank{$r}PipeCount",23);
+                        break;
+
+                    case 16: // HW Mix desc etc
+                    case 18:
+                    case 20:
+                        $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
+                        $stop->set("Rank{$r}FirstPipeNumber",25);
+                        break;
+                } 
+            }
+        }
+
+        foreach($hwi->getRanks() as $rankid=>$rank) {
+            $pipes=$rank->Pipes();
+            $size=sizeof($pipes);
+            $min=($size>0) ? min(array_keys($pipes)) : 0;
+            //echo $rankid, " ", $size, " ", $min, " ", $rank->Name, "\n";
+        }
+     }
 }
