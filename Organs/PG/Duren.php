@@ -259,6 +259,7 @@ class Duren extends PGOrgan {
                     case 32: // HW Cornet V
                         $stop->set("Rank{$r}FirstAccessibleKeyNumber",25);
                         break;
+                    case 25: // HW Flute Harmonique
                     case 38: // SW Celeste
                         $stop->set("Rank{$r}FirstAccessibleKeyNumber",13);
                         break;

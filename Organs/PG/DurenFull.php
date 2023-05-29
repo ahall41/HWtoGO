@@ -24,14 +24,8 @@ class DurenFull extends Duren {
             . "https://piotrgrabowski.pl/duren/\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (%s) 0.4.organ";
+    const TARGET=self::ROOT . "Duren (%s) 1.0.organ";
     
-    public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
-        $switch=$this->hwdata->switch($switchid);
-        if (!empty($switch["Disp_ImageSetIndexEngaged"])) 
-            parent::configureKeyboardKey($manual, $switchid, $midikey);
-    }
-
     // Create dummy sample file for testing ...
     public function createSample($hwdata) {
         $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
