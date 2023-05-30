@@ -61,7 +61,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
     ];
 
     private $couplers=[
-        301=>["Name"=>"GO/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>1, "Position"=>[9, 1]],
+        301=>["Name"=>"GO/Ped",  "SourceKeyboardID"=>0, "DestKeyboardID"=>1, "Position"=>[9, 1]], // "DestinationKeyshift"=>0
         302=>["Name"=>"Rec/Ped", "SourceKeyboardID"=>0, "DestKeyboardID"=>2, "Position"=>[8, 3]],
         303=>["Name"=>"Pos/Ped", "SourceKeyboardID"=>0, "DestKeyboardID"=>3, "Position"=>[9, 3]],
         311=>["Name"=>"Rec/GO",  "SourceKeyboardID"=>1, "DestKeyboardID"=>2, "Position"=>[4, 2]],
@@ -70,46 +70,46 @@ class BillerbeckExtStudio170 extends \Import\Organ {
     ];
     
     private $stops=[
-         2=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 1], "Name"=>"Principal 16"], // Ex GO
-         4=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 1], "Name"=>"Principal major 8"],
-         9=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 1], "Name"=>"Octave major 4"],
-        13=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[4, 1], "Name"=>"Octave 2"],
-         8=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 2], "Name"=>"Gedackt 8"],
-        78=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 2], "Name"=>"Holzflote 4"],
-         7=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 2], "Name"=>"Viola da Gamba 8"],
-        15=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 3], "Name"=>"Mixture major"],
-        16=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 3], "Name"=>"Mixture minor"],
-        43=>["ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 3], "Name"=>"Trompeta real 8", "Colour"=>"Dark Red"], // Ex Chamade
+         2=>["Rank"=> 2, "ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 1], "Name"=>"Principal 16"], // Ex GO
+         4=>["Rank"=> 4, "ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 1], "Name"=>"Principal major 8"],
+         9=>["Rank"=> 9, "ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 1], "Name"=>"Octave major 4"],
+        13=>["Rank"=>13, "ManualID"=>1, "DivisionID"=>1, "Position"=>[4, 1], "Name"=>"Octave 2"],
+         8=>["Rank"=> 8, "ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 2], "Name"=>"Gedackt 8"],
+        78=>["Rank"=>78, "ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 2], "Name"=>"Holzflote 4"],
+         7=>["Rank"=> 7, "ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 2], "Name"=>"Viola da Gamba 8"],
+        15=>["Rank"=>15, "ManualID"=>1, "DivisionID"=>1, "Position"=>[1, 3], "Name"=>"Mixture major"],
+        16=>["Rank"=>16, "ManualID"=>1, "DivisionID"=>1, "Position"=>[2, 3], "Name"=>"Mixture minor"],
+        43=>["Rank"=>43, "ManualID"=>1, "DivisionID"=>1, "Position"=>[3, 3], "Name"=>"Trompeta real 8", "Colour"=>"Dark Red"], // Ex Chamade
        
-        27=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[6, 1], "Name"=>"Principalbass 16"],
-       104=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 1], "Name"=>"Principal 8", "Rank"=>4], // #4
-        38=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[8, 1], "Name"=>"Posaune 16", "Colour"=>"Dark Red"],
-        26=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 2], "Name"=>"Bourdon 32"],
-       126=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[8, 2], "Name"=>"Soubasse 16", "Rank"=>26, "FirstKey"=>13], // #26 +12
-        32=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[9, 2], "Name"=>"Flute 8"],
-       178=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[6, 3], "Name"=>"Holzflote 4", "Rank"=>78],
-       143=>["ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 3], "Name"=>"Trompeta 8", "Rank"=>43, "Colour"=>"Dark Red"], // #43
+        27=>["Rank"=>27, "ManualID"=>0, "DivisionID"=>0, "Position"=>[6, 1], "Name"=>"Principalbass 16"],
+       104=>["Rank"=> 4, "ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 1], "Name"=>"Principal 8"],
+        38=>["Rank"=>38, "ManualID"=>0, "DivisionID"=>0, "Position"=>[8, 1], "Name"=>"Posaune 16", "Colour"=>"Dark Red"],
+        26=>["Rank"=>26, "ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 2], "Name"=>"Bourdon 32"],
+       126=>["Rank"=>26, "ManualID"=>0, "DivisionID"=>0, "Position"=>[8, 2], "Name"=>"Soubasse 16", "FirstKey"=>13], // #26 +12
+        32=>["Rank"=>32, "ManualID"=>0, "DivisionID"=>0, "Position"=>[9, 2], "Name"=>"Flute 8"],
+       178=>["Rank"=>78, "ManualID"=>0, "DivisionID"=>0, "Position"=>[6, 3], "Name"=>"Holzflote 4"],
+       143=>["Rank"=>43, "ManualID"=>0, "DivisionID"=>0, "Position"=>[7, 3], "Name"=>"Trompeta 8", "Colour"=>"Dark Red"], // #43
        
-        51=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 4], "TremulantID"=>2, "Name"=>"Geigenprincipal 8"], // Ex Rec
-        77=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 4], "TremulantID"=>2, "Name"=>"Praestant 4"],
-        60=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 4], "TremulantID"=>2, "Name"=>"Octavin 2"],
-        64=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[4, 4], "TremulantID"=>3, "Name"=>"Trompette harmonique 8", "Colour"=>"Dark Red"],
-        55=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 5], "TremulantID"=>2, "Name"=>"Bourdon 8"],
-        53=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 5], "TremulantID"=>2, "Name"=>"Viola 8"],
-        54=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 5], "TremulantID"=>2, "Name"=>"Vox coelestis 8", "FirstNote"=>6],
-        57=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[4, 5], "TremulantID"=>2, "Name"=>"Flute octaviante 4"],
-        59=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 6], "TremulantID"=>2, "Name"=>"Nazard harmonique 2 2/3"],
-        81=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 6], "TremulantID"=>2, "Name"=>"Sesquialtera"],
-        82=>["ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 6], "TremulantID"=>2, "Name"=>"Mixtur 4f."],
+        51=>["Rank"=>51, "ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 4], "TremulantID"=>2, "Name"=>"Geigenprincipal 8"], // Ex Rec
+        77=>["Rank"=>77, "ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 4], "TremulantID"=>2, "Name"=>"Praestant 4"],
+        60=>["Rank"=>60, "ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 4], "TremulantID"=>2, "Name"=>"Octavin 2"],
+        64=>["Rank"=>64, "ManualID"=>2, "DivisionID"=>2, "Position"=>[4, 4], "TremulantID"=>3, "Name"=>"Trompette harmonique 8", "Colour"=>"Dark Red"],
+        55=>["Rank"=>55, "ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 5], "TremulantID"=>2, "Name"=>"Bourdon 8"],
+        53=>["Rank"=>53, "ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 5], "TremulantID"=>2, "Name"=>"Viola 8"],
+        54=>["Rank"=>54, "ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 5], "TremulantID"=>2, "Name"=>"Vox coelestis 8", "FirstNote"=>6],
+        57=>["Rank"=>57, "ManualID"=>2, "DivisionID"=>2, "Position"=>[4, 5], "TremulantID"=>2, "Name"=>"Flute octaviante 4"],
+        59=>["Rank"=>59, "ManualID"=>2, "DivisionID"=>2, "Position"=>[1, 6], "TremulantID"=>2, "Name"=>"Nazard harmonique 2 2/3"],
+        81=>["Rank"=>81, "ManualID"=>2, "DivisionID"=>2, "Position"=>[2, 6], "TremulantID"=>2, "Name"=>"Sesquialtera"],
+        82=>["Rank"=>82, "ManualID"=>2, "DivisionID"=>2, "Position"=>[3, 6], "TremulantID"=>2, "Name"=>"Mixtur 4f."],
 
-        46=>["ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 4], "Name"=>"Flute harmonique 8"],
-        74=>["ManualID"=>3, "DivisionID"=>3, "Position"=>[8, 4], "TremulantID"=>3, "Name"=>"Rohrflote 8"], // Ex Pos
-        58=>["ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 5], "TremulantID"=>3, "Name"=>"Fugara 4"],
-        79=>["ManualID"=>3, "DivisionID"=>3, "Position"=>[8, 5], "TremulantID"=>3, "Name"=>"Waldflote 2"],
-        84=>["ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 6], "TremulantID"=>3, "Name"=>"Cromorne 8", "Colour"=>"Dark Red"],
+        46=>["Rank"=>46, "ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 4], "Name"=>"Flute harmonique 8"],
+        74=>["Rank"=>74, "ManualID"=>3, "DivisionID"=>3, "Position"=>[8, 4], "TremulantID"=>3, "Name"=>"Rohrflote 8"], // Ex Pos
+        58=>["Rank"=>58, "ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 5], "TremulantID"=>3, "Name"=>"Fugara 4"],
+        79=>["Rank"=>79, "ManualID"=>3, "DivisionID"=>3, "Position"=>[8, 5], "TremulantID"=>3, "Name"=>"Waldflote 2"],
+        84=>["Rank"=>84, "ManualID"=>3, "DivisionID"=>3, "Position"=>[7, 6], "TremulantID"=>3, "Name"=>"Cromorne 8", "Colour"=>"Dark Red"],
     ];
-
-    protected \HWClasses\HWData $hwdata;
+    
+        protected \HWClasses\HWData $hwdata;
     
     public function build() : void {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
@@ -226,7 +226,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
             $manualid=$stopdata["DivisionID"]=$stopdata["ManualID"];
             $switch=$this->createStop($stopdata);
             $stop=$this->getStop($stopid);
-            $baseid=isset($stopdata["Rank"]) ? $stopdata["Rank"] : $stopdata["StopID"];
+            $baseid=$stopdata["Rank"];
             $tremmed=isset($stopdata["TremulantID"]);
             foreach($this->rankpositions as $offset=>$groupid) {
                 if ($offset>4) continue;
