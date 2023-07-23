@@ -28,8 +28,8 @@ class Tremulant extends Button {
         if ($wave) 
             $this->TremulantType="Wave";
         else {
-            $this->Period=200;
-            $this->AmpModDepth=10;
+            $this->Period=250;
+            $this->AmpModDepth=13;
             $this->StartRate=30;
             $this->StopRate=30;
         }

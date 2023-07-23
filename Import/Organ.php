@@ -361,14 +361,16 @@ abstract class Organ extends Images {
             $layer=$this->hwdata->layer($datum["LayerID"]);
             $pipe=$this->hwdata->pipe($layer["PipeID"]);
             $sample=$this->hwdata->sample($datum["SampleID"]);
+            $reltime=isset($datum["ReleaseSelCriteria_LatestKeyReleaseTimeMs"])
+                    ? $datum["ReleaseSelCriteria_LatestKeyReleaseTimeMs"] : -1; 
+            if ($reltime>=999999) $reltime=-1;
             $array[]=array_merge(
-                    $isattack ? [] : ["ReleaseSelCriteria_LatestKeyReleaseTimeMs"=>999999], 
-                    $datum, $layer, $sample, $pipe);
+                    ["reltime"=>$reltime], $datum, $layer, $sample, $pipe);
         }
 
         if (!$isattack) // Sort by PipeID and ReleaseTime
             array_multisort(array_column($array, "PipeID"), SORT_ASC,
-                       array_column($array, "ReleaseSelCriteria_LatestKeyReleaseTimeMs"), SORT_ASC,
+                       array_column($array, "reltime"), SORT_ASC,
                        array_column($array, "UniqueID"), SORT_ASC,
                        $array);
         else

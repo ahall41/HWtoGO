@@ -14,15 +14,15 @@ require_once __DIR__ . "/SPOrganV2.php";
 /**
  * Import Sonus Paradisi Aristide Cavaillé-Coll, Warrington organ (1870)
  * 
- * @todo: Noise effects, Stops panels
+ * @todo: Trumpet vs blower
  * 
  * @author andrewZ`
  */
 class Warrington extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Warrington/";
     const SOURCE=self::ROOT . "OrganDefinitions/Warrington, Parr Hall, Cavaille-Coll, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Warrington, Parr Hall, Cavaille-Coll, Demo (%s).1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Warrington, Parr Hall, Cavaille-Coll, Demo (%s).1.1.organ";
+    const REVISIONS="\n1.1 Added tuning information; remove spurious switches for Ped Trumpet\n";
     
     
     const RANKS_DIRECT=1;
@@ -104,14 +104,13 @@ class Warrington extends SPOrganV2 {
             "GroupIDs"=>[301,302,303,304], "AmpMinimumLevel"=>20], // sw
         997=>["Panels"=>[2=>[981, NULL, 981], 4=>[984, NULL, 984], 7=>[979]], 
             "GroupIDs"=>[401,402,403,404], "AmpMinimumLevel"=>20], // Pos
-       
-    ];
+   ];
 
     protected $patchStops=[
-        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>50,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
-        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>50,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
-        -103=>["StopID"=>-103, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>50,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>603],
-        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>50,   "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
+        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
+        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
+        -103=>["StopID"=>-103, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>603],
+        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
         -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"GO Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"R Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"P key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
@@ -131,33 +130,6 @@ class Warrington extends SPOrganV2 {
         999921=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[-103]],
         999941=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[-104]],
         
-        /* 998102=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-111]],
-        998112=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-111]],
-        998122=>["Noise"=>"KeyOn",   "GroupID"=>703, "StopIDs"=>[-111]],
-        998142=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-111]],
-        998152=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-121]],
-        998162=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-121]],
-        998172=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-121]],
-        998192=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-121]],
-        
-        998202=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-112]],
-        998212=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-112]],
-        998222=>["Noise"=>"KeyOn",   "GroupID"=>703, "StopIDs"=>[-112]],
-        998242=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-112]],
-        998252=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-122]],
-        998262=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-122]],
-        998272=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-122]],
-        998292=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-122]],
-        
-        998602=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-113]],
-        998612=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-113]],
-        998622=>["Noise"=>"KeyOn",   "GroupID"=>703, "StopIDs"=>[-113]],
-        998642=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-113]],
-        998652=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-123]],
-        998662=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-123]],
-        998672=>["Noise"=>"KeyOff",  "GroupID"=>703, "StopIDs"=>[-123]],
-        998692=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-123]], */
-        
         999800=>["Noise"=>"StopOff", "GroupID"=>801, "StopIDs"=>[]],
         999810=>["Noise"=>"StopOff", "GroupID"=>802, "StopIDs"=>[]],
         999820=>["Noise"=>"StopOff", "GroupID"=>803, "StopIDs"=>[]],
@@ -166,11 +138,6 @@ class Warrington extends SPOrganV2 {
         999910=>["Noise"=>"StopOn",  "GroupID"=>802, "StopIDs"=>[]],
         999940=>["Noise"=>"StopOn",  "GroupID"=>803, "StopIDs"=>[]],
         999920=>["Noise"=>"StopOn",  "GroupID"=>804, "StopIDs"=>[]],
-        
-        /* 999905=>["Noise"=>"Ambient", "GroupID"=>901, "StopIDs"=>[-131]],
-        999915=>["Noise"=>"Ambient", "GroupID"=>902, "StopIDs"=>[-132]],
-        999925=>["Noise"=>"Ambient", "GroupID"=>903, "StopIDs"=>[-133]],
-        999945=>["Noise"=>"Ambient", "GroupID"=>904, "StopIDs"=>[-134]], */
         
         999902=>["Noise"=>"Ambient", "GroupID"=>901, "StopIDs"=>[-131]],
         999912=>["Noise"=>"Ambient", "GroupID"=>902, "StopIDs"=>[-132]],
@@ -214,9 +181,11 @@ class Warrington extends SPOrganV2 {
     
     public function createStops(array $stopsdata) : void {
         parent::createStops($stopsdata);
-        $switch=$this->getSwitch(50);
         
-        $this->configurePanelSwitchImages($switch, ["StopID"=>50]);
+        $switch=$this->getSwitch(1050); // Blower
+        $panel=$this->getPanel(50);
+        $pe=$panel->GUIElement($switch);
+        $this->configureImage($pe, ["SwitchID"=>1050], 0);
     }
 
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
@@ -249,10 +218,6 @@ class Warrington extends SPOrganV2 {
 
     protected function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         SPOrgan::ConfigurePanelEnclosureImages($enclosure, $data);
-    }
-    
-    protected function sampleTuning(array $hwdata) : ?float {
-        return NULL;
     }
     
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {

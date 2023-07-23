@@ -12,39 +12,34 @@ namespace Organs\AV;
 require_once(__DIR__ . "/AVOrgan.php");
 
 /**
- * Import Carl Hesse style  Organ from Zalaegerszeg (Hungary) to GrandOrgue
+ * Import Kolonics Organ from Franciscan Church in Brasov to GrandOrgue
  * 
  * @author andrew
  */
-class Egerszeg extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Egerszeg/";
-    const ODF="Egerszeg Surround_demo.Organ_Hauptwerk_xml";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
+class Lemmer extends AVOrgan {
+    const ROOT="/GrandOrgue/Organs/AVO/Lemmer/";
+    const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Lemmer %s.1.0.organ";
     const COMMENTS=
-              "Carl Hesse style  Organ from Zalaegerszeg (Hungary)\n"
-            . "https://hauptwerk-augustine.info/Egerszeg.php\n"
+              "Flentrop organ from Lemmer - Sint Willibrorduskerk (Netherlands)\n"
+            . "https://hauptwerk-augustine.info/Lemmer.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Egerszeg %s demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=100;
     
     protected $patchDisplayPages=[
-        1=>["SetID"=>1, "Name"=>"Console"],
-        2=>["SetID"=>2, "Name"=>"Stops"],
+        1=>["SetID"=>1, "Name"=>"Original"],
+        2=>["SetID"=>2, "Name"=>"Extended"],
     ];
     
     protected $patchEnclosures=[
-        220=>[                     "Name"=>"Swell",  "GroupIDs"=>[301,302,303],     "InstanceID"=>23],
-         11=>["EnclosureID"=>"11", "Name"=>"Far",    "GroupIDs"=>[101,201,301,601], "InstanceID"=>85133, "AmpMinimumLevel"=>0],
-         12=>["EnclosureID"=>"12", "Name"=>"Near",   "GroupIDs"=>[102,202,302,602], "InstanceID"=>85132, "AmpMinimumLevel"=>0],
-         13=>["EnclosureID"=>"13", "Name"=>"Rear",   "GroupIDs"=>[103,203,303,603], "InstanceID"=>85134, "AmpMinimumLevel"=>0],
-         17=>["EnclosureID"=>"17", "Name"=>"Noises", "GroupIDs"=>[700,601,602,603], "InstanceID"=>85135, "AmpMinimumLevel"=>0],
+        220=>[                     "Name"=>"Pos",    "GroupIDs"=>[301,302,303], "InstanceID"=>23],
+         11=>["EnclosureID"=>"11", "Name"=>"Far",    "GroupIDs"=>[101,201,301], "InstanceID"=>85133, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Near",   "GroupIDs"=>[102,202,302], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         13=>["EnclosureID"=>"13", "Name"=>"Rear",   "GroupIDs"=>[103,203,303], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
+         17=>["EnclosureID"=>"17", "Name"=>"Noises", "GroupIDs"=>[700],         "InstanceID"=>85135, "AmpMinimumLevel"=>1],
     ];
     
-    protected $patchDivisions=[
-          6=>["DivisionID"=>6, "Name"=>"Auxiliary"],
-    ];
-
     protected $patchTremulants=[
         1710=>["Type"=>"Synth", "GroupIDs"=>[201,202,203]],
         1720=>["Type"=>"Synth", "GroupIDs"=>[301,302,303]],
@@ -57,38 +52,23 @@ class Egerszeg extends AVOrgan {
         -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      2650=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2650, "GroupID"=>601], // Nachtigall far
-      2660=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2650, "GroupID"=>602], // Nachtigall near
-      2670=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2650, "GroupID"=>603], // Nachtigall rear
-      2651=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2651, "GroupID"=>601], // Tambur far
-      2661=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2651, "GroupID"=>602], // Tambur near
-      2671=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2651, "GroupID"=>603], // Tambur rear
-      2652=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2652, "GroupID"=>601], // Zimbelstern far
-      2662=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2652, "GroupID"=>602], // Zimbelstern near
-      2672=>["DivisionID"=>1, "Ambient"=>TRUE, "ControllingSwitchID"=>2652, "GroupID"=>603], // Zimbelstern rear
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
     // Inspection of Ranks object
     protected $patchRanks=[
-        91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
-        92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"StopOff", "GroupID"=>700, "StopIDs"=>[]],
-        94=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2]],
-        95=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-2]],
-        96=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+3]],
-        97=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-3]],
-        98=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1]],
-        99=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-1]],
-        50=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[2650]],
-        51=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[2660]],
-        52=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[2670]],
-       150=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[2651]],
-       151=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[2661]],
-       152=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[2671]],
-       250=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[2652]],
-       251=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[2662]],
-       252=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[2672]],
+        23=>"DELETE", //
+       123=>"DELETE", // GRT- 23 Terts B ???
+       223=>"DELETE", // 
+        91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
+        92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
+        93=>["Noise"=>"StopOff",    "GroupID"=>700, "StopIDs"=>[]],
+        94=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+2]],
+        95=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-2]],
+        96=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+3]],
+        97=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-3]],
+        98=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
+        99=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-1]],
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -96,13 +76,6 @@ class Egerszeg extends AVOrgan {
             return parent::createManual($hwdata);
         else
             return NULL;
-    }
-
-    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
-            return NULL;
-        else
-            return parent::createRank($hwdata, $keynoise);
     }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
@@ -156,7 +129,7 @@ class Egerszeg extends AVOrgan {
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         unset($data["SwitchID"]);
-        $panelid=1;
+        $panelid=$data["InstanceID"]==23 ? 2 : 1;
         $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
         $this->configureEnclosureImage($panelelement, $data);
         $panelelement->DispLabelText="";
@@ -184,47 +157,103 @@ class Egerszeg extends AVOrgan {
         else
             throw new \Exception ("File $filename does not exist!");
     }
+    
+    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
+        return parent::processNoise($hwdata, $isattack);
+    }
+
+    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        if ($this->sampleTuning($hwdata)<=1200)
+            return parent::processSample($hwdata, $isattack);
+        else
+            return NULL;
+    }
 
     /**
      * Run the import
      */
-    public static function Egerszeg(array $positions=[], string $target="") {
+    public static function Lemmer(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=56;
         \GOClasses\Manual::$pedals=30;
         if (sizeof($positions)>0) {
-            $hwi=new Egerszeg(self::SOURCE);
+            $hwi=new Lemmer(sprintf(self::SOURCE, $target));
             $hwi->positions=$positions;
             $hwi->import();
             unset($hwi->getOrgan()->InfoFilename);
-            $hwi->getOrgan()->ChurchName=str_replace("sur", $target, $hwi->getOrgan()->ChurchName);
-            echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getStops() as $id=>$stop) {
-                for($n=1; $n<=sizeof($positions ); $n++) {
-                    $s=$stop->int2str($n);
-                    $stop->unset("Rank{$s}PipeCount");
-                    $stop->unset("Rank{$s}FirstAccessibleKeyNumber");
-                    if ($id==2119) // Terzia31
-                        $stop->set("Rank{$s}FirstAccessibleKeyNumber", 20);
-                    if ($id==2235) // Unda Maris
-                        $stop->set("Rank{$s}FirstAccessibleKeyNumber", 25);
+            echo ($hwi->getOrgan()->ChurchName=str_replace("sur", $target, $hwi->getOrgan()->ChurchName)), "\n";
+            foreach($hwi->getStops() as $stopid=>$stop) {
+                for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
+                    $rn=$stop->int2str($rankid);
+                    $stop->unset("Rank{$rn}PipeCount");
+                    $stop->unset("Rank{$rn}FirstAccessibleKeyNumber");
+                
+                    switch ($stopid) {
+                        case 2002: // Ped Prestant 8
+                        case 2117: // HW  Prestant 8
+                        case 2111: // Bourdon 16
+                            if (($rankid % 2)==0)
+                                 $stop->set("Rank{$rn}FirstAccessibleKeyNumber",13);
+                            else 
+                                 $stop->set("Rank{$rn}PipeCount",12);
+                            break;
+                        
+                        case 2114: // Descants
+                        case 2116:
+                        case 2121:
+                        case 2124:
+                            $stop->set("Rank{$rn}FirstAccessibleKeyNumber",25);
+                            break;
+                        
+                        case 2120: // Quint B
+                        case 2130: // Holpijp8o
+                        case 2135: // Fluit4o
+                        case 2234: // Nasard
+                        case 2237: // Terts
+                            if (($rankid % 2)==0)
+                                 $stop->set("Rank{$rn}FirstAccessibleKeyNumber",25);
+                            else 
+                                 $stop->set("Rank{$rn}PipeCount",24);
+                            break;
+                        
+                    }
                 }
             }
             
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
-            /* self::Egerszeg(
-                    [1=>"Far"], "far");
-            self::Egerszeg(
-                    [2=>"Near"], "near");
-            self::Egerszeg(
-                    [3=>"Rear"], "rear"); */
-            self::Egerszeg(
+            self::Lemmer(
+                    [1=>"Far"],
+                    "far (ext)");
+            self::Lemmer(
+                    [2=>"Near"],
+                    "near (ext)");
+            self::Lemmer(
                     [1=>"Far", 2=>"Near", 3=>"Rear"],
-                    "surround");
+                    "surround (ext)");
         }
     }   
+}
+
+class LemmerLite extends Lemmer {
+    const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround (lite).Organ_Hauptwerk_xml";
+
+    protected $patchDisplayPages=[
+        1=>["SetID"=>1, "Name"=>"Original"],
+    ];
+
+    public static function LemmerLite() {
+        self::Lemmer(
+                [1=>"Far"],
+                "far (lite)");
+        self::Lemmer(
+                [2=>"Near"],
+                "near (lite)");
+        self::Lemmer(
+                [1=>"Far", 2=>"Near", 3=>"Rear"],
+                "surround (lite)");
+    }
 }
 
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
@@ -232,4 +261,5 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
     die();
 }
 set_error_handler("Organs\AV\ErrorHandler");
-Egerszeg::Egerszeg();
+Lemmer::Lemmer();
+LemmerLite::LemmerLite();

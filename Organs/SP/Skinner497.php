@@ -23,7 +23,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Skinner497 extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Skinner497/";
+    const ROOT="/GrandOrgue/Organs/SP/Skinner497/";
     const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3.organ";
     

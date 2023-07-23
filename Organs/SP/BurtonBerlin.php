@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class BurtonBerlin extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Burton-Berlin/";
+    const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinDemo/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.0.organ";
     

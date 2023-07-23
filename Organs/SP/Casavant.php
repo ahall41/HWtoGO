@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Casavant extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Casavant/";
+    const ROOT="/GrandOrgue/Organs/SP/Casavant/";
     const SOURCE="OrganDefinitions/Bellevue, Casavant Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Bellevue, Casavant (Demo - %s) 1.1.organ";
     const REVISIONS=

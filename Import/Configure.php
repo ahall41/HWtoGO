@@ -724,7 +724,7 @@ abstract Class Configure extends Create {
             . "Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)\n"
             . "https://creativecommons.org/licenses/by-nc-sa/4.0/\n"
             . "\n"
-            . "You are free to use this and share this ODF provided you share it with these conditions.\n"
+            . "You are free to use this ODF. You may also share it, provided you share it with these conditions.\n"
             . "\n"
             . "Extracted from the original Hauptwerk XML by Andrew Hall\n"
             . "https://sites.google.com/view/andrews-odfs/home\n"
