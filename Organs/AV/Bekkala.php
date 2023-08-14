@@ -12,17 +12,17 @@ namespace Organs\AV;
 require_once(__DIR__ . "/AVOrgan.php");
 
 /**
- * Import Kolonics Organ from Franciscan Church in Brasov to GrandOrgue
+ * Import Országh organ of Szentbékkála (Hungary) to GrandOrgue
  * 
  * @author andrew
  */
-class Lemmer extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Lemmer/";
-    const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Lemmer %s.1.0.organ";
+class Bekkala extends AVOrgan {
+    const ROOT="/GrandOrgue/Organs/AVO/Bekkala/";
+    const SOURCE=self::ROOT . "OrganDefinitions/Bekkala surround demo.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Bekkala Demo %s.1.0.organ";
     const COMMENTS=
-              "Flentrop organ from Lemmer - Sint Willibrorduskerk (Netherlands)\n"
-            . "https://hauptwerk-augustine.info/Lemmer.php\n"
+              "Országh organ of Szentbékkála (Hungary)\n"
+            . "https://hauptwerk-augustine.info/Bekkala.php\n"
             . "\n";
 
     //protected int $releaseCrossfadeLengthMs=100;
@@ -41,7 +41,6 @@ class Lemmer extends AVOrgan {
     ];
     
     protected $patchTremulants=[
-        1710=>["Type"=>"Synth", "GroupIDs"=>[201,202,203]],
         1720=>["Type"=>"Synth", "GroupIDs"=>[301,302,303]],
     ];
     
@@ -57,9 +56,6 @@ class Lemmer extends AVOrgan {
 
     // Inspection of Ranks object
     protected $patchRanks=[
-        23=>"DELETE", //
-       123=>"DELETE", // GRT- 23 Terts B ???
-       223=>"DELETE", // 
         91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
         93=>["Noise"=>"StopOff",    "GroupID"=>700, "StopIDs"=>[]],
@@ -94,12 +90,8 @@ class Lemmer extends AVOrgan {
                 }
                 if (!isset($panelelement->PositionX))
                     $panelelement->PositionX=0;
-                /* $style=$this->hwdata->textStyle($textInstance["TextStyleID"]);
-                $panelelement->DispLabelFontSize=9;
-                if (isset($style["Font_SizePixels"]))
-                    $panelelement->DispLabelFontSize=$style["Font_SizePixels"];
-                
-                $panelelement->DispLabelColour="Black"; */
+                if (!isset($panelelement->PositionY))
+                    $panelelement->PositionY=0;
             }
         }
     }
@@ -132,7 +124,12 @@ class Lemmer extends AVOrgan {
         $panelid=$data["InstanceID"]==23 ? 2 : 1;
         $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
         $this->configureEnclosureImage($panelelement, $data);
+        if (empty($panelelement->PositionY)) $panelelement->PositionY=0;
         $panelelement->DispLabelText="";
+        if ($panelelement->Bitmap007=="OrganInstallationPackages/002753/Images/expressionPedal/expres07.bmp")
+            $panelelement->Bitmap007="expres07.bmp";
+        if ($panelelement->Bitmap013=="OrganInstallationPackages/002753/Images/expressionPedal/expres13.bmp")
+            $panelelement->Bitmap013="expres13.bmp";
     }
 
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -172,16 +169,16 @@ class Lemmer extends AVOrgan {
     /**
      * Run the import
      */
-    public static function Lemmer(array $positions=[], string $target="") {
+    public static function Bekkala(string $source="", array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=56;
-        \GOClasses\Manual::$pedals=30;
+        \GOClasses\Manual::$keys=54;
+        \GOClasses\Manual::$pedals=27;
         if (sizeof($positions)>0) {
-            $hwi=new Lemmer(sprintf(self::SOURCE, $target));
+            $hwi=new Bekkala(sprintf($source, $target));
             $hwi->positions=$positions;
             $hwi->import();
             unset($hwi->getOrgan()->InfoFilename);
-            echo ($hwi->getOrgan()->ChurchName=str_replace("sur", $target, $hwi->getOrgan()->ChurchName)), "\n";
+            echo ($hwi->getOrgan()->ChurchName=str_replace("surround", $target, $hwi->getOrgan()->ChurchName)), "\n";
             foreach($hwi->getStops() as $stopid=>$stop) {
                 for ($rankid=1; $rankid<=$stop->NumberOfRanks; $rankid++) {
                     $rn=$stop->int2str($rankid);
@@ -189,31 +186,17 @@ class Lemmer extends AVOrgan {
                     $stop->unset("Rank{$rn}FirstAccessibleKeyNumber");
                 
                     switch ($stopid) {
-                        case 2002: // Ped Prestant 8
-                        case 2117: // HW  Prestant 8
-                        case 2111: // Bourdon 16
-                            if (($rankid % 2)==0)
-                                 $stop->set("Rank{$rn}FirstAccessibleKeyNumber",13);
-                            else 
-                                 $stop->set("Rank{$rn}PipeCount",12);
+                        case 2001: // PED_Subbas-
+                            if (($rankid % 2)!=0)
+                                 $stop->set("Rank{$rn}PipeCount",13);
                             break;
-                        
-                        case 2114: // Descants
-                        case 2116:
-                        case 2121:
-                        case 2124:
-                            $stop->set("Rank{$rn}FirstAccessibleKeyNumber",25);
-                            break;
-                        
-                        case 2120: // Quint B
-                        case 2130: // Holpijp8o
-                        case 2135: // Fluit4o
-                        case 2234: // Nasard
-                        case 2237: // Terts
+ 
+                        case 2003: // PED_Violinbass-
+                        case 2005: // PED_Oktavbass4
                             if (($rankid % 2)==0)
-                                 $stop->set("Rank{$rn}FirstAccessibleKeyNumber",25);
+                                 $stop->set("Rank{$rn}FirstAccessibleKeyNumber",14);
                             else 
-                                 $stop->set("Rank{$rn}PipeCount",24);
+                                 $stop->set("Rank{$rn}PipeCount",13);
                             break;
                         
                     }
@@ -223,37 +206,16 @@ class Lemmer extends AVOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
-            self::Lemmer(
-                    [1=>"Far"],
-                    "far (ext)");
-            self::Lemmer(
-                    [2=>"Near"],
-                    "near (ext)");
-            self::Lemmer(
-                    [1=>"Far", 2=>"Near", 3=>"Rear"],
-                    "surround (ext)");
+            /* self::Bekkala(
+                    self::SOURCE, [1=>"Far"], "far (ext)");
+            self::Bekkala(
+                    self::SOURCE, [2=>"Near"], "near (ext)");
+            self::Bekkala(
+                    self::SOURCE, [3=>"Rear"], "rear (ext)"); */
+            self::Bekkala(
+                    self::SOURCE, [1=>"Far", 2=>"Near", 3=>"Rear"], "surround (ext)");
         }
     }   
-}
-
-class LemmerLite extends Lemmer {
-    const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround (lite).Organ_Hauptwerk_xml";
-
-    protected $patchDisplayPages=[
-        1=>["SetID"=>1, "Name"=>"Original"],
-    ];
-
-    public static function LemmerLite() {
-        self::Lemmer(
-                [1=>"Far"],
-                "far (lite)");
-        self::Lemmer(
-                [2=>"Near"],
-                "near (lite)");
-        self::Lemmer(
-                [1=>"Far", 2=>"Near", 3=>"Rear"],
-                "surround (lite)");
-    }
 }
 
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
@@ -261,5 +223,4 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
     die();
 }
 set_error_handler("Organs\AV\ErrorHandler");
-Lemmer::Lemmer();
-LemmerLite::LemmerLite();
+Bekkala::Bekkala();
