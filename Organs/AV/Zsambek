@@ -184,6 +184,9 @@ class Zsambek extends AVOrgan {
                             else 
                                  $stop->set("Rank{$rn}PipeCount",12);
                             break;
+                        case 2238: // Voxhumana 
+                            $stop->set("Rank{$rn}FirstAccessibleKeyNumber",13);
+                            break;
                     }
                 }
             }
@@ -191,12 +194,12 @@ class Zsambek extends AVOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
-            self::Zsambek(
+            /* self::Zsambek(
                     [1=>"Far"],
                     "far");
             self::Zsambek(
                     [2=>"Rear"],
-                    "rear");
+                    "rear"); */
             self::Zsambek(
                     [1=>"Far", 2=>"Rear"],
                     "surround");
