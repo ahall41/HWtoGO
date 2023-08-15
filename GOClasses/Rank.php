@@ -80,6 +80,15 @@ class Rank extends GOObject {
             return NULL;
     }
     
+    /**
+     * Remove a pipe
+     * 
+     * @param int $midikey
+     */
+    public function removePipe(int $midikey) {
+        unset($this->pipes[$midikey]);
+    }
+    
     public function __toString() : string {
         $this->storePipes();
         $result=parent::__toString();

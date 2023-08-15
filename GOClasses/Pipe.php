@@ -105,15 +105,21 @@ class Pipe extends GOBase {
                 break;
 
             case "ReleaseIsTremulant":
-            case "ReleaseCuePoint":
                 if ($this->storeRelease)
                     parent::set(
                             $this->release() . str_replace("Release","",$property), 
                             $value);
                 break;
 
+            case "ReleaseCuePoint":
+                if (!empty($value) && $this->storeRelease)
+                    parent::set(
+                            $this->release() . str_replace("Release","",$property), 
+                            $value);
+                break;
+
             case "ReleaseEnd":
-                if ($this->storeRelease)
+                if (!empty($value) && $this->storeRelease )
                     parent::set(
                             $this->release() . $property, 
                             $value);
