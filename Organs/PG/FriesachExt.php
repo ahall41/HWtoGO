@@ -12,7 +12,7 @@ namespace Organs\SP;
 require_once __DIR__ . "/../../Import/Organ.php";
 
 /**
- * Create bespoke organ (for Studio 170) based on Billerbeck Dom demo from SP
+ * Create extension of Friesach as implemented for HW by Les Deutsch
  * 
  * @author andrew
  */
@@ -31,8 +31,8 @@ class FriesachExt extends \Import\Organ {
     ];
     
     private $enclosures=[
-        2=>"Schw",
-        3=>"Pos"
+        1=>"Pos",
+        3=>"Schw"
     ];
 
     private $manuals=[ 
@@ -43,10 +43,12 @@ class FriesachExt extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-        2=>["TremulantID"=>2, "Name"=>"Schw", "SwitchID"=>203, "Type"=>"Synth", 
-            "DivisionID"=>2, "Position"=>[6, 1], "GroupIDs"=>[301]],
-        3=>["TremulantID"=>3, "Name"=>"Pos", "SwitchID"=>204, "Type"=>"Synth",
-            "DivisionID"=>3, "Position"=>[12, 1], "GroupIDs"=>[401]], 
+        1=>["TremulantID"=>3, "Name"=>"Pos", "SwitchID"=>201, "Type"=>"Synth",
+            "Period"=>250, "StartRate"=>50, "StopRate"=>30, "AmpModDepth"=>6, 
+            "DivisionID"=>1, "Position"=>[12, 1], "GroupIDs"=>[1]], 
+        3=>["TremulantID"=>2, "Name"=>"Schw", "SwitchID"=>203, "Type"=>"Synth", 
+            "Period"=>208, "StartRate"=>30, "StopRate"=>70, "AmpModDepth"=>8, 
+            "DivisionID"=>3, "Position"=>[6, 1], "GroupIDs"=>[3]],
     ];
 
     private $couplers=[
@@ -83,12 +85,12 @@ class FriesachExt extends \Import\Organ {
     
     private $stops=[
         // Regular stops
-         1=>["Rank"=> 1, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 2, 5], "Name"=>"Unter- statz 32"],
+         1=>["Rank"=> 1, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 2, 5], "Name"=>"Unterstatz 32"],
          2=>["Rank"=> 2, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 5], "Name"=>"Contra- bass 16"],
          3=>["Rank"=> 3, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 2, 4], "Name"=>"Subbass 16"],
          4=>["Rank"=> 4, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 4], "Name"=>"Octave- bass 8"],
          5=>["Rank"=> 5, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 2, 3], "Name"=>"Gedackt 8"],
-         6=>["Rank"=> 6, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 3], "Name"=>"Choral- bass 8"],
+         6=>["Rank"=> 6, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 3], "Name"=>"Choral- bass 4"],
          7=>["Rank"=> 7, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 2], "Name"=>"Posaune 32", "Colour"=>"Dark Red"],
          8=>["Rank"=> 8, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 3, 2], "Name"=>"Posaune 16", "Colour"=>"Dark Red"],
          9=>["Rank"=> 9, "ManualID"=>0, "DivisionID"=>0, "Position"=>[ 1, 1], "Name"=>"Trompete 8", "Colour"=>"Dark Red"],
@@ -127,28 +129,48 @@ class FriesachExt extends \Import\Organ {
         
         40=>["Rank"=>40, "ManualID"=>1, "DivisionID"=>1, "Position"=>[12, 5], "Name"=>"Jubalflöte 8"],
         41=>["Rank"=>41, "ManualID"=>1, "DivisionID"=>1, "Position"=>[11, 4], "Name"=>"Trichterflöte 4"],
-        42=>["Rank"=>42, "ManualID"=>1, "DivisionID"=>1, "Position"=>[10, 3], "Name"=>"Cornet a Pavilion I/VIII"],
+        42=>["Rank"=>42, "ManualID"=>1, "DivisionID"=>1, "Position"=>[10, 3], "Name"=>"Cornet a Pavilion I/VIII", "FirstNote"=>20],
         43=>["Rank"=>43, "ManualID"=>1, "DivisionID"=>1, "Position"=>[12, 2], "Name"=>"Trompete en Chamade 8", "Colour"=>"Dark Red"],
         44=>["Rank"=>44, "ManualID"=>1, "DivisionID"=>1, "Position"=>[11, 2], "Name"=>"Englischhorn 8", "Colour"=>"Dark Red"],
         
         // Extensions
         51=>["ManualID"=>0, "Position"=>[ 2, 1], "Name"=>"(SW) Contra Hautbois 16", "Colour"=>"Dark Red"],
         52=>["ManualID"=>0, "Position"=>[ 2, 2], "Name"=>"Mixture III"],
-        53=>["ManualID"=>0, "Position"=>[ 3, 1], "Name"=>"(PO) Englisch Horn 4", "Colour"=>"Dark Red"],
+        53=>["ManualID"=>0, "Position"=>[ 3, 1], "Name"=>"(PO) Englisch Horn 8", "Colour"=>"Dark Red"],
         54=>["ManualID"=>0, "Position"=>[ 3, 3], "Name"=>"(SW) Querflöte 4"],
         55=>["ManualID"=>0, "Position"=>[ 3, 4], "Name"=>"(SW) Bourdon 16"],
         56=>["ManualID"=>0, "Position"=>[ 3, 5], "Name"=>"(HW) Praestant 16"],
         
-        57=>["ManualID"=>3, "Position"=>[ 4, 3], "Name"=>"Contra Hautbois 16"],
+        57=>["ManualID"=>3, "Position"=>[ 4, 3], "Name"=>"Contra Hautbois 16", "Colour"=>"Dark Red"],
         
-        58=>["ManualID"=>2, "Position"=>[ 9, 1], "Name"=>"Trumpet 4"],
+        58=>["ManualID"=>2, "Position"=>[ 9, 1], "Name"=>"Trumpet 4", "Colour"=>"Dark Red"],
         59=>["ManualID"=>2, "Position"=>[ 7, 4], "Name"=>"(SW) Principal 8"],
         60=>["ManualID"=>2, "Position"=>[ 9, 2], "Name"=>"Wald- Flote 2"],
         
         61=>["ManualID"=>1, "Position"=>[10, 6], "Name"=>"Gamba Celeste"],
         62=>["ManualID"=>1, "Position"=>[10, 4], "Name"=>"Octave 2"],
-        63=>["ManualID"=>1, "Position"=>[12, 4], "Name"=>"Principal 4"],
-       
+        63=>["ManualID"=>1, "Position"=>[12, 4], "Name"=>"Prinzipal 4"],
+    ];
+    
+    private $clonedRanks=[
+        51=>[["Rank"=>38, "PitchTuning"=>-1200, "FirstKey"=>36, "DivisionID"=>0]],
+        52=>[["Rank"=>15, "PitchTuning"=>-700,  "FirstKey"=>43, "DivisionID"=>0],
+             ["Rank"=>15, "PitchTuning"=>-1200, "FirstKey"=>48, "DivisionID"=>0],
+             ["Rank"=>15, "PitchTuning"=>-700,  "FirstKey"=>67, "DivisionID"=>0]], // 1900/55 !
+        53=>[["Rank"=>44, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>0]],
+        54=>[["Rank"=>30, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>0]],
+        55=>[["Rank"=>23, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>0]],
+        56=>[["Rank"=>10, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>0]],
+        
+        57=>[["Rank"=>38, "PitchTuning"=>-1200, "FirstKey"=>36, "DivisionID"=>3]],
+        
+        58=>[["Rank"=>22, "PitchTuning"=>1200,  "FirstKey"=>36, "DivisionID"=>2]],
+        59=>[["Rank"=>24, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>2]],
+        60=>[["Rank"=>16, "PitchTuning"=>1200,  "FirstKey"=>36, "DivisionID"=>2]],
+        
+        61=>[["Rank"=>14, "PitchTuning"=>1210,  "FirstKey"=>48, "DivisionID"=>1, "FirstNote"=>13, "Keys"=>48]],
+        62=>[["Rank"=>29, "PitchTuning"=>1200,  "FirstKey"=>36, "DivisionID"=>1]],
+        63=>[["Rank"=>29, "PitchTuning"=>0,     "FirstKey"=>36, "DivisionID"=>1]],
     ];
     
     protected \HWClasses\HWData $hwdata;
@@ -166,6 +188,7 @@ class FriesachExt extends \Import\Organ {
         $this->buildStops();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
+        $this->cloneRanks();
     }
 
     protected function buildOrgan() : void {
@@ -278,13 +301,8 @@ class FriesachExt extends \Import\Organ {
                 $rank=$this->newRank($rankid, $rankdata["Name"] );
                 $rank->WindchestGroup($wcg);
                 $stop->Rank($rank);
-                if (isset($stopdata["PitchTuning"])) {
-                    $rank->PitchTuning=$rankdata["PitchTuning"];
-                }
+
                 $ranknum=$stop->int2str($stop->NumberOfRanks);
-                if (isset($stopdata["FirstKey"])) {
-                    $stop->set("Rank${ranknum}FirstPipeNumber", $stopdata["FirstKey"]);
-                }
                 if (isset($stopdata["FirstNote"])) {
                     $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $stopdata["FirstNote"]);
                 }
@@ -305,6 +323,7 @@ class FriesachExt extends \Import\Organ {
     }
     
     protected function correctFileName(string $filename): string {
+        $filename=str_replace("OrganInstallationPackages/002213", "Data - Friesach", $filename);
         static $files=[];
         if (sizeof($files)==0)
             $files=$this->treeWalk(getenv("HOME") . self::ROOT);
@@ -328,6 +347,31 @@ class FriesachExt extends \Import\Organ {
             }
         }
         return $pipe;
+    }
+    
+    private function cloneRanks() : void {
+        foreach($this->clonedRanks as $stopid=>$clonedRanks) {
+            foreach ($clonedRanks as $id=>$rankdata) {
+                $rankid=$rankdata["Rank"];
+                $stop=$this->getStop($stopid);
+                $rank=$this->newRank("$stopid.$rankid", $this->stops[$stopid]["Name"] . " ($id)");
+                $rank->WindchestGroup($this->getWindchestGroup($rankdata["DivisionID"]));
+                $stop->Rank($rank);
+                if (isset($rankdata["FirstNote"])) {
+                    $ranknum=$stop->int2str($stop->NumberOfRanks);
+                    $stop->set("Rank${ranknum}FirstAccessibleKeyNumber", $rankdata["FirstNote"]);
+                }
+                
+                $rank->PitchTuning=$rankdata["PitchTuning"];
+                $pipes=$this->getRank($rankid)->Pipes();
+                $manual=$this->getManual($this->stops[$stopid]["ManualID"]);
+                $keys=isset($rankdata["Keys"]) ? $rankdata["Keys"] : $manual->NumberOfLogicalKeys;
+                $fkey=$rankdata["FirstKey"];
+                for ($i=0; $i<$keys; $i++) {
+                    $rank->Pipe(36+$i, $pipes[$fkey+$i]);
+                }
+            }
+        }
     }
 
     /**

@@ -217,8 +217,16 @@ abstract Class Configure extends Create {
      * @return \GOClasses\Coupler
      */
     public function createTremulant(array $hwdata) : ?\GOClasses\Sw1tch {
+        $map=[
+            ["Period","Period"],
+            ["AmpModDepth","AmpModDepth"],
+            ["StartRate","StartRate"],
+            ["StopRate","StopRate"],
+        ];
+        
         if (!isset($hwdata["SwitchID"])) $hwdata["SwitchID"]=$hwdata["ControllingSwitchID"];
         $switch=parent::createTremulant($hwdata);
+        $this->map($map, $hwdata, $this->getTremulant($hwdata["TremulantID"]));
         $this->configurePanelSwitchImages($switch, $hwdata);
         return $switch;
     }
