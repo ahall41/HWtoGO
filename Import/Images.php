@@ -20,6 +20,21 @@ require_once(__DIR__ . "/../HWClasses/HWData.php");
 abstract class Images extends Configure {
     
     protected \HWClasses\HWData $hwdata;
+    protected static $keymap=
+        [ // Note, Image, Width, FirstImage, LastImage
+            ["C",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", "KeyShapeImageSetID_WholeNatural", "KeyShapeImageSetID_WholeNatural"],
+            ["Cis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
+            ["D",   "KeyShapeImageSetID_D", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyDG"],
+            ["Dis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
+            ["E",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", "KeyShapeImageSetID_WholeNatural", NULL],
+            ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
+            ["Fis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
+            ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", "KeyShapeImageSetID_FirstKeyG", NULL],
+            ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, "KeyShapeImageSetID_LastKeyDG"],
+            ["A",   "KeyShapeImageSetID_A", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyA"],
+            ["Ais", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
+            ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL],
+        ];
     
     public function __construct($xmlfile) {
         if (!file_exists($xmlfile))
@@ -27,7 +42,7 @@ abstract class Images extends Configure {
         $this->hwdata = new \HWClasses\HWData($xmlfile);
     }
     
-    /**
+/**
      * 
      * 
      * @param array $data: HW data, may contain, by priority, InstanceID, SwitchID or SetID
@@ -245,20 +260,7 @@ abstract class Images extends Configure {
         ];
         $this->map($map, $keyImageset, $object);
         
-        static $keymap=[ // Note, Image, Width, FirstImage, LastImage
-                ["C",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", "KeyShapeImageSetID_WholeNatural", "KeyShapeImageSetID_WholeNatural"],
-                ["Cis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
-                ["D",   "KeyShapeImageSetID_D", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyDG"],
-                ["Dis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
-                ["E",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", "KeyShapeImageSetID_WholeNatural", NULL],
-                ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
-                ["Fis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
-                ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", "KeyShapeImageSetID_FirstKeyG", NULL],
-                ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, "KeyShapeImageSetID_LastKeyDG"],
-                ["A",   "KeyShapeImageSetID_A", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyA"],
-                ["Ais", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
-                ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL],
-            ];
+        $keymap=self::$keymap;
 
         $engidx=array_key_exists("ImageIndexWithinImageSets_Engaged", $keyImageset)
                 ? $keyImageset["ImageIndexWithinImageSets_Engaged"] : FALSE;
