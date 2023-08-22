@@ -33,7 +33,7 @@ class Hermance extends AVOrgan {
             return NULL;
     }
     
-    public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
+   public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         unset($data["SwitchID"]);
         foreach ($data["InstanceIDs"] as $panelid=>$instanceid) {
             if ($this->hwdata->imageSetInstance($instanceid, TRUE)) {
@@ -109,7 +109,7 @@ class Hermance extends AVOrgan {
         // Increase volume of key noise effects
         foreach ([93, 94] as $rankid) {
             $rank=$hwi->getRank($rankid);
-            foreach ($rank->Pipes() as $pipe) unset($pipe->Gain);
+            foreach ($rank->Pipes() as $pipe) $pipe->Gain+=15;
         }
     }
 }
@@ -120,9 +120,14 @@ class Original extends Hermance {
         1=>["SetID"=>1],
     ];
     
+    /* protected $patchKeyboards=[
+        1=>["KeyGen_MIDINoteNumberOfFirstKey"=>36],
+        2=>["KeyGen_MIDINoteNumberOfFirstKey"=>36],
+    ]; */
+    
     protected $patchStops=[
-        +1=>["StopID"=>+2, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["StopID"=>+2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        +1=>["DivisionID"=>1, "Name"=>"DivisionKeyAction_01 On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        +2=>["DivisionID"=>2, "Name"=>"DivisionKeyAction_02 On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
       1006=>"DELETE",
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700], // Blower
     ];
@@ -140,6 +145,132 @@ class Original extends Hermance {
          13=>["EnclosureID"=>"13", "Name"=>"Rear",  "GroupIDs"=>[203], "InstanceIDs"=>[1=>85134], "AmpMinimumLevel"=>1],
     ];
     
+    public function configureKeyImage(?\GOClasses\GOObject $object, array $keyImageset) : void {
+        $this->configureKeyImageKeys($object, $keyImageset);
+        return;
+        
+        switch ($keyImageset["ManualID"]) {
+            case 1:
+                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn=$object->Key004ImageOn
+                        ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightDown.bmp";
+                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff=$object->Key004ImageOff
+                        ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightUp.bmp";
+                $object->Key001Width=$object->Key003Width=$object->Key004Width
+                        =18;
+                $object->Key002Width=27;
+                break;
+        
+            case 2:
+                $object->Key001ImageOn// =$object->Key002ImageOn=$object->Key003ImageOn
+                        ="OrganInstallationPackages/002377/images/keys/Down-WholeNatural.bmp";
+                $object->Key001ImageOff// =$object->Key002ImageOff=$object->Key003ImageOff
+                        ="OrganInstallationPackages/002377/images/keys/Up-WholeNatural.bmp";
+                //$object->Key004ImageOn="OrganInstallationPackages/002377/images/keys/Down-FirstKeyG.bmp";
+                //$object->Key004ImageOff="OrganInstallationPackages/002377/images/keys/Up-FirstKeyG.bmp";
+                
+                $object->Key001Width=8;
+                echo $object, "\n";
+                break;
+        }
+
+        //echo $this->getManual($keyImageset["ManualID"]), "\n";
+        echo $object, "\n";
+        //exit();
+        return;
+        
+        $this->configureKeyImageKeys($object, $keyImageset, [37,39,40,42]);
+        
+        switch ($keyImageset["ManualID"]) {
+            case 1:
+                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn=$object->Key004ImageOn
+                        ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightDown.bmp";
+                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff=$object->Key004ImageOff
+                        ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightUp.bmp";
+                $object->Key001Width=$object->Key003Width=$object->Key004Width=18;
+                $object->Key002Width=27;
+                break;
+        
+            case 2:
+                // print_r($keyImageset);
+                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn
+                        ="OrganInstallationPackages/002377/images/keys/Down-WholeNatural.bmp";
+                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff
+                        ="OrganInstallationPackages/002377/images/keys/Up-WholeNatural.bmp";
+                $object->Key004ImageOn="OrganInstallationPackages/002377/images/keys/Down-FirstKeyG.bmp";
+                $object->Key004ImageOff="OrganInstallationPackages/002377/images/keys/Up-FirstKeyG.bmp";
+                
+                for ($i=1; $i<=45; $i++) {
+                    $key=sprintf("Key%03d", $i);
+                    $width=(substr($object->get("${key}ImageOn"), -8)=="Sharp.bmp") ? 4 : 4;
+                    $object->unset("${key}Width", $width);
+                }
+                /*$object->Key001Width=12;
+                $object->Key002Width=18;
+                $object->Key003Width=12; */
+                
+                
+                echo $object, "\n";
+                break;
+        }
+    }
+    
+    public function configureKeyImageKeys(\GOClasses\GOObject $object, array $keyImageset, array $omits=[]) : void {
+        $manual=$this->getManual($keyImageset["ManualID"]);
+    
+        $keymap=\Import\Images::$keymap;
+        
+        // Position the image 
+        static $map=[
+            ["PositionX", "KeyGen_DispKeyboardLeftXPos"],
+            ["PositionX", "PositionX"],
+            ["PositionY", "KeyGen_DispKeyboardTopYPos"],
+            ["PositionY", "PositionY"],
+        ];
+        $this->map($map, $keyImageset, $object);
+        $object->set("DisplayKeys", 0);
+        
+        $engidx=array_key_exists("ImageIndexWithinImageSets_Engaged", $keyImageset)
+                ? $keyImageset["ImageIndexWithinImageSets_Engaged"] : FALSE;
+        $disidx=array_key_exists("ImageIndexWithinImageSets_Disengaged", $keyImageset)
+                ? $keyImageset["ImageIndexWithinImageSets_Disengaged"] : FALSE;
+        
+        $first=$manual->FirstAccessibleKeyMIDINoteNumber;
+        $last=$first+$manual->NumberOfLogicalKeys-1+sizeof($omits);
+        $keyno=1;
+        for ($midikey=$first; $midikey<=$last; $midikey++) {
+            if (in_array($midikey,$omits)) continue;
+            $kmap=$keymap[$midikey % 12];
+            $key=$kmap[0];
+            $imagekey=$kmap[1];
+            $width=$kmap[2];
+            if ($midikey==$first && !empty($kmap[3]))
+                $imagekey=$kmap[3];
+            elseif ($midikey==$last && !empty($kmap[4]))
+                $imagekey=$kmap[4];
+    
+            $imagedata=$this->getImageData(["SetID"=>$keyImageset[$imagekey]]);
+            $images=$imagedata["Images"];
+
+            $idx=$engidx===FALSE ? array_key_last($images) : $engidx;
+            $on=$images[$idx];
+
+            $idx=$disidx===FALSE ? array_key_first($images) : $disidx;
+            $off=$images[$idx];
+            unset($images[$idx]);
+            $object->set(sprintf("Key%03dImageOn", $keyno), $on);  
+            $object->set(sprintf("Key%03dImageOff", $keyno), $off);
+            $object->set(sprintf("Key%03dWidth", $keyno), $keyImageset[$width]); 
+            
+            $object->set(sprintf("DisplayKey%03d", $keyno), $midikey);
+            $object->set("DisplayKeys", $keyno);
+            $keyno++;
+        }
+        
+        foreach ($omits as $midikey) $manual->set(sprintf("MIDIKey%03d", $midikey), "0");
+            
+        //echo $manual, "\n\n";
+    }
+
     public function createCouplers(array $keyactions) : void {
         $coupler=$this->newCoupler(10112, "Grt. Ped.8");
         $coupler->DefaultToEngaged="Y";
@@ -213,9 +344,9 @@ class Extended extends Hermance {
     ];
     
     protected $patchStops=[
-        +1=>["Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        +1=>["DivisionID"=>1, "Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        +2=>["DivisionID"=>2, "Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        +3=>["DivisionID"=>3, "Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
       1105=>"DELETE",
       1107=>"DELETE",
       1006=>"DELETE",
@@ -231,7 +362,7 @@ class Extended extends Hermance {
     protected $patchRanks=[
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2,+3]],
         94=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1]],
     ];
     

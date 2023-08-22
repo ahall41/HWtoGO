@@ -29,9 +29,25 @@ abstract class Images extends Configure {
             ["E",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", "KeyShapeImageSetID_WholeNatural", NULL],
             ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
             ["Fis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
-            ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", "KeyShapeImageSetID_FirstKeyG", NULL],
-            ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, "KeyShapeImageSetID_LastKeyDG"],
+            ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", "KeyShapeImageSetID_FirstKeyG", "KeyShapeImageSetID_LastKeyDG"],
+            ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, NULL],
             ["A",   "KeyShapeImageSetID_A", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyA"],
+            ["Ais", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
+            ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL],
+        ];
+
+    protected static $akeymap=
+        [ // Note, Image, Width, FirstImage, LastImage
+            ["C",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", "KeyShapeImageSetID_WholeNatural", "KeyShapeImageSetID_WholeNatural"],
+            ["Cis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
+            ["D",   "KeyShapeImageSetID_D", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyDG"],
+            ["Dis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", NULL, NULL],
+            ["E",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", "KeyShapeImageSetID_WholeNatural", NULL],
+            ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL, NULL],
+            ["Fis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
+            ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", "KeyShapeImageSetID_FirstKeyG", NULL],
+            ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", NULL, "KeyShapeImageSetID_LastKeyDG"],
+            ["A",   "KeyShapeImageSetID_A", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyA"],
             ["Ais", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
             ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL],
         ];
