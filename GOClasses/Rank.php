@@ -70,10 +70,10 @@ class Rank extends GOObject {
      * @return Pipe|null
      */
     public function Pipe(int $midikey, $pipe=NULL) : ? Pipe {
-        if (array_key_exists($midikey, $this->pipes))
-            return $this->pipes[$midikey];
-        elseif ($pipe instanceof Pipe)
+        if ($pipe instanceof Pipe)
             return $this->pipes[$midikey]=clone($pipe);
+        elseif (array_key_exists($midikey, $this->pipes))
+            return $this->pipes[$midikey];
         elseif ($pipe)
             return $this->pipes[$midikey]=new Pipe();
         else

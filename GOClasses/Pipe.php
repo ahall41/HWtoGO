@@ -16,6 +16,7 @@ require_once(__DIR__ . "/GOBase.php");
  * @author andrew
  */
 class Pipe extends GOBase {
+    private $dummy=FALSE;
     private $pipe="000";
     private $storeRelease=TRUE;
     private $midikey=0;
@@ -23,6 +24,10 @@ class Pipe extends GOBase {
     public function __construct() {
         $this->AttackCount=-1;
         $this->ReleaseCount=0;
+    }
+    
+    public function Dummy(bool $isdummy=TRUE) {
+        $this->dummy=$isdummy;
     }
     
     public function set(string $property, ?string $value) : void  {
@@ -197,8 +202,12 @@ class Pipe extends GOBase {
     public function __toString() : string {
         $result="";
         $pipe=$this->pipe;
-        foreach ($this->data as $name => $value) 
-            $result .= "Pipe{$pipe}${name}=${value}\n";
+        if ($this->dummy)
+            $result .= "Pipe{$pipe}=DUMMY\n";
+        else {
+            foreach ($this->data as $name => $value) 
+                $result .= "Pipe{$pipe}${name}=${value}\n";
+            }
         return $result;
     }
 }

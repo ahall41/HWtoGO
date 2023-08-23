@@ -33,7 +33,7 @@ abstract class Images extends Configure {
             ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, NULL],
             ["A",   "KeyShapeImageSetID_A", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyA"],
             ["Ais", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
-            ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL],
+            ["B",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", NULL,  NULL],
         ];
 
     protected static $akeymap=

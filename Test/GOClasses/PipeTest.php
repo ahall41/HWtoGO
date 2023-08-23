@@ -96,6 +96,8 @@ class PipeTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(43, $pipe->Release002MaxKeyPressTime);
         $pipe->ReleaseCuePoint=54;
         $this->assertEquals(54, $pipe->Release002CuePoint);
+        $pipe->Dummy();
+        $this->assertEquals("Pipe001=DUMMY\n", (string) $pipe);
     }
     
     public function testSameRelease() {

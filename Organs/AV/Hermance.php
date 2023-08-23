@@ -120,10 +120,10 @@ class Original extends Hermance {
         1=>["SetID"=>1],
     ];
     
-    /* protected $patchKeyboards=[
-        1=>["KeyGen_MIDINoteNumberOfFirstKey"=>36],
-        2=>["KeyGen_MIDINoteNumberOfFirstKey"=>36],
-    ]; */
+    protected $patchKeyboards=[
+        1=>["KeyGen_MIDINoteNumberOfFirstKey"=>36, "KeyGen_NumberOfKeys"=>23],
+        2=>["KeyGen_MIDINoteNumberOfFirstKey"=>36, "KeyGen_NumberOfKeys"=>49],
+    ];
     
     protected $patchStops=[
         +1=>["DivisionID"=>1, "Name"=>"DivisionKeyAction_01 On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
@@ -147,35 +147,60 @@ class Original extends Hermance {
     
     public function configureKeyImage(?\GOClasses\GOObject $object, array $keyImageset) : void {
         $this->configureKeyImageKeys($object, $keyImageset);
-        return;
-        
+        if ($object->instance()=="001") {
+            foreach([2,4,7,9] as $key) {
+                $object->set(sprintf("Key%03dImageOn", $key), 
+                             "OrganInstallationPackages/002377/images/pedals/SharpUp.bmp");
+            }
+        }
+        if ($object->instance()=="002") {
+            $object->PositionX-=20;
+            $object->Key001Width-=2;
+            foreach([2,4,7,9] as $key) {
+                $object->set(sprintf("Key%03dImageOn", $key), 
+                             "OrganInstallationPackages/002377/images/keys/Up-Sharp.bmp");
+            }
+        }
+    }
+
+    // This messaes the display up ...
+    public function xxconfigureKeyImage(?\GOClasses\GOObject $object, array $keyImageset) : void {
+        $this->configureKeyImageKeys($object, $keyImageset, [37, 39, 42, 44]);
+  
         switch ($keyImageset["ManualID"]) {
             case 1:
-                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn=$object->Key004ImageOn
+                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn
+                    =$object->Key004ImageOn=$object->Key005ImageOn=$object->Key006ImageOn
                         ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightDown.bmp";
-                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff=$object->Key004ImageOff
+                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff
+                    =$object->Key004ImageOff=$object->Key005ImageOff=$object->Key006ImageOff
                         ="OrganInstallationPackages/002377/images/pedals/NaturalWithNoSharpToTheRightUp.bmp";
-                $object->Key001Width=$object->Key003Width=$object->Key004Width
+                $object->Key001Width=$object->Key002Width=$object->Key003Width
+                    =$object->Key004Width=$object->Key005Width
                         =18;
-                $object->Key002Width=27;
                 break;
         
             case 2:
-                $object->Key001ImageOn// =$object->Key002ImageOn=$object->Key003ImageOn
+                $object->Key001ImageOn=$object->Key002ImageOn=$object->Key003ImageOn
+                    =$object->Key004ImageOn=$object->Key005ImageOff
                         ="OrganInstallationPackages/002377/images/keys/Down-WholeNatural.bmp";
-                $object->Key001ImageOff// =$object->Key002ImageOff=$object->Key003ImageOff
+                $object->Key001ImageOff=$object->Key002ImageOff=$object->Key003ImageOff
+                    =$object->Key004ImageOff=$object->Key005ImageOff
                         ="OrganInstallationPackages/002377/images/keys/Up-WholeNatural.bmp";
-                //$object->Key004ImageOn="OrganInstallationPackages/002377/images/keys/Down-FirstKeyG.bmp";
-                //$object->Key004ImageOff="OrganInstallationPackages/002377/images/keys/Up-FirstKeyG.bmp";
-                
-                $object->Key001Width=8;
+                $object->Key006ImageOn
+                       ="OrganInstallationPackages/002377/images/keys/Down-FirstKeyDA.bmp"; 
+                $object->Key006ImageOff
+                       ="OrganInstallationPackages/002377/images/keys/Up-FirstKeyDA.bmp"; 
+                $object->Key001Width=$object->Key002Width=$object->Key003Width
+                    =$object->Key004Width=$object->Key005Width=$object->Key006Width
+                        =10;
                 echo $object, "\n";
                 break;
         }
 
-        //echo $this->getManual($keyImageset["ManualID"]), "\n";
-        echo $object, "\n";
-        //exit();
+        foreach ([36,41,38,43,40,44] as $keyno=>$midikey)
+            $object->set(sprintf("DisplayKey%03d", 1+$keyno), $midikey);
+
         return;
         
         $this->configureKeyImageKeys($object, $keyImageset, [37,39,40,42]);
@@ -307,11 +332,43 @@ class Original extends Hermance {
                 switch ($stopid) {
                     case 2102:
                     case 2104:
-                    case 2110:
                     case 2107:
-                        $stop->set("Rank{$rn}FirstAccessibleKeyNumber", 22);
+                    case 2110:
+                        $stop->set("Rank{$rn}FirstAccessibleKeyNumber", 26);
                         break;
                 }
+            }
+        }
+        
+        // Now re-order the first few notes, + all the others
+        static $map=[40,0,42,0,44,41,0,43,0];
+        foreach ($hwi->getRanks() as $rankid=>$rank) {
+            switch ($rankid % 100) {
+                case 1:
+                case 3:
+                case 5:
+                case 6:
+                case 8:
+                case 9:
+                    // $pipes=$rank->Pipes();
+                    foreach ($map as $to=>$fr) {
+                        if ($fr==0) {
+                            $temp[$to]=new \GOClasses\Pipe();
+                            $temp[$to]->Dummy();
+                        }
+                        else
+                            $temp[$to]=$rank->Pipe($fr);
+                    }
+
+                    foreach ($temp as $to=>$pipe) $rank->Pipe(36+$to, $pipe, FALSE);
+                    break;
+                        
+                case 93:
+                case 94:
+                    foreach ($map as $to=>$fr) {
+                        if ($fr==0) $rank->Pipe(36+$to)->Dummy();
+                    }
+                    break;
             }
         }
     }
@@ -446,7 +503,6 @@ class Extended extends Hermance {
                 $pipe->PitchTuning=-100;
             }
         }
-
     }
     
     public static function Extended() {
