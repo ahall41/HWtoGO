@@ -19,7 +19,10 @@ require_once __DIR__ . "/../../Import/Organ.php";
 class FriesachExt extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/PG/Friesach/";
     const SOURCE=self::ROOT . "OrganDefinitions/Friesach.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Friesach Extended 1.0.organ";
+    const TARGET=self::ROOT . "Friesach Extended 1.1.organ";
+    const COMMENTS="\n"
+            . "1.1 Extended pedals to 32\n"
+            . "\n";
     const WIDTH=1500;
     const HEIGHT=800;
 
@@ -178,6 +181,7 @@ class FriesachExt extends \Import\Organ {
     public function build() : void {
         \GOClasses\Noise::$blankloop="Data - Friesach\Noises\BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
+        \GOClasses\Manual::$pedals=32;
         $hwd=$this->hwdata;
         $this->buildOrgan();
         $this->buildWindchestGroups();
@@ -368,7 +372,13 @@ class FriesachExt extends \Import\Organ {
                 $keys=isset($rankdata["Keys"]) ? $rankdata["Keys"] : $manual->NumberOfLogicalKeys;
                 $fkey=$rankdata["FirstKey"];
                 for ($i=0; $i<$keys; $i++) {
-                    $rank->Pipe(36+$i, $pipes[$fkey+$i]);
+                    if (isset($pipes[$fkey+$i])) {
+                        $rank->Pipe(36+$i, $pipes[$fkey+$i]);
+                    }
+                    else {
+                        $pipe=$rank->Pipe(36+$i, $pipes[$fkey+$i-2]); 
+                        $pipe->PitchTuning+=200;
+                    }
                 }
             }
         }
@@ -382,7 +392,7 @@ class FriesachExt extends \Import\Organ {
         $hwi->build();
         echo $hwi->getOrgan()->ChurchName, "\n";
         $hwi->getPanel(0)->Name="Friesach Extended";
-        $hwi->saveODF(self::TARGET);
+        $hwi->saveODF(self::TARGET, self::COMMENTS);
     }
 }
 
