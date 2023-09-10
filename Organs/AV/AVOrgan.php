@@ -149,7 +149,10 @@ abstract class AVOrgan extends \Import\Organ {
                     return parent::processSample($hwdata, FALSE);
             }
         }
-        if (!empty($this->releaseCrossfadeLengthMs)) {
+        if (empty($this->releaseCrossfadeLengthMs)) {
+            $hwdata["ReleaseCrossfadeLengthMs"]=0;
+        }
+        else {
             if ($this->releaseCrossfadeLengthMs>0)
                 $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
             else
