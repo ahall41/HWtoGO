@@ -20,10 +20,12 @@ class Luins extends AVOrgan {
 
     const ROOT="/GrandOrgue/Organs/AVO/Luins/";
     const SOURCE=self::ROOT . "/OrganDefinitions/Luins_%s.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luins %s 1.0.organ";
+    const TARGET=self::ROOT . "Luins %s 1.1.organ";
     const COMMENTS=
               "Armagni & Mingot organ from Luins (Switzerland)\n"
             . "https://hauptwerk-augustine.info/Luins.php\n"
+            . "\n"
+            . "Version 1.1 Correct enclosures for far/near/rear; move swell pedal to the right"
             . "\n";
     
     protected $patchDisplayPages=[
@@ -65,10 +67,10 @@ class Luins extends AVOrgan {
     ];
 
     protected $patchEnclosures=[
-        220=>[                     "Name"=>"Swell", "GroupIDs"=>[301,302,303],     "InstanceIDs"=>[1=>40]],
-         11=>["EnclosureID"=>"11", "Name"=>"Far",   "GroupIDs"=>[201], "InstanceIDs"=>[1=>85132], "AmpMinimumLevel"=>1],
-         12=>["EnclosureID"=>"12", "Name"=>"Near",  "GroupIDs"=>[202], "InstanceIDs"=>[1=>85133], "AmpMinimumLevel"=>1],
-         13=>["EnclosureID"=>"13", "Name"=>"Rear",  "GroupIDs"=>[203], "InstanceIDs"=>[1=>85134], "AmpMinimumLevel"=>1],
+        220=>[                     "Name"=>"Swell", "GroupIDs"=>[301,302,303], "InstanceIDs"=>[1=>40]],
+         11=>["EnclosureID"=>"11", "Name"=>"Far",   "GroupIDs"=>[101,201,301], "InstanceIDs"=>[1=>85132], "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Near",  "GroupIDs"=>[102,202,302], "InstanceIDs"=>[1=>85133], "AmpMinimumLevel"=>1],
+         13=>["EnclosureID"=>"13", "Name"=>"Rear",  "GroupIDs"=>[103,203,303], "InstanceIDs"=>[1=>85134], "AmpMinimumLevel"=>1],
     ];
     
     
@@ -92,6 +94,11 @@ class Luins extends AVOrgan {
                 $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
                 $data["InstanceID"]=$instanceid;
                 $this->configureEnclosureImage($panelelement, $data);
+                switch ($instanceid) {
+                    case 40:
+                        $panelelement->PositionX+=20;
+                        break;
+                }
             }
         }
     }
