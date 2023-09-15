@@ -27,7 +27,7 @@ abstract class Images extends Configure {
             ["D",   "KeyShapeImageSetID_D", "HorizSpacingPixels_LeftOfDASharpFromLeftOfDA", "KeyShapeImageSetID_FirstKeyDA", "KeyShapeImageSetID_LastKeyDG"],
             ["Dis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfEBFromLeftOfDASharp", NULL, NULL],
             ["E",   "KeyShapeImageSetID_EB", "HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural", "KeyShapeImageSetID_WholeNatural", NULL],
-            ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", NULL, NULL],
+            ["F",   "KeyShapeImageSetID_CF", "HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF", "KeyShapeImageSetID_WholeNatural", "KeyShapeImageSetID_WholeNatural"],
             ["Fis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp", NULL, NULL],
             ["G",   "KeyShapeImageSetID_G", "HorizSpacingPixels_LeftOfGSharpFromLeftOfG", "KeyShapeImageSetID_FirstKeyG", "KeyShapeImageSetID_LastKeyDG"],
             ["Gis", "KeyShapeImageSetID_Sharp", "HorizSpacingPixels_LeftOfAFromLeftOfGSharp", NULL, NULL],
@@ -301,10 +301,11 @@ abstract class Images extends Configure {
         }
 
         $firstnote=$manual->FirstAccessibleKeyMIDINoteNumber;
-        $lastnote=$firstnote+$manual->NumberOfLogicalKeys-1;
+        $lastnote=$firstnote + isset($object->DisplayKeys) ? $object->DisplayKeys-1 : $manual->NumberOfLogicalKeys-1;
         foreach ([$firstnote, $lastnote] as $id=>$midi) {
             $kmap=$keymap[$midi % 12];
             $key=["First", "Last"][$id] . $kmap[0];
+            $width=$kmap[2];
             $image=$kmap[3+$id];
             if (empty($image)) $image=$kmap[1];
             $imagedata=$this->getImageData(["SetID"=>$keyImageset[$image]]);

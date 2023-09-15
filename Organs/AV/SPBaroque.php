@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class SPBaroque extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/GreatBaroque/";
+    const ROOT="/GrandOrgue/Organs/AVO/Baroque/";
     const ODF="SP Great Baroque.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
@@ -29,26 +29,25 @@ class SPBaroque extends AVOrgan {
     protected int $releaseCrossfadeLengthMs=0;
     
     protected $patchDisplayPages=[
-        1=>["SetID"=>1],
-        5=>["SetID"=>5],
-        6=>["SetID"=>6],
-        7=>["SetID"=>7],
-        8=>["SetID"=>8],
+        1=>["SetID"=>27],
+        5=>"DELETE",
+        6=>"DELETE",
+        7=>"DELETE",
+        8=>"DELETE",
     ];
     
     protected $patchEnclosures=[
-        220=>"DELETE", // [                     "Name"=>"II",     "GroupIDs"=>[301],     "InstanceID"=>NULL],
-        230=>"DELETE", // [                     "Name"=>"III",    "GroupIDs"=>[401],     "InstanceID"=>NULL],
-        240=>"DELETE", // [                     "Name"=>"III",    "GroupIDs"=>[501],     "InstanceID"=>NULL],
-         17=>"DELETE", // ["EnclosureID"=>"17", "Name"=>"Noises", "GroupIDs"=>[700],     "InstanceID"=>NULL, "AmpMinimumLevel"=>1],
+        220=>["Name"=>"II",  "GroupIDs"=>[301], "X"=>1020],
+        230=>["Name"=>"III", "GroupIDs"=>[401], "X"=>1070],
+        240=>["Name"=>"IV",  "GroupIDs"=>[501], "X"=>1120],
     ];
     
     protected $patchTremulants=[
-        1700=>"DELETE", // ["Type"=>"Synth", "GroupIDs"=>[101]],
-        1710=>"DELETE", // ["Type"=>"Synth", "GroupIDs"=>[201]],
-        1720=>"DELETE", // ["Type"=>"Synth", "GroupIDs"=>[301]],
-        1730=>"DELETE", // ["Type"=>"Synth", "GroupIDs"=>[401]],
-        1740=>"DELETE", // ["Type"=>"Synth", "GroupIDs"=>[501]],
+        1700=>["Type"=>"Synth", "GroupIDs"=>[101]],
+        1710=>["Type"=>"Synth", "GroupIDs"=>[201]],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301]],
+        1730=>["Type"=>"Synth", "GroupIDs"=>[401]],
+        1740=>["Type"=>"Synth", "GroupIDs"=>[501]],
     ];
     
     protected $patchStops=[
@@ -57,11 +56,6 @@ class SPBaroque extends AVOrgan {
         +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +5=>["Name"=>"DivisionKeyAction_05 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -5=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_05 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
@@ -70,7 +64,7 @@ class SPBaroque extends AVOrgan {
     protected $patchRanks=[
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1,+2,+3,+4]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4,5]],
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -79,7 +73,7 @@ class SPBaroque extends AVOrgan {
         else
             return NULL;
     }
-   
+    
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
         if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
             return NULL;
@@ -95,37 +89,20 @@ class SPBaroque extends AVOrgan {
             $switchdata=$this->hwdata->switch($destid=$link["DestSwitchID"]);
             if (isset($switchdata["Disp_ImageSetInstanceID"])) {
                 $instancedata=$this->hwdata->imageSetInstance($instanceid=$switchdata["Disp_ImageSetInstanceID"]);
+                if ($instancedata["DisplayPageID"]!=1) continue;
                 //error_log(print_r($instancedata, 1));
                 $panel=$this->getPanel($instancedata["DisplayPageID"]);
-                $panelelement=$panel->GUIElement($switch);
-                $this->configureImage($panelelement, ["SwitchID"=>$destid]);
                 foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
+                    $panelelement=$panel->GUIElement($switch);
+                    $this->configureImage($panelelement, ["SwitchID"=>$destid]);
                     $panelelement->DispLabelText=str_replace("\n", " ", $textInstance["Text"]);
-                    switch ($textInstance["TextStyleID"]) {
-                        
-                        case -4:
-                            $panelelement->DispLabelColour="Dark Red";
-                            break;
-                            
-                        case -5:
-                            $panelelement->DispLabelColour="Dark Blue";
-                            break;
-                        
-                        case -6:
-                            $panelelement->DispLabelColour="Dark Green";
-                            break;
-                        
-                        default:
-                            echo $textInstance["TextStyleID"], "\t", $panelelement->DispLabelText, "\n";
-                            $panelelement->DispLabelColour="Black";
-                            
-                    }
+                    if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
+                    if ($switchid==10484) $panelelement->PositionX+=20; // BLWR
+                    $panelelement->DispLabelFontSize=8;
+                    unset($panelelement->MouseRectHeight);
+                    unset($panelelement->MouseRectWidth);
                     break; // Only the one?
                 }
-                if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
-                $panelelement->DispLabelFontSize=8;
-                unset($panelelement->MouseRectHeight);
-                unset($panelelement->MouseRectWidth);
             }
         }
     }
@@ -133,33 +110,63 @@ class SPBaroque extends AVOrgan {
     public function configureKeyImages(array $keyImageSets, array $keyboards) : void {
         foreach($keyboards as $keyboardid=>$keyboard) {
             if ($keyboardid>5) continue;
-            if (isset($keyboard["KeyGen_DisplayPageID"])) {
-                $panel=$this->getPanel($keyboard["KeyGen_DisplayPageID"]);
-                if ($panel!==NULL) {
-                    foreach($this->hwdata->keyActions() as $keyaction) {
-                        if ($keyaction["SourceKeyboardID"]==$keyboardid) {
-                            $manual=$this->getManual($keyaction["SourceKeyboardID"]);
-                            $panelelement=$panel->GUIElement($manual);
-                            $keyImageset=$keyImageSets[$keyboard["KeyGen_KeyImageSetID"]];
-                            $keyImageset["ManualID"]=$keyaction["SourceKeyboardID"];
-                            $keyImageset["PositionX"]=$keyboard["KeyGen_DispKeyboardLeftXPos"];
-                            $keyImageset["PositionY"]=$keyboard["KeyGen_DispKeyboardTopYPos"];
-                            $this->configureKeyImage($panelelement, $keyImageset);
-                            $manual->Displayed="N";
-                            unset($manual->DisplayKeys);
-                        }
-                    }
-                }
+            $panel=$this->getPanel(1);
+            $manual=$this->getManual($keyboardid);
+            $panelelement=$panel->GUIElement($manual);
+            $panelelement->DisplayKeys=54;
+            $keyImageset=$keyImageSets[$keyboardid==1 ? 2 : 1];
+            $keyImageset["ManualID"]=$keyboardid;
+            $adjuster=$keyboardid==1 ? 3 : 1;
+            $keyImageset["HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfDASharpFromLeftOfDA"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfGSharpFromLeftOfG"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfEBFromLeftOfDASharp"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfAFromLeftOfGSharp"]-=$adjuster;
+            switch ($keyboardid) {
+                case 1:
+                    $keyImageset["PositionX"]=455;
+                    $keyImageset["PositionY"]=400;
+                    $panelelement->DisplayKeys=30;
+                    break;
+                
+                case 2:
+                    $keyImageset["PositionX"]=460;
+                    $keyImageset["PositionY"]=315;
+                    break;
+                    
+                case 3:
+                    $keyImageset["PositionX"]=460;
+                    $keyImageset["PositionY"]=265;
+                    break;
+
+                case 4:
+                    $keyImageset["PositionX"]=460;
+                    $keyImageset["PositionY"]=216;
+                    break;
+
+                case 5:
+                    $keyImageset["PositionX"]=460;
+                    $keyImageset["PositionY"]=165;
+                    break;
             }
+            $this->configureKeyImage($panelelement, $keyImageset);
+            $manual->Displayed="N";
+            unset($manual->DisplayKeys);
+            unset($manual->PositionX);
+            unset($manual->PositionY);
         }
     }
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        unset($data["SwitchID"]);
         $panelid=1;
         $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
         $this->configureEnclosureImage($panelelement, $data);
-        $panelelement->DispLabelText="";
+        $panelelement->PositionX=$data["X"];
+        $panelelement->PositionY=320;
+        $panelelement->DispLabelText=$data["Name"];
+        unset($panelelement->BitmapCount);
     }
 
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -208,6 +215,7 @@ class SPBaroque extends AVOrgan {
         if ($pipe) unset($pipe->PitchTuning);
         return $pipe;
     }
+    
     /**
      * Run the import
      */
