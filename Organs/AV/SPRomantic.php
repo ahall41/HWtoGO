@@ -49,19 +49,110 @@ class SPRomantic extends AVOrgan {
         +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+//      -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+//      -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+//      -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+//      -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+      2010=>["DELETE"], // Basson Hautbois 81
+      2130=>["DELETE"], // Basson Hautbois 41
+      2132=>["DELETE"], // Voix Humana1
+      2235=>["DELETE"], // Diapason81
+      2242=>["DELETE"], // Floete octaviante 41
+      2248=>["DELETE"], // Octavin 21
+      2255=>["DELETE"], // Voix aeolin1
+      2257=>["DELETE"], // Voix celeste1
+      2374=>["DELETE"], // Basson Hautbois 81
+      2377=>["DELETE"], // DoesVoix Celeste1
+      2379=>["DELETE"], // DoesViolin Celeste1
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
     // Inspection of Ranks object
     /* @todo see stoprank */
     protected $patchRanks=[
+         1=>["HN"=>4], // "PED- 1 Contrebasse 32' * = First midi->24!
+         2=>["HN"=>4], // "PED- 2 Subbas forte 16'
+         3=>["HN"=>8], // "PED- 3 Principal Bass 16' *
+         4=>["HN"=>8], // "PED- 4 Sub Bass 16' *
+         5=>["HN"=>8], // "PED- 5 Praestant 8'
+         6=>["HN"=>8], // "PED- 6 Grosse Flute 8'
+         7=>["HN"=>8], // "PED- 7 Holpijp 8'
+         8=>["HN"=>32], // "PED- 8 Gross Princ 4' *
+         9=>["HN"=>48], // "PED- 9 Mixtur V *
+        10=>["HN"=>8, "StopIDs"=>[2011], "GroupID"=>101], // "PED- 10 Basson Hautbois 81
+        11=>["HN"=>8], // "PED- 11 Basson Hautbois 8'
+        12=>["HN"=>32], // "PED- 12 Orchhestr. Oboe 4' *
+        13=>["HN"=>8], // "PED- 13 Posaune 16' *
+        14=>["HN"=>4], // "PED- 14 Basuin16'
+        15=>["HN"=>8], // "GRT- 15 Oktava 16' *
+        16=>["HN"=>8], // "GRT- 16 Montre 8'
+        17=>["HN"=>16], // "GRT- 17 Gross principal 8' *
+        18=>["HN"=>8], // "GRT- 18 Gambe 8'
+        19=>["HN"=>8], // "GRT- 19 Bourdon 8'
+        20=>["HN"=>16], // "GRT- 20 Jubal floete 8' *
+        21=>["HN"=>8], // "GRT- 21 Flute Harmonique 8'
+        22=>["HN"=>32], // "GRT- 22 Praestant 4' *
+        23=>["HN"=>16], // "GRT- 23 Holpijp 4'
+        24=>["HN"=>32], // "GRT- 24 Oktava 2'
+        25=>["HN"=>32], // "GRT- 25 Roerfluit 2'
+        26=>["HN"=>64], // "GRT- 26 Oktava 1'
+        27=>["HN"=>32], // "GRT- 27 Mixtur V *
+        28=>["HN"=>4], // "GRT- 28 Bombarde 16
+        29=>["HN"=>8], // "GRT- 29 Trompette 8'
+        30=>["HN"=>16, "StopIDs"=>[2131], "GroupID"=>201], // "GRT- 30 Basson Hautbois 41
+        31=>["HN"=>16], // "GRT- 31 Basson Hautbois 4'
+        32=>["HN"=>16, "StopIDs"=>[2133], "GroupID"=>201], // "GRT- 32 Voix Humana1 *
+        33=>["HN"=>16], // "GRT- 33 Voix Humana *
+        34=>["HN"=>8], // "SWL- 34 Praestant 8'
+        35=>["HN"=>8, "StopIDs"=>[2236], "GroupID"=>301], // "SWL- 35 Diapason81
+        36=>["HN"=>8], // "SWL- 36 Diapason 8'
+        37=>["HN"=>16], // "SWL- 37 Floeten Principal 8' *
+        38=>["HN"=>16], // "SWL- 38 Viola di Gamba 8' *
+        39=>["HN"=>16], // "SWL- 39 Cello 8' *
+        40=>["HN"=>16], // "SWL- 40 Doppel Gedeckt 8' *
+        41=>["HN"=>16], // "SWL- 41 Harmonique 8' *
+        42=>["HN"=>16, "StopIDs"=>[2243], "GroupID"=>301], // "SWL- 42 Floete octaviante 41
+        43=>["HN"=>16], // "SWL- 43 Flute octaviante 4'
+        44=>["HN"=>16], // "SWL- 44 Flute Harm. 4'
+        45=>["HN"=>32], // "SWL- 45 Orchest. Floete 4' *
+        46=>["HN"=>24], // "SWL- 46 Nasard1
+        47=>["HN"=>24], // "SWL- 47 Nasard
+        48=>["HN"=>32, "StopIDs"=>[2249], "GroupID"=>301], // "SWL- 48 Octavin 21
+        49=>["HN"=>32], // "SWL- 49 Octavin 2'
+        50=>["HN"=>64], // "SWL- 50 Piccolo [2'] *
+        51=>["HN"=>16], // "SWL- 51  Orchestr. Oboe *
+        52=>["HN"=>8], // "SWL- 52 Vox Humana 8'
+        53=>["HN"=>16], // "SWL- 53 Carillon
+        54=>["HN"=>8], // "SWL- 54 Trompette 8'
+        55=>["HN"=>8, "StopIDs"=>[2256], "GroupID"=>301], // "SWL- 55 Voix aeolin1
+        56=>["HN"=>8], // "SWL- 56 Voix eoline
+        57=>["HN"=>8, "StopIDs"=>[2258], "GroupID"=>301], // "SWL- 57 Voix celeste1
+        58=>["HN"=>8], // "SWL- 58 Voix celeste
+        59=>["HN"=>4], // "POS- 59 Bourdon 16'
+        60=>["HN"=>8], // "POS- 60 Oktava 8'
+        61=>["HN"=>16], // "POS- 61 Gemshorn 8 *
+        62=>["HN"=>8], // "POS- 62 Cor de Nuit 8'
+        63=>["HN"=>8], // "POS- 63 Salicional 8'
+        64=>["HN"=>16], // "POS- 64 Does Viola di Gamba 8' *
+        65=>["HN"=>8], // "POS- 65 Holpijp 8'
+        66=>["HN"=>16], // "POS- 66 Oktava 4'
+        67=>["HN"=>16], // "POS- 67 Does Jubal floete 4'
+        68=>["HN"=>16], // "POS- 68 Roerfluit 4'
+        69=>["HN"=>24], // "POS- 69 Quinta 2 2/3'
+        70=>["HN"=>32], // "POS- 70 Oktava 2'
+        71=>["HN"=>32], // "POS- 71 Flute 2'
+        72=>["HN"=>64], // "POS- 72  Piccolo 1'
+        73=>["HN"=>24], // "POS- 73  Mixtur Echo *
+        74=>["HN"=>8, "StopIDs"=>[2375], "GroupID"=>401], // "POS- 74 Basson Hautbois 81
+        75=>["HN"=>8], // "POS- 75 Basson Hautbois 8'
+        76=>["HN"=>16], // "POS- 76 Trompette 4'
+        77=>["HN"=>16, "StopIDs"=>[2378], "GroupID"=>401], // "POS- 77 DoesVoix Celeste1 *
+        78=>["HN"=>16], // "POS- 78 Voix Celeste *
+        79=>["HN"=>8, "StopIDs"=>[2380], "GroupID"=>401], // "POS- 79 DoesViolin Celeste1
+        80=>["HN"=>8], // "POS- 80 Violin Celeste
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1,+2,+3,+4]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4]],
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -225,15 +316,26 @@ class SPRomantic extends AVOrgan {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipe=parent::processSample($hwdata, $isattack);
-        if (!empty($pitchtuning=$pipe->PitchTuning)) {
-            if ($pitchtuning<-1800) {
-                $pipe->PitchTuning+=1200;
-            } 
-            elseif ($pitchtuning>1800) {
-                $pipe->PitchTuning-=1200;
-            }
+        $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
+        $rankid=$hwdata["RankID"];
+        switch ($rankid) {
+            case 1:
+            case 3:
+            case 4:
+            case 8:
+            case 9:
+            case 13:
+                if ($midi>55) return NULL;
+                break;
+                
+            default:
+                if ($rankid<15 && $midi>67) return NULL;
+                break;
         }
+        
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && !empty($pitchtuning=$pipe->PitchTuning) && $pitchtuning<-1800) $pipe->Dummy();
+        
         return $pipe;
     }
     /**
@@ -249,7 +351,7 @@ class SPRomantic extends AVOrgan {
             $hwi->import();
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getStops() as $id=>$stop) {
+            foreach($hwi->getStops() as $stop) {
                 for($n=1; $n<=$stop->NumberOfRanks; $n++) {
                     $s=$stop->int2str($n);
                     $stop->unset("Rank{$s}PipeCount");
@@ -257,6 +359,15 @@ class SPRomantic extends AVOrgan {
                 }
             }
             
+            foreach($hwi->getRanks() as $rankid=>$rank) {
+                if (isset($hwi->patchRanks[$rankid]["HN"])) {
+                    $hn=$hwi->patchRanks[$rankid]["HN"];
+                    foreach ($rank->Pipes() as $pipe) {
+                        $pipe->HarmonicNumber=$hn;
+                    }
+                }
+                $hwi->getRank(93)->Gain=9;
+            }
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
         
