@@ -30,6 +30,10 @@ class Pipe extends GOBase {
         $this->dummy=$isdummy;
     }
     
+    public function IsDummy() : bool {
+        return  $this->dummy;
+    }
+    
     public function set(string $property, ?string $value) : void  {
         if ($value==="" || $value===NULL) return;
         

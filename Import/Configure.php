@@ -444,7 +444,7 @@ abstract Class Configure extends Create {
      * @return float Midi note+fraction
      * https://www.music.mcgill.ca/~gary/307/week1/node28.html
      */
-    private function HzToMidi(float $hz) {
+    protected function HzToMidi(float $hz) {
         return  12 * log(floatval($hz) / 220.0) / log(2.0) + 57;
     }
 
@@ -454,7 +454,7 @@ abstract Class Configure extends Create {
      * @return float Midi note+fraction
      * https://www.music.mcgill.ca/~gary/307/week1/node28.html
      */
-    private function MidiToHz(float $midi) {
+    protected function MidiToHz(float $midi) {
         return  440 * pow(2.0, ($midi-69)/12);
     }
 

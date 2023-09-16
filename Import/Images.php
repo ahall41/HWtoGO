@@ -301,7 +301,7 @@ abstract class Images extends Configure {
         }
 
         $firstnote=$manual->FirstAccessibleKeyMIDINoteNumber;
-        $lastnote=$firstnote + isset($object->DisplayKeys) ? $object->DisplayKeys-1 : $manual->NumberOfLogicalKeys-1;
+        $lastnote=$firstnote + (isset($object->DisplayKeys) ? $object->DisplayKeys-1 : $manual->NumberOfLogicalKeys-1);
         foreach ([$firstnote, $lastnote] as $id=>$midi) {
             $kmap=$keymap[$midi % 12];
             $key=["First", "Last"][$id] . $kmap[0];
