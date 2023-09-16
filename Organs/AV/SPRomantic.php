@@ -23,8 +23,9 @@ class SPRomantic extends AVOrgan {
     const COMMENTS=
               "Sonus Paradisi Great Romantic composite set\n"
             . "https://hauptwerk-augustine.info/SP_Romantic.php\n"
+            . "2.0.1 Corrected harmonic number on mixtures"
             . "\n";
-    const TARGET=self::ROOT . "SP Great Romantic.2.0.organ";
+    const TARGET=self::ROOT . "SP Great Romantic.2.0.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -49,10 +50,6 @@ class SPRomantic extends AVOrgan {
         +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-//      -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-//      -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-//      -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-//      -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
       2010=>["DELETE"], // Basson Hautbois 81
       2130=>["DELETE"], // Basson Hautbois 41
       2132=>["DELETE"], // Voix Humana1
@@ -78,7 +75,7 @@ class SPRomantic extends AVOrgan {
          6=>["HN"=>8], // "PED- 6 Grosse Flute 8'
          7=>["HN"=>8], // "PED- 7 Holpijp 8'
          8=>["HN"=>32], // "PED- 8 Gross Princ 4' *
-         9=>["HN"=>48], // "PED- 9 Mixtur V *
+         9=>["HN"=>[[24,35,64],[36,47,48], [48,55,32]]], // "PED- 9 Mixtur V *
         10=>["HN"=>8, "StopIDs"=>[2011], "GroupID"=>101], // "PED- 10 Basson Hautbois 81
         11=>["HN"=>8], // "PED- 11 Basson Hautbois 8'
         12=>["HN"=>32], // "PED- 12 Orchhestr. Oboe 4' *
@@ -96,7 +93,7 @@ class SPRomantic extends AVOrgan {
         24=>["HN"=>32], // "GRT- 24 Oktava 2'
         25=>["HN"=>32], // "GRT- 25 Roerfluit 2'
         26=>["HN"=>64], // "GRT- 26 Oktava 1'
-        27=>["HN"=>32], // "GRT- 27 Mixtur V *
+        27=>["HN"=>[[24,35,64], [36,47,48], [48,59,32], [60,99,16]]], // "GRT- 27 Mixtur V *
         28=>["HN"=>4], // "GRT- 28 Bombarde 16
         29=>["HN"=>8], // "GRT- 29 Trompette 8'
         30=>["HN"=>16, "StopIDs"=>[2131], "GroupID"=>201], // "GRT- 30 Basson Hautbois 41
@@ -142,7 +139,7 @@ class SPRomantic extends AVOrgan {
         70=>["HN"=>32], // "POS- 70 Oktava 2'
         71=>["HN"=>32], // "POS- 71 Flute 2'
         72=>["HN"=>64], // "POS- 72  Piccolo 1'
-        73=>["HN"=>24], // "POS- 73  Mixtur Echo *
+        73=>["HN"=>[[24,35,64], [36,47,48], [48,59,32], [60,99,16]]], // "POS- 73  Mixtur Echo *
         74=>["HN"=>8, "StopIDs"=>[2375], "GroupID"=>401], // "POS- 74 Basson Hautbois 81
         75=>["HN"=>8], // "POS- 75 Basson Hautbois 8'
         76=>["HN"=>16], // "POS- 76 Trompette 4'
@@ -315,6 +312,22 @@ class SPRomantic extends AVOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
 
+    // List sample pitches (for mixtures)
+    private function listSample(array $hwdata) {
+        return;
+        switch ($rankid=$hwdata["RankID"]) {
+            //case 9:  // Mixtur V
+            case 27: // Mixture V
+            //case 53: // Carillon
+            //case 73: // Mixtur Echo
+                $ppitch=$this->readSamplePitch(self::ROOT . ($file=$this->sampleFilename($hwdata)));
+                $spitch=$this->midiToHz($midi=$this->sampleMidiKey($hwdata));
+                $hn=8*$ppitch/$spitch;
+                printf("%0d\t%0d\t%01.1f\t%s\n", $rankid, $midi, $hn, $file);
+        }
+ 
+    }
+ 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
         $rankid=$hwdata["RankID"];
@@ -332,12 +345,13 @@ class SPRomantic extends AVOrgan {
                 if ($rankid<15 && $midi>67) return NULL;
                 break;
         }
-        
         $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && $pipe->ReleaseCount==0) $this->listSample($hwdata);
         if ($pipe && !empty($pitchtuning=$pipe->PitchTuning) && $pitchtuning<-1800) $pipe->Dummy();
         
         return $pipe;
     }
+
     /**
      * Run the import
      */
@@ -361,9 +375,17 @@ class SPRomantic extends AVOrgan {
             
             foreach($hwi->getRanks() as $rankid=>$rank) {
                 if (isset($hwi->patchRanks[$rankid]["HN"])) {
-                    $hn=$hwi->patchRanks[$rankid]["HN"];
-                    foreach ($rank->Pipes() as $pipe) {
-                        $pipe->HarmonicNumber=$hn;
+                    $hns=$hwi->patchRanks[$rankid]["HN"];
+                    if (!is_array($hns)) $hns=[[0, 99, $hns]];
+                    $pipes=$rank->Pipes();
+                    foreach ($hns as $hn) {
+                        for ($midi=$hn[0]; $midi<=$hn[1]; $midi++) {
+                            if (isset($pipes[$midi])) {
+                                $pipe=$pipes[$midi];
+                                if (!$pipe->IsDummy()) $pipe->HarmonicNumber=$hn[2];
+                                // echo $pipe, "\n\n";
+                            }
+                        }
                     }
                 }
                 $hwi->getRank(93)->Gain=9;
