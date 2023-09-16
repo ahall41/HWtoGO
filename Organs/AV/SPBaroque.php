@@ -37,9 +37,9 @@ class SPBaroque extends AVOrgan {
     ];
     
     protected $patchEnclosures=[
-        220=>["Name"=>"II",  "GroupIDs"=>[301], "X"=>1020],
-        230=>["Name"=>"III", "GroupIDs"=>[401], "X"=>1070],
-        240=>["Name"=>"IV",  "GroupIDs"=>[501], "X"=>1120],
+        220=>["Name"=>"Sw.",  "GroupIDs"=>[301], "X"=>1020],
+        230=>["Name"=>"Pos.", "GroupIDs"=>[401], "X"=>1070],
+        240=>["Name"=>"Ch.",  "GroupIDs"=>[501], "X"=>1120],
     ];
     
     protected $patchTremulants=[
@@ -168,7 +168,40 @@ class SPBaroque extends AVOrgan {
                 foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
                     $panelelement=$panel->GUIElement($switch);
                     $this->configureImage($panelelement, ["SwitchID"=>$destid]);
-                    $panelelement->DispLabelText=str_replace("\n", " ", $textInstance["Text"]);
+                    $panelelement->DispLabelText=
+                        str_replace(
+                           ["Pedal-Trem.",
+                            "Great-Trem",
+                            "Swell-Trem.",
+                            "Positiv-Trem.",
+                            "Choir-Trem.",
+                            "Super-octavbass",
+                            "Superoctaav",
+                            "Ssuperoctaav",
+                            "Baixons-Clarins",
+                            "Flaut-",
+                            "Quintadena",
+                            "Copula-",
+                            "Octavadecara",
+                            "Tolosana-Cornetilla",
+                           ], 
+                           ["Ped. Trem.",
+                            "Grt. Trem.",
+                            "Sw. Trem.",
+                            "Pos. Trem.",
+                            "Ch Trem.",
+                            "Super- 8ve bass",
+                            "Super- 8ve",
+                            "Super- 8ve",
+                            "Baixons- Clarins",
+                            "Flaut- ",
+                            "Quinta- dena",
+                            "Copula- ",
+                            "Octava- decara",
+                            "Tolosana- Cornetilla",
+                           ],
+                            $textInstance["Text"]);
+
                     $panelelement->DispLabelColour="Black";
 
                     switch ($switchid) {
@@ -230,7 +263,7 @@ class SPBaroque extends AVOrgan {
                             $panelelement->DispLabelColour="Dark Red";
                             break;
                     }
-                    //echo $switchid, "\t", $panelelement->DispLabelText, "\n";
+                    // echo $switchid, "\t", $panelelement->DispLabelText, "\n";
                     if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
                     if ($switchid==10484) $panelelement->PositionX+=20; // BLWR
                     $panelelement->DispLabelFontSize=7;
@@ -294,13 +327,33 @@ class SPBaroque extends AVOrgan {
         }
     }
 
+    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+        static $map=[
+            //["ImageWidthPixels","ImageWidthPixels"],
+            //["ImageHeightPixels","ImageHeightPixels"],
+            ["DispScreenSizeHoriz","ImageWidthPixels"],
+            ["DispScreenSizeVert","ImageHeightPixels"],
+        ];
+        if (isset($data["SetID"])) {
+            unset($data["SwitchID"]);
+            $imagedata=$this->getImageData($data);
+            $this->map($map, $imagedata, $panel);
+            $image=$panel->Image(reset($imagedata["Images"]));
+            echo $image; exit();
+        }
+    }
+
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        $panelid=1;
-        $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
+        $panel=$this->getPanel(1);
+        $panel->DispScreenSizeHoriz=1214; // Fix to match image
+        $panel->DispScreenSizeVert=678;
+       
+        $panelelement=$panel->GUIElement($enclosure);
         $this->configureEnclosureImage($panelelement, $data);
         $panelelement->PositionX=$data["X"];
         $panelelement->PositionY=320;
         $panelelement->DispLabelText=$data["Name"];
+        $panelelement->EnclosureStyle=3;
         unset($panelelement->BitmapCount);
     }
 
@@ -326,14 +379,16 @@ class SPBaroque extends AVOrgan {
                  "OrganInstallationPackages/000001/HauptwerkStandardImages/Button06-Wood-Large-On.bmp",
                  "OrganInstallationPackages/000001/HauptwerkStandardImages/Button06-Wood-Large-Off.bmp",
                  "OrganInstallationPackages/000001/HauptwerkStandardImages/ExpressionPedalLargeStage",
+                 "OrganInstallationPackages/001630/background_images/SP_Baroque2.jpg",
                  "//"],
                 ["OrganInstallationPackages/001630/Images/Pedals/",
                  "OrganInstallationPackages/001630/Images/Keys/",
-                 "OrganInstallationPackages/001630/Images/Button04-grey-Large-On.bmp",
-                 "OrganInstallationPackages/001630/Images/Button04-grey-Large-Off.bmp",
-                 "OrganInstallationPackages/001630/Images/Button04-grey-Large-On.bmp",
-                 "OrganInstallationPackages/001630/Images/Button04-grey-Large-Off.bmp",
+                 "Images/On1.bmp",
+                 "Images/Off1.bmp",
+                 "Images/On1.bmp",
+                 "Images/Off1.bmp",
                  "OrganInstallationPackages/001630/Images/expressionPedal/expres",
+                 "Images/background.png",
                  "/"], 
                 $filename);  
         if (sizeof($files)==0)
