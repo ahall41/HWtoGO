@@ -49,6 +49,12 @@ class SPModern extends AVOrgan {
         +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+      2233=>["ControllingSwitchID"=>10191], // Gamba L/R
+      2235=>["ControllingSwitchID"=>10195], // Octava L/R
+      2237=>["ControllingSwitchID"=>10199], // Open-Fluit L/R
+      2239=>["ControllingSwitchID"=>10203], // Roerquint L/R
+      2241=>["ControllingSwitchID"=>10207], // Terz L/R
+      2243=>["ControllingSwitchID"=>10211], // Octaaf L/R
       2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
@@ -67,11 +73,11 @@ class SPModern extends AVOrgan {
         10=>["HN"=>[[36,47,64],[48,76,32],[77,83,24],[78,99,16]]], //PED- 10 Scherp
         11=>["HN"=>[[36,41,48],[42,53,32],[54,65,24],[66,77,16],[78,99,8]]], //PED- 11 Mixtur
         12=>["HN"=>4], //PED- 12 Trumpet 16
-        13=>["HN"=>8], //PED- 13 Trumpet 8
+        13=>["HN"=>4], //PED- 13 Trumpet 8
         14=>["HN"=>8], //PED- 14 Krumhorn 8
-        15=>["HN"=>16], //PED- 15 Krumhorn 4
-        16=>["HN"=>32], //PED- 16 Batalla 2
-        17=>["HN"=>4], //GRT- 17 Principal 16
+        15=>["HN"=>8], //PED- 15 Krumhorn 4 
+        16=>["HN"=>8], //PED- 16 Batalla 2 [starts at 60]
+        17=>["HN"=>8], //GRT- 17 Principal 16
         18=>["HN"=>8], //GRT- 18 Octaf 8
         19=>["HN"=>8], //GRT- 19 Holpijp 8
         20=>["HN"=>16], //GRT- 20 Octaf 4
@@ -83,7 +89,7 @@ class SPModern extends AVOrgan {
         26=>["HN"=>4], //GRT- 26 Trumpet 16
         27=>["HN"=>8], //GRT- 27 Krumhorn 8
         28=>["HN"=>16], //GRT- 28 Fuerte 4
-        29=>["HN"=>4], //SWL- 29 Holpijp 16
+        29=>["HN"=>8], //SWL- 29 Holpijp 16
         30=>["HN"=>8], //SWL- 30 Montre
         31=>["HN"=>8], //SWL- 31 Roerfluit 8
         32=>["HN"=>8], //SWL- 32 Gamba 8L
@@ -104,13 +110,13 @@ class SPModern extends AVOrgan {
         47=>["HN"=>8], //POS- 47 Principal 8
         48=>["HN"=>8], //POS- 48 Gedackt 8
         49=>["HN"=>8], //POS- 49 Burdon 8
-        50=>["HN"=>8], //POS- 50 Octav 4
-        51=>["HN"=>8], //POS- 51 Salicional 4
-        52=>["HN"=>8], //POS- 52 Flute 4
-        53=>["HN"=>8], //POS- 53 Octav 2
-        54=>["HN"=>8], //POS- 54 Wald-Floet 2
-        55=>["HN"=>8], //POS- 55 Quinta 1 1/2
-        56=>["HN"=>[[36,41,48],[42,53,32],[54,65,24],[66,77,16],[78,99,8]]], //POS- 56 Mixtur 4x
+        50=>["HN"=>16], //POS- 50 Octav 4
+        51=>["HN"=>16], //POS- 51 Salicional 4
+        52=>["HN"=>16], //POS- 52 Flute 4
+        53=>["HN"=>32], //POS- 53 Octav 2
+        54=>["HN"=>32], //POS- 54 Wald-Floet 2
+        55=>["HN"=>48], //POS- 55 Quinta 1 1/2
+        56=>["HN"=>[[36,47,48],[48,59,32],[60,71,24],[72,83,16],[84,99,8]]], //POS- 56 Mixtur 4x
         57=>["HN"=>8], //POS- 57 Vox-Humana 8
         58=>["HN"=>8], //POS- 58 Krumhorn 4
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
@@ -133,6 +139,23 @@ class SPModern extends AVOrgan {
     }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
+        static $switchpositions=[ // [row,col]
+            10185=>[0,0],
+            10187=>[0,1],
+            10189=>[0,2],
+            10191=>[0,3],
+            10195=>[0,4],
+            10199=>[0,5],
+            10203=>[1,0],
+            10207=>[1,1],
+            10211=>[1,2],
+            10215=>[1,3],
+            10217=>[1,4],
+            10219=>[1,5],
+        ];
+        if (isset($data["StopID"])) { 
+            if (array_key_exists($data["StopID"]+1, $this->patchStops)) {return;}
+        };
         $switchid=$data["SwitchID"];
         //error_log("switch=$switchid");
         $slinkid=$this->hwdata->switchLink($switchid)["D"][0]["SourceSwitchID"];
@@ -148,8 +171,18 @@ class SPModern extends AVOrgan {
                     $panelelement->DispLabelText=
                         str_replace(
                            ["-Trem",
+                            " 8L",
+                            "3/5L",
+                            " 4L",
+                            "2/3L",
+                            " 2L",
                            ], 
                            [" Trem",
+                            " 8",
+                            "3/5",
+                            " 4",
+                            "2/3",
+                            " 2",
                            ],
                             $textInstance["Text"]);
                     
@@ -197,15 +230,25 @@ class SPModern extends AVOrgan {
                         case 10159:
                         case 10179:
                         case 10181:
+                        case 10183:
+                        case 10219:
+                        case 10241:
                         case 10243:
                             $panelelement->DispLabelColour="Dark Red";
                     }
-
-                    //echo $switchid, "\t", $panelelement->DispLabelText, "\n";
+                    
+                    /* echo $switchid, "\t",
+                         $panelelement->PositionX, "\t",
+                         $panelelement->PositionY, "\t",
+                         $panelelement->DispLabelText, "\n"; */
                     if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
                     if ($switchid==10245) { // BLWR
                         $panelelement->PositionX+=20;
                         $panelelement->PositionY+=20;
+                    }
+                    if (array_key_exists($switchid, $switchpositions)) {
+                        $panelelement->PositionX=840+($switchpositions[$switchid][0]*50);
+                        $panelelement->PositionY= 50+($switchpositions[$switchid][1]*50);
                     }
                     $panelelement->DispLabelFontSize=7;
                     break; // Only the one?
@@ -307,8 +350,9 @@ class SPModern extends AVOrgan {
             //case 16: // PED- 16 Batalla 2
             //case 25: // GRT- 25 Mixtur
             //case 45: // SWL- 45 Scherp
-            case 46: // SWL- 46 Batala 8
+            //case 46: // SWL- 46 Batala 8
             //case 56: // POS- 56 Mixtur 4x
+            case 9999:
                 $ppitch=$this->readSamplePitch(self::ROOT . ($file=$this->sampleFilename($hwdata)));
                 $spitch=$this->midiToHz($midi=$this->sampleMidiKey($hwdata));
                 $hn=8*$ppitch/$spitch;
@@ -318,7 +362,28 @@ class SPModern extends AVOrgan {
     }
  
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        
+        $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
+        $rankid=$hwdata["RankID"];
+        switch ($rankid) {
+            case 13:
+            case 15:
+                if ($midi>79) return NULL;
+                break;
+                
+            case 16:
+                if ($midi>91) return NULL;
+                break;
+
+            case 28:
+                if ($midi>73) return NULL;
+                break;
+            
+            default:
+                if ($rankid<17 && $midi>68) return NULL;
+                if ($midi>97) return NULL;
+                break;
+        }
+
         $pipe=parent::processSample($hwdata, $isattack);
         if ($pipe && !empty($pitchtuning=$pipe->PitchTuning)) {
             if ($pitchtuning<-1800 || $pitchtuning>1800) $pipe->Dummy();
@@ -341,6 +406,21 @@ class SPModern extends AVOrgan {
             $hwi->import();
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
+            
+            foreach($hwi->getStops() as $stopid=>$stop) {
+                unset($stop->Rank001FirstAccessibleKeyNumber);
+                unset($stop->Rank001FirstPipeNumber);
+                switch ($stopid) {
+                    case 2128:
+                        $stop->Rank001FirstAccessibleKeyNumber=25;
+                        break;
+                    
+                    case 2246:
+                        $stop->Rank001FirstAccessibleKeyNumber=17;
+                        break;
+                }
+            }
+            
             foreach($hwi->getRanks() as $rankid=>$rank) {
                 if (isset($hwi->patchRanks[$rankid]["HN"])) {
                     $hns=$hwi->patchRanks[$rankid]["HN"];
@@ -355,8 +435,9 @@ class SPModern extends AVOrgan {
                         }
                     }
                 }
-                $hwi->getRank(93)->Gain=9;
             }
+            
+            $hwi->getRank(93)->Gain=9;
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
         
