@@ -77,8 +77,8 @@ class LargeDutch extends AVOrgan {
         14=>["HN"=> 8], // PED- 14 Trombone 8
         15=>["HN"=> 4], // PED- 15 Bazuin 16
         16=>["HN"=> 4], // PED- 16 Posaunen bass 16
-        17=>["HN"=> 2], // PED- 17 Fagot 32
-        18=>["HN"=> 4], // GRT- 18 Montre 16
+        17=>["HN"=>16, "PitchTuning"=>1200], // PED- 17 Fagot 32
+        18=>["HN"=> 8], // GRT- 18 Montre 16
         19=>["HN"=> 4], // GRT- 19 Bourdon 16
         20=>["HN"=> 8], // GRT- 20 Principal 8
         21=>["HN"=> 8], // GRT- 21 Doppelflute 8
@@ -132,7 +132,7 @@ class LargeDutch extends AVOrgan {
         69=>["HN"=> 8], // POS- 69 Trompet 8L
         70=>["HN"=> 8], // POS- 70 Trompet 8R
         71=>["HN"=>16], // POS- 71 Clarinet 4
-        72=>["HN"=> 4], // CHR- 72 Gedeck tbass 16
+        72=>["HN"=> 4, "PitchTuning"=>1200], // CHR- 72 Gedeck tbass 16
         73=>["HN"=> 4], // CHR- 73 Bourdon 16
         74=>["HN"=> 8], // CHR- 74 Prestant 8
         75=>["HN"=> 8], // CHR- 75 Gedakt 8
@@ -147,9 +147,9 @@ class LargeDutch extends AVOrgan {
         84=>["HN"=>16], // CHR- 84 Clarinet 4
         85=>["HN"=> 8], // CHR- 85 Cromorne 8
         86=>["HN"=> 8], // CHR- 86 Clarinet 8
-        87=>["HN"=>16], // CHR- 87 Trompette 4
-        88=>["HN"=> 8], // CHR- 88 Trompette 8
-        89=>["HN"=> 4], // CHR- 89 Bombarde 16
+        87=>["HN"=>16, "PitchTuning"=>1800], // CHR- 87 Trompette 4
+        88=>["HN"=> 8, "PitchTuning"=>1800], // CHR- 88 Trompette 8
+        89=>["HN"=> 4, "PitchTuning"=>1800], // CHR- 89 Bombarde 16
         91=>"DELETE",
         92=>"DELETE",
         93=>"DELETE",
@@ -416,9 +416,6 @@ class LargeDutch extends AVOrgan {
         if ($midi>96) return NULL;
 
         $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe && !empty($pitchtuning=$pipe->PitchTuning)) {
-            if ($pitchtuning<-1800 || $pitchtuning>1800) $pipe->Dummy();
-        }
         return $pipe;
     }
     
@@ -461,20 +458,33 @@ class LargeDutch extends AVOrgan {
             
             foreach($hwi->getRanks() as $rankid=>$rank) {
                 if (isset($hwi->patchRanks[$rankid]["HN"])) {
+                    $pitchtuning=isset($hwi->patchRanks[$rankid]["PitchTuning"]) ? $hwi->patchRanks[$rankid]["PitchTuning"] : 0;
                     $hns=$hwi->patchRanks[$rankid]["HN"];
                     if (!is_array($hns)) $hns=[[0, 99, $hns]];
                     $pipes=$rank->Pipes();
+                    if ($pitchtuning) {$rank->PitchCorrection=$rank->PitchTuning=$pitchtuning;}
                     foreach ($hns as $hn) {
                         for ($midi=$hn[0]; $midi<=$hn[1]; $midi++) {
                             if (isset($pipes[$midi])) {
                                 $pipe=$pipes[$midi];
-                                if (!$pipe->IsDummy()) $pipe->HarmonicNumber=$hn[2];
+                                //if (!$pipe->IsDummy()) $pipe->HarmonicNumber=$hn[2];
+                                unset($pipe->HarmonicNumber);
                                 if ($rankid==51) $pipe->Gain=15;
+                                if ($pitchtuning) {
+                                    if (empty($pipe->PitchTuning)) {$pipe->PitchTuning=-$pitchtuning;}
+                                    else {$pipe->PitchTuning-=$pitchtuning;}
+                                }
+                                if ($pipe->PitchTuning) {$pipe->PitchCorrection=$pipe->PitchTuning;}
+                                if ($rankid==17) {unset($pipe->PitchTuning);}
                             }
                         }
                     }
                 }
             }
+            
+            $hwi->getRank(1)->PitchCorrection=$hwi->getRank(1)->PitchTuning=-1200;
+            $hwi->getRank(17)->PitchCorrection=-1200;
+            $hwi->getRank(18)->PitchCorrection=$hwi->getRank(18)->PitchTuning=-1200;
 
             $hwi->label(130,  15, "PEDAL");
             $hwi->label(920,  15, "CHOIR");
