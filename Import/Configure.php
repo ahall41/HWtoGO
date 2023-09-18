@@ -191,6 +191,7 @@ abstract Class Configure extends Create {
         if ($switchid!==NULL && ($switch=$this->getSwitch($switchid))!==NULL) {
             $name=$switch->Name;
             $windchestgroup=$this->getWindchestGroup($switchdata["GroupID"]);
+            if (!$windchestgroup) {return;}
             $manual=$this->getManual(
                     isset($switchdata["DivisionID"]) && !empty($switchdata["DivisionID"])
                     ? $switchdata["DivisionID"] : 1);
@@ -383,6 +384,7 @@ abstract Class Configure extends Create {
         if (empty($coupler->DestinationKeyshift) &&
                 $hwdata["SourceKeyboardID"]==$manualid) {
             $coupler->UnisonOff="Y";
+            unset($coupler->CouplerType);                
         }
         $coupler->Displayed="N";
         return $switch;
