@@ -61,6 +61,95 @@ class LargeDutch extends AVOrgan {
     // Inspection of Ranks object
     /* @todo see stoprank */
     protected $patchRanks=[
+         1=>["HN"=> 2], // PED- 1 Bourdon 32
+         2=>["HN"=> 4], // PED- 2 Contrabass 16
+         3=>["HN"=> 4], // PED- 3 SubBass 16
+         4=>["HN"=> 8], // PED- 4 Octavbass 8
+         5=>["HN"=> 8], // PED- 5 Principal 8
+         6=>["HN"=> 8], // PED- 6 Gedecktbass 8
+         7=>["HN"=> 8], // PED- 7 Holpijp 8
+         8=>["HN"=> 8], // PED- 8 Violon 8
+         9=>["HN"=>16], // PED- 9 Prestant 4
+        10=>["HN"=>16], // PED- 10 Octaaf 4
+        11=>["HN"=>32], // PED- 11 Octaaf 2
+        12=>["HN"=>16], // PED- 12 Clairon 4
+        13=>["HN"=>16], // PED- 13 Trompette 4
+        14=>["HN"=> 8], // PED- 14 Trombone 8
+        15=>["HN"=> 4], // PED- 15 Bazuin 16
+        16=>["HN"=> 4], // PED- 16 Posaunen bass 16
+        17=>["HN"=> 2], // PED- 17 Fagot 32
+        18=>["HN"=> 4], // GRT- 18 Montre 16
+        19=>["HN"=> 4], // GRT- 19 Bourdon 16
+        20=>["HN"=> 8], // GRT- 20 Principal 8
+        21=>["HN"=> 8], // GRT- 21 Doppelflute 8
+        22=>["HN"=> 8], // GRT- 22 Holpijp 8
+        23=>["HN"=> 8], // GRT- 23 Dolce 8
+        24=>["HN"=>16], // GRT- 24 Speelfluit 4
+        25=>["HN"=>16], // GRT- 25 Octave 4
+        26=>["HN"=>32], // GRT- 26 Octave 2
+        27=>["HN"=>32], // GRT- 27 Doublette 2
+        28=>["HN"=>24], // GRT- 28 Quint 3
+        29=>["HN"=> 8], // GRT- 29 Fourniture
+        30=>["HN"=> 8], // GRT- 30 Mixtur
+        31=>["HN"=> 8], // GRT- 31 Cornet
+        32=>["HN"=> 8], // GRT- 32 Trompete 8
+        33=>["HN"=>16], // GRT- 33 Clairon 4
+        34=>["HN"=> 4], // SWL- 34 Gedakt 16
+        35=>["HN"=> 8], // SWL- 35 Geigen prinzipal 8
+        36=>["HN"=> 8], // SWL- 36 Synthemato- phon 8
+        37=>["HN"=> 8], // SWL- 37 Lieblich Gedeckt 8
+        38=>["HN"=> 8], // SWL- 38 Bourdon 8
+        39=>["HN"=> 8], // SWL- 39 Viola 8
+        40=>["HN"=>16], // SWL- 40 Fluit 4
+        41=>["HN"=>16], // SWL- 41 Flute Harmonique 4
+        42=>["HN"=>16], // SWL- 42 Salicet 4
+        43=>["HN"=>16], // SWL- 43 Octaaf 4
+        44=>["HN"=>32], // SWL- 44 Octaaf 2
+        45=>["HN"=>32], // SWL- 45 Woudfluit 2
+        46=>["HN"=>32], // SWL- 46 Gemshorn 2
+        47=>["HN"=>24], // SWL- 47 Quinte 2 2/3
+        48=>["HN"=>24], // SWL- 48 Nasard
+        49=>["HN"=> 8], // SWL- 49 Mixtura L
+        50=>["HN"=> 8], // SWL- 50 Mixtura R
+        51=>["HN"=> 8], // SWL- 51 Clarinet 8
+        52=>["HN"=> 8], // SWL- 52 Cornett
+        53=>["HN"=> 8], // SWL- 53 Cymbale
+        54=>["HN"=> 8], // SWL- 54 EchoTrompete 8
+        55=>["HN"=> 8], // SWL- 55 Scherp 4
+        56=>["HN"=> 4], // POS- 56 Bourdon 16
+        57=>["HN"=> 8], // POS- 57 Prestant 8
+        58=>["HN"=> 8], // POS- 58 Montre 8
+        59=>["HN"=> 8], // POS- 59 Violadi-  gamba 8
+        60=>["HN"=> 8], // POS- 60 Gedakt 8
+        61=>["HN"=> 8], // POS- 61 Bourdon 8
+        62=>["HN"=>16], // POS- 62 Prestant 4
+        63=>["HN"=>16], // POS- 63 Flutechem 4
+        64=>["HN"=>32], // POS- 64 Doublette 2
+        65=>["HN"=>24], // POS- 65 Nasard
+        66=>["HN"=>48], // POS- 66 Tierce
+        67=>["HN"=> 8], // POS- 67 Fourniture
+        68=>["HN"=> 8], // POS- 68 Cromorne 8
+        69=>["HN"=> 8], // POS- 69 Trompet 8L
+        70=>["HN"=> 8], // POS- 70 Trompet 8R
+        71=>["HN"=>16], // POS- 71 Clarinet 4
+        72=>["HN"=> 4], // CHR- 72 Gedeck tbass 16
+        73=>["HN"=> 4], // CHR- 73 Bourdon 16
+        74=>["HN"=> 8], // CHR- 74 Prestant 8
+        75=>["HN"=> 8], // CHR- 75 Gedakt 8
+        76=>["HN"=> 8], // CHR- 76 Principal 8
+        77=>["HN"=>16], // CHR- 77 Octaaf 4
+        78=>["HN"=>16], // CHR- 78 Fluit 4
+        79=>["HN"=>32], // CHR- 79 Woudfluit 2
+        80=>["HN"=>24], // CHR- 80 Quint 3
+        81=>["HN"=>24], // CHR- 81 Nasard
+        82=>["HN"=>16], // CHR- 82 Clairon 4
+        83=>["HN"=> 8], // CHR- 83 Scherp 4
+        84=>["HN"=>16], // CHR- 84 Clarinet 4
+        85=>["HN"=> 8], // CHR- 85 Cromorne 8
+        86=>["HN"=> 8], // CHR- 86 Clarinet 8
+        87=>["HN"=>16], // CHR- 87 Trompette 4
+        88=>["HN"=> 8], // CHR- 88 Trompette 8
+        89=>["HN"=> 4], // CHR- 89 Bombarde 16
         91=>"DELETE",
         92=>"DELETE",
         93=>"DELETE",
@@ -100,11 +189,13 @@ class LargeDutch extends AVOrgan {
                             "Gedeck tbass",
                             "EchoTrompete",
                             "TREM-",
+                            "Violadi-",
                            ], 
                            ["Gedeckt bass",
                             "Gedeckt bass",
                             "Echo Trompete",
                             "Trem ",
+                            "Viola di",
                            ],
                             $textInstance["Text"]);
 
@@ -149,6 +240,7 @@ class LargeDutch extends AVOrgan {
                             $panelelement->DispLabelColour="Dark Blue";
                             break;
                         
+                        case 10300:
                         case 10303:
                         case 10306:
                         case 10309:
@@ -170,8 +262,8 @@ class LargeDutch extends AVOrgan {
                             $panelelement->DispLabelColour="Dark Red";
                             break;
                             
-                        default:
-                            echo $switchid, "\t", $panelelement->DispLabelText, "\n";
+                        //default:
+                        //    echo $switchid, "\t", $panelelement->DispLabelText, "\n";
                     }
                     
                     if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
@@ -302,33 +394,31 @@ class LargeDutch extends AVOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
 
-    // List sample pitches (for mixtures)
-    private function listSample(array $hwdata) {
-        return;
-        switch ($rankid=$hwdata["RankID"]) {
-            case 23: // Fourniture
-            case 24: // Scherp
-            case 26: // Cornet
-            case 27: // Baixons-Clarins
-            case 40: // Cimbel
-            case 41: // Simbalet 2
-            case 56: // Mixtura 3x1
-            case 55: // Cimbale 2x12
-            case 72: // Tolosana-Cornetilla
-                $ppitch=$this->readSamplePitch(self::ROOT . ($file=$this->sampleFilename($hwdata)));
-                $spitch=$this->midiToHz($midi=$this->sampleMidiKey($hwdata));
-                $hn=8*$ppitch/$spitch;
-                printf("%0d\t%0d\t%01.1f\t%s\n", $rankid, $midi, $hn, $file);
-        }
- 
-    }    
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        
+        $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
+        $rankid=$hwdata["RankID"];
+        switch ($rankid) {
+            case 31: // Cornet
+                if ($midi<55) return NULL;
+                break;
+                
+            case 49: // Mixtura L
+            case 69: // Trompet 8L
+                if ($midi>59) return NULL;
+                break;
+                
+            case 50: // Mixtura R
+            case 70: // Trompet 8R
+                if ($midi<60) return NULL;
+                break;
+        }
+        if ($rankid<18 && $midi>67) return NULL;
+        if ($midi>96) return NULL;
+
         $pipe=parent::processSample($hwdata, $isattack);
         if ($pipe && !empty($pitchtuning=$pipe->PitchTuning)) {
             if ($pitchtuning<-1800 || $pitchtuning>1800) $pipe->Dummy();
         }
-        if ($pipe && $pipe->ReleaseCount==0) $this->listSample($hwdata);
         return $pipe;
     }
     
@@ -353,6 +443,22 @@ class LargeDutch extends AVOrgan {
             
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
+            
+            foreach($hwi->getStops() as $stopid=>$stop) {
+                unset($stop->Rank001FirstAccessibleKeyNumber);
+                unset($stop->Rank001FirstPipeNumber);
+                switch ($stopid) {
+                    case 2131: // Cornet
+                        $stop->Rank001FirstAccessibleKeyNumber=20;
+                        break;
+                    
+                    case 2250: // Mixtura R
+                    case 2370: // Trompet 8R
+                        $stop->Rank001FirstAccessibleKeyNumber=25;
+                        break;
+                }
+            }
+            
             foreach($hwi->getRanks() as $rankid=>$rank) {
                 if (isset($hwi->patchRanks[$rankid]["HN"])) {
                     $hns=$hwi->patchRanks[$rankid]["HN"];
@@ -363,6 +469,7 @@ class LargeDutch extends AVOrgan {
                             if (isset($pipes[$midi])) {
                                 $pipe=$pipes[$midi];
                                 if (!$pipe->IsDummy()) $pipe->HarmonicNumber=$hn[2];
+                                if ($rankid==51) $pipe->Gain=15;
                             }
                         }
                     }
