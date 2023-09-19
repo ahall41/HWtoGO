@@ -1,0 +1,507 @@
+<?php 
+
+/*
+ * Copyright (C) 2022 Andrew E Hall (ahall.ahall.41@gmail.com)
+ * 
+ * Released under the Creative Commons Non-Commercial 4.0 licence
+ * (https://creativecommons.org/licenses/by-nc/4.0/)
+ * 
+ */
+
+namespace Organs\AV;
+require_once(__DIR__ . "/AVOrgan.php");
+
+/**
+ * Import Large Dutch composite set to GrandOrgue
+ * 
+ * @author andrew
+ */
+class LargeSwedish extends AVOrgan {
+    const ROOT="/GrandOrgue/Organs/AVO/Swedish/";
+    const ODF="Large Swedish.Organ_Hauptwerk_xml";
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
+    const COMMENTS=
+              "Large Dutch composite set\n"
+            . "https://hauptwerk-augustine.info/Large_Dutch.php\n"
+            . "\n";
+    const TARGET=self::ROOT . "Large Swedish.1.0.organ";
+
+    protected int $releaseCrossfadeLengthMs=0;
+    
+    protected $patchDisplayPages=[
+        1=>["SetID"=>27],
+        5=>"DELETE",
+        7=>"DELETE",
+    ];
+    
+    protected $patchDivisions=[
+        7=>"DELETE"
+    ];
+    
+    protected $patchEnclosures=[
+        220=>["Name"=>"Sw.",  "GroupIDs"=>[301], "X"=>700],
+        230=>["Name"=>"Pos.", "GroupIDs"=>[401], "X"=>750],
+    ];
+    
+    protected $patchTremulants=[
+        1700=>["Type"=>"Synth", "GroupIDs"=>[101]],
+        1710=>["Type"=>"Synth", "GroupIDs"=>[201]],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301]],
+        1730=>["Type"=>"Synth", "GroupIDs"=>[401]],
+    ];
+    
+    protected $patchStops=[
+         1=>"DELETE",
+         2=>"DELETE",
+         3=>"DELETE",
+         4=>"DELETE",
+      2690=>"DELETE"
+    ];
+
+    // Inspection of Ranks object
+    /* @todo see stoprank */
+    protected $patchRanks=[
+         1=>["HN"=> 2], //PED- 1 Subbas 32
+         2=>["HN"=> 4], //PED- 2 Principal 16
+         3=>["HN"=> 8], //PED- 3 Subbas 16
+         4=>["HN"=> 8], //PED- 4 Principal 8
+         5=>["HN"=> 8], //PED- 5 Oktava 8
+         6=>["HN"=> 8], //PED- 6 Gedakt 8
+         7=>["HN"=> 8], //PED- 7 Oktava 4
+         8=>["HN"=>16], //PED- 8 Gedackt 4
+         9=>["HN"=> 8], //PED- 9 Nachthorn 2
+      //10=>["HN"=> 8], //PED- 10 Rauschpfeife
+        11=>["HN"=> 8], //PED- 11 Trumpet4
+        12=>["HN"=> 8], //PED- 12 Trumpet 8
+        13=>["HN"=> 8], //PED- 13 Voix Celeste 8
+        14=>["HN"=> 8], //PED- 14 Violon 16
+        15=>["HN"=> 8], //PED- 15 Basun 16
+        16=>["HN"=> 4], //GRT- 16 Ged Pommer 16
+        17=>["HN"=> 4], //GRT- 17 Gedackt 16
+        18=>["HN"=> 8], //GRT- 18 Principal 8
+        19=>["HN"=> 8], //GRT- 19 Gedakt 8
+        20=>["HN"=> 8], //GRT- 20 Quintadena 8
+        21=>["HN"=> 8], //GRT- 21 Salicional 8
+        22=>["HN"=> 8], //GRT- 22 Rorflojt 8
+        23=>["HN"=> 8], //GRT- 23 Dubbelflojt 8
+        24=>["HN"=>16], //GRT- 24 Principal 4
+        25=>["HN"=>16], //GRT- 25 Oktava 4
+        26=>["HN"=>16], //GRT- 26 Gedakt 4
+        27=>["HN"=>16], //GRT- 27 Rorflojt 4
+        28=>["HN"=>32], //GRT- 28 Principal 2
+        29=>["HN"=>32], //GRT- 29 Oktava 2
+        30=>["HN"=>32], //GRT- 30 Blockflojt 2
+        31=>["HN"=>24], //GRT- 31 Sesquialtera
+        32=>["HN"=>32], //GRT- 32 Mixtur
+        33=>["HN"=> 8], //GRT- 33 Voix Celeste 8
+        34=>["HN"=> 8], //GRT- 34 Geigen Regal 8
+        35=>["HN"=>[[36,41,96], [42,53,48], [54,71,48], [72,99,32]]], //GRT- 35 Cymbel
+        36=>["HN"=> 8], //GRT- 36 Trumpet8
+        37=>["HN"=>16], //GRT- 37 Trumpet 4
+        38=>["HN"=> 8], //GRT- 38 Cornet V
+        39=>["HN"=> 4], //SWL- 39 Borduna 16
+        40=>["HN"=> 8], //SWL- 40 Principal 8
+        41=>["HN"=> 8], //SWL- 41 Salicional 8
+        42=>["HN"=> 8], //SWL- 42 Rorflojt 8
+        43=>["HN"=> 8], //SWL- 43 Borduna 8
+        44=>["HN"=> 8], //SWL- 44 Gamba 8
+        45=>["HN"=> 8], //SWL- 45 Principal 4
+        46=>["HN"=> 8], //SWL- 46 Halflojt 4
+        47=>["HN"=> 4], //SWL- 47 Rorflojt 4
+        48=>["HN"=>[]], //SWL- 48 Mixtur
+        49=>["HN"=> 4], //SWL- 49 Nasard
+        50=>["HN"=>32], //SWL- 50 Piccolo 2
+        51=>["HN"=> 8], //SWL- 51 Valdflojt 2
+        52=>["HN"=> 8], //SWL- 52 Ters 1 3/5
+        53=>["HN"=> 8], //SWL- 53 Kvinta 1 1/3
+        54=>["HN"=> 8], //SWL- 54 Septima 1 1/7
+        55=>["HN"=> 8], //SWL- 55 Sivflojt 1
+        56=>["HN"=>16], //SWL- 56 Clarion 4
+      //57=>["HN"=>[]], //SWL- 57 Scharff
+        58=>["HN"=> 8], //SWL- 58 Viol Celeste 8
+        59=>["HN"=> 8], //SWL- 59 Voix Celeste 8
+        60=>["HN"=> 8], //SWL- 60 Oboe 8
+        61=>["HN"=> 8], //SWL- 61 Skalmeja 8
+        62=>["HN"=> 4], //POS- 62 Gedakt 16
+        63=>["HN"=> 8], //POS- 63 Gedackt 8
+        64=>["HN"=> 8], //POS- 64 Halflojt 8
+        65=>["HN"=> 8], //POS- 65 Fldamore 8
+        66=>["HN"=> 8], //POS- 66 Quintadena 8
+        67=>["HN"=>16], //POS- 67 Principal 4
+        68=>["HN"=>16], //POS- 68 Koppelflojt 4
+        69=>["HN"=> 8], //POS- 69 Gemshorn 4
+        70=>["HN"=>[[36,55,24], [56,67,15], [68,79,12], [80,99,8]]], //POS- 70 Mixtur V
+        71=>["HN"=> 8], //POS- 71 Nasard
+        72=>["HN"=> 8], //POS- 72 Principal 2
+        73=>["HN"=> 8], //POS- 73 Flojtlein 2
+        74=>["HN"=> 8], //POS- 74 Valdflojt 2
+        75=>["HN"=> 8], //POS- 75 Kvinta 2 2/3
+        76=>["HN"=>48], //POS- 76 Ters 1 3/5
+        77=>["HN"=> 8], //POS- 77 Oktava 1
+      //78=>["HN"=>[]], //POS- 78 Cymbel
+        79=>["HN"=>[]], //POS- 79 Scharf
+        80=>["HN"=> 8], //POS- 80 Krummhorn 8
+        81=>["HN"=> 8], //POS- 81 Cromorne 8
+        82=>["HN"=> 8], //POS- 82 TrHarm8 echo
+        83=>["HN"=>[]], //POS- 83  Cornet V echo
+        91=>"DELETE",
+        92=>"DELETE",
+        93=>"DELETE",
+    ];
+    
+    public function createManual(array $hwdata) : ?\GOClasses\Manual {
+        if ($hwdata["KeyboardID"]<7)
+            return parent::createManual($hwdata);
+        else
+            return NULL;
+    }
+    
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
+            return NULL;
+        else
+            return parent::createRank($hwdata, $keynoise);
+    }
+
+    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
+        $switchid=$data["SwitchID"];
+        //error_log("switch=$switchid");
+        $slinkid=$this->hwdata->switchLink($switchid)["D"][0]["SourceSwitchID"];
+        foreach($this->hwdata->switchLink($slinkid)["S"] as $link) {
+            $switchdata=$this->hwdata->switch($destid=$link["DestSwitchID"]);
+            if (isset($switchdata["Disp_ImageSetInstanceID"])) {
+                $instancedata=$this->hwdata->imageSetInstance($instanceid=$switchdata["Disp_ImageSetInstanceID"]);
+                if ($instancedata["DisplayPageID"]!=1) continue;
+                //error_log(print_r($instancedata, 1));
+                $panel=$this->getPanel($instancedata["DisplayPageID"]);
+                foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
+                    $panelelement=$panel->GUIElement($switch);
+                    $this->configureImage($panelelement, ["SwitchID"=>$destid]);
+                    $panelelement->DispLabelText=
+                        str_replace(
+                           ["TREM-",
+                            "",
+                            "",
+                            "",
+                            "",
+                           ], 
+                           ["Trem ",
+                            "",
+                            "",
+                            "",
+                            "",
+                           ],
+                            $textInstance["Text"]);
+
+                    $panelelement->DispLabelColour="Black";
+
+                    switch ($switchid) {
+                        case 10561: //TREM-Ped
+                        case 10564: //TREM-Gr
+                        case 10567: //TREM-Sw
+                        case 10570: //TREM-Pos
+                            $panelelement->DispLabelColour="Dark Green";
+                            break;
+                        
+                        case 10486: //Ped. 16
+                        case 10489: //Ped. 4
+                        case 10492: //Grt. 16
+                        case 10495: //Grt. 4
+                        case 10498: //Grt. Ped.16
+                        case 10501: //Grt. Ped.8
+                        case 10504: //Grt. Ped.4
+                        case 10507: //Sw. 16
+                        case 10510: //Sw. 4
+                        case 10513: //Sw. Ped.16
+                        case 10516: //Sw. Ped.8
+                        case 10519: //Sw. Ped.4
+                        case 10522: //Sw. Grt.16
+                        case 10525: //Sw. Grt.8
+                        case 10528: //Sw. Grt.4
+                        case 10531: //Pos. Grt.16
+                        case 10534: //Pos. Grt.8
+                        case 10537: //Pos. Grt.4
+                        case 10540: //Pos. Ped.8
+                        case 10543: //Pos. Swell
+                        case 10546: //Pos. Pos.4
+                        case 10549: //Swell Pos
+                        case 10552: //Sw. Pos.4
+                        case 10555: //Ped. Bass
+                        case 10558: //Grt. Sw                       
+                            $panelelement->DispLabelColour="Dark Blue";
+                            break;
+                        
+                        case 10265: //Trumpet4
+                        case 10268: //Trumpet 8
+                        case 10277: //Basun 16
+                        case 10334: //Geigen Regal 8    
+                        case 10340: //Trumpet8
+                        case 10343: //Trumpet 4
+                        case 10400: //Clarion 4
+                        case 10412: //Oboe 8
+                        case 10415: //Skalmeja 8
+                        case 10472: //Krummhorn 8
+                        case 10475: //Cromorne 8
+                        case 10478: //TrHarm8 echo                            
+                            $panelelement->DispLabelColour="Dark Red";
+                            break;
+                            
+                        //default:
+                        //   echo $switchid, "\t", $panelelement->DispLabelText, "\n";
+                    }
+                    
+                    if (!isset($panelelement->PositionX)) {$panelelement->PositionX=0;}
+                    $panelelement->DispLabelFontSize=7;
+                    unset($panelelement->MouseRectHeight);
+                    unset($panelelement->MouseRectWidth);
+                    break; // Only the one?
+                }
+            }
+        }
+    }
+
+    public function configureKeyImages(array $keyImageSets, array $keyboards) : void {
+        foreach($keyboards as $keyboardid=>$keyboard) {
+            if ($keyboardid>5) continue;
+            $panel=$this->getPanel(1);
+            $manual=$this->getManual($keyboardid);
+            $panelelement=$panel->GUIElement($manual);
+            //$panelelement->DisplayKeys=54;
+            $keyImageset=$keyImageSets[$keyboardid==1 ? 2 : 1];
+            $keyImageset["ManualID"]=$keyboardid;
+            $adjuster=$keyboardid==1 ? 3 : 1;
+            $keyImageset["HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfDASharpFromLeftOfDA"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfGSharpFromLeftOfG"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfDGFromLeftOfCFSharp"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfEBFromLeftOfDASharp"]-=$adjuster;
+            $keyImageset["HorizSpacingPixels_LeftOfAFromLeftOfGSharp"]-=$adjuster;
+            switch ($keyboardid) {
+                case 1:
+                    $keyImageset["PositionX"]=450;
+                    $keyImageset["PositionY"]=600;
+                    $panelelement->DisplayKeys=32;
+                    break;
+                
+                case 2:
+                    $keyImageset["PositionX"]=450;
+                    $keyImageset["PositionY"]=420;
+                    break;
+                    
+                case 3:
+                    $keyImageset["PositionX"]=450;
+                    $keyImageset["PositionY"]=360;
+                    break;
+
+                case 4:
+                    $keyImageset["PositionX"]=450;
+                    $keyImageset["PositionY"]=300;
+                    break;
+            }
+            $this->configureKeyImage($panelelement, $keyImageset);
+            $manual->Displayed="N";
+            unset($manual->DisplayKeys);
+            unset($manual->PositionX);
+            unset($manual->PositionY);
+        }
+    }
+
+    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+        static $map=[
+            //["ImageWidthPixels","ImageWidthPixels"],
+            //["ImageHeightPixels","ImageHeightPixels"],
+            ["DispScreenSizeHoriz","ImageWidthPixels"],
+            ["DispScreenSizeVert","ImageHeightPixels"],
+        ];
+        if (isset($data["SetID"])) {
+            unset($data["SwitchID"]);
+            $imagedata=$this->getImageData($data);
+            $this->map($map, $imagedata, $panel);
+            $image=$panel->Image("Images/background.jpg");
+        }
+    }
+
+    public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
+        $panel=$this->getPanel(1);
+        //$panel->DispScreenSizeHoriz=1214; // Fix to match image
+        //$panel->DispScreenSizeVert=678;
+       
+        $panelelement=$panel->GUIElement($enclosure);
+        $this->configureEnclosureImage($panelelement, $data);
+        $panelelement->PositionX=$data["X"];
+        $panelelement->PositionY=500;
+        $panelelement->DispLabelText=$data["Name"];
+        $panelelement->EnclosureStyle=3;
+        unset($panelelement->BitmapCount);
+    }
+
+    private function treeWalk($root, $dir="", &$results=[]) {
+        $files=scandir("$root$dir");
+        foreach ($files as $key => $value) {
+            if (!is_dir("$root$dir/$value")) {
+                $results[strtolower("$dir/$value")] = "$dir/$value";
+            } else if ($value != "." && $value != "..") {
+                $this->treeWalk($root, ltrim("$dir/$value", "/"), $results);
+            }
+        }
+        return $results;
+    }
+
+    protected function correctFileName(string $filename): string {
+        static $files=[];
+        $filename=str_replace(
+                ["OrganInstallationPackages/000001/HauptwerkStandardImages/KeyImageSet004-",
+                 "OrganInstallationPackages/000001/HauptwerkStandardImages/KeyImageSet002-",
+                 "OrganInstallationPackages/000001/HauptwerkStandardImages/Button04-White-Large-On.bmp",
+                 "OrganInstallationPackages/000001/HauptwerkStandardImages/Button04-White-Large-Off.bmp",
+                 "OrganInstallationPackages/000001/HauptwerkStandardImages/ExpressionPedalLargeStage",
+                 "//"],
+                ["OrganInstallationPackages/080090/Images/Pedals/",
+                 "OrganInstallationPackages/080090/Images/Keys/",
+                 "Images/On.png",
+                 "Images/Off.png",
+                 "OrganInstallationPackages/080090/Images/expressionPedal/expres",
+                 "/"], 
+                $filename);  
+        if (sizeof($files)==0)
+            $files=$this->treeWalk(getenv("HOME") . self::ROOT);
+        
+        if (isset($files[strtolower($filename)]))
+            return $files[strtolower($filename)];
+        else
+            throw new \Exception ("File $filename does not exist!");
+    }
+
+    private function listSample(array $hwdata) {
+        return;
+        switch ($rankid=$hwdata["RankID"]) {
+            //case 10: // PED- 10 Rauschpfeife
+            case 31: // GRT- 31 Sesquialtera
+            case 32: // GRT- 32 Mixtur
+            case 35: // GRT- 35 Cymbel
+            case 38: // GRT- 38 Cornet V
+            case 57: // SWL- 57 Scharff
+            case 70: // POS- 70 Mixtur V
+            case 78: // POS- 79 Scharf
+            case 83: // POS- 83  Cornet V echo
+                $ppitch=$this->readSamplePitch(self::ROOT . ($file=$this->sampleFilename($hwdata)));
+                $spitch=$this->midiToHz($midi=$this->sampleMidiKey($hwdata));
+                $hn=8*$ppitch/$spitch;
+                printf("%0d\t%0d\t%01.1f\t%s\n", $rankid, $midi, $hn, $file);
+        }
+ 
+    }
+    
+    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        if (!isset($hwdata["NormalMIDINoteNumber"])) {$hwdata["NormalMIDINoteNumber"]=60;}
+        $midi=$hwdata["NormalMIDINoteNumber"];
+        $rankid=$hwdata["RankID"];
+        /* switch ($rankid) {
+            case 31: // Cornet
+                if ($midi<55) return NULL;
+                break;
+                
+            case 49: // Mixtura L
+            case 69: // Trompet 8L
+                if ($midi>59) return NULL;
+                break;
+                
+            case 50: // Mixtura R
+            case 70: // Trompet 8R
+                if ($midi<60) return NULL;
+                break;
+        } */
+        
+        if ($rankid<16 && $midi>67) return NULL;
+        if ($midi>96) return NULL;
+
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && !empty($pitchtuning=$pipe->PitchTuning)) {
+            if ($pitchtuning<-1800 || $pitchtuning>1800) $pipe->Dummy();
+        }
+        if ($pipe && $pipe->ReleaseCount==0) $this->listSample($hwdata);
+        return $pipe;
+    }
+    
+    public function label(int $x, int $y, string $text) : void {
+        $panel=$this->getPanel(1);
+        $panelelement=$panel->Label($text);
+        $panelelement->PositionX=$x;
+        $panelelement->PositionY=$y;
+    }
+    
+    /**
+     * Run the import
+     */
+    public static function LargeSwedish(array $positions=[]) {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=61;
+        \GOClasses\Manual::$pedals=32;
+        if (sizeof($positions)>0) {
+            $hwi=new LargeSwedish(self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            
+            unset($hwi->getOrgan()->InfoFilename);
+            echo ($hwi->getOrgan()->ChurchName="Large Swedish composite"), "\n";
+            
+            foreach($hwi->getStops() as $stopid=>$stop) {
+                unset($stop->Rank001FirstAccessibleKeyNumber);
+                unset($stop->Rank001FirstPipeNumber);
+                /*switch ($stopid) {
+                    case 2131: // Cornet
+                        $stop->Rank001FirstAccessibleKeyNumber=20;
+                        break;
+                    
+                    case 2250: // Mixtura R
+                    case 2370: // Trompet 8R
+                        $stop->Rank001FirstAccessibleKeyNumber=25;
+                        break;
+                } */
+            }
+
+            foreach($hwi->getRanks() as $rankid=>$rank) {
+                if (isset($hwi->patchRanks[$rankid]["HN"])) {
+                    $hns=$hwi->patchRanks[$rankid]["HN"];
+                    if (!is_array($hns)) $hns=[[0, 99, $hns]];
+                    $pipes=$rank->Pipes();
+                    foreach ($hns as $hn) {
+                        for ($midi=$hn[0]; $midi<=$hn[1]; $midi++) {
+                            if (isset($pipes[$midi])) {
+                                $pipe=$pipes[$midi];
+                                if (!$pipe->IsDummy()) $pipe->HarmonicNumber=$hn[2];
+                            }
+                        }
+                    }
+                }
+            }
+            
+            $hwi->getRank( 2)->PitchTuning=-1200;
+            $hwi->getRank( 8)->PitchTuning=+1200;
+            $hwi->getRank(17)->PitchTuning=-1200;
+            $hwi->getRank(37)->PitchTuning=+1200;
+            $hwi->getRank(49)->PitchTuning= +700;
+            $hwi->getRank(71)->PitchTuning= +700;
+            $hwi->getRank(62)->PitchTuning=-1200;
+            
+            $hwi->label( 30,  30, "GREAT");
+            $hwi->label(940,  30, "POSITIVE");
+            $hwi->label( 30, 320, "PEDAL");
+            $hwi->label(940, 320, "SWELL");
+            
+            $hwi->saveODF(self::TARGET, self::COMMENTS);
+        }
+        
+        else {
+            self::LargeSwedish([1=>""]);
+        }
+    }   
+}
+
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
+    throw new \Exception("Error $errstr");
+    die();
+}
+// set_error_handler("Organs\AV\ErrorHandler");
+LargeSwedish::LargeSwedish();
