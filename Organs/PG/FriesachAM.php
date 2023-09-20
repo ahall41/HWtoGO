@@ -17,7 +17,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  * @author andrew
  */
 class FriesachAM extends \Import\Organ {
-    const ROOT="/GrandOrgue/Organs/PG/FriesachExt/";
+    const ROOT="/GrandOrgue/Organs/PG/Friesach/";
     const SOURCE=self::ROOT . "OrganDefinitions/FriesachExtendV2.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Friesach Extended (Al Morse) 1.0.organ";
     const COMMENTS="\n";
@@ -198,6 +198,13 @@ class FriesachAM extends \Import\Organ {
         $this->buildStops();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
+        foreach([403,404] as $rankid) {
+            $rank=$this->getRank($rankid);
+            for ($midi=93; $midi<98; $midi++) {
+                $pipe=$rank->Pipe($midi,$rank->Pipe(92));
+                $pipe->PitchTuning=100*($midi-92);
+            }
+        }
         $this->cloneRanks();
     }
 
@@ -291,11 +298,6 @@ class FriesachAM extends \Import\Organ {
             $tremdata["Label"]="Tremulant";
             $this->createTremulant($tremdata);
         }
-        echo $this->getWindchestGroup(0);
-        echo $this->getWindchestGroup(1);
-        echo $this->getWindchestGroup(2);
-        echo $this->getWindchestGroup(3);
-        echo $this->getWindchestGroup(4);
     }
 
     protected function buildCouplers() : void {
