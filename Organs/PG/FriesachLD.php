@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  * 
  * @author andrew
  */
-class FriesachExt extends \Import\Organ {
+class FriesachLD extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/PG/Friesach/";
     const SOURCE=self::ROOT . "OrganDefinitions/Friesach.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Friesach Extended 1.1.organ";
@@ -387,8 +387,8 @@ class FriesachExt extends \Import\Organ {
     /**
      * Run the build
      */
-    public static function FriesachExt() {
-        $hwi=new FriesachExt(self::SOURCE);
+    public static function FriesachLD() {
+        $hwi=new FriesachLD(self::SOURCE);
         $hwi->build();
         echo $hwi->getOrgan()->ChurchName, "\n";
         $hwi->getPanel(0)->Name="Friesach Extended";
@@ -396,4 +396,4 @@ class FriesachExt extends \Import\Organ {
     }
 }
 
-FriesachExt::FriesachExt();
+FriesachLD::FriesachLD();
