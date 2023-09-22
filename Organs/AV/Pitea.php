@@ -229,7 +229,7 @@ class Pitea extends AVOrgan {
             //$panelelement->DisplayKeys=54;
             $keyImageset=$keyImageSets[$keyboardid==1 ? 2 : 1];
             $keyImageset["ManualID"]=$keyboardid;
-            $adjuster=$keyboardid==1 ? 3 : 2;
+            $adjuster=$keyboardid==1 ? 3 : 1;
             $keyImageset["HorizSpacingPixels_LeftOfNaturalFromLeftOfNatural"]-=$adjuster;
             $keyImageset["HorizSpacingPixels_LeftOfCFSharpFromLeftOfCF"]-=$adjuster;
             $keyImageset["HorizSpacingPixels_LeftOfDASharpFromLeftOfDA"]-=$adjuster;
@@ -239,23 +239,23 @@ class Pitea extends AVOrgan {
             $keyImageset["HorizSpacingPixels_LeftOfAFromLeftOfGSharp"]-=$adjuster;
             switch ($keyboardid) {
                 case 1:
-                    $keyImageset["PositionX"]=390;
-                    $keyImageset["PositionY"]=590;
+                    $keyImageset["PositionX"]=385;
+                    $keyImageset["PositionY"]=595;
                     $panelelement->DisplayKeys=32;
                     break;
                 
                 case 2:
-                    $keyImageset["PositionX"]=415;
+                    $keyImageset["PositionX"]=380;
                     $keyImageset["PositionY"]=420;
                     break;
                     
                 case 3:
-                    $keyImageset["PositionX"]=415;
+                    $keyImageset["PositionX"]=380;
                     $keyImageset["PositionY"]=360;
                     break;
 
                 case 4:
-                    $keyImageset["PositionX"]=415;
+                    $keyImageset["PositionX"]=380;
                     $keyImageset["PositionY"]=300;
                     break;
             }
@@ -353,7 +353,7 @@ class Pitea extends AVOrgan {
             $hwi->import();
             
             unset($hwi->getOrgan()->InfoFilename);
-            echo ($hwi->getOrgan()->ChurchName="Large Swedish composite"), "\n";
+            echo ($hwi->getOrgan()->ChurchName="Pitea Composite"), "\n";
             
             foreach($hwi->getStops() as $stopid=>$stop) {
                 unset($stop->Rank001FirstAccessibleKeyNumber);
