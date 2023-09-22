@@ -19,7 +19,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Nancy extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Nancy/";
+    const ROOT="/GrandOrgue/Organs/PG/Nancy/";
     const ODF="Nancy (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Nancy, Cathédrale Notre-Dame-de-l'Annonciation, France (" . self::ODF . ")\n"
