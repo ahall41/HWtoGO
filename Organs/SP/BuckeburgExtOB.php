@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew`
  */
 class BuckeburgExtOB extends \Import\Organ {
-    const ROOT="/GrandOrgue/Organs/Buckeburg/";
+    const ROOT="/GrandOrgue/Organs/SP/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Old Brampton (Buckeburg Model) %s.organ";
 

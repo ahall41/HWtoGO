@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Bakats extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Bakats/";
+    const ROOT="/GrandOrgue/Organs/AV//Bakats/";
     const SOURCE=self::ROOT . "OrganDefinitions/Bakats surround_demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Bakats surround demo 1.0.organ";
     const COMMENTS=

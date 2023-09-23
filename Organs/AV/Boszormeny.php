@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Boszormeny extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Boszormeny/";
+    const ROOT="/GrandOrgue/Organs/AV//Boszormeny/";
     const ODF="Boszormeny surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

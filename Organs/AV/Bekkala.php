@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Bekkala extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Bekkala/";
+    const ROOT="/GrandOrgue/Organs/AV//Bekkala/";
     const SOURCE=self::ROOT . "OrganDefinitions/Bekkala surround demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Bekkala Demo %s.1.0.organ";
     const COMMENTS=

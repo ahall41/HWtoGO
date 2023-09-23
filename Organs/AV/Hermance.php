@@ -18,7 +18,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  */
 class Hermance extends AVOrgan {
 
-    const ROOT="/GrandOrgue/Organs/AVO/Hermance/";
+    const ROOT="/GrandOrgue/Organs/AV//Hermance/";
     const SOURCE=self::ROOT . "/OrganDefinitions/Mascioni-Hermance_%s.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Mascioni-Hermance %s 1.0.organ";
     const COMMENTS=

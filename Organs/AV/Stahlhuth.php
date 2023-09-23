@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Stahlhuth extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Stahlhuth/";
+    const ROOT="/GrandOrgue/Organs/AV/Stahlhuth/";
     const ODF="Stahlhuth_positive_ext_four_channels.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

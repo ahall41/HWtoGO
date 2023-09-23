@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class NoviSad extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/NoviSad/";
+    const ROOT="/GrandOrgue/Organs/AV/NoviSad/";
     const ODF="Novi Sad surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

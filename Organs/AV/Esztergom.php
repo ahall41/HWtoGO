@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Esztergom extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Esztergom/";
+    const ROOT="/GrandOrgue/Organs/AV//Esztergom/";
     const SOURCE=self::ROOT . "OrganDefinitions/Rieger-Esztergom surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Rieger-Esztergom surround demo 1.0.organ";
     const COMMENTS=

@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class SPModern extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Modern/";
+    const ROOT="/GrandOrgue/Organs/AV//Modern/";
     const ODF="SP Modern demo composit.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

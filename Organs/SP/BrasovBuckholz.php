@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class BrasovBuckholz extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Brasov_Buckholz/";
+    const ROOT="/GrandOrgue/Organs/SP/Brasov_Buckholz/";
     const SOURCE="OrganDefinitions/Brasov - Surround DEMO.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Brasov Buckholz (Demo - %s) 1.0.organ";
     const REVISIONS="";

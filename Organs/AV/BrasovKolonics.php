@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class BrasovKolonics extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Kolonics_Brasov/";
+    const ROOT="/GrandOrgue/Organs/AV/Kolonics_Brasov/";
     const ODF="Kolonics Brasov Surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

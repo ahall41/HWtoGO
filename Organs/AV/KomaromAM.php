@@ -22,7 +22,7 @@ require_once(__DIR__ . "/Komarom.php");
  * @author andrew
  */
 class KomaromAM extends Komarom {
-    const ROOT="/GrandOrgue/Organs/KomaromAM/";
+    const ROOT="/GrandOrgue/Organs/AV/KomaromAM/";
     const ODF="Buckow-Rieger Komarom_v2_surround_AM.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Szombathely extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Szombathely/";
+    const ROOT="/GrandOrgue/Organs/AV/Szombathely/";
     const ODF="Jehmlich_Szombathely.v2.surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

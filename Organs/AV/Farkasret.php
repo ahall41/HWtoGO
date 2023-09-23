@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Farkasret extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Farkasret/";
+    const ROOT="/GrandOrgue/Organs/AV/Farkasret/";
     const ODF="Italian Baroque Organ Budapest sur native_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

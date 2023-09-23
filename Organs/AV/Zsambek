@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Zsambek extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Zsambek/";
+    const ROOT="/GrandOrgue/Organs/AV//Zsambek/";
     const SOURCE=self::ROOT . "OrganDefinitions/Zsambek surround_demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Zsambek Demo %s.1.0.organ";
     const COMMENTS=

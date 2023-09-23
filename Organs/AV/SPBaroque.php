@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class SPBaroque extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Baroque/";
+    const ROOT="/GrandOrgue/Organs/AV//Baroque/";
     const ODF="SP Great Baroque.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

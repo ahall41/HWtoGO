@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Savaria extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Savaria/";
+    const ROOT="/GrandOrgue/Organs/AV//Savaria/";
     const SOURCE=self::ROOT . "OrganDefinitions/Savaria-surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Savaria surround demo 1.0.organ";
     const COMMENTS=

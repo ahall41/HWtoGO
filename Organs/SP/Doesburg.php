@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Doesburg extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Doesburg/";
+    const ROOT="/GrandOrgue/Organs/SP/Doesburg/";
     const SOURCE="OrganDefinitions/Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Doesburg, St. Martini, Walcker, DEMO (%s) 1.1.organ";
     

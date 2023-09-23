@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Aachen extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Aachen/";
+    const ROOT="/GrandOrgue/Organs/AV/Aachen/";
     const ODF="Stahlhuth_surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

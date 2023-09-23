@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class WalckerMiskolc extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/WalckerMiskolc/";
+    const ROOT="/GrandOrgue/Organs/AV/WalckerMiskolc/";
     const ODF="Walcker_Miskolc v2 surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

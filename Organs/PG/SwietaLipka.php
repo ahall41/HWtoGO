@@ -19,7 +19,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class SwietaLipka extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/SwietaLipka/";
+    const ROOT="/GrandOrgue/Organs/PG/SwietaLipka/";
     const ODF="Swieta Lipka (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Święta Lipka, Sanktuarium Nawiedzenia Najświętszej Maryi Panny, Poland (" . self::ODF . ")\n"

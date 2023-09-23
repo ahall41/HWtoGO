@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Zamardi extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Zamardi/";
+    const ROOT="/GrandOrgue/Organs/AV/Zamardi/";
     const ODF="Zamardi surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

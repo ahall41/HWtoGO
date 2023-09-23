@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class BudapestStMary extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/BudapestStMary/";
+    const ROOT="/GrandOrgue/Organs/AV/BudapestStMary/";
     const ODF="Mary the Virgin Budapest surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

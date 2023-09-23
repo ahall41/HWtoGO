@@ -17,7 +17,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Goch extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Goch/";
+    const ROOT="/GrandOrgue/Organs/PG/Goch/";
     const ODF="Goch (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Pfarrkirche St. Maria Magdalena in Goch, Germany (" . self::ODF . ")\n"

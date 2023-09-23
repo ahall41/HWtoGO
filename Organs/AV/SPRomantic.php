@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class SPRomantic extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Romantic/";
+    const ROOT="/GrandOrgue/Organs/AV//Romantic/";
     const ODF="SP Great Romantic v.2.0.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

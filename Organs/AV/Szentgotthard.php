@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Szentgotthard extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Szentgotthard/";
+    const ROOT="/GrandOrgue/Organs/AV//Szentgotthard/";
     const SOURCE=self::ROOT . "OrganDefinitions/Szentgotthard surround_demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Szentgotthard surround demo 1.0.organ";
     const COMMENTS=

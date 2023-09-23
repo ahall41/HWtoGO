@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Kecskemet extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Kecskemet/";
+    const ROOT="/GrandOrgue/Organs/AV/Kecskemet/";
     const ODF="Jehmlich_Kecskemet_surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

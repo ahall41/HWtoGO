@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Sepsiszentgyorgy extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Sepsiszentgyorgy/";
+    const ROOT="/GrandOrgue/Organs/AV/Sepsiszentgyorgy/";
     const SOURCE=self::ROOT . "OrganDefinitions/%s.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "%s 1.1.organ";
     const COMMENTS=
@@ -27,7 +27,7 @@ class Sepsiszentgyorgy extends AVOrgan {
 
     private static $targets=[
         "Ziegler dry"       =>[1=>"Near"],
-        "Ziegler wet"       =>[1=>"Far"],
+        "Ziegler wet"       =>[2=>"Far"],
         "Ziegler surround"  =>[1=>"Near", 2=>"Far", 3=>"Rear"],
     ];
     

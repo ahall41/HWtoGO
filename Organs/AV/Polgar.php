@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Polgar extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Polgar/";
+    const ROOT="/GrandOrgue/Organs/AV//Polgar/";
     const ODF="Polgar surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

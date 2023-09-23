@@ -17,7 +17,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  * @author andrew
  */
 class BillerbeckExtStsAugustine extends \Import\Organ {
-    const ROOT="/GrandOrgue/Organs/Billerbeck/";
+    const ROOT="/GrandOrgue/Organs/SP/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Saints Augustine (Billerbeck Model) %s.organ";
 

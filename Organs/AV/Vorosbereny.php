@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Vorosbereny extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Vorosbereny/";
+    const ROOT="/GrandOrgue/Organs/AV/Vorosbereny/";
     const ODF="Vorosbereny surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

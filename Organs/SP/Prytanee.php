@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class Prytanee extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/Prytanee/";
+    const ROOT="/GrandOrgue/Organs/SP/Prytanee/";
     const SOURCE="OrganDefinitions/Prytanee Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Prytanee %s Demo 1.0.organ";
     const REVISIONS="";

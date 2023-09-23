@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class SzikszoOriginal extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Szikszo/";
+    const ROOT="/GrandOrgue/Organs/AV//Szikszo/";
     const SOURCE=self::ROOT . "OrganDefinitions/%s.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "%s 1.1.organ";
     const COMMENTS=
@@ -26,7 +26,7 @@ class SzikszoOriginal extends AVOrgan {
             . "\n";
     
     private static $targets=[
-        "Klais v2 wet orig.demo"      =>[1=>"Far"],
+        //"Klais v2 wet orig.demo"      =>[1=>"Far"],
         "Klais v2 wet original"       =>[1=>"Far"],
         "Klais w2 semidry_orig"       =>[1=>"Near"],
         "Klais v2 surround original"  =>[1=>"Far", 2=>"Near"],

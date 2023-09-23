@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrewZ`
  */
 class Buckeburg extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Buckeburg/";
+    const ROOT="/GrandOrgue/Organs/SP/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.2.organ";
     const REVISIONS="\n1.1 Remove additional attacks\n"

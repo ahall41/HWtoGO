@@ -17,7 +17,7 @@ require_once __DIR__ . "/AVOrgan.php";
  * @author andrew
  */
 class BudaHills extends AVOrgan{
-    const ROOT="/GrandOrgue/Organs/LutheranBuda/";
+    const ROOT="/GrandOrgue/Organs/AV//BudaHills/";
     const ODF="Lutheran Buda_surround.Organ_Hauptwerk_xml";
     const COMMENTS=
               "POM Lutheran's Organ from the Buda Hills Area (" . self::ODF . ")\n"

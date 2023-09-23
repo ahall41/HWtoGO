@@ -18,7 +18,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
 
 class Alessandria extends \Import\Organ {
 
-    const ROOT="/GrandOrgue/Organs/Alessandria/";
+    const ROOT="/GrandOrgue/Organs/PG/Alessandria/";
     const SOURCE=self::ROOT . "OrganDefinitions/Alessandria (demo).Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Alessandria (demo - %s) 0.1.organ";
     const PITCHDATA=self::ROOT . "PitchData.csv";

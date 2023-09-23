@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class Noordwolde extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/Noordwolde/";
+    const ROOT="/GrandOrgue/Organs/SP/Noordwolde/";
     const SOURCE="OrganDefinitions/Noordwolde, Huis-Freytag-Lohman, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Noordwolde, Huis-Freytag-Lohma %s Demo 1.0.organ";
     const REVISIONS="";

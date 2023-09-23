@@ -178,13 +178,25 @@ class Casavant extends SPOrgan {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            foreach([440,440] as $rankid) {
+            foreach([440,444,448,449] as $rankid) {
                 $rank=$hwi->getRank($rankid);
-                foreach ($rank->Pipes() as $pipe) unset($pipe->PitchTuning);
+                if ($rank) {
+                    foreach ($rank->Pipes() as $pipe) unset($pipe->PitchTuning);
+                }
             }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
+            self::Casavant(
+                    [
+                        self::RANKS_DIRECT=>"Front", 
+                    ],
+                   "dry");
+            self::Casavant(
+                    [
+                        self::RANKS_REAR=>"Rear"
+                    ],
+                   "wet");
             self::Casavant(
                     [
                         self::RANKS_DIRECT=>"Front", 

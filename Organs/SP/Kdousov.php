@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Kdousov extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Kdousov/";
+    const ROOT="/GrandOrgue/Organs/SP/Kdousov/";
     const SOURCE="OrganDefinitions/Kdousov Wet.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Kdousov Wet 1.0.organ";
     const RANKS_WET=0;

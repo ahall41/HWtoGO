@@ -18,7 +18,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  */
 class BudapestCastilian extends AVOrgan {
 
-    const ROOT="/GrandOrgue/Organs/AVO/Budapest_Castilian/";
+    const ROOT="/GrandOrgue/Organs/AV//Budapest_Castilian/";
     const SOURCE=self::ROOT . "OrganDefinitions/Castilian Budapest surround %s_demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Castilian Budapest (%s) 1.0.organ";
     const COMMENTS=

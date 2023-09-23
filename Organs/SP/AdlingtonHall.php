@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class AdlingtonHall extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/AdlingtonHall/";
+    const ROOT="/GrandOrgue/Organs/SP/AdlingtonHall/";
     const SOURCE="OrganDefinitions/Adlington Hall, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Adlington Hall %s Demo 1.0.organ";
     const REVISIONS="";

@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Egerszeg extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Egerszeg/";
+    const ROOT="/GrandOrgue/Organs/AV//Egerszeg/";
     const ODF="Egerszeg Surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

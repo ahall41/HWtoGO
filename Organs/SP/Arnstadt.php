@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class Arnstadt extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/Arnstadt/";
+    const ROOT="/GrandOrgue/Organs/SP/Arnstadt/";
     const SOURCE="OrganDefinitions/Arnstadt, Bachkirche Wender Organ, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Arnstadt, Bachkirche Wender Organ %s Demo 1.0.organ";
     const REVISIONS="";

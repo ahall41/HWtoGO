@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Urk extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Urk/";
+    const ROOT="/GrandOrgue/Organs/AV/Urk/";
     const ODF="Urk - Kerk aan de Zee-surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

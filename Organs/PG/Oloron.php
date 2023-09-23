@@ -20,7 +20,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Oloron extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Oloron/";
+    const ROOT="/GrandOrgue/Organs/PG/Oloron/";
     const ODF="Oloron-Sainte-Marie.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Oloron, Cathédrale Notre-Dame-de-l'Annonciation, France (" . self::ODF . ")\n"

@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Zenta extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Zenta/";
+    const ROOT="/GrandOrgue/Organs/AV/Zenta/";
     const ODF="Zenta surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

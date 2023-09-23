@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class HradecKralove extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/HradecKralove/";
+    const ROOT="/GrandOrgue/Organs/SP/HradecKralove/";
     const SOURCE="OrganDefinitions/Hradec Kralove - Maria - Wet.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Hradec Kralove - Maria - Wet 1.0.organ";
     

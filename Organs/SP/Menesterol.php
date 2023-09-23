@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Menesterol extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Menesterol/";
+    const ROOT="/GrandOrgue/Organs/SP/Menesterol/";
     const SOURCE="OrganDefinitions/Menesterol 4-chan Surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Menesterol 4-chan Surround (%s) 1.0.organ";
     

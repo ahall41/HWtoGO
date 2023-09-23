@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Tihany extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Tihany/";
+    const ROOT="/GrandOrgue/Organs/AV/Tihany/";
     const ODF="Tihany surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

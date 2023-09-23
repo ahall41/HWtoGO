@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Lemmer extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AVO/Lemmer/";
+    const ROOT="/GrandOrgue/Organs/AV//Lemmer/";
     const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Lemmer %s.1.0.organ";
     const COMMENTS=

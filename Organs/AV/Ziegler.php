@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Ziegler extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Ziegler/";
+    const ROOT="/GrandOrgue/Organs/AV/Ziegler/";
     const ODF="Ziegler surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

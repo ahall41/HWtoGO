@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class PortlandRosales extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/PortlandRosales/";
+    const ROOT="/GrandOrgue/Organs/SP/PortlandRosales/";
     const SOURCE="OrganDefinitions/Portland, Rosales op.11, DEMO.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Portland, Rosales op.11 %s Demo 0.1.organ";
     const REVISIONS="";

@@ -18,7 +18,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  */
 class Luins extends AVOrgan {
 
-    const ROOT="/GrandOrgue/Organs/AVO/Luins/";
+    const ROOT="/GrandOrgue/Organs/AV//Luins/";
     const SOURCE=self::ROOT . "/OrganDefinitions/Luins_%s.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Luins %s 1.1.organ";
     const COMMENTS=

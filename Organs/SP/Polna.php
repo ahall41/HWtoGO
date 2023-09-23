@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class Polna extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/Polna/";
+    const ROOT="/GrandOrgue/Organs/SP/Polna/";
     const SOURCE="OrganDefinitions/Polna, Sieber Organ, Surround Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Polna, Sieber Organ, Surround %s Demo 1.0.organ";
     const REVISIONS="";

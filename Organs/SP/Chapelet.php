@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Chapelet extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Chapelet/";
+    const ROOT="/GrandOrgue/Organs/SP/Chapelet/";
     const SOURCE="OrganDefinitions/Chapelet Spanish Collection DEMO.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Chapelet Spanish Collection (Demo - %s) 1.0.organ";
     const REVISIONS="";

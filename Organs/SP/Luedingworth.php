@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Luedingworth extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Luedingworth/";
+    const ROOT="/GrandOrgue/Organs/SP/Luedingworth/";
     const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.0.organ";
     

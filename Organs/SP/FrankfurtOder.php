@@ -17,7 +17,7 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class FrankfurtOder extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/FrankfurtOder/";
+    const ROOT="/GrandOrgue/Organs/SP/FrankfurtOder/";
     const SOURCE="OrganDefinitions/Frankfurt (Oder), Sauer, op. 2025, 8-channel demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Frankfurt (Oder), Sauer, op. 2025 %s Demo 1.0.organ";
     const REVISIONS="";

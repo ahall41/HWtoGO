@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Caen extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/Caen/";
+    const ROOT="/GrandOrgue/Organs/SP/Caen/";
     const SOURCE="OrganDefinitions/Caen St. Etienne, Cavaille-Coll, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Caen St. Etienne, Cavaille-Coll, Demo (%s) 0.2.organ";
     

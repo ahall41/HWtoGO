@@ -17,7 +17,7 @@ require_once __DIR__ . "/AVOrgan.php";
  * @author andrew
  */
 class Ada extends AVOrgan{
-    const ROOT="/GrandOrgue/Organs/Ada/";
+    const ROOT="/GrandOrgue/Organs/AV/Ada/";
     const ODF="Ada demo surround.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Romantic Organ from Ada (Serbia-Vojvodina) (" . self::ODF . ")\n"

@@ -19,7 +19,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Komarom extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Komarom/";
+    const ROOT="/GrandOrgue/Organs/AV/Komarom/";
     const ODF="Buckow-Rieger Komarom_v2_surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
