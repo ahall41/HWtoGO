@@ -19,10 +19,12 @@ require_once(__DIR__ . "/AVOrgan.php");
 class Lemmer extends AVOrgan {
     const ROOT="/GrandOrgue/Organs/AV//Lemmer/";
     const SOURCE=self::ROOT . "OrganDefinitions/Lemmer surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Lemmer %s.1.0.organ";
+    const TARGET=self::ROOT . "Lemmer %s.1.1.organ";
     const COMMENTS=
               "Flentrop organ from Lemmer - Sint Willibrorduskerk (Netherlands)\n"
             . "https://hauptwerk-augustine.info/Lemmer.php\n"
+            . "\n"
+            . "\1.1 Corrected extended Holpip"
             . "\n";
 
     //protected int $releaseCrossfadeLengthMs=100;
@@ -206,7 +208,7 @@ class Lemmer extends AVOrgan {
                             break;
                         
                         case 2120: // Quint B
-                        case 2130: // Holpijp8o
+                        case 2133: // Holpijp8o
                         case 2135: // Fluit4o
                         case 2234: // Nasard
                         case 2237: // Terts

@@ -24,7 +24,7 @@ class Gelence extends AVOrgan {
               "Baumgartner organ from Gelence (Transylvania)\n"
             . "https://hauptwerk-augustine.info/Gelence.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Gelence extended.1.0.organ";
+    const TARGET=self::ROOT . "Gelence extended %s.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -143,6 +143,8 @@ class Gelence extends AVOrgan {
                             $keyImageset["PositionX"]=$keyboard["KeyGen_DispKeyboardLeftXPos"];
                             $keyImageset["PositionY"]=$keyboard["KeyGen_DispKeyboardTopYPos"];
                             $this->configureKeyImage($panelelement, $keyImageset);
+                            $panelelement->DisplayKeys=$manual->DisplayKeys;
+                            unset($manual->DisplayKeys);
                             $manual->Displayed="N";
                         }
                     }
@@ -210,28 +212,51 @@ class Gelence extends AVOrgan {
             $hwi=new Gelence(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("sur new", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName.=" ($target)";
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
+            foreach($hwi->getManuals() as $id=>$manual) {
+                unset($manual->DisplayKeys);
+                $manual->NumberOfLogicalKeys=$manual->NumberOfAccessibleKeys=$id==1 ? 30 : 57;
+            }
             foreach($hwi->getStops() as $id=>$stop) {
                 unset($stop->Rank001PipeCount);
                 unset($stop->Rank002PipeCount);
                 unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                if ( ($id > 2120 && $id<2200) || ($id > 2120 && $id<2200)) {
-                    $stop->Rank001FirstAccessibleKeyNumber=25;
-                    $stop->Rank002FirstAccessibleKeyNumber=25;
-                    $stop->Rank003FirstAccessibleKeyNumber=25;                }
+                $stop->NumberOfAccessiblePipes=$id>2000 && $id<2100 ? 30 : 57;
+                 if ( ($id > 2120 && $id<2200) || ($id > 2220 && $id<2300)) {
+                    for ($r=1; $r<=$stop->NumberOfRanks; $r++) {
+                        $rn=$stop->int2str($r);
+                        $stop->set("Rank{$rn}FirstAccessibleKeyNumber", 25);
+                    }
+                    //echo $id, "\t", $stop->Name, "\n";
+                }
+                // else {echo $stop->Name, "\n";}
+            }
+            
+            // Extend the descant ranks
+            foreach ($hwi->getRanks() as $id=>$rank) {
+                if (($id % 100)>20 && ($id % 100)<90) {
+                    // echo $rank->Name, "\n";
+                   for ($midi=86; $midi<=91; $midi++) {
+                        $pipe=$rank->Pipe($midi,$rank->Pipe(85));
+                        $pipe->PitchTuning=100*($midi-85);
+                        // echo $pipe, "\n";
+                   }
+                }
             }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Gelence(
                     [1=>"Front", 2=>"Rear (orig)", 3=>"Rear (echo)"],
-                    "surround");
+                    "Surround");
+            self::Gelence(
+                    [1=>"Front"],
+                    "Dry");
+            self::Gelence(
+                    [2=>"Rear"],
+                    "Wet");
         }
     }   
 }

@@ -227,7 +227,7 @@ abstract Class Configure extends Create {
         
         if (!isset($hwdata["SwitchID"])) $hwdata["SwitchID"]=$hwdata["ControllingSwitchID"];
         $switch=parent::createTremulant($hwdata);
-        $this->map($map, $hwdata, $this->getTremulant($hwdata["TremulantID"]));
+        if (($tremulant=$this->getTremulant($hwdata["TremulantID"],FALSE))) {$this->map($map, $hwdata, $tremulant);}
         $this->configurePanelSwitchImages($switch, $hwdata);
         return $switch;
     }

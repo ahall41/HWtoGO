@@ -17,14 +17,14 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Ziegler extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV/Ziegler/";
+    const ROOT="/GrandOrgue/Organs/AV/Sepsiszentgyorgy/";
     const ODF="Ziegler surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Ziegler Organ of Sepsiszentgyörgy (Transylvania) - from Montreux\n"
             . "https://hauptwerk-augustine.info/Ziegler_organ.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Ziegler surround_demo.1.0.organ";
+    const TARGET=self::ROOT . "Ziegler %s.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -214,24 +214,22 @@ class Ziegler extends AVOrgan {
             $hwi=new Ziegler(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("sur new", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("surround", "($target)", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             foreach($hwi->getStops() as $id=>$stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                if ($id==2121) {
-                    $stop->Rank001FirstAccessibleKeyNumber=18;
-                    $stop->Rank002FirstAccessibleKeyNumber=18;
-                    $stop->Rank003FirstAccessibleKeyNumber=18;
+                for ($r=1; $r<=$stop->NumberOfRanks; $r++) {
+                    $rn=$stop->int2str($r);
+                    $stop->unset("Rank{$rn}PipeCount");
+                    if ($id==2121) {$stop->set("Rank{$rn}FirstAccessibleKeyNumber", 18);}
                 }
             }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {
-            self::Ziegler([1=>"Near", 2=>"Far", 3=>"Rear"], "");
+            self::Ziegler([1=>"Near", 2=>"Far", 3=>"Rear"], "Surround");
+            self::Ziegler([1=>"Near"], "Dry");
         }
     }   
 }

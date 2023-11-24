@@ -25,9 +25,10 @@ class BudaHills extends AVOrgan{
             . "\n"
             . "Version 1.1 Correct reed tuning and organ gain\n"
             . "Version 1.2 Add key action noises\n"
+            . "Version 1.2 Remove unused pipes\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Lutheran Buda_%s.1.2.organ";
+    const TARGET=self::ROOT . "Lutheran Buda_%s.1.3.organ";
 
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
@@ -122,6 +123,7 @@ class BudaHills extends AVOrgan{
         $keyImageset=$keyImageSets[1];
         foreach ([2=>470,3=>410] as $manid=>$posy) {
             $manual=$this->getManual($manid);
+            $keyImageset["ManualID"]=$manid;
             $this->configureKeyImage($manual, $keyImageset);
             $manual->PositionX=350;
             $manual->PositionY=$posy;
@@ -142,14 +144,20 @@ class BudaHills extends AVOrgan{
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
+        $rankid=$hwdata["RankID"] % 100;
+        if ($rankid<5 && $midi>67) {return NULL;}
+        if ($midi>96) {return NULL;}
+        
         $pipe=parent::processSample($hwdata, $isattack);
-        if (isset($hwdata["NormalMIDINoteNumber"])) {
+        if ($pipe && isset($hwdata["NormalMIDINoteNumber"])) {
             $key=$hwdata["NormalMIDINoteNumber"];
             if ($key>91)
                 $pipe->PitchTuning=($key-91)*100; // Extended pipes
             if ($key==36 && in_array($hwdata["RankID"], [4,104,204]))
                 $pipe->PitchTuning=35;
         }
+      
         return $pipe;
     }
     
@@ -168,8 +176,14 @@ class BudaHills extends AVOrgan{
         }
         else {
             self::BudaHills(
-                    [1=>"Near", 2=>"Far", 3=>"Rear"],
+                    [1=>"Far", 2=>"Near", 3=>"Rear"],
                     "surround");
+            self::BudaHills(
+                    [1=>"Far"],
+                    "wet");
+            self::BudaHills(
+                    [2=>"Near"],
+                    "dry");
         }
     }   
 }

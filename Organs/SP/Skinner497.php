@@ -257,4 +257,8 @@ class Skinner497 extends SPOrgan {
         }
     }
 }
-Skinner497::Skinner497();
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
+    throw new \Exception("Error $errstr");
+    die();
+}
+set_error_handler("Organs\SP\ErrorHandler");Skinner497::Skinner497();

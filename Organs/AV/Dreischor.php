@@ -24,7 +24,7 @@ class Dreischor extends AVOrgan {
               "Vierdag Organ from Adriaanskerk in Dreischor (Netherlands)\n"
             . "https://hauptwerk-augustine.info/Dreischor.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Dreischor Surround.1.0.organ";
+    const TARGET=self::ROOT . "Dreischor %s.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -141,7 +141,7 @@ class Dreischor extends AVOrgan {
             $hwi=new Dreischor(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("sur new", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("surround", $target, $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             unset($hwi->getManual(4)->DisplayKeys);
@@ -157,8 +157,9 @@ class Dreischor extends AVOrgan {
         }
         else {
             self::Dreischor(
-                    [1=>"Far", 2=>"Near"],
-                    "surround");
+                    [1=>"Far", 2=>"Near"], "Surround");
+            self::Dreischor(
+                    [2=>"Near"], "Dry");
         }
     }   
 }

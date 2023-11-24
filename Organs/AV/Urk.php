@@ -23,8 +23,10 @@ class Urk extends AVOrgan {
     const COMMENTS=
               "Dam & Zonen Organ from Urk - Kerkje aan de Zee (Netherlands) (" . self::ODF . ")\n"
             . "https://hauptwerk-augustine.info/Urk.php\n"
+            . "\n"
+            . "1.1 Corrected volume controls\n"
             . "\n";
-    const TARGET=self::ROOT . "Urk - Kerk aan de Zee-%s.1.0.organ";
+    const TARGET=self::ROOT . "Urk - Kerk aan de Zee %s.1.1.organ";
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
@@ -39,8 +41,8 @@ class Urk extends AVOrgan {
     ];
     
     protected $patchEnclosures=[
-        11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
-        12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202], "InstanceID"=>85133, "AmpMinimumLevel"=>1],
+        11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201], "InstanceID"=>85133, "AmpMinimumLevel"=>1],
+        12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
         17=>["EnclosureID"=>"17", "Name"=>"Noises","GroupIDs"=>[700], "InstanceID"=>85135, "AmpMinimumLevel"=>1],
         
     ];
@@ -105,7 +107,7 @@ class Urk extends AVOrgan {
             $hwi=new Urk(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("sur new", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("surround", "($target)", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getStops() as $stop) {
@@ -120,8 +122,11 @@ class Urk extends AVOrgan {
         }
         else {
             self::Urk(
-                    [1=>"Far", 2=>"Near"],
-                    "surround");
+                    [1=>"Far", 2=>"Near"], "Surround");
+            self::Urk(
+                    [1=>"Far"], "Wet");
+            self::Urk(
+                    [2=>"Near"], "Dry");
         }
     }   
 }

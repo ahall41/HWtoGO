@@ -186,8 +186,10 @@ class Buckeburg extends SPOrgan {
     }
     
     protected function xxconfigureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
-        if ($pipe->AttackCount<0)
-            parent::configureAttack($hwdata, $pipe);
+        parent::configureAttack($hwdata, $pipe);
+        echo $hwdata["SampleID"], "\t",
+             $this->sampleHarmonicNumber($hwdata), "\t",
+             $this->sampleMidiKey($hwdata), "\n";
     }
     
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
@@ -198,12 +200,13 @@ class Buckeburg extends SPOrgan {
     /**
      * Run the import
      */
-    public static function Buckeburg(array $positions=[], string $target="") {
+    public static function Buckeburg(array $positions=[], string $target="", float $balance=0.0) {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         if (sizeof($positions)>0) {
             $hwi=new Buckeburg(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
+            $hwi->balance=$balance;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
@@ -211,7 +214,7 @@ class Buckeburg extends SPOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
-            self::Buckeburg(
+            /*self::Buckeburg(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
             self::Buckeburg(
@@ -226,7 +229,11 @@ class Buckeburg extends SPOrgan {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "Surround");
+                   "Surround"); */
+            self::Buckeburg(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "Balanced",
+                    5.0);
         }
     }
 }

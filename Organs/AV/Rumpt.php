@@ -12,33 +12,29 @@ namespace Organs\AV;
 require_once(__DIR__ . "/AVOrgan.php");
 
 /**
- * Import Kolonics Organ from Franciscan Church in Brasov to GrandOrgue
+ * Import Naber Organ of the Reformed Church from Rumpt (Netherlands) to GrandOrgue
  * 
  * @author andrew
  */
-class BrasovKolonics extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV/BrasovKolonics/";
-    const ODF="Kolonics Brasov Surround.Organ_Hauptwerk_xml";
+class Rumpt extends AVOrgan {
+    const ROOT="/GrandOrgue/Organs/AV/Rumpt/";
+    const ODF="Rumpt_demo surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
-              "Wegenstein Organ from Reformed Church in BrasovKolonics\n"
-            . "https://hauptwerk-augustine.info/BrasovKolonics_Reformed.php\n"
+              "Naber Organ of the Reformed Church from Rumpt (Netherlands)\n"
+            . "https://hauptwerk-augustine.info/Rumpt.php\n"
             . "\n";
-    const TARGET=self::ROOT . "Kolonics Brasov %s.1.1.organ";
+    const TARGET=self::ROOT . "Rumpt %s demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=100;
-    
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Console"],
-        2=>["SetID"=>2, "Name"=>"Extended"],
+        2=>["SetID"=>2, "Name"=>"Controls"],
     ];
     
     protected $patchEnclosures=[
-        220=>[                     "Name"=>"Swell",  "GroupIDs"=>[301,302,303], "InstanceID"=>23],
-         11=>["EnclosureID"=>"11", "Name"=>"Far",    "GroupIDs"=>[101,201,301], "InstanceID"=>85133, "AmpMinimumLevel"=>0],
-         12=>["EnclosureID"=>"12", "Name"=>"Near",   "GroupIDs"=>[102,202,302], "InstanceID"=>85132, "AmpMinimumLevel"=>0],
-         13=>["EnclosureID"=>"13", "Name"=>"Rear",   "GroupIDs"=>[103,203,303], "InstanceID"=>85134, "AmpMinimumLevel"=>0],
-         17=>["EnclosureID"=>"17", "Name"=>"Noises", "GroupIDs"=>[700],         "InstanceID"=>85135, "AmpMinimumLevel"=>0],
+         11=>["EnclosureID"=>"11", "Name"=>"Far",    "GroupIDs"=>[101,201,301,601], "InstanceID"=>85133, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Near",   "GroupIDs"=>[102,202,302,602], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         17=>["EnclosureID"=>"17", "Name"=>"Noises", "GroupIDs"=>[700],             "InstanceID"=>85135, "AmpMinimumLevel"=>1],
     ];
     
     protected $patchTremulants=[
@@ -58,15 +54,15 @@ class BrasovKolonics extends AVOrgan {
 
     // Inspection of Ranks object
     protected $patchRanks=[
-        91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
-        92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"StopOff",    "GroupID"=>700, "StopIDs"=>[]],
-        94=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+2]],
-        95=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-2]],
-        96=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+3]],
-        97=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-3]],
-        98=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
-        99=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-1]],
+        91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
+        92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
+        93=>["Noise"=>"StopOff", "GroupID"=>700, "StopIDs"=>[]],
+        94=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2]],
+        95=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-2]],
+        96=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+3]],
+        97=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-3]],
+        98=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1]],
+        99=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-1]],
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -74,6 +70,13 @@ class BrasovKolonics extends AVOrgan {
             return parent::createManual($hwdata);
         else
             return NULL;
+    }
+   
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
+            return NULL;
+        else
+            return parent::createRank($hwdata, $keynoise);
     }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
@@ -88,16 +91,28 @@ class BrasovKolonics extends AVOrgan {
                 $this->configureImage($panelelement, ["SwitchID"=>$destid]);
                 foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
                     $panelelement->DispLabelText=str_replace("\n", " ", $textInstance["Text"]);
+                    switch ($textInstance["TextStyleID"]) {
+                        
+                        case 4:
+                            $panelelement->DispLabelColour="Dark Red";
+                            break;
+                            
+                        case 5:
+                            $panelelement->DispLabelColour="Dark Blue";
+                            break;
+                        
+                        case 6:
+                            $panelelement->DispLabelColour="Dark Green";
+                            break;
+                        
+                        default:
+                            $panelelement->DispLabelColour="Black";
+                            
+                    }
                     break; // Only the one?
                 }
-                if (!isset($panelelement->PositionX))
-                    $panelelement->PositionX=0;
-                /* $style=$this->hwdata->textStyle($textInstance["TextStyleID"]);
-                $panelelement->DispLabelFontSize=9;
-                if (isset($style["Font_SizePixels"]))
-                    $panelelement->DispLabelFontSize=$style["Font_SizePixels"];
-                
-                $panelelement->DispLabelColour="Black"; */
+                if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
+                $panelelement->DispLabelFontSize=12;
             }
         }
     }
@@ -127,7 +142,7 @@ class BrasovKolonics extends AVOrgan {
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         unset($data["SwitchID"]);
-        $panelid=$data["InstanceID"]==23 ? 2 : 1;
+        $panelid=2;
         $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
         $this->configureEnclosureImage($panelelement, $data);
         $panelelement->DispLabelText="";
@@ -155,46 +170,44 @@ class BrasovKolonics extends AVOrgan {
         else
             throw new \Exception ("File $filename does not exist!");
     }
-    
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        return parent::processNoise($hwdata, $isattack);
-    }
-
-    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        //if ($hwdata["RankID"]>90 && $hwdata["RankID"]<100)
-        //    echo $hwdata["SampleFilename"], "\n";
-        return parent::processSample($hwdata, $isattack);
-    }
 
     /**
      * Run the import
      */
-    public static function BrasovKolonics(array $positions=[], string $target="") {
+    public static function Rumpt(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=56;
-        \GOClasses\Manual::$pedals=30;
+        \GOClasses\Manual::$keys=54;
+        \GOClasses\Manual::$pedals=27;
         if (sizeof($positions)>0) {
-            $hwi=new BrasovKolonics(self::SOURCE);
+            $hwi=new Rumpt(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             unset($hwi->getOrgan()->InfoFilename);
-            echo $hwi->getOrgan()->ChurchName.=" ($target)" , "\n";
-            foreach($hwi->getStops() as $stop) {
-                foreach(["001","002","003"] as $rn) {
-                    $stop->unset("Rank{$rn}PipeCount");
-                    $stop->unset("Rank{$rn}FirstAccessibleKeyNumber");
+            $hwi->getOrgan()->ChurchName=str_replace("surround", $target, $hwi->getOrgan()->ChurchName);
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            foreach($hwi->getStops() as $id=>$stop) {
+                for($n=1; $n<=$stop->NumberOfRanks; $n++) {
+                    $s=$stop->int2str($n);
+                    $stop->unset("Rank{$s}PipeCount");
+                    switch ($id) {
+                        case 2115: // Quint 3
+                        case 2122: // Bourdon 16D
+                        case 2130: // Trumpet 8b
+                            $stop->set("Rank{$s}FirstAccessibleKeyNumber", 13);
+                    }
                 }
             }
             
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
+        
         else {
-            self::BrasovKolonics(
-                    [1=>"Far", 2=>"Near", 3=>"Rear"],  "Surround");
-            self::BrasovKolonics(
-                    [1=>"Far"],  "Wet");
-            self::BrasovKolonics(
-                    [2=>"Near"],  "Dry");
+            self::Rumpt(
+                    [1=>"Far"], "far");
+            self::Rumpt(
+                    [2=>"Near"], "near");
+            self::Rumpt(
+                    [1=>"Far", 2=>"Near"], "surround");
         }
     }   
 }
@@ -204,4 +217,4 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
     die();
 }
 set_error_handler("Organs\AV\ErrorHandler");
-BrasovKolonics::BrasovKolonics();
+Rumpt::Rumpt();
