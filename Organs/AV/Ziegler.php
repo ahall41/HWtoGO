@@ -23,8 +23,11 @@ class Ziegler extends AVOrgan {
     const COMMENTS=
               "Ziegler Organ of Sepsiszentgyörgy (Transylvania) - from Montreux\n"
             . "https://hauptwerk-augustine.info/Ziegler_organ.php\n"
+            . "\n"
+            . "1.1 Updated for full set"
+            . "1.2 Sesquialtera starts at key 13"
             . "\n";
-    const TARGET=self::ROOT . "Ziegler %s.1.1.organ";
+    const TARGET=self::ROOT . "Ziegler %s.1.2.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -222,6 +225,7 @@ class Ziegler extends AVOrgan {
                     $rn=$stop->int2str($r);
                     $stop->unset("Rank{$rn}PipeCount");
                     if ($id==2121) {$stop->set("Rank{$rn}FirstAccessibleKeyNumber", 18);}
+                    if ($id==2338) {$stop->set("Rank{$rn}FirstAccessibleKeyNumber", 13);}
                 }
             }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
@@ -230,6 +234,7 @@ class Ziegler extends AVOrgan {
         else {
             self::Ziegler([1=>"Near", 2=>"Far", 3=>"Rear"], "Surround");
             self::Ziegler([1=>"Near"], "Dry");
+            self::Ziegler([2=>"Far"],  "Wet");
         }
     }   
 }
