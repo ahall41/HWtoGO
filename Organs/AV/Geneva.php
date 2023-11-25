@@ -20,16 +20,17 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Geneva extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/Geneva/";
+    const ROOT="/GrandOrgue/Organs/AV/Geneva/";
     const ODF="Grenzing-Geneva four-channels.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Grenzing Organ from Geneva\n"
             . "https://hauptwerk-augustine.info/Grenzing_Geneva.php\n"
             . "\n"
-            . "Version 1.1 - Added C# Cornet, Fix Pos Int/Sup"
+            . "Version 1.1 - Added C# Cornet, Fix Pos Int/Sup\n"
+            . "Version 1.2 - Corrected noise effects\n"
             . "\n";
-    const TARGET=self::ROOT . "Grenzing_Geneva_surround.1.1.organ";
+    const TARGET=self::ROOT . "Grenzing_Geneva_%s.1.2.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -53,10 +54,13 @@ class Geneva extends AVOrgan {
     ];
     
     protected $patchStops=[
-        +1=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +3=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +4=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -1=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"Action_01_Off", "StopID"=>-1, "DivisionID"=>1],
+        -2=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"Action_02_Off", "StopID"=>-2, "DivisionID"=>2],
+        -3=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"KeyAction_03_Off", "StopID"=>-3, "DivisionID"=>3],
+        +1=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"KeyAction_01_On"],
+        +2=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"Action_02_On"],
+        +3=>["ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Name"=>"Action_03_On"],
+        +4=>"DELETE", // DivisionKeyAction_04
       1006=>"DELETE", // Coupler
       1011=>"DELETE", // Coupler
       1016=>"DELETE", // Coupler
@@ -73,11 +77,11 @@ class Geneva extends AVOrgan {
     protected $patchRanks=[
         91=>["Noise"=>"Ambient",    "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",     "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
-        94=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[+2]],
+        93=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+2,+3]],
+        94=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-2,-3]],
         95=>["Noise"=>"Ambient",    "GroupID"=>101, "StopIDs"=>[2691]],
-        96=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+3]],
-        97=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[+4]],
+        96=>["Noise"=>"KeyOn",      "GroupID"=>700, "StopIDs"=>[+1]],
+        97=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-1]],
        195=>["Noise"=>"Ambient",    "GroupID"=>102, "StopIDs"=>[2692]],
     ];
     
@@ -198,9 +202,34 @@ class Geneva extends AVOrgan {
         return parent::isNoiseSample($hwdata);
     }
 
+    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
+        $type=$this->hwdata->rank($rankid=$hwdata["RankID"])["Noise"];
+        if ($type=="Ambient") {
+            return parent::processNoise($hwdata, $isattack);
+        }
+        else {
+            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
+            $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
+            foreach($this->hwdata->read("StopRank") as $sr) {
+                if ($sr["RankID"]==$rankid && 
+                    $sr["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
+                    $stopdata=$this->hwdata->stop($sr["StopID"], FALSE);
+                    if ($stopdata) {
+                        $switchid=$stopdata["ControllingSwitchID"];
+                        $stopoff=strpos($sr["Name"], "Disengaging")!==FALSE;
+                        $switchNoise=$this->getSwitchNoise($stopoff ? -$switchid : +$switchid);
+                        if ($switchNoise) {
+                            $this->configureAttack($hwdata, $switchNoise->Noise());
+                        }
+                    }
+                }
+            } 
+            return NULL;
+        }
+    }
+
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $pipe=$this->pipePitchMidi($hwdata);
-        $sample=$this->samplePitchMidi($hwdata);
         if ((($hwdata["RankID"] % 100)<=5) && $pipe>65) return NULL; // Pedal
         if (in_array($hwdata["RankID"], [16,116]) 
                                            && $pipe>60) return NULL; // C Cornet
@@ -219,28 +248,16 @@ class Geneva extends AVOrgan {
             $hwi=new Geneva(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace("sur new", $target, $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("dry/wet", " $target", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
-            echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             foreach($hwi->getStops() as $id=>$stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-                if ($id==2116) {
-                    $stop->Rank001FirstAccessibleKeyNumber=25;
-                    $stop->Rank002FirstAccessibleKeyNumber=25;
-                    foreach ([17,117] as $rankid)
-                        $stop->Rank($hwi->getRank($rankid));
-                    $stop->Rank003FirstAccessibleKeyNumber=26;
-                    $stop->Rank004FirstAccessibleKeyNumber=26;
-                }
-                elseif ($id==2117) {
-                    $stop->Rank001FirstAccessibleKeyNumber=26;
-                    $stop->Rank002FirstAccessibleKeyNumber=26;
+                $nr=$stop->NumberOfRanks;
+                for ($r=1;$r<=$nr;$r++) {
+                    $rn=$stop->int2str($r);
+                    $stop->unset("Rank{$rn}PipeCount");
+                    if ($id==2116) {$stop->set("Rank{$rn}FirstAccessibleKeyNumber", 25);}
+                    if ($id==2117) {$stop->set("Rank{$rn}FirstAccessibleKeyNumber", 26);}
                 }
             }
 
@@ -253,11 +270,15 @@ class Geneva extends AVOrgan {
             $sup=$hwi->getCoupler(10199);
             $sup->FirstMIDINoteNumber=36+25;
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {
             self::Geneva(
-                    [1=>"Dry", 2=>"Wet"],
-                    "surround");
+                    [1=>"Dry", 2=>"Wet"], "surround");
+            self::Geneva(
+                    [1=>"Dry"], "dry");
+            self::Geneva(
+                    [2=>"Wet"], "wet");
         }
     }   
 }
