@@ -17,7 +17,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class ErfurtPredigerkirche extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/Erfurt Predigerkirche/";
+    const ROOT="/GrandOrgue/Organs/PG/Erfurt Predigerkirche/";
     const ODF="Erfurt Predigerkirche (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Predigerkirche in Erfurt, Germany (" . self::ODF . ")\n"
