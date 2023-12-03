@@ -26,8 +26,10 @@ class CouplerManuals extends ODF {
 
     public static function main() {
         $p="/home/andrew/GrandOrgue/Organs";
-        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->dispLabelText();
+        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
         (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(2, [1,2,3], [1,2]);
+        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
+        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(2, [1,2,3], [1,2]);
     }
     
     public function run(int $manuals, array $targets,  array $defaults) {
@@ -124,16 +126,17 @@ class CouplerManuals extends ODF {
     }
     
     /**
-     * Fix DispLabelText after ODFEdit
+     * Fix TextBreakWidth after ODFEdit
      */
-    public function dispLabelText() {
+    public function textBreakWidth($panelid=0) {
+        $pe=sprintf("Panel%03dElement", $panelid);
         foreach($this->index as $section=>$data) {
-            if (substr($section, 0, 15)=="Panel000Element" &&    
+            if (substr($section, 0, 15)==$pe &&    
                 ($this->getItem($section, "Type")=="Switch" ||
                  $this->getItem($section, "Type")=="Enclosure")  &&
-                !isset($data["DispLabelText"])) {
+                !isset($data["TextBreakWidth"])) {
                     $lineno=$this->index[$section]["Type"];
-                    $this->buffer[$lineno]["DispLabelText"]="";
+                    $this->buffer[$lineno]["TextBreakWidth"]=0;
                     echo $section, "\n"; 
                     print_r($this->buffer[$lineno]);
             }
