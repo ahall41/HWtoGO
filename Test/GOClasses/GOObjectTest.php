@@ -44,6 +44,12 @@ class GOObjectTest extends \PHPUnit\Framework\TestCase {
 
         $object=new ObjectClass2();
         $this->assertEquals("[SecondClass002]\n", (string) $object);
+        $this->assertEquals("002", $object->instance());
+        
+        $object->instance(24);
+        $this->assertEquals("[SecondClass024]\n", (string) $object);
+        $this->assertEquals("024", $object->instance());
+        
     }
     
 }

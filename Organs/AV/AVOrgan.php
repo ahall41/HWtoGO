@@ -17,6 +17,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
 abstract class AVOrgan extends \Import\Organ {
     
     protected int $releaseCrossfadeLengthMs=-1;
+    protected int $noiseVersion=2;
 
     /*
      * Create Windchest Groups. 1 per position/division + 1 for all noise effects
@@ -107,10 +108,41 @@ abstract class AVOrgan extends \Import\Organ {
                 && in_array($rankdata["Noise"], ["StopOn","StopOff","Ambient"]);
     }
     
+     public function processNoiseV2(array $hwdata, $isattack): ?\GOClasses\Noise {
+        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
+        $type=$this->hwdata->rank($rankid=$hwdata["RankID"])["Noise"];
+        if ($type=="Ambient") {
+            $stopid=$this->hwdata->rank($hwdata["RankID"])["StopIDs"][0];
+            if (($stop=$this->getStop($stopid))) {
+                if ($isattack)
+                    $this->configureAttack($hwdata, $stop->Ambience());
+                else
+                    $this->configureRelease($hwdata, $stop->Ambience());
+            }
+        }
+        else {
+            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
+            foreach($this->hwdata->read("StopRank") as $sr) {
+                if ($sr["RankID"]==$rankid && 
+                    $sr["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
+                    if ($stopdata=$this->hwdata->stop($sr["StopID"], FALSE)) {
+                        $switchid=$stopdata["ControllingSwitchID"];
+                        $stopoff=strpos($sr["Name"], "Disengaging")!==FALSE;
+                        $switchNoise=$this->getSwitchNoise($stopoff ? -$switchid : +$switchid);
+                        if ($switchNoise) {
+                            $this->configureAttack($hwdata, $switchNoise->Noise());
+                        }
+                    }
+                }
+            } 
+        }
+        return NULL;
+    }
+   
     /*
      * May be OK for other providers 
      */
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
+    public function processNoiseV1(array $hwdata, $isattack): ?\GOClasses\Noise {
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
         if ($type=="Ambient") {
@@ -131,6 +163,13 @@ abstract class AVOrgan extends \Import\Organ {
             }
         }
         return NULL;
+    }
+    
+    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        if ($this->noiseVersion==1)
+            {return $this->processNoiseV1($hwdata, $isattack);}
+        else
+            {return $this->processNoiseV2($hwdata, $isattack);}
     }
     
     /*

@@ -23,8 +23,10 @@ class Rumpt extends AVOrgan {
     const COMMENTS=
               "Naber Organ of the Reformed Church from Rumpt (Netherlands)\n"
             . "https://hauptwerk-augustine.info/Rumpt.php\n"
+            . "\n"
+            . "1.1 Correct stop sound effects"
             . "\n";
-    const TARGET=self::ROOT . "Rumpt %s demo.1.0.organ";
+    const TARGET=self::ROOT . "Rumpt %s demo.1.1.organ";
 
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Console"],

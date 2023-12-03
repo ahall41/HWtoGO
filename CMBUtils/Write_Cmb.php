@@ -7,7 +7,7 @@
 function Write_Cmb(array $data, string $filename) : void
 {
     $fp=gzopen($filename, "wb");
-    gzwrite($fp, chr(0xbb) . chr(0xef) . chr(0x5b));
+    // gzwrite($fp, chr(0xbb) . chr(0xef) . chr(0x5b));
     foreach($data as $key => $val)
     {
         if(is_array($val))

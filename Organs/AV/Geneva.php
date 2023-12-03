@@ -202,32 +202,6 @@ class Geneva extends AVOrgan {
         return parent::isNoiseSample($hwdata);
     }
 
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $type=$this->hwdata->rank($rankid=$hwdata["RankID"])["Noise"];
-        if ($type=="Ambient") {
-            return parent::processNoise($hwdata, $isattack);
-        }
-        else {
-            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
-            $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-            foreach($this->hwdata->read("StopRank") as $sr) {
-                if ($sr["RankID"]==$rankid && 
-                    $sr["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
-                    $stopdata=$this->hwdata->stop($sr["StopID"], FALSE);
-                    if ($stopdata) {
-                        $switchid=$stopdata["ControllingSwitchID"];
-                        $stopoff=strpos($sr["Name"], "Disengaging")!==FALSE;
-                        $switchNoise=$this->getSwitchNoise($stopoff ? -$switchid : +$switchid);
-                        if ($switchNoise) {
-                            $this->configureAttack($hwdata, $switchNoise->Noise());
-                        }
-                    }
-                }
-            } 
-            return NULL;
-        }
-    }
-
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $pipe=$this->pipePitchMidi($hwdata);
         if ((($hwdata["RankID"] % 100)<=5) && $pipe>65) return NULL; // Pedal

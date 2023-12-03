@@ -94,7 +94,7 @@ abstract class SPOrgan extends \Import\Organ {
     }
 
    
-    protected function stopIsTremmed(array $stopdata) : bool {
+    protected function switchedTremulant(array $stopdata) : bool {
         return sizeof($this->hwdata->altStopRank($stopdata["StopID"]))>0;
     }
 
@@ -107,7 +107,7 @@ abstract class SPOrgan extends \Import\Organ {
             $hwdata["ControllingSwitchID"]=$hwdata["StopID"];
         $switch=parent::createStop($hwdata);
         
-        if (sizeof($this->hwdata->altStopRank($hwdata["StopID"]))>0) {// Tremmed ranks
+        if ($this->switchedTremulant($hwdata)) {// Switched Tremulant ranks
             foreach($this->patchTremulants as $tremulantid=>$tremulantdata) {
                 if (isset($tremulantdata["Type"]) && $tremulantdata["Type"]=="Switched" 
                         &&  $tremulantdata["DivisionID"]==$hwdata["DivisionID"]) {

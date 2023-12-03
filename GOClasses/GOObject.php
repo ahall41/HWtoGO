@@ -71,11 +71,14 @@ abstract class GOObject extends GOBase {
      * Get the current instance (001, 002 ...)
      * @return string
      */
-    public function instance() : string {
+    public function instance(?int $setinstance=NULL) : string {
+        if ($setinstance!==NULL)
+            {$this->instance=$setinstance;}
+        
         if ($this->instance===NULL)
-            return "";
+            {return "";}
         else
-            return $this->int2str($this->instance);
+            {return $this->int2str($this->instance);}
     }
     
     /*

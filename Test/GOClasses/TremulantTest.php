@@ -26,8 +26,8 @@ class TremulantTest extends \PHPUnit\Framework\TestCase {
             "[Tremulant001]\n" .
             "Name=Synth Tremulant\n" .
             "DispLabelColour=Blue\n" .
-            "Period=200\n" .
-            "AmpModDepth=10\n" .
+            "Period=250\n" .
+            "AmpModDepth=13\n" .
             "StartRate=30\n" .
             "StopRate=30\n", (string) $synth);
         

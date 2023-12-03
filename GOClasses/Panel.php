@@ -9,6 +9,7 @@
 
 namespace GOClasses;
 require_once __DIR__ . "/GOObject.php";
+require_once __DIR__ . "/PanelElement.php";
 
 /**
  * Representation of a GrandOrgue Panel, setting suitable default properties
