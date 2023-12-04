@@ -31,8 +31,8 @@ class Write_CmbTestTestClass extends \PHPUnit\Framework\TestCase {
         $data=["Section1"=>["A"=>"Element A","B"=>"Element B"],
                "Section2",
                "Section3"=>["A"=>"Element A","C"=>"Element C"]];
-        write_cmb($data, "test.cmb");
-        error_log($this->gzread("test.cmb"));
+        write_cmb($data, "write.cmb");
+        error_log($this->gzread("write.cmb"));
         $this->assertEquals(
                 "[Section1]\n"
                 . "A=Element A\n"
@@ -40,6 +40,6 @@ class Write_CmbTestTestClass extends \PHPUnit\Framework\TestCase {
                 . "[Section2]\n"
                 . "[Section3]\n"
                 . "A=Element A\n"
-                . "C=Element C\n", $this->gzread("test.cmb"));
+                . "C=Element C\n", $this->gzread("write.cmb"));
     }
 }
