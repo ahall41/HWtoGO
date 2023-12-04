@@ -20,9 +20,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlinFull extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinFull/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.1.organ";
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.2.organ";
     const COMMENTS="/n"
-            . "Corrected tremulants and Diffuse expression\n"
+            . "1.1 Corrected tremulants and Diffuse expression\n"
+            . "1.2 Added coupler manuals for 2 keyboard operation\n"
             . "\n";
     
     protected string $root=self::ROOT;
@@ -79,15 +80,15 @@ class BurtonBerlinFull extends SPOrgan {
     ];
 
     protected $patchStops=[
-       +250=>["StopID"=>+250, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
-       -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Ped Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -102=>["StopID"=>-102, "DivisionID"=>2, "Name"=>"Ch Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -103=>["StopID"=>-103, "DivisionID"=>3, "Name"=>"Gt key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -104=>["StopID"=>-104, "DivisionID"=>4, "Name"=>"Sw key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -201=>["StopID"=>-201, "DivisionID"=>1, "Name"=>"Ped Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -202=>["StopID"=>-202, "DivisionID"=>2, "Name"=>"Ch Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -203=>["StopID"=>-203, "DivisionID"=>3, "Name"=>"GT key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-       -204=>["StopID"=>-204, "DivisionID"=>4, "Name"=>"SW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+       +250=>["StopID"=>+250, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>250,  "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N", "Ambient"=>TRUE, "GroupID"=>800],
+       -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Ped Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -102=>["StopID"=>-102, "DivisionID"=>2, "Name"=>"Ch Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -103=>["StopID"=>-103, "DivisionID"=>3, "Name"=>"Gt key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -104=>["StopID"=>-104, "DivisionID"=>4, "Name"=>"Sw key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -201=>["StopID"=>-201, "DivisionID"=>1, "Name"=>"Ped Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -202=>["StopID"=>-202, "DivisionID"=>2, "Name"=>"Ch Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -203=>["StopID"=>-203, "DivisionID"=>3, "Name"=>"GT key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+       -204=>["StopID"=>-204, "DivisionID"=>4, "Name"=>"SW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
     ];
     
     protected $patchRanks=[
@@ -189,7 +190,6 @@ class BurtonBerlinFull extends SPOrgan {
         return parent::processSample($hwdata, $isattack);
     }
     
-    
     /**
      * Run the import
      */
@@ -200,6 +200,7 @@ class BurtonBerlinFull extends SPOrgan {
             $hwi=new BurtonBerlinFull(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
+            $hwi->addCouplerManuals(2, [1,2,3], [2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             $hwi->getSwitch(250)->DisplayInInvertedState="Y";
             foreach($hwi->getStops() as $stop) {

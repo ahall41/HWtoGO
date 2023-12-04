@@ -24,10 +24,11 @@ class Ziegler extends AVOrgan {
               "Ziegler Organ of Sepsiszentgyörgy (Transylvania) - from Montreux\n"
             . "https://hauptwerk-augustine.info/Ziegler_organ.php\n"
             . "\n"
-            . "1.1 Updated for full set"
-            . "1.2 Sesquialtera starts at key 13"
+            . "1.1 Updated for full set\n"
+            . "1.2 Sesquialtera starts at key 13\n"
+            . "1.3 Added Coupler Manuals\n"
             . "\n";
-    const TARGET=self::ROOT . "Ziegler %s.1.2.organ";
+    const TARGET=self::ROOT . "Ziegler %s.1.3.organ";
 
     protected int $releaseCrossfadeLengthMs=-1;
     
@@ -52,12 +53,12 @@ class Ziegler extends AVOrgan {
     ];
     
     protected $patchStops=[
-        +1=>["Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +4=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      2688=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>700], // Bell
-      2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700]  // Blower
+        +1=>["Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +4=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+      2688=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>700, "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"], // Bell
+      2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700, "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"]  // Blower
     ];
 
     protected $patchRanks=[
@@ -217,6 +218,7 @@ class Ziegler extends AVOrgan {
             $hwi=new Ziegler(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
+            $hwi->addCouplerManuals(2, [1,2,3], [2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("surround", "($target)", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);

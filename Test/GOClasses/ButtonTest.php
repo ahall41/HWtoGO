@@ -34,6 +34,14 @@ class ButtonTest extends \PHPUnit\Framework\TestCase {
             "DispLabelText=Label Text\n" .
             "DispLabelColour=Label Colour\n", (string) $button);
         
+        
+        $button->DispLabelText="";
+        $this->assertEquals(
+            "[Button001]\n" .
+            "Name=Test Button\n" .
+            "DispLabelColour=Label Colour\n" .
+            "TextBreakWidth=0\n", (string) $button);
+        
         $button->Displayed="N";
         $this->assertFalse(isset($button->DispLabelText));
         $this->assertFalse(isset($button->DispLabelColour));

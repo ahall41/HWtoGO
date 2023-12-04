@@ -148,6 +148,12 @@ abstract Class Configure extends Create {
                     $switch->DefaultToEngaged=$hwdata["Engaged"];
                     $switch->GCState=-1;
                 }
+                if (isset($hwdata["StoreInGeneral"])) {
+                    $stop->StoreInGeneral=$hwdata["StoreInGeneral"];
+                }
+                if (isset($hwdata["StoreInDivisional"])) {
+                    $stop->StoreInDivisional=$hwdata["StoreInDivisional"];
+                }
                 $this->configurePanelSwitchImages($switch, $hwdata);
             }
             elseif (isset($hwdata["Engaged"]) && $stop!==NULL) {

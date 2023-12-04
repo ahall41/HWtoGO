@@ -37,6 +37,13 @@ class Button extends GOObject {
     }
     
     public function set(string $name, ?string $value): void {
+        // According to Lars Palo, we should do this!
+        if ($name=="DispLabelText" && empty($value)) {
+            unset($this->DispLabelText);
+            $this->TextBreakWidth=0;
+            return;
+        }
+
         parent::set($name, $value);
         if ($name=="Displayed" && $value="N") {
             unset($this->DispLabelText);

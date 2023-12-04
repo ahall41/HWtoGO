@@ -19,15 +19,18 @@ require_once(__DIR__ . "/AVOrgan.php");
 class SzikszoExtended extends AVOrgan {
     const ROOT="/GrandOrgue/Organs/AV//Szikszo/";
     const SOURCE=self::ROOT . "OrganDefinitions/%s.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "%s 1.1.organ";
+    const TARGET=self::ROOT . "%s 1.2.organ";
     const COMMENTS=
               "Klais Organ of Szikszó (Hungary) from Frankfurt\n"
             . "https://hauptwerk-augustine.info/Klais.php\n"
+            . "\n"
+            . "1.1 Released with full version\n"
+            . "1.2 Added coupler manuals\n"
             . "\n";
     
     private static $targets=[
         //"Klais v2 wet_extend demo"  =>[1=>"Far"],
-        "Klais v2 wet_extend"       =>[1=>"Far"],
+        //"Klais v2 wet_extend"       =>[1=>"Far"],
         "Klais w2 semidry_extend"   =>[1=>"Near"],
         "Klais v2 surround_extend"  =>[1=>"Far", 2=>"Near"],
     ];
@@ -49,18 +52,18 @@ class SzikszoExtended extends AVOrgan {
     ];
 
     protected $patchStops=[
-        +1=>["Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +5=>["Name"=>"DivisionKeyAction_05 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -5=>["StopID"=>-5, "DivisionID"=>5, "Name"=>"DivisionKeyAction_05 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700], // Blower
-      2691=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>700]  // Bell
+        +1=>["Name"=>"DivisionKeyAction_01 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +2=>["Name"=>"DivisionKeyAction_02 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +3=>["Name"=>"DivisionKeyAction_03 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +4=>["Name"=>"DivisionKeyAction_04 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        +5=>["Name"=>"DivisionKeyAction_05 On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -1=>["StopID"=>-1, "DivisionID"=>1, "Name"=>"DivisionKeyAction_01 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -2=>["StopID"=>-2, "DivisionID"=>2, "Name"=>"DivisionKeyAction_02 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"DivisionKeyAction_03 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"DivisionKeyAction_04 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -5=>["StopID"=>-5, "DivisionID"=>5, "Name"=>"DivisionKeyAction_05 Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+      2690=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700, "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"], // Blower
+      2691=>["DivisionID"=>1, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>700, "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"]  // Bell
     ];
 
     protected $patchEnclosures=[
@@ -213,6 +216,7 @@ class SzikszoExtended extends AVOrgan {
             $hwi=new SzikszoExtended(sprintf(self::SOURCE, $target));
             $hwi->positions=$positions;
             $hwi->import();
+            $hwi->addCouplerManuals(3, [1,2,3,4], [1,2,3]);
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);

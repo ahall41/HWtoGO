@@ -19,9 +19,14 @@ require_once __DIR__ . "/SPOrgan.php";
 class Buckeburg extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Buckeburg/";
     const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.2.organ";
-    const REVISIONS="\n1.1 Remove additional attacks\n"
-            . "1.2 Reinstate additional attacks\n\n";
+    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.3.organ";
+    const REVISIONS="\n"
+            . "1.1 Remove additional attacks\n"
+            . "1.2 Reinstate additional attacks\n"
+            . "1.3 Coupler manuals\n"
+            . "\n";
+    
+    public static bool $singleRelease=FALSE;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -63,11 +68,11 @@ class Buckeburg extends SPOrgan {
             8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
             9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
     ];
-
-    protected $patchTremulants=[
-        19=>["Type"=>"Switched", "DivisionID"=>2], // HW
-        49=>["Type"=>"Switched", "DivisionID"=>4], // BW
-        50=>["Type"=>"Switched", "DivisionID"=>3], // OW
+            
+    protected $patchTremulants=[ // Needs to be switched until we can load all releases?
+        19=>["Type"=>"Wave", "DivisionID"=>2, "GroupIDs"=>[201,202,203]], // HW
+        49=>["Type"=>"Wave", "DivisionID"=>4, "GroupIDs"=>[401,402,403]], // BW
+        50=>["Type"=>"Wave", "DivisionID"=>3, "GroupIDs"=>[301,302,303]], // OW
     ];
 
     protected $patchEnclosures=[
@@ -84,15 +89,15 @@ class Buckeburg extends SPOrgan {
     ];
 
     protected $patchStops=[
-         124=>["StopID"=> 124, "DivisionID"=>1, "Name"=>"Blower",         "ControllingSwitchID"=>124,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
-        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"P Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"HW Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"OW key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -114=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"BW key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"HW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"OW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"BW key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+         124=>["StopID"=> 124, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>124,  "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N", "Ambient"=>TRUE, "GroupID"=>800],
+        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"HW Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"OW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -114=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"BW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"HW Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"OW key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"BW key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
     ];
     
     protected $patchRanks=[
@@ -125,6 +130,13 @@ class Buckeburg extends SPOrgan {
         return parent::createOrgan($hwdata);
     }
     
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if (($hwdata["RankID"] % 10)<5)
+            {return parent::createRank($hwdata, $keynoise);}
+        else
+            {return NULL;}
+    }
+
     private function treeWalk($root, $dir="", &$results=[]) {
         $files=scandir("$root$dir");
         foreach ($files as $key => $value) {
@@ -185,15 +197,37 @@ class Buckeburg extends SPOrgan {
         return NULL;
     }
     
-    protected function xxconfigureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
-        parent::configureAttack($hwdata, $pipe);
-        echo $hwdata["SampleID"], "\t",
-             $this->sampleHarmonicNumber($hwdata), "\t",
-             $this->sampleMidiKey($hwdata), "\n";
+    protected function switchedTremulant(array $stopdata) : bool {
+        return FALSE; // All stops are wave based
     }
-    
+            
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        /* Single Release */
+        if (self::$singleRelease &&
+            isset($hwdata["ReleaseSelCriteria_LatestKeyReleaseTimeMs"]) &&
+            !empty($hwdata["ReleaseSelCriteria_LatestKeyReleaseTimeMs"])) {
+            return NULL;
+        }
+        $hwdata["IsTremulant"]=0;
+        switch ($hwdata["RankID"] % 10) {
+            case 9: // Direct
+                $hwdata["RankID"]-=9; // -> 0
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 8: // Rear
+                $hwdata["RankID"]-=4; // > 4
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 7: // Diffuse
+                $hwdata["RankID"]-=6; // -> 1
+                $hwdata["IsTremulant"]=1;
+                break;
+            case 6: // NA
+                $hwdata["RankID"]-=4;
+                $hwdata["IsTremulant"]=1;
+                break;
+        }
         return parent::processSample($hwdata, $isattack);
     }
     
@@ -208,13 +242,15 @@ class Buckeburg extends SPOrgan {
             $hwi->positions=$positions;
             $hwi->balance=$balance;
             $hwi->import();
+            $hwi->addCouplerManuals(2, [1,2,3], [1,2]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
-            /*self::Buckeburg(
+            self::$singleRelease=FALSE;
+            self::Buckeburg(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
             self::Buckeburg(
@@ -229,11 +265,11 @@ class Buckeburg extends SPOrgan {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "Surround"); */
+                   "Surround");
+            self::$singleRelease=TRUE;
             self::Buckeburg(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
-                     "Balanced",
-                    5.0);
+                     "SR Diffuse");
         }
     }
 }
