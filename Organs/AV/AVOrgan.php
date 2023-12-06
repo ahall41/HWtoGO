@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class AVOrgan extends \Import\Organ {
     
-    protected int $releaseCrossfadeLengthMs=-1;
+    protected int $releaseCrossfadeLengthMs=0;
     protected int $noiseVersion=2;
 
     /*
