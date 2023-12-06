@@ -26,13 +26,13 @@ class CouplerManuals extends ODF {
 
     public static function main() {
         $p="/home/andrew/GrandOrgue/Organs";
-        /* (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
+        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
         (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
         (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/LP/NorrfjardenChurch/NorrfjardenChurch.organ"))->run(3, [5,6,7], [5,6,7]);
         (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(3, [1,2,3], [1,2,3]);
-        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]); */
+        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/AV/New Haven/New Haven Ghent Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
         (new CouplerManuals())->fixColumns(
                 "${p}/AV/New Haven/New Haven Lurie Surround.organ",
@@ -41,6 +41,8 @@ class CouplerManuals extends ODF {
         (new CouplerManuals())->fixColumns(
                 "${p}/AV/New Haven/New Haven Ghent Surround.organ",
                 "${p}/AV/New Haven/New Haven Surround.organ");
+        (new CouplerManuals("${p}/Melotone/Barton3-7/Barton3-7.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
+        
      }
     
     public function run(int $manuals, array $targets,  array $defaults) {
@@ -178,9 +180,9 @@ class CouplerManuals extends ODF {
                         $object=$type . $this->getItem($section, $type);
                         if ($source->hasItem($object, "DispDrawstopCol")) {
                             $col=$source->getItem($object, "DispDrawstopCol");
-                            error_log($section . "\t" . $this->getItem($section, "Type") . "\t" . $col);
+                            //error_log($section . "\t" . $this->getItem($section, "Type") . "\t" . $col);
                             $this->buffer[$data["PositionX"]]["DispDrawstopCol"]=$col;
-                            error_log(print_r($this->buffer[$data["PositionX"]],1));
+                            //error_log(print_r($this->buffer[$data["PositionX"]],1));
                         }
                 }
             }

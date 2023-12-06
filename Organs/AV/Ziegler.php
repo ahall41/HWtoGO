@@ -73,6 +73,12 @@ class Ziegler extends AVOrgan {
         90=>["Noise"=>"KeyOff",     "GroupID"=>700, "StopIDs"=>[-1]],
     ];
     
+    public function createManuals(array $keyboards): void {
+        foreach([1,4,2,3] as $id) {
+            $this->createManual($keyboards[$id]);
+        }
+    }
+    
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
         if ($hwdata["KeyboardID"]<7)
             return parent::createManual($hwdata);
