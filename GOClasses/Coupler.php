@@ -36,9 +36,20 @@ class Coupler extends Drawstop {
     
     public function set(string $property, ?string $value) : void {
         parent::set($property, $value);
-        if ($property=="UnisonOff" && $value) {
-            foreach(self::$defaults as $property=>$value)
+        
+        if ($property=="UnisonOff" && $value=="Y") {
+            foreach(self::$defaults as $property=>$value) {
                 $this->unset($property);
+            }
+        }
+        
+        if (($property=="CouplerType") && 
+            ($value=="Melody" || $value=="Bass")) {
+            foreach(self::$defaults as $property=>$value) {
+                if ($property!="DestinationKeyshift") {
+                    $this->unset($property);
+                }
+            }
         }
     }
 }

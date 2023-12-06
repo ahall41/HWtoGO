@@ -33,13 +33,24 @@ class CouplerTest extends \PHPUnit\Framework\TestCase {
             "CoupleToSubsequentDownwardIntramanualCouplers=N\n",             
                 (string) $coupler);
         
-        $coupler->UnisonOff=1;
+        $coupler->UnisonOff="Y";
         $this->assertEquals(
             "[Coupler001]\n" .
             "Name=Test Coupler\n" .
             "DefaultToEngaged=N\n" .
             "DispLabelColour=Dark Green\n" .
-            "UnisonOff=1\n", (string) $coupler);
+            "UnisonOff=Y\n", (string) $coupler);
+        
+        $coupler2=new Coupler("Test Coupler 2");
+        $coupler2->CouplerType="Bass";
+        $this->assertEquals(
+            "[Coupler002]\n" .
+            "Name=Test Coupler 2\n" .
+            "DefaultToEngaged=N\n" .
+            "DispLabelColour=Dark Green\n" .
+            "UnisonOff=N\n" .
+            "DestinationKeyshift=0\n" .
+            "CouplerType=Bass\n", (string) $coupler2);
         
     }
 }

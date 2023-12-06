@@ -216,7 +216,7 @@ class SzikszoExtended extends AVOrgan {
             $hwi=new SzikszoExtended(sprintf(self::SOURCE, $target));
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3,4], [1,2,3]);
+            $hwi->addCouplerManuals(4, [1,2,3,4], [1,2,3,4]);
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);

@@ -72,6 +72,10 @@ class ODF {
         $lineno=$this->index[$section][$key];
         return $this->buffer[$lineno][$key];
     }
+
+    public function hasItem(string $section, string $key) : bool {
+        return  isset($this->index[$section][$key]);
+    }
     
     public function setLine(int $lineno, mixed $data) {
         $this->buffer[$lineno]=$data;

@@ -30,8 +30,6 @@ class Ziegler extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Ziegler %s.1.3.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
-    
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
         2=>["SetID"=>2],
@@ -218,7 +216,7 @@ class Ziegler extends AVOrgan {
             $hwi=new Ziegler(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(2, [1,2,3], [2,3]);
+            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("surround", "($target)", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);

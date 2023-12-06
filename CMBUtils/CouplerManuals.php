@@ -2,7 +2,7 @@
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+ * Click %nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
 require_once __DIR__ . "/../GOClasses/Organ.php";
@@ -26,14 +26,22 @@ class CouplerManuals extends ODF {
 
     public static function main() {
         $p="/home/andrew/GrandOrgue/Organs";
-        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
-        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(2, [1,2,3], [1,2]);
+        /* (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
+        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
-        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(2, [1,2,3], [1,3]);
-        (new CouplerManuals("${p}/LP/NorrfjardenChurch/NorrfjardenChurch.organ"))->run(2, [5,6,7], [6,7]);
-        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(2, [1,2,3], [1,2]);
-        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(2, [1,2,3], [1,3]);
-    }
+        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
+        (new CouplerManuals("${p}/LP/NorrfjardenChurch/NorrfjardenChurch.organ"))->run(3, [5,6,7], [5,6,7]);
+        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(3, [1,2,3], [1,2,3]);
+        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]); */
+        (new CouplerManuals("${p}/AV/New Haven/New Haven Ghent Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
+        (new CouplerManuals())->fixColumns(
+                "${p}/AV/New Haven/New Haven Lurie Surround.organ",
+                "${p}/AV/New Haven/New Haven Surround.organ");
+        (new CouplerManuals("${p}/AV/New Haven/New Haven Lurie Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
+        (new CouplerManuals())->fixColumns(
+                "${p}/AV/New Haven/New Haven Ghent Surround.organ",
+                "${p}/AV/New Haven/New Haven Surround.organ");
+     }
     
     public function run(int $manuals, array $targets,  array $defaults) {
         $organ=new GOClasses\Organ("CM");
@@ -76,7 +84,7 @@ class CouplerManuals extends ODF {
         $panel->DispExtraDrawstopCols=$nt;
         $panel->DispExtraDrawstopRows=$manuals;
         $panel->DispScreenSizeHoriz="Small";
-        $panel->DispScreenSizeVert="Small";
+        $panel->DispScreenSizeVert=($manuals<3 ? "Small" : "Medium");
         $panel->DispDrawstopBackgroundImageNum=12;
         $panel->DispConsoleBackgroundImageNum=12;
         $panel->DispKeyHorizBackgroundImageNum=12;
@@ -149,6 +157,35 @@ class CouplerManuals extends ODF {
             }
         }
         $this->write($this->sourcefile);
+    }
+    
+    public function fixColumns(string $originalFile, string $sourceFile) {
+        $this->read(str_replace(".organ", ".cm.organ", $originalFile));
+        $source=new ODF($sourceFile);
+        
+        foreach($this->index as $section=>$data) {
+            if ((substr($section,0,15)=="Panel000Element") &&
+                isset($data["PositionX"]) &&
+                !isset($data["DispDrawstopCol"])) {
+                switch ($type=$this->getItem($section, "Type")) {
+                    case "Enclosure":
+                    case "General":
+                    case "Set":
+                    case "GC":
+                        break;
+                    
+                    default:
+                        $object=$type . $this->getItem($section, $type);
+                        if ($source->hasItem($object, "DispDrawstopCol")) {
+                            $col=$source->getItem($object, "DispDrawstopCol");
+                            error_log($section . "\t" . $this->getItem($section, "Type") . "\t" . $col);
+                            $this->buffer[$data["PositionX"]]["DispDrawstopCol"]=$col;
+                            error_log(print_r($this->buffer[$data["PositionX"]],1));
+                        }
+                }
+            }
+        }
+        $this->write(str_replace(".organ", ".cm.organ", $originalFile));
     }
 }
 

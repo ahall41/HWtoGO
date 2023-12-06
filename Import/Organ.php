@@ -328,7 +328,7 @@ abstract class Organ extends Images {
         $panel->DispDrawstopCols=2;
         $panel->DispExtraDrawstopCols=$nt;
         $panel->DispExtraDrawstopRows=$manuals;
-        $panel->DispScreenSizeHoriz="Small";
+        $panel->DispScreenSizeVert=($manuals<3 ? "Small" : "Medium");
         $panel->DispScreenSizeVert="Small";
         
         $couplerid=-999;
