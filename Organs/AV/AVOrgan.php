@@ -66,6 +66,10 @@ abstract class AVOrgan extends \Import\Organ {
      * May be OK for other providers
      */
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
+        if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient") {
+            return NULL;
+        }
+        
         $rankid=$hwdata["RankID"];
         if (!isset($hwdata["StopIDs"])) {
             $hwdata["StopIDs"]=[];
