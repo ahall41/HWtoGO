@@ -323,7 +323,7 @@ abstract class Organ extends Images {
      */
     public function addCouplerManuals(int $manuals, array $targets,  array $defaults) : void {
         $nt=sizeof($targets);
-        $panel=$this->newPanel(-999,"Coupler Manuals");
+        $panel=$this->newPanel(-999,"Virtual Keyboards");
         $panel->DispDrawstopRows=1;
         $panel->DispDrawstopCols=2;
         $panel->DispExtraDrawstopCols=$nt;
@@ -334,11 +334,11 @@ abstract class Organ extends Images {
         $couplerid=-999;
      
         for ($mn=1; $mn<=$manuals; $mn++) {
-            $manual=$this->newManual($mn-1000, "Coupler Manual $mn");
+            $manual=$this->newManual($mn-1000, "Virtual Keyboard $mn");
             $manual->Displayed="N";
             $panel->GUIElement($manual);
             foreach($targets as $tn) {
-                $coupler=$this->newCoupler($couplerid, "CM $mn -> $tn");
+                $coupler=$this->newCoupler($couplerid, "VK $mn -> $tn");
                 $manual->Coupler($coupler);
                 $coupler->DestinationManual=$tn;
                 $coupler->CoupleToSubsequentUnisonIntermanualCouplers="Y";
@@ -347,7 +347,7 @@ abstract class Organ extends Images {
                 $coupler->CoupleToSubsequentUpwardIntramanualCouplers="Y";
                 $coupler->CoupleToSubsequentDownwardIntramanualCouplers="Y";
 
-                $switch=new \GOClasses\Sw1tch("CM $mn -> $tn");
+                $switch=new \GOClasses\Sw1tch("VK $mn -> $tn");
                 $coupler->Switch($switch);
                 if ($tn==$defaults[$mn-1]) {
                     $switch->DefaultToEngaged="Y";

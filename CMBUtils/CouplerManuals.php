@@ -78,7 +78,7 @@ class CouplerManuals extends ODF {
     
     public function addCouplerManuals(int $manuals, array $targets,  array $defaults) : void {
         $nt=sizeof($targets);
-        $panel=new GOClasses\Panel("Coupler Manuals");
+        $panel=new GOClasses\Panel("Virtual Keyboards");
         $panel->instance($this->mpanels+1);
         $panel->HasPedals="N";
         $panel->DispDrawstopRows=1;
@@ -96,12 +96,12 @@ class CouplerManuals extends ODF {
         $switchid=$this->mswitches;
         
         for ($mn=1; $mn<=$manuals; $mn++) {
-            $manual=new GOClasses\Manual("Coupler Manual $mn");
+            $manual=new GOClasses\Manual("Virtual Keyboard $mn");
             $manual->instance($this->mmanuals+$mn);
             $manual->Displayed="N";
             $me=$panel->GUIElement($manual);
             foreach($targets as $tn) {
-                $coupler=new \GOClasses\Coupler("CM $mn to $tn");
+                $coupler=new \GOClasses\Coupler("VK $mn to $tn");
                 $coupler->instance(++$couplerid);
                 $manual->Coupler($coupler);
                 $coupler->DestinationManual=$tn;
@@ -111,7 +111,7 @@ class CouplerManuals extends ODF {
                 $coupler->CoupleToSubsequentUpwardIntramanualCouplers="Y";
                 $coupler->CoupleToSubsequentDownwardIntramanualCouplers="Y";
 
-                $switch=new \GOClasses\Sw1tch("CM $mn to $tn");
+                $switch=new \GOClasses\Sw1tch("VK $mn to $tn");
                 $switch->instance(++$switchid);
                 $coupler->Switch($switch);
                 if ($tn==$defaults[$mn-1]) {
