@@ -17,11 +17,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Luedingworth extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/Luedingworth/";
-    const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.0.organ";
     
-    protected string $root=self::ROOT;
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,  9=>self::RANKS_DIRECT,
         1=>self::RANKS_DIFFUSE, 7=>self::RANKS_DIFFUSE,
@@ -148,13 +144,17 @@ class Luedingworth extends SPOrgan {
 
     protected function correctFileName(string $filename): string {
         static $files=[];
-        if (sizeof($files)==0)
-            $files=$this->treeWalk(getenv("HOME") . self::ROOT);
+        if (sizeof($files)==0) {
+            $files=$this->treeWalk(getenv("HOME") . $this->root);
+        }
+        
+        
         $filename=str_replace("//", "/", $filename);
+        if (strpos($filename, "backgrounds")!==FALSE) {
+            $filename=str_replace("OrganInstallationPackages/002302/", "", $filename);
+        }
         if (isset($files[strtolower($filename)])) {
             $result=$files[strtolower($filename)];
-            if (strpos($filename, "backgrounds"))
-                $result=str_replace("OrganInstallationPackages/002302/", "", $result);
             return $result;
         }
         else
@@ -193,6 +193,14 @@ class Luedingworth extends SPOrgan {
         }
         return parent::processSample($hwdata, $isattack);
     }
+}
+
+class Demo extends Luedingworth {
+    const ROOT="/GrandOrgue/Organs/SP/Luedingworth/";
+    const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.0.organ";
+    
+    protected string $root=self::ROOT;
     
     /**
      * Run the import
@@ -201,9 +209,10 @@ class Luedingworth extends SPOrgan {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=73;
         if (sizeof($positions)>0) {
-            $hwi=new Luedingworth(self::ROOT . self::SOURCE);
+            $hwi=new Demo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
+            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             foreach($hwi->getStops() as $stop) {
                 unset($stop->Rank001PipeCount);
@@ -216,7 +225,7 @@ class Luedingworth extends SPOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            /* self::Luedingworth(
+            self::Luedingworth(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
             self::Luedingworth(
@@ -224,7 +233,7 @@ class Luedingworth extends SPOrgan {
                      "Diffuse");
             self::Luedingworth(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear"); */
+                    "Rear"); 
              self::Luedingworth(
                     [
                         self::RANKS_DIRECT=>"Direct", 
@@ -235,4 +244,62 @@ class Luedingworth extends SPOrgan {
         }
     }
 }
-Luedingworth::Luedingworth();
+
+class Full extends Luedingworth {
+    const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
+    const SOURCE="OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Luedingworth Full (%s) 1.0.organ";
+    
+    protected string $root=self::ROOT;
+    
+    /**
+     * Run the import
+     */
+    public static function Luedingworth(array $positions=[], string $target="") {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=73;
+        if (sizeof($positions)>0) {
+            $hwi=new Full(self::ROOT . self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->getOrgan()->ChurchName.= " ($target)";
+            foreach($hwi->getStops() as $stop) {
+                unset($stop->Rank001PipeCount);
+                unset($stop->Rank002PipeCount);
+                unset($stop->Rank003PipeCount);
+            }
+            unset($hwi->getManual(1)->Key027Width);
+            
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->saveODF(sprintf(self::TARGET, $target));
+        }
+        else {
+            self::Luedingworth(
+                    [self::RANKS_DIRECT=>"Direct"],
+                    "Direct");
+            self::Luedingworth(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "Diffuse");
+            self::Luedingworth(
+                    [self::RANKS_REAR=>"Rear"],
+                    "Rear"); 
+             self::Luedingworth(
+                    [
+                        self::RANKS_DIRECT=>"Direct", 
+                        self::RANKS_DIFFUSE=>"Diffuse", 
+                        self::RANKS_REAR=>"Rear"
+                    ],
+                   "Surround");
+        }
+    }
+}
+
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
+    throw new \Exception("Error $errstr");
+    die();
+}
+set_error_handler("Organs\SP\ErrorHandler");
+
+Full::Luedingworth();
+Demo::Luedingworth();
