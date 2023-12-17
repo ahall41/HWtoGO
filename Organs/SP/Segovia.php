@@ -282,7 +282,6 @@ class Segovia extends SPOrganV2 {
      */
     public static function Segovia(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        //\GOClasses\Manual::$pedals=13;
         \GOClasses\Manual::$keys=54;
         if (sizeof($positions)>0) {
             $hwi=new Segovia(self::SOURCE);
@@ -295,15 +294,6 @@ class Segovia extends SPOrganV2 {
                 unset($stop->Rank004PipeCount);
                 unset($stop->Rank005PipeCount);
                 unset($stop->Rank006PipeCount);
-            }
-            
-            foreach ($hwi->getManuals() as $manual) {
-                for ($key=1; $key<=$manual->NumberOfAccessibleKeys; $key++) {
-                    $w=sprintf("Key%03dWidth", $key);
-                    if ($manual->get($w)<0) {
-                        $manual->set($w, 1);
-                    }
-                }
             }
             
             foreach ($hwi->getRanks() as $rank) {

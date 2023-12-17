@@ -89,9 +89,15 @@ class Manual extends GOObject {
     public function KeyWidth(int $x) : void {
         if ($this->DisplayKeys>1) {
             $key=$this->Key($this->DisplayKeys -1);
-            $this->set("${key}Width", $x-$this->currentX);
+            $delta=$x-$this->currentX;
+            if ($delta<0) {
+                $this->set("${key}Width",0);
+                $this->set("${key}Offset",$delta);
+            }
+            else {
+                $this->set("${key}Width", $x-$this->currentX);
+            }
         }
         $this->currentX=$x;
     }
-    
 }
