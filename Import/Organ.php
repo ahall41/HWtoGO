@@ -58,6 +58,7 @@ abstract class Organ extends Images {
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
         $this->cloneTremmed();
+        $this->fixTremmed();
     }
 
     /**
@@ -443,6 +444,33 @@ abstract class Organ extends Images {
                 foreach($frpipes as $midikey=>$pipe) {
                     if (!isset($topipes[$midikey]))
                         $torank->Pipe($midikey, $pipe);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Set Pipes with no IsTremmed=1 to IsTremmed=-1
+     * 
+     * @return void
+     */
+    public function fixTremmed() : void {
+        foreach ($this->getRanks() as $rank) {
+            foreach ($rank->Pipes() as $pipe) {
+                $hasTrem=FALSE;
+                for ($a=0; $a<=$pipe->AttackCount; $a++) {
+                    $t=$a<1 ? "IsTremulant" : sprintf("Attack%03dIsTremulant", $a);
+                    if ($pipe->isset($t) && $pipe->get($t)=="1") {
+                        $hasTrem=TRUE;
+                        break;
+                    }
+                }
+
+                if (!$hasTrem) {
+                    for ($a=0; $a<=$pipe->AttackCount; $a++) {
+                        $t=$a<1 ? "IsTremulant" : sprintf("Attack%03dIsTremulant", $a);
+                        $pipe->set($t,-1);
+                    }
                 }
             }
         }

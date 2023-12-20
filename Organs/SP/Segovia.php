@@ -62,9 +62,8 @@ class Segovia extends SPOrganV2 {
                 0=>["Name"=>"Mixer", "Instance"=>1000, "SetID"=>1035],
                ],
             6=>[
-                0=>["Group"=>"Stops", "Name"=>"Landscape", "Instance"=>13000, "SetID"=>1038],
-                1=>[],
-                2=>["Group"=>"Stops", "Name"=>"Portrait", "Instance"=>13000, "SetID"=>1039],
+                0=>["Group"=>"Single", "Name"=>"Standard", "Instance"=>13000, "SetID"=>1038],
+                1=>["Group"=>"Single", "Name"=>"Wide", "Instance"=>13000, "SetID"=>1039],
                 ],
     ];
 
@@ -93,7 +92,7 @@ class Segovia extends SPOrganV2 {
         908=>["Panels"=>[5=>[1690]], "EnclosureID"=>908,"Name"=>"Stops",
             "GroupIDs"=>[801,802,804], "AmpMinimumLevel"=>1],
         
-        998=>["Panels"=>[2=>[988, NULL, 988], 3=>[984, NULL, 984], 7=>[986, NULL, 986]], 
+        998=>["Panels"=>[2=>[988, NULL, 988], 3=>[984, NULL, 984], 6=>[986, 986]], 
             "GroupIDs"=>[201,202,204], "AmpMinimumLevel"=>20], // Echo
    ];
 
@@ -176,8 +175,9 @@ class Segovia extends SPOrganV2 {
 
     public function configureImage(\GOClasses\GOObject $object, array $data, int $layout=0) : void {
         parent::configureImage($object, $data, $layout);
-        unset($object->MouseRectWidth);
-        unset($object->MouseRectHeight);
+        $imagedata=$this->getImageData($data, $layout);
+        $object->MouseRectWidth=$imagedata["ImageWidthPixels"];
+        $object->MouseRectHeight=$imagedata["ImageHeightPixels"];
     }
     
     public function createStops(array $stopsdata) : void {
@@ -218,7 +218,21 @@ class Segovia extends SPOrganV2 {
     }
 
     protected function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        SPOrgan::ConfigurePanelEnclosureImages($enclosure, $data);
+        // print_r($data);
+        if (isset($data["Panels"])) {
+            foreach ($data["Panels"] as $panelid=>$instances) {
+                foreach ($instances as $layout=>$instanceid) {
+                    if ($instanceid!==NULL) {
+                        $panel=$this->getPanel(($panelid*10)+$layout, FALSE);
+                        if ($panel!==NULL) {
+                            $pe=$this->getPanel(($panelid*10)+$layout)->GUIElement($enclosure);
+                            $this->configureEnclosureImage($pe, ["InstanceID"=>$instanceid], $layout);
+                            echo $pe, "\n";
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
@@ -273,7 +287,6 @@ class Segovia extends SPOrganV2 {
                 break;
         }
         $pipe=parent::processSample($hwdata, $isattack);
-        // if ($pipe) unset($pipe->ReleaseCrossfadeLength);
         return $pipe;
     }
     
@@ -296,26 +309,6 @@ class Segovia extends SPOrganV2 {
                 unset($stop->Rank006PipeCount);
             }
             
-            foreach ($hwi->getRanks() as $rank) {
-                foreach ($rank->Pipes() as $pipe) {
-                    $hasTrem=FALSE;
-                    for ($a=0; $a<=$pipe->AttackCount; $a++) {
-                        $t=$a<1 ? "IsTremulant" : sprintf("Attack%03dIsTremulant", $a);
-                        if ($pipe->isset($t) && $pipe->get($t)=="1") {
-                            $hasTrem=TRUE;
-                            break;
-                        }
-                    }
-                    
-                    if (!$hasTrem) {
-                        for ($a=0; $a<=$pipe->AttackCount; $a++) {
-                            $t=$a<1 ? "IsTremulant" : sprintf("Attack%03dIsTremulant", $a);
-                            $pipe->set($t,-1);
-                        }
-                    }
-                }
-            }
-            
             $hwi->getOrgan()->ChurchName.= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
@@ -324,6 +317,7 @@ class Segovia extends SPOrganV2 {
             self::Segovia(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
+            exit();
             self::Segovia(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
