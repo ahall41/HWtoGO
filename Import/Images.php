@@ -103,8 +103,12 @@ abstract class Images extends Configure {
             $instance=$this->hwdata->imageSetInstance($instanceid);
             foreach(["PositionX"=>"${layout}LeftXPosPixels",
                      "PositionY"=>"${layout}TopYPosPixels"] as $to=>$fr) {
-                if (isset($instance[$fr]))  
+                if (isset($instance[$fr])) {  
                     $result[$to]=$instance[$fr];
+                }
+                else {
+                    $result[$to]=0;
+                }
             }
             if (isset($instance["${layout}ImageSetID"])
                 && !empty($instance["${layout}ImageSetID"]))

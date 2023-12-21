@@ -21,10 +21,10 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Segovia extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Segovia/";
     const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.1.organ";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.2.organ";
     const REVISIONS="\n"
-            . "1.1 Corrected panel displays\n"
-            . "    Corrected releases on ranks without tremmed samples\n"
+            . "1.1 Corrected releases on ranks without tremmed samples\n"
+            . "1.2 Corrected panel image placement\n"
             . "\n";
     
     const RANKS_DIRECT=1;
