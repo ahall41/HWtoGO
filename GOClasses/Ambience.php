@@ -7,7 +7,7 @@
  * 
  */
 namespace GOClasses;
-require_once(__DIR__ . "/Pipe.php");
+require_once(__DIR__ . "/Noise.php");
 
 /**
  * Representation of a GrandOrgue ambient sound (typically a blower)
@@ -20,8 +20,6 @@ require_once(__DIR__ . "/Pipe.php");
  */
 class Ambience extends Pipe {
 
-    public static $blankloop="";
-    
     public function __construct() {
         parent::__construct();
         parent::set("Pipe",1);
@@ -36,7 +34,7 @@ class Ambience extends Pipe {
     public function __toString() : string {
         if ($this->AttackCount<0) {
             $data=$this->data;
-            $this->Attack=self::$blankloop;
+            $this->Attack=Noise::$blankloop;
             $result=parent::__toString();
             $this->data=$data;
             return $result;

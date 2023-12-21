@@ -18,6 +18,11 @@ require_once __DIR__ . "/SPOrgan.php";
  */
 class Luedingworth extends SPOrgan {
     
+    const COMMENTS= 
+              "\n"
+            . "1.1 Added Ventils, Toys and Full surround ODFs\n"
+            . "\n";
+    
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,  9=>self::RANKS_DIRECT,
         1=>self::RANKS_DIFFUSE, 7=>self::RANKS_DIFFUSE,
@@ -60,24 +65,26 @@ class Luedingworth extends SPOrgan {
     ];
 
     protected $patchTremulants=[
-        36=>["Type"=>"Wave", "GroupIDs"=>[101,102,104,201,202,204,301,302,304,401,402,404]],
+        36=>["Type"=>"Wave", "GroupIDs"=>[101,103,104,201,203,204,301,303,304,401,403,404]],
     ];
 
     protected $patchEnclosures=[
         /* 801=>["Name"=>"Pedal",  "EnclosureID"=>801, "X"=>1400, "Y"=>700,
             "GroupIDs"=>[101,102,104]],
-        802=>["Name"=>"RPtif",     "EnclosureID"=>802, "X"=>1400, "Y"=>800,
+        802=>["Name"=>"RP",     "EnclosureID"=>802, "X"=>1400, "Y"=>800,
             "GroupIDs"=>[201,202,204]],
-        803=>["Name"=>"OW",        "EnclosureID"=>803, "X"=>1400, "Y"=>900, 
+        803=>["Name"=>"OW",     "EnclosureID"=>803, "X"=>1400, "Y"=>900, 
+            "GroupIDs"=>[301,302,304]],
+        803=>["Name"=>"BW",     "EnclosureID"=>804, "X"=>1400, "Y"=>1000, 
             "GroupIDs"=>[301,302,304]], */
         901=>["Panels"=>[5=>[1600]], "EnclosureID"=>901, "Name"=>"Direct",
-            "GroupIDs"=>[101,201,301,401], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[101,201,301,401,501], "AmpMinimumLevel"=>1],
         902=>["Panels"=>[5=>[1610]], "EnclosureID"=>902, "Name"=>"Diffuse",
-            "GroupIDs"=>[102,202,302,402], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[103,203,303,403,503], "AmpMinimumLevel"=>1],
         903=>["Panels"=>[5=>[1620]], "EnclosureID"=>903,"Name"=>"Rear",
-            "GroupIDs"=>[104,204,304], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[104,204,304,404,504], "AmpMinimumLevel"=>1],
         905=>["Panels"=>[5=>[1598]], "EnclosureID"=>907,"Name"=>"Toys",
-            "GroupIDs"=>[701,702,704], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[501,503,504], "AmpMinimumLevel"=>1],
         908=>["Panels"=>[5=>[1595]], "EnclosureID"=>908,"Name"=>"Blower",
             "GroupIDs"=>[800], "AmpMinimumLevel"=>1],
         909=>["Panels"=>[5=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker",
@@ -85,26 +92,33 @@ class Luedingworth extends SPOrgan {
     ];
 
     protected $patchStops=[
-        250=>["StopID"=>250,  "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
-        -11=>["StopID"=>-11,  "DivisionID"=>1, "Name"=>"PE Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -12=>["StopID"=>-12,  "DivisionID"=>2, "Name"=>"PO Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -13=>["StopID"=>-13,  "DivisionID"=>3, "Name"=>"HW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -14=>["StopID"=>-14,  "DivisionID"=>4, "Name"=>"BW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -21=>["StopID"=>-21,  "DivisionID"=>1, "Name"=>"PE Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -22=>["StopID"=>-22,  "DivisionID"=>2, "Name"=>"PO Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -23=>["StopID"=>-23,  "DivisionID"=>3, "Name"=>"GO key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -24=>["StopID"=>-24,  "DivisionID"=>4, "Name"=>"BW key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        250=>["StopID"=>250, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>800],
+        -11=>["StopID"=>-11, "DivisionID"=>1, "Name"=>"PE Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -12=>["StopID"=>-12, "DivisionID"=>2, "Name"=>"PO Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -13=>["StopID"=>-13, "DivisionID"=>3, "Name"=>"HW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -14=>["StopID"=>-14, "DivisionID"=>4, "Name"=>"BW key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -21=>["StopID"=>-21, "DivisionID"=>1, "Name"=>"PE Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -22=>["StopID"=>-22, "DivisionID"=>2, "Name"=>"PO Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -23=>["StopID"=>-23, "DivisionID"=>3, "Name"=>"GO key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -24=>["StopID"=>-24, "DivisionID"=>4, "Name"=>"BW key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         136=>["StopID"=>136, "DivisionID"=>1, "Name"=>"Tremulant Direct",    "ControllingSwitchID"=>36, "Ambient"=>TRUE, "GroupID"=>501],
-        236=>["StopID"=>236, "DivisionID"=>1, "Name"=>"Tremulant Diffuse",   "ControllingSwitchID"=>36, "Ambient"=>TRUE, "GroupID"=>502],
+        236=>["StopID"=>236, "DivisionID"=>1, "Name"=>"Tremulant Diffuse",   "ControllingSwitchID"=>36, "Ambient"=>TRUE, "GroupID"=>503],
         436=>["StopID"=>436, "DivisionID"=>1, "Name"=>"Tremulant Rear",      "ControllingSwitchID"=>36, "Ambient"=>TRUE, "GroupID"=>504],
         137=>["StopID"=>137, "DivisionID"=>1, "Name"=>"Zimbelstern Direct",  "ControllingSwitchID"=>37, "Ambient"=>TRUE, "GroupID"=>501],
-        237=>["StopID"=>237, "DivisionID"=>1, "Name"=>"Zimbelstern Diffuse", "ControllingSwitchID"=>37, "Ambient"=>TRUE, "GroupID"=>502],
+        237=>["StopID"=>237, "DivisionID"=>1, "Name"=>"Zimbelstern Diffuse", "ControllingSwitchID"=>37, "Ambient"=>TRUE, "GroupID"=>503],
         437=>["StopID"=>437, "DivisionID"=>1, "Name"=>"Zimbelstern Rear",    "ControllingSwitchID"=>37, "Ambient"=>TRUE, "GroupID"=>504],
         143=>["StopID"=>143, "DivisionID"=>1, "Name"=>"Vogelgesang Direct",  "ControllingSwitchID"=>43, "Ambient"=>TRUE, "GroupID"=>501],
-        243=>["StopID"=>243, "DivisionID"=>1, "Name"=>"Vogelgesang Diffuse", "ControllingSwitchID"=>43, "Ambient"=>TRUE, "GroupID"=>502],
+        243=>["StopID"=>243, "DivisionID"=>1, "Name"=>"Vogelgesang Diffuse", "ControllingSwitchID"=>43, "Ambient"=>TRUE, "GroupID"=>503],
         443=>["StopID"=>443, "DivisionID"=>1, "Name"=>"Vogelgesang Rear",    "ControllingSwitchID"=>43, "Ambient"=>TRUE, "GroupID"=>504],
-   ];
+    ];
     
+    protected $patchKeyActions=[
+          1=>["SourceKeyboardID"=>2, "DestKeyboardID"=>2, "Name"=>"RP Ventil",  "ConditionSwitchID"=>19001],
+          7=>["SourceKeyboardID"=>1, "DestKeyboardID"=>1, "Name"=>"Ped Ventil", "ConditionSwitchID"=>19007],
+         13=>["SourceKeyboardID"=>3, "DestKeyboardID"=>3, "Name"=>"OW Ventil",  "ConditionSwitchID"=>19013],
+         19=>["SourceKeyboardID"=>4, "DestKeyboardID"=>4, "Name"=>"BP Ventil",  "ConditionSwitchID"=>19019  ],
+    ];
+
     protected $patchRanks=[
           5=>"DELETE", //
           6=>"DELETE", // Toys - see ProcessNoise()
@@ -122,26 +136,6 @@ class Luedingworth extends SPOrgan {
         994=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-24]],
     ];
 
-    protected function xxpatchData(\HWClasses\HWData $hwd) : void {
-        parent::patchData($hwd);
-        $instances=$this->hwdata->imageSetInstances();
-        foreach ($instances as $instance) {
-            if ($instance["DisplayPageID"]==2) {
-                echo $instance["ImageSetInstanceID"], " ",
-                     $instance["DisplayPageID"], " ",
-                     $instance["Name"], "\n";
-            }
-        } 
-        exit();
-    }
-
-    public function xxcreateStop(array $hwdata): ?\GOClasses\Sw1tch {
-        $switch=parent::createStop($hwdata);
-        
-        echo $hwdata["StopID"], "\n",  $switch, "\n";
-        return $switch;
-    }
-    
     protected function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
         //error_log(print_r($data,1));
         if (isset($data["ControllingSwitchID"])) {
@@ -153,6 +147,13 @@ class Luedingworth extends SPOrgan {
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2302; 
         return parent::createOrgan($hwdata);
+    }
+    
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+        if ((($rankid=$hwdata["RankID"]) % 10)<5 && $rankid!=950) {
+            return parent::createRank($hwdata, $keynoise);
+        }
+        return NULL;
     }
     
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -185,16 +186,14 @@ class Luedingworth extends SPOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
     
-    public function xxconfigurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
+    public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         if (isset($data["Panels"]))
             parent::configurePanelEnclosureImages($enclosure, $data);
         else {
             $panel=$this->getPanel(50); // Mixer
             $pe=$panel->GUIElement($enclosure);
-            print_r($data);
             $pe->PositionX=$data["X"];
             $pe->PositionY=$data["Y"];
-            echo $pe, "\n";
         }
     }
 
@@ -211,6 +210,7 @@ class Luedingworth extends SPOrgan {
             $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
             $stopid=$hwdata["NormalMIDINoteNumber"]
                     + $offsets[intval($hwdata["SampleID"]/1000)];
+            // echo $stopid, "\t", $hwdata["SampleFilename"], "\n";
             $stop=$this->getStop($stopid);
             if ($stop!==NULL) {
                 $ambience=$stop->Ambience();
@@ -244,9 +244,9 @@ class Luedingworth extends SPOrgan {
 }
 
 class Demo extends Luedingworth {
-    const ROOT="/GrandOrgue/Organs/SP/Luedingworth/";
+    const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.1.organ";
     
     protected string $root=self::ROOT;
     
@@ -269,8 +269,18 @@ class Demo extends Luedingworth {
             }
             unset($hwi->getManual(1)->Key027Width);
             
+            foreach([100,400,200] as $pid=>$pos) {
+                foreach([36=>"trem", 37=>"Zimbelstern",43=>"vogelg"] as $stopid=>$wav) {
+                    $stop=$hwi->getStop($pos + $stopid);
+                    if ($stop && $stop->Ambience()->AttackCount<0) {
+                        $stop->Ambience()->Attack=sprintf("OrganInstallationPackages/002302/pipe/Toys/%s_%01d1.wav",$wav,$pid);
+                        // echo $stop, "\n";
+                    }
+                }
+            }
+            
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Luedingworth(
@@ -282,7 +292,7 @@ class Demo extends Luedingworth {
             self::Luedingworth(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear"); 
-             self::Luedingworth(
+            self::Luedingworth(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
@@ -320,13 +330,12 @@ class Full extends Luedingworth {
             unset($hwi->getManual(1)->Key027Width);
             
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Luedingworth(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            exit();
             self::Luedingworth(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
