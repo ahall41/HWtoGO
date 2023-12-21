@@ -409,7 +409,7 @@ abstract class Organ extends Images {
             $sample=$this->hwdata->sample($datum["SampleID"]);
             $reltime=isset($datum["ReleaseSelCriteria_LatestKeyReleaseTimeMs"])
                     ? $datum["ReleaseSelCriteria_LatestKeyReleaseTimeMs"] : -1; 
-            if ($reltime>=999999) $reltime=-1;
+            // if ($reltime>=999999) $reltime=-1;
             $array[]=array_merge(
                     ["reltime"=>$reltime], $datum, $layer, $sample, $pipe);
         }
@@ -469,7 +469,11 @@ abstract class Organ extends Images {
                 if (!$hasTrem) {
                     for ($a=0; $a<=$pipe->AttackCount; $a++) {
                         $t=$a<1 ? "IsTremulant" : sprintf("Attack%03dIsTremulant", $a);
-                        $pipe->set($t,-1);
+                        $pipe->unset($t);
+                    }
+                    for ($r=1; $r<=$pipe->ReleaseCount; $r++) {
+                        $t=sprintf("Release%03dIsTremulant", $r);
+                        $pipe->unset($t);
                     }
                 }
             }

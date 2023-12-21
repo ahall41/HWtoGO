@@ -75,7 +75,7 @@ abstract class Images extends Configure {
      *      Images[Filenames]
      */
     public function getImageData(array $data, int $layout=0) : array {
-        static $map=[
+        static $map=[ /** @@todo not quite right ! */
             "ImageWidthPixels"=>"ImageWidthPixels",
             "ImageHeightPixels"=>"ImageHeightPixels",
             "ClickableAreaLeftRelativeXPosPixels"=>"MouseRectLeft",

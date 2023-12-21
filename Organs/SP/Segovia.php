@@ -21,8 +21,11 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Segovia extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Segovia/";
     const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Corrected panel displays\n"
+            . "    Corrected releases on ranks without tremmed samples\n"
+            . "\n";
     
     const RANKS_DIRECT=1;
     const RANKS_DIFFUSE=2;
@@ -218,7 +221,6 @@ class Segovia extends SPOrganV2 {
     }
 
     protected function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        // print_r($data);
         if (isset($data["Panels"])) {
             foreach ($data["Panels"] as $panelid=>$instances) {
                 foreach ($instances as $layout=>$instanceid) {
@@ -227,7 +229,6 @@ class Segovia extends SPOrganV2 {
                         if ($panel!==NULL) {
                             $pe=$this->getPanel(($panelid*10)+$layout)->GUIElement($enclosure);
                             $this->configureEnclosureImage($pe, ["InstanceID"=>$instanceid], $layout);
-                            echo $pe, "\n";
                         }
                     }
                 }
@@ -286,6 +287,7 @@ class Segovia extends SPOrganV2 {
                 $hwdata["IsTremulant"]=1;
                 break;
         }
+
         $pipe=parent::processSample($hwdata, $isattack);
         return $pipe;
     }
@@ -309,6 +311,8 @@ class Segovia extends SPOrganV2 {
                 unset($stop->Rank006PipeCount);
             }
             
+            $hwi->getManual(1)->NumberOfLogicalKeys=
+                     $hwi->getManual(1)->NumberOfAccessibleKeys=32;
             $hwi->getOrgan()->ChurchName.= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
@@ -317,7 +321,6 @@ class Segovia extends SPOrganV2 {
             self::Segovia(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
-            exit();
             self::Segovia(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");

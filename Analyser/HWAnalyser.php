@@ -37,21 +37,22 @@ class HWAnalyser {
     /**
      * Constructor
      */
-    public function __construct(string $dir, string $xml) {
-        $source=getenv("HOME") . self::ROOT . "${dir}/OrganDefinitions/${xml}";
+    public function __construct(string $xml) {
+        $source=getenv("HOME") . self::ROOT . $xml;
         $this->hwd=new \HWClasses\HWData($source);
-        $general=$this->hwd->general();
-        $organ=new \GOClasses\Organ($general["Identification_Name"]);
         echo "Analysing $xml\n";
-        $this->samples();
-        $this->buildpanels();
-        $this->switchImages();
-        $this->stops();
-        $this->tremulants();
-        $this->manuals();
-        $this->windcompartments();
-        $this->layers();
-        $this->enclosureImages();
+        //$general=$this->hwd->general();
+        //$organ=new \GOClasses\Organ($general["Identification_Name"]);
+        //$this->samples();
+        //$this->buildpanels();
+        //$this->switchImages();
+        //$this->stops();
+        //$this->tremulants();
+        //$this->manuals();
+        //$this->windcompartments();
+        //$this->layers();
+        //$this->enclosureImages();
+        $this->imageSets();
     }
     
     /**
@@ -469,64 +470,186 @@ class HWAnalyser {
             }
         }
     }
+    
+    /**
+     * Analyse images - MouseRect vs image size
+     */
+    private function imageSets() {
+        foreach ($this->hwd->imageSets() as $imageSet) {
+            if (array_key_exists("ImageWidthPixels", $imageSet) &&
+                array_key_exists("ClickableAreaRightRelativeXPosPixels", $imageSet)) {
+                $width=intval($imageSet["ClickableAreaRightRelativeXPosPixels"]);
+                if (array_key_exists("ClickableAreaLeftRelativeXPosPixels", $imageSet)) {
+                        $width-=intval($imageSet["ClickableAreaLeftRelativeXPosPixels"]);
+                }
+                if ($width!=$imageSet["ImageWidthPixels"]) {
+                    echo $imageSet["ImageSetID"], "\twidth ",$width, "!=", $imageSet["ImageWidthPixels"], "\t",
+                            $imageSet["Name"], "\n";
+                }
+            }
+            
+            if (array_key_exists("ImageHeightPixels", $imageSet) &&
+                array_key_exists("ClickableAreaRightRelativeYPosPixels", $imageSet)) {
+                $height=intval($imageSet["ClickableAreaRightRelativeYPosPixels"]);
+                if (array_key_exists("ClickableAreaLeftRelativeYPosPixels", $imageSet)) {
+                        $height-=intval($imageSet["ClickableAreaLeftRelativeYPosPixels"]);
+                }
+                if ($height!=$imageSet["ImageHeightPixels"]) {
+                    echo $imageSet["ImageSetID"], "\theight ", $height, "!=", $imageSet["ImageHeightPixels"], "\t",
+                            $imageSet["Name"], "\n";
+                }
+            }
+        }
+    }
 }
 
-new HWAnalyser("Arnstadt","Arnstadt, Bachkirche Wender Organ, Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Billerbeck","Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Buckeburg","Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("BudaHills","Lutheran Buda_far.Organ_Hauptwerk_xml");
-new HWAnalyser("BudaHills","Lutheran Buda_near.Organ_Hauptwerk_xml");
-new HWAnalyser("BudaHills","Lutheran Buda_surround.Organ_Hauptwerk_xml");
-new HWAnalyser("Burton-Berlin","Burton-Berlin Hill Surround Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Caen","Caen St. Etienne, Cavaille-Coll, Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Casavant","Bellevue, Casavant Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Doesburg","Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml");
-new HWAnalyser("Dreischor","Dreischor far.Organ_Hauptwerk_xml");
-new HWAnalyser("Dreischor","Dreischor near.Organ_Hauptwerk_xml");
-new HWAnalyser("Dreischor","Dreischor surround.Organ_Hauptwerk_xml");
-new HWAnalyser("Erfurt Predigerkirche","Erfurt Predigerkirche (demo).Organ_Hauptwerk_xml");
-new HWAnalyser("FrankfurtOder","Frankfurt (Oder), Sauer, op. 2025, 8-channel demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Gelence","Gelence extended.Organ_Hauptwerk_xml");
-new HWAnalyser("Gelence","Gelence original.Organ_Hauptwerk_xml");
-new HWAnalyser("Goch","Goch (demo).Organ_Hauptwerk_xml");
-new HWAnalyser("HradecKralove","Hradec Kralove - Maria - Wet.Organ_Hauptwerk_xml");
-new HWAnalyser("Kdousov","Kdousov Wet.Organ_Hauptwerk_xml");
-new HWAnalyser("Krzesow","Krzeszow Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Lorris","Lorris dry.Organ_Hauptwerk_xml");
-new HWAnalyser("Lorris","Lorris_wet_and_dry.Organ_Hauptwerk_xml");
-new HWAnalyser("Lorris","Lorris_wet.Organ_Hauptwerk_xml");
-new HWAnalyser("Luedingworth","Luedingworth Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Menesterol","Menesterol 4-chan Surround.Organ_Hauptwerk_xml");
-new HWAnalyser("Midwolda","Midwolda Surround, Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("New Haven","Redemeer Aeolian-Skinner_surround extend.Organ_Hauptwerk_xml");
-new HWAnalyser("New Haven","Redemeer Aeolian-Skinner_surround orig.Organ_Hauptwerk_xml");
-new HWAnalyser("New Haven","Redemeer Aeolian-Skinner_wet_r extend.Organ_Hauptwerk_xml");
-new HWAnalyser("New Haven","Redemeer Aeolian-Skinner_wet_r orig.Organ_Hauptwerk_xml");
-new HWAnalyser("Noordwolde","Noordwolde, Huis-Freytag-Lohman, Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Oloron","Oloron-Sainte-Marie.Organ_Hauptwerk_xml");
-new HWAnalyser("Polna","Polna, Sieber Organ, Surround Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Rotterdam","Rotterdam - Laurenskerk, Hoofdorgel DEMO.Organ_Hauptwerk_xml");
-new HWAnalyser("Rozay","Rozay Surround DEMO.Organ_Hauptwerk_xml");
-new HWAnalyser("Sepsiszentgyorgy","Ziegler dry.Organ_Hauptwerk_xml");
-new HWAnalyser("Sepsiszentgyorgy","Ziegler surround.Organ_Hauptwerk_xml");
-new HWAnalyser("Sepsiszentgyorgy","Ziegler wet.Organ_Hauptwerk_xml");
-new HWAnalyser("Skinner497","San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Stahlhuth","Stahlhuth_positive_ext_dry.Organ_Hauptwerk_xml");
-new HWAnalyser("Stahlhuth","Stahlhuth_positive_ext_four_channels.Organ_Hauptwerk_xml");
-new HWAnalyser("Stahlhuth","Stahlhuth_positive_ext_wet.Organ_Hauptwerk_xml");
-new HWAnalyser("Stahlhuth","Stahlhuth_positive_orig_dry.Organ_Hauptwerk_xml");
-new HWAnalyser("Stahlhuth","Stahlhuth_positive_orig_wet.Organ_Hauptwerk_xml");
-new HWAnalyser("St Maximin","St. Maximin, Surround Ext.Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("St Maximin","St. Maximin, Surround Orig.Demo.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais v2 surround_extend.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais v2 surround original.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais v2 wet_extend.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais v2 wet original.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais w2 semidry_extend.Organ_Hauptwerk_xml");
-new HWAnalyser("Szikszo","Klais w2 semidry_orig.Organ_Hauptwerk_xml");
-new HWAnalyser("Urk","Urk - Kerk aan de Zee-far.Organ_Hauptwerk_xml");
-new HWAnalyser("Urk","Urk - Kerk aan de Zee-near.Organ_Hauptwerk_xml");
-new HWAnalyser("Urk","Urk - Kerk aan de Zee-surround.Organ_Hauptwerk_xml");
-new HWAnalyser("Utrecht","Utrecht Dom, Surround DEMO.Organ_Hauptwerk_xml");
-new HWAnalyser("Wildervank","Wildervank.Organ.Hauptwerk.xml");
-new HWAnalyser("ZlKor","Zlata Koruna DEMO.Organ.Hauptwerk.xml");
+new HWAnalyser("AV/Bakats/OrganDefinitions/Bakats semidry_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Bakats/OrganDefinitions/Bakats surround_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Bakats/OrganDefinitions/Bakats wet_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Boszormeny/OrganDefinitions/Boszormeny far_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Boszormeny/OrganDefinitions/Boszormeny near_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Boszormeny/OrganDefinitions/Boszormeny surround_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/BudaHills/OrganDefinitions/Lutheran Buda_far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/BudaHills/OrganDefinitions/Lutheran Buda_near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/BudaHills/OrganDefinitions/Lutheran Buda_surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest semidry_extended_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest semidry orig_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest surround extended_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest surround original_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest wet_extended_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_Castilian/OrganDefinitions/Castilian Budapest wet orig_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Budapest_HS/OrganDefinitions/Holy Spirit Budapest_v1_2_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Csaszar/OrganDefinitions/Luber of Csaszar extend v2.0_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Csaszar/OrganDefinitions/Luber of Csaszar orig v2.0_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Dreischor/OrganDefinitions/Dreischor far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Dreischor/OrganDefinitions/Dreischor near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Dreischor/OrganDefinitions/Dreischor surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Esztergom/OrganDefinitions/Rieger-Esztergom dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Esztergom/OrganDefinitions/Rieger-Esztergom surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Esztergom/OrganDefinitions/Rieger-Esztergom wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Farkasret/OrganDefinitions/Italian Baroque Organ Budapest far_native_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Farkasret/OrganDefinitions/Italian Baroque Organ Budapest far reverb_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Farkasret/OrganDefinitions/Italian Baroque Organ Budapest near_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Farkasret/OrganDefinitions/Italian Baroque Organ Budapest sur native_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Farkasret/OrganDefinitions/Italian Baroque Organ Budapest sur reverb_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Fehervar/OrganDefinitions/Angster Cistercian extended demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Fehervar/OrganDefinitions/Angster Cistercian orig demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Gelence/OrganDefinitions/Gelence extended.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Gelence/OrganDefinitions/Gelence original.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Geneva/OrganDefinitions/Grenzing-Geneva four-channels.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Geneva/OrganDefinitions/Grenzing-Geneva orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hajos/OrganDefinitions/Hajos_extend_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hajos/OrganDefinitions/Hajos_orig_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Harmonium/OrganDefinitions/Dutch Harmonium extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Harmonium/OrganDefinitions/Dutch Harmonium orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_extend_semidry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_extend_surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_extend_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_original_semidry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_original_surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Hermance/OrganDefinitions/Mascioni-Hermance_original_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Jak/OrganDefinitions/Jak-Angster.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kanta/OrganDefinitions/Kanta_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kanta/OrganDefinitions/Kanta_surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kanta/OrganDefinitions/Kanta_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kolonics_Brasov/OrganDefinitions/Kolonics Brasov far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kolonics_Brasov/OrganDefinitions/Kolonics Brasov lite.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kolonics_Brasov/OrganDefinitions/Kolonics Brasov near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kolonics_Brasov/OrganDefinitions/Kolonics Brasov Surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Komarom/OrganDefinitions/Bells from Komarom.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kormend_Catholic/OrganDefinitions/Kormend_Catholic_Angster_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Kormend_Lutheran/OrganDefinitions/Angster Lutheran Kormend_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer far (lite).Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer near (lite).Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer surround (lite).Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lemmer/OrganDefinitions/Lemmer surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lorris/OrganDefinitions/Lorris dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lorris/OrganDefinitions/Lorris_wet_and_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Lorris/OrganDefinitions/Lorris_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Luins/OrganDefinitions/Luins_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Luins/OrganDefinitions/Luins_surround .Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Luins/OrganDefinitions/Luins_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Mauracher/OrganDefinitions/Mauracher demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Monor/OrganDefinitions/Rieger Organ of Monor ext. demo v2.0.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Monor/OrganDefinitions/Rieger Organ of Monor orig. demo V2.0 .Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Nagyrakos/OrganDefinitions/Nagyrakos dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Nagyrakos/OrganDefinitions/Nagyrakos wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/New Haven/OrganDefinitions/GhentCarillon.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/New Haven/OrganDefinitions/Redemeer Aeolian-Skinner_surround extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/New Haven/OrganDefinitions/Redemeer Aeolian-Skinner_surround orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/New Haven/OrganDefinitions/Redemeer Aeolian-Skinner_wet_r extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/New Haven/OrganDefinitions/Redemeer Aeolian-Skinner_wet_r orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Rumpt/OrganDefinitions/Rumpt_demo far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Rumpt/OrganDefinitions/Rumpt_demo near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Rumpt/OrganDefinitions/Rumpt_demo surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Savaria/OrganDefinitions/Savaria-semidry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Savaria/OrganDefinitions/Savaria-surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Savaria/OrganDefinitions/Savaria-wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Sepsiszentgyorgy/OrganDefinitions/Ziegler dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Sepsiszentgyorgy/OrganDefinitions/Ziegler surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Sepsiszentgyorgy/OrganDefinitions/Ziegler wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Solignac/OrganDefinitions/Solignac extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Solignac/OrganDefinitions/Solignac orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Stahlhuth/OrganDefinitions/Stahlhuth_positive_ext_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Stahlhuth/OrganDefinitions/Stahlhuth_positive_ext_four_channels.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Stahlhuth/OrganDefinitions/Stahlhuth_positive_ext_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Stahlhuth/OrganDefinitions/Stahlhuth_positive_orig_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Stahlhuth/OrganDefinitions/Stahlhuth_positive_orig_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szentgotthard/OrganDefinitions/Szentgotthard dry_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szentgotthard/OrganDefinitions/Szentgotthard surround_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szentgotthard/OrganDefinitions/Szentgotthard wet_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais v2 surround_extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais v2 surround original.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais v2 wet_extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais v2 wet original.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais w2 semidry_extend.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szikszo/OrganDefinitions/Klais w2 semidry_orig.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Eule/OrganDefinitions/Eule_Szombathely_dry_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Eule/OrganDefinitions/Eule_Szombathely_limited_wet_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Eule/OrganDefinitions/Eule_Szombathely_wet and surround1_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Eule/OrganDefinitions/Eule_Szombathely_wet and surround2_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Rieger/OrganDefinitions/Rieger-Szhely_demo_dry.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Rieger/OrganDefinitions/Rieger-Szhely_demo_surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Szombathely_Rieger/OrganDefinitions/Rieger-Szhely_demo_wet.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Ujpest/OrganDefinitions/Ujpest semidry_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Ujpest/OrganDefinitions/Ujpest surround_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Ujpest/OrganDefinitions/Ujpest wet_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Urk/OrganDefinitions/Urk - Kerk aan de Zee-far.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Urk/OrganDefinitions/Urk - Kerk aan de Zee-near.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Urk/OrganDefinitions/Urk - Kerk aan de Zee-surround.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Vasvar/OrganDefinitions/Vasvar.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Zalalov/OrganDefinitions/Zalalovo extended_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("AV/Zalalov/OrganDefinitions/Zalalovo orig_demo.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Alessandria/OrganDefinitions/Alessandria (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Begard/OrganDefinitions/Begard (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Chapelet/OrganDefinitions/Chapelet Spanish Collection DEMO.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Chorzow/OrganDefinitions/Chorzow, sw Jadwiga Slaska (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/DurenFull/OrganDefinitions/Duren.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Duren/OrganDefinitions/Duren (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Erfurt Bussleben/OrganDefinitions/Erfurt Bussleben (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Erfurt Predigerkirche/OrganDefinitions/Erfurt Predigerkirche (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/ErmeloFull/OrganDefinitions/Ermelo.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Ermelo/OrganDefinitions/Ermelo (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Friesach/OrganDefinitions/Friesach.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Goch/OrganDefinitions/Goch (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Nancy/OrganDefinitions/Nancy (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/NitraFull/OrganDefinitions/Nitra.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Nitra/OrganDefinitions/Nitra (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Obervellach/OrganDefinitions/Obervellach (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("PG/Oloron/OrganDefinitions/Oloron-Sainte-Marie.Organ_Hauptwerk_xml");
+new HWAnalyser("PG/SwietaLipka/OrganDefinitions/Swieta Lipka (demo).Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Billerbeck/OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Buckeburg/OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/BurtonBerlinFull/OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Casavant/OrganDefinitions/Bellevue, Casavant Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Doesburg/OrganDefinitions/Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/LuedingworthDemo/OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/LuedingworthDemo/OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/LuedingworthFull/OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/LuedingworthFull/OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Rotterdam/OrganDefinitions/Rotterdam - Laurenskerk, Hoofdorgel DEMO.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Segovia/OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("SP/Skinner497/OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml");
+new HWAnalyser("VN/Wildervank/OrganDefinitions/Wildervank.Organ.Hauptwerk.xml");
