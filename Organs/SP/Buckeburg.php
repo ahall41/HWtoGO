@@ -242,7 +242,7 @@ class Buckeburg extends SPOrgan {
             $hwi->positions=$positions;
             $hwi->balance=$balance;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;

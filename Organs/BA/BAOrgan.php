@@ -17,7 +17,6 @@ require_once __DIR__ . "/../../Import/Organ.php";
 abstract class BAOrgan extends \Import\Organ {
     
     protected int $releaseCrossfadeLengthMs=0;
-    protected int $noiseVersion=1;
     protected string $root="";
 
     /*
@@ -104,14 +103,11 @@ abstract class BAOrgan extends \Import\Organ {
         parent::createSwitchNoise($type, $switchdata);
     }
     
-    public function xxgetImageData(array $data, int $layout=0) : array {
+    public function getImageData(array $data, int $layout=0) : array {
         $imagedata=parent::getImageData($data, $layout);
-        error_log(print_r($data,1));
-        error_log(print_r($imagedata,1));    
         if ((!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))
                 || (!isset($imagedata["ImageWidthPixels"]) || empty($imagedata["ImageWidthPixels"]))) {
             $filename=reset($imagedata["Images"]);
-            error_log(getenv("HOME") . $this->root . $filename);
             $sizes=getimagesize(getenv("HOME") . $this->root . $filename);
             if (is_array($sizes)) {
                 $imagedata["ImageWidthPixels"]=$sizes[0];
@@ -128,70 +124,6 @@ abstract class BAOrgan extends \Import\Organ {
         $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
         return isset($rankdata["Noise"])
                 && in_array($rankdata["Noise"], ["StopOn","StopOff","Ambient"]);
-    }
-    
-     public function processNoiseV2(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-        $type=$this->hwdata->rank($rankid=$hwdata["RankID"])["Noise"];
-        if ($type=="Ambient") {
-            $stopid=$this->hwdata->rank($hwdata["RankID"])["StopIDs"][0];
-            if (($stop=$this->getStop($stopid))) {
-                if ($isattack)
-                    $this->configureAttack($hwdata, $stop->Ambience());
-                else
-                    $this->configureRelease($hwdata, $stop->Ambience());
-            }
-        }
-        else {
-            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
-            foreach($this->hwdata->read("StopRank") as $sr) {
-                if ($sr["RankID"]==$rankid && 
-                    $sr["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
-                    if ($stopdata=$this->hwdata->stop($sr["StopID"], FALSE)) {
-                        $switchid=$stopdata["ControllingSwitchID"];
-                        $stopoff=strpos($sr["Name"], "Disengaging")!==FALSE;
-                        $switchNoise=$this->getSwitchNoise($stopoff ? -$switchid : +$switchid);
-                        if ($switchNoise) {
-                            $this->configureAttack($hwdata, $switchNoise->Noise());
-                        }
-                    }
-                }
-            } 
-        }
-        return NULL;
-    }
-   
-    /*
-     * May be OK for other providers 
-     */
-    public function processNoiseV1(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-        $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
-        if ($type=="Ambient") {
-            $stopid=$this->hwdata->rank($hwdata["RankID"])["StopIDs"][0];
-            if (($stop=$this->getStop($stopid))) {
-                if ($isattack)
-                    $this->configureAttack($hwdata, $stop->Ambience());
-                else
-                    $this->configureRelease($hwdata, $stop->Ambience());
-            }
-        }
-        else {
-            foreach($this->getSwitchNoises() as $id=>$stop) {
-                if ($id>0 && $type=="StopOn")
-                    $this->configureAttack($hwdata, $stop->Noise());
-                elseif ($id<0 && $type=="StopOff")
-                    $this->configureAttack($hwdata, $stop->Noise());
-            }
-        }
-        return NULL;
-    }
-    
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        if ($this->noiseVersion==1)
-            {return $this->processNoiseV1($hwdata, $isattack);}
-        else
-            {return $this->processNoiseV2($hwdata, $isattack);}
     }
     
     /*

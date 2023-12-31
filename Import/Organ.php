@@ -322,7 +322,7 @@ abstract class Organ extends Images {
     /**
      * Add coupler manuals panel
      */
-    public function addCouplerManuals(int $manuals, array $targets,  array $defaults) : void {
+    public function addVirtualKeyboards(int $manuals, array $targets,  array $defaults) : void {
         $nt=sizeof($targets);
         $panel=$this->newPanel(-999,"Virtual Keyboards");
         $panel->DispDrawstopRows=1;

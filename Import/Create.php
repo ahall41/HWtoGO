@@ -59,7 +59,7 @@ abstract Class Create extends Objects {
      * @return \GOClasses\Manual
      */
     public function createWindchestGroup(array $groupdata) : ?\GOClasses\WindchestGroup {
-        return $this->newWindchestGroup($groupdata["GroupID"], $groupdata["Name"]);
+        return $this->newWindchestGroup($groupdata["GroupID"], trim($groupdata["Name"]));
     }
 
     /**

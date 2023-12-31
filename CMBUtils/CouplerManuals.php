@@ -49,7 +49,7 @@ class CouplerManuals extends ODF {
         $organ=new GOClasses\Organ("CM");
         $organ->HasPedals="N";
         $this->scanIndex();
-        $this->addCouplerManuals($manuals, $targets, $defaults);
+        $this->addVirtualKeyboards($manuals, $targets, $defaults);
         $this->write(str_replace(".organ", ".cm.organ", $this->sourcefile));
     }
     
@@ -76,7 +76,7 @@ class CouplerManuals extends ODF {
             "\n";
     }
     
-    public function addCouplerManuals(int $manuals, array $targets,  array $defaults) : void {
+    public function addVirtualKeyboards(int $manuals, array $targets,  array $defaults) : void {
         $nt=sizeof($targets);
         $panel=new GOClasses\Panel("Virtual Keyboards");
         $panel->instance($this->mpanels+1);

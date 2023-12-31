@@ -217,7 +217,7 @@ class Extended extends Redeemer {
             $hwi=new Extended(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(4, [1,2,3,4], [1,2,3,4]);
+            $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             foreach($hwi->getStops() as $id=>$stop) {
                 unset($stop->Rank001PipeCount);
@@ -285,7 +285,7 @@ class Original extends Redeemer {
             $hwi=new Original(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.=" ($target)";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             $hwi->getManual(4)->Displayed="N";

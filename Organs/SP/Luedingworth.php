@@ -260,7 +260,7 @@ class Demo extends Luedingworth {
             $hwi=new Demo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             foreach($hwi->getStops() as $stop) {
                 unset($stop->Rank001PipeCount);
@@ -320,7 +320,7 @@ class Full extends Luedingworth {
             $hwi=new Full(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             foreach($hwi->getStops() as $stop) {
                 unset($stop->Rank001PipeCount);

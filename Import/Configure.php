@@ -194,7 +194,9 @@ abstract Class Configure extends Create {
                 break;
         }
         
-        if ($switchid!==NULL && ($switch=$this->getSwitch($switchid))!==NULL) {
+        if ($switchid!==NULL && 
+                ($switch=$this->getSwitch($switchid))!==NULL &&
+                ($this->getSwitchNoise($switchid)===NULL)) {
             $name=$switch->Name;
             $windchestgroup=$this->getWindchestGroup($switchdata["GroupID"]);
             if (!$windchestgroup) {return;}

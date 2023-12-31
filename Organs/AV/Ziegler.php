@@ -222,7 +222,7 @@ class Ziegler extends AVOrgan {
             $hwi=new Ziegler(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("surround", "($target)", $hwi->getOrgan()->ChurchName);
             unset($hwi->getOrgan()->InfoFilename);
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);

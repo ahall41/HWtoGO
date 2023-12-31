@@ -200,7 +200,7 @@ class BurtonBerlinFull extends SPOrgan {
             $hwi=new BurtonBerlinFull(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             $hwi->getSwitch(250)->DisplayInInvertedState="Y";
             foreach($hwi->getStops() as $stop) {

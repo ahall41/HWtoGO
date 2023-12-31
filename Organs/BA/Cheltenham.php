@@ -6,11 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Enclosure position
- *        Tremulant noise
- *        Stop noises
- *        Mouse rect
- *        Combinations
+ * @todo: Combinations
  *        Reversible Pistons 
  * 
  */
@@ -37,11 +33,11 @@ class Cheltenham extends BAOrgan {
     ];
     
     protected $patchEnclosures=[
-        220=>["GroupIDs"=>[401]],
+        220=>["GroupIDs"=>[301], "Panels"=>[1=>18, 2=>20]],
     ];
     
     protected $patchTremulants=[
-        1720=>["Type"=>"Synth", "GroupIDs"=>[401]],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301]],
     ];
     
     protected $patchStops=[
@@ -53,20 +49,20 @@ class Cheltenham extends BAOrgan {
         -2=>["StopID"=>-2, "DivisionID"=>1, "Name"=>"Choir Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"Great Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"Swell Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      1006=>"DELETE",  
-      1011=>"DELETE",  
-      1016=>"DELETE",  
-      1110=>"DELETE",  
-      1111=>"DELETE",  
-      1112=>"DELETE",  
-      1116=>"DELETE",  
-      1720=>["DivisionID"=>4, "Ambient"=>TRUE, "GroupID"=>700], // Tremulant
+      1006=>["DivisionID"=>1], 
+      1011=>["DivisionID"=>1],   
+      1016=>["DivisionID"=>1],  
+      1110=>["DivisionID"=>1],  
+      1111=>["DivisionID"=>1],  
+      1112=>["DivisionID"=>1],   
+      1116=>["DivisionID"=>1], 
+      1720=>["DivisionID"=>4, "Ambient"=>TRUE, "GroupID"=>700], // Tremulant */
       2601=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700] // Blower
     ];
 
     // Inspection of Ranks object
     protected $patchRanks=[
-        100=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
+        100=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2601]],
         101=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
         102=>["Noise"=>"StopOff", "GroupID"=>700, "StopIDs"=>[]],
         103=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2]],
@@ -75,7 +71,7 @@ class Cheltenham extends BAOrgan {
         106=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-1]],
         107=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+3]],
         108=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-3]],
-        109=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-4]],
+        109=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+4]],
         110=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-4]],
     ];
     
@@ -92,7 +88,7 @@ class Cheltenham extends BAOrgan {
         else
             return parent::createRank($hwdata, $keynoise);
     }
-
+  
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
         $switchid=$data["SwitchID"];
         $slinkid=$this->hwdata->switchLink($switchid)["D"][0]["SourceSwitchID"];
@@ -157,19 +153,21 @@ class Cheltenham extends BAOrgan {
     }
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
-        return;
         unset($data["SwitchID"]);
-        $panelid=2;
-        $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
-        $this->configureEnclosureImage($panelelement, $data);
-        $panelelement->DispLabelText="";
+        foreach($data["Panels"] as $panelid=>$instanceid) {
+            $data["InstanceID"]=$instanceid;
+            $panelelement=$this->getPanel($panelid)->GUIElement($enclosure);
+            $this->configureEnclosureImage($panelelement, $data);
+            $panelelement->DispLabelText="";
+        }
     }
 
     public function configureImage(\GOClasses\GOObject $object, array $data, int $layout=0) : void {
         parent::configureImage($object, $data, $layout);
-        unset($object->MouseRectWidth);
-        unset($object->MouseRectHeight);
-        unset($object->MouseRadius);
+        $imagedata=$this->getImageData($data, $layout);
+        $object->MouseRectWidth=$imagedata["ImageWidthPixels"];
+        $object->MouseRectHeight=$imagedata["ImageHeightPixels"];
+        //unset($object->MouseRadius);
     }
     
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -195,6 +193,48 @@ class Cheltenham extends BAOrgan {
             throw new \Exception ("File $filename does not exist!");
     }
 
+    public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
+        $rankdata=$this->patchRanks[$rankid=$hwdata["RankID"]];
+        
+        if ($rankdata["Noise"]=="Ambient") {
+            $stop=$this->getStop($rankdata["StopIDs"][0]);
+            if ($stop!==NULL) {
+                $ambience=$stop->Ambience();
+                if ($isattack) {
+                    $this->configureAttack($hwdata, $ambience);
+                    $ambience->LoadRelease="Y";
+                }
+                else {
+                    $this->configureRelease($hwdata, $ambience);
+                    $ambience->LoadRelease="N";
+                }
+                return $ambience;
+            }
+        }
+        else {
+            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
+            foreach($this->hwdata->rankStop($rankid) as $stopid=>$rsdata) {
+                if ($rsdata["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
+                    $stop=NULL;
+                    $stopdata=$this->hwdata->stop($stopid, FALSE);
+                    if ($stopdata) {
+                        $stop=$this->getSwitchNoise(($isattack ? 1 : -1) * $stopdata["ControllingSwitchID"]);
+                        if ($stop) {
+                            $noise=$stop->Noise();
+                            if ($noise->AttackCount<1) {
+                                $this->configureAttack($hwdata, $noise);
+                            }
+                            return $noise;
+                        }
+                        return NULL;
+                    }
+                }
+            }
+        }
+        return NULL;
+    }
+    
     /**
      * Run the import
      */
@@ -204,8 +244,10 @@ class Cheltenham extends BAOrgan {
         \GOClasses\Manual::$pedals=30;
 
         $hwi->root=self::ROOT;
-        $hwi->positions=[1=>"X"];
+        $hwi->positions=[1=>""];
         $hwi->import();
+        $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+        
         unset($hwi->getOrgan()->InfoFilename);
         echo $hwi->getOrgan()->ChurchName, "\n";
         
@@ -226,14 +268,6 @@ class CheltenhamDemo extends Cheltenham {
         self::Cheltenham(new CheltenhamDemo(self::SOURCE), self::TARGET);
     }
 
-    public function xxcreateStop(array $hwdata): ?\GOClasses\Sw1tch {
-        if (!in_array($hwdata["StopID"], $this->$usedstops)) {
-            return NULL;
-        }
-        error_log($hwdata["StopID"]);
-        return parent::createStop($hwdata);
-    }
-    
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
         if (isset($data["StopID"]) &&
                 !in_array($data["StopID"], $this->usedstops)) {
@@ -260,5 +294,6 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
     die();
 }
 set_error_handler("Organs\BA\ErrorHandler");
-CheltenhamDemo::Demo();
+
 CheltenhamFull::Full();
+CheltenhamDemo::Demo();
