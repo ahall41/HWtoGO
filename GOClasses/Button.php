@@ -29,13 +29,6 @@ class Button extends GOObject {
         $this->PositionY=$y;
     }
 
-    public function Switch(Sw1tch $switch) : void {
-        if (!isset($this->Function)) $this->Function="And";
-        $this->setObject("Switch", "SwitchCount", $switch);
-        $this->Displayed="N";
-        unset($this->DefaultToEngaged);
-    }
-    
     public function set(string $name, ?string $value): void {
         // According to Lars Palo, we should do this!
         if ($name=="DispLabelText" && empty($value)) {

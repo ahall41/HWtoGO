@@ -8,6 +8,7 @@
  */
 namespace GOClasses;
 require_once(__DIR__ . "/Drawstop.php");
+require_once(__DIR__ . "/Manual.php");
 
 /**
  * Representation of a GrandOrgue Stop

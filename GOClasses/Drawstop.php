@@ -20,6 +20,13 @@ class Drawstop extends Button {
         parent::__construct($name);
         $this->DefaultToEngaged="N";
     } 
+
+    public function Switch(Sw1tch $switch) : void {
+        if (!isset($this->Function)) $this->Function="And";
+        $this->setObject("Switch", "SwitchCount", $switch);
+        $this->Displayed="N";
+        unset($this->DefaultToEngaged);
+    }
     
     public function posRC(int $row, int $col) : void {
         $this->Displayed="Y";

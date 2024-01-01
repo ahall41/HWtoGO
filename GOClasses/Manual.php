@@ -63,6 +63,10 @@ class Manual extends GOObject {
         $this->setObject("Coupler", "NumberOfCouplers", $coupler);
     }
 
+    public function Divisional(Divisional $divisional) {
+        $this->setObject("Divisional", "NumberOfDivisionals", $divisional);
+    }
+    
     public function Key(?int $key=NULL) : string {
         if ($key===NULL) {
             if (isset($this->DisplayKeys))
