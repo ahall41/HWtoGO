@@ -432,7 +432,16 @@ class HWReader {
     }
 
     public function combinationElements() {
-        return $this->read("CombinationElement", "CombinationElementID");
+        if (!isset($this->cache["CombinationElementIndex"])) {
+            $result=[];
+            foreach ($this->read("CombinationElement") as $element) {
+                $ind1=$element["CombinationID"];
+                $ind2=$element["CombinationElementID"];
+                $result[$ind1][$ind2]=$element;
+            }
+            $this->cache["CombinationElementIndex"]=$result;
+        }
+        return $this->cache["CombinationElementIndex"];
     }
 
     public function continuousControls() {

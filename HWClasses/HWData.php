@@ -20,7 +20,19 @@ class HWData extends HWReader {
                 unset($this->cache[$name][$id]);
         }
     }
-            
+    
+    public function combination(int $combinationid) : array {
+        if (!isset($this->cache["Combination"]))
+            $this->combinations();
+        return $this->cache["Combination"][$combinationid];
+    }
+
+    public function combinationElement(int $combinationid) : array {
+        if (!isset($this->cache["CombinationElement"]))
+            $this->combinationElements();
+        return $this->cache["CombinationElement"][$combinationid];
+    }
+    
     public function continuousControl(int $controlid) : array {
         if (!isset($this->cache["ContinuousControl"]))
             $this->continuousControls();
