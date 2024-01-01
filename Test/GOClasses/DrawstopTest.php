@@ -14,6 +14,7 @@
 
 namespace GOClasses;
 require_once (__DIR__ . "/../../GOClasses/Drawstop.php");
+require_once (__DIR__ . "/../../GOClasses/Sw1tch.php");
 require_once (__DIR__ . "/../../GOClasses/Organ.php");
 
 class DrawstopTest extends \PHPUnit\Framework\TestCase {
@@ -27,4 +28,15 @@ class DrawstopTest extends \PHPUnit\Framework\TestCase {
             "Name=Test Drawstop\n" .
             "DefaultToEngaged=N\n", (string) $drawstop);
     }
+    
+    public function testSwitch() {
+        new Organ("Test");
+        $drawstop=new Drawstop("Test Drawstop");
+        new Sw1tch("Switch 1");
+        $switch=new Sw1tch("Switch 2");
+        $drawstop->Switch($switch);
+        $this->assertEquals(1,$drawstop->SwitchCount);
+        $this->assertEquals(2,$drawstop->Switch001);
+    }
+    
 }

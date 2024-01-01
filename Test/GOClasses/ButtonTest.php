@@ -14,7 +14,6 @@
 
 namespace GOClasses;
 require_once (__DIR__ . "/../../GOClasses/Button.php");
-require_once (__DIR__ . "/../../GOClasses/Sw1tch.php");
 require_once (__DIR__ . "/../../GOClasses/Organ.php");
 
 class ButtonTest extends \PHPUnit\Framework\TestCase {
@@ -64,15 +63,4 @@ class ButtonTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(34, $button->PositionY);
         $this->assertEquals("Y", $button->Displayed);
     }
-    
-    public function testSwitch() {
-        $organ=new Organ("Test");
-        $button=new Button("Test Button");
-        new Sw1tch("Switch 1");
-        $switch=new Sw1tch("Switch 2");
-        $button->Switch($switch);
-        $this->assertEquals(1,$button->SwitchCount);
-        $this->assertEquals(2,$button->Switch001);
-    }
-    
 }
