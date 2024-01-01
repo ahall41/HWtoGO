@@ -212,6 +212,7 @@ class Objects {
     }
 
     protected function newTremulant($id, $name, $wave=FALSE) : \GOClasses\Tremulant {
+        // echo "newTremulant($id, $name, $wave)\n";
         return $this->Model[self::Tremulants][$id]=new \GOClasses\Tremulant($name, $wave);
     }
 

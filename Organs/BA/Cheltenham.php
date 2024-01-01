@@ -33,11 +33,11 @@ class Cheltenham extends BAOrgan {
     ];
     
     protected $patchEnclosures=[
-        220=>["GroupIDs"=>[301], "Panels"=>[1=>18, 2=>20]],
+        220=>["GroupIDs"=>[301], "Panels"=>[1=>18, 2=>20], "AmpMinimumLevel"=>30],
     ];
     
     protected $patchTremulants=[
-        1720=>["Type"=>"Synth", "GroupIDs"=>[301]],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301], "Period"=>200, "AmpModDepth"=>20],
     ];
     
     protected $patchStops=[
@@ -75,14 +75,13 @@ class Cheltenham extends BAOrgan {
         110=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-4]],
     ];
     
-    public function createManual(array $hwdata) : ?\GOClasses\Manual {
-        if ($hwdata["KeyboardID"]<7)
-            return parent::createManual($hwdata);
-        else
-            return NULL;
+    public function createManuals(array $keyboards): void {
+        foreach([1,4,2,3] as $id) {
+            parent::createManual($keyboards[$id]);
+        }
     }
-   
-   public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
+    
+    public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
         if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
             return NULL;
         else
