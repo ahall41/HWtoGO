@@ -34,4 +34,11 @@ class Tremulant extends Button {
             $this->StopRate=30;
         }
     }
+    
+    public function Switch(Sw1tch $switch) : void {
+        if (!isset($this->Function)) $this->Function="And";
+        $this->setObject("Switch", "SwitchCount", $switch);
+        $this->Displayed="N";
+        unset($this->DefaultToEngaged);
+    }
 }

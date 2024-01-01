@@ -14,6 +14,7 @@
 
 namespace GOClasses;
 require_once (__DIR__ . "/../../GOClasses/Tremulant.php");
+require_once (__DIR__ . "/../../GOClasses/Sw1tch.php");
 require_once (__DIR__ . "/../../GOClasses/Organ.php");
 
 class TremulantTest extends \PHPUnit\Framework\TestCase {
@@ -38,5 +39,15 @@ class TremulantTest extends \PHPUnit\Framework\TestCase {
             "DispLabelColour=Blue\n" .
             "TremulantType=Wave\n", (string) $wave);
         $this->assertEquals(2, $organ->NumberOfTremulants);
+    }
+    
+        public function testSwitch() {
+        new Organ("Test");
+        $tremulant=new Tremulant("Test Tremulant");
+        new Sw1tch("Switch 1");
+        $switch=new Sw1tch("Switch 2");
+        $tremulant->Switch($switch);
+        $this->assertEquals(1,$tremulant->SwitchCount);
+        $this->assertEquals(2,$tremulant->Switch001);
     }
 }
