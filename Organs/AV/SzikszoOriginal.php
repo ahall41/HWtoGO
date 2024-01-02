@@ -22,7 +22,7 @@ class SzikszoOriginal extends AVOrgan {
     const TARGET=self::ROOT . "%s 1.2.organ";
     const COMMENTS=
               "Klais Organ of Szikszó (Hungary) from Frankfurt\n"
-            . "https://hauptwerk-augustine.info/Klais.php\n"
+            . "https://hauptwerk-augustine.info/Klais_Szikszo.php\n"
             . "\n"
             . "1.1 Updated for full version\n"
             . "1.2 Added coupler manuals\n"
@@ -211,7 +211,7 @@ class SzikszoOriginal extends AVOrgan {
             $hwi=new SzikszoOriginal(sprintf(self::SOURCE, $target));
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addCouplerManuals(3, [1,2,3], [1,2,3]);
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
