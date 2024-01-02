@@ -22,7 +22,7 @@ class Jehmlich extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Jehmlich Organs from Hungary composite set\n"
-            . "https://hauptwerk-augustine.info/Jehmlich_Jehmlich.php\n"
+            . "https://hauptwerk-augustine.info/Jehmlich_composite.php\n"
             . "\n";
     const TARGET=self::ROOT . "Jehmlich Composit_surround.1.0.organ";
 

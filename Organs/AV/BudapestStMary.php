@@ -22,7 +22,7 @@ class BudapestStMary extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "The Organ of the Mary the Virgin Church in Budapest\n"
-            . "https://hauptwerk-augustine.info/BudapestStMary.php\n"
+            . "https://hauptwerk-augustine.info/Mary_the_Virgin.php\n"
             . "\n"
             . "Version 1.1 Add III and IV to mixer\n"
             . "\n";
