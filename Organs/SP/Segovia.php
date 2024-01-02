@@ -14,14 +14,13 @@ require_once __DIR__ . "/SPOrganV2.php";
 /**
  * Import Sonus Paradisi Segovia Cathedral: Echevarria organ (1772)
  * 
- * @todo: Trumpet vs blower
+ * @todo: Permanent couple pedal
+ *        "Toys
  * 
  * @author andrewZ`
  */
 class Segovia extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/SP/Segovia/";
-    const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.2.organ";
+    const ROOT="/GrandOrgue/Organs/SP/SegoviaFull/";
     const REVISIONS="\n"
             . "1.1 Corrected releases on ranks without tremmed samples\n"
             . "1.2 Corrected panel image placement\n"
@@ -151,7 +150,7 @@ class Segovia extends SPOrganV2 {
         998362=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-123]],
         998392=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-123]],
 
-        ];
+    ];
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         /* Uncomment to determine image instances on each page ...
@@ -159,7 +158,7 @@ class Segovia extends SPOrganV2 {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 6:
+                case 2:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
                          $instance["Name"], ": "; 
                     foreach ($this->hwdata->switches() as $switch) {
@@ -236,6 +235,15 @@ class Segovia extends SPOrganV2 {
         }
     }
     
+    public function isNoiseSample(array $hwdata): bool {
+        if (in_array($hwdata["RankID"],[999903, 999913, 999943, 999904, 999904, 999904])) {
+            echo $hwdata["RankID"], "\t",
+                 $hwdata["SampleID"], "\t",
+                 $hwdata["SampleFilename"], "\n";
+        }
+        return parent::isNoiseSample($hwdata);
+    }
+
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $rankdata=$this->patchRanks[$hwdata["RankID"]];
@@ -292,6 +300,12 @@ class Segovia extends SPOrganV2 {
         return $pipe;
     }
     
+}
+
+class SegoviaDemo extends Segovia {
+    const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.2.organ";
+
     /**
      * Run the import
      */
@@ -299,7 +313,7 @@ class Segovia extends SPOrganV2 {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=54;
         if (sizeof($positions)>0) {
-            $hwi=new Segovia(self::SOURCE);
+            $hwi=new SegoviaDemo(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             foreach($hwi->getStops() as $stop) {
@@ -338,10 +352,63 @@ class Segovia extends SPOrganV2 {
         }
     }
 }
+
+class SegoviaFull extends Segovia {
+    const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Surround.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Full (%s).1.3.organ";
+
+    /**
+     * Run the import
+     */
+    public static function Segovia(array $positions=[], string $target="") {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=54;
+        if (sizeof($positions)>0) {
+            $hwi=new SegoviaFull(self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            foreach($hwi->getStops() as $stop) {
+                unset($stop->Rank001PipeCount);
+                unset($stop->Rank002PipeCount);
+                unset($stop->Rank003PipeCount);
+                unset($stop->Rank004PipeCount);
+                unset($stop->Rank005PipeCount);
+                unset($stop->Rank006PipeCount);
+            }
+            
+            $hwi->getManual(1)->NumberOfLogicalKeys=
+                     $hwi->getManual(1)->NumberOfAccessibleKeys=32;
+            $hwi->getOrgan()->ChurchName.= " ($target)";
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
+        }
+        else {
+            self::Segovia(
+                    [self::RANKS_DIRECT=>"Direct"],
+                    "Direct");
+            self::Segovia(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "Diffuse");
+            self::Segovia(
+                    [self::RANKS_REAR=>"Rear"],
+                    "Rear");
+            self::Segovia(
+                    [
+                        self::RANKS_DIRECT=>"Direct", 
+                        self::RANKS_DIFFUSE=>"Diffuse", 
+                        self::RANKS_DISTANT=>"Distant",
+                        self::RANKS_REAR=>"Rear"
+                    ],
+                   "Surround");
+        }
+    }
+}
+
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
     throw new \Exception("Error $errstr");
     die();
 }
 set_error_handler("Organs\SP\ErrorHandler");
 
-Segovia::Segovia();
+SegoviaFull::Segovia();
