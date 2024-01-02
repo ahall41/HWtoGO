@@ -155,6 +155,10 @@ class Pipe extends GOBase {
                 $this->midikey=$value;
                 break;
             
+            case "MIDIKeyOverride":
+                parent::set("MIDIKeyNumber", $value);
+                break;
+            
             default:
                 parent::set($property, $value);
 

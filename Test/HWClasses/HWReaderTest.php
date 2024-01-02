@@ -80,16 +80,17 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
 
     public function testCombinationElement() {
         $walcker=self::HWReader(self::Walcker)->combinationElements();
-        $this->assertEquals(2623, sizeof($walcker));
+        $this->assertEquals(106, sizeof($walcker));
+        $this->assertEquals(61, sizeof($walcker[1537]));
         $this->assertEquals([
             'CombinationElementID' => '193',
             'CombinationID' => '1',
             'ControlledSwitchID' => '2001',
             'CapturedSwitchID' => '2001'
-        ], $walcker[193]);
+        ], $walcker[1][193]);
         
         $skrzatusz=self::HWReader(self::Skrzatusz)->combinationElements();
-        $this->assertEquals(23, sizeof($skrzatusz));
+        $this->assertEquals(1, sizeof($skrzatusz));
         $this->assertEquals([
             'CombinationElementID' => '21',
             'CombinationID' => '1',
@@ -98,7 +99,7 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'InitialStoredStateIsEngaged' => 'N',
             'InvertStoredStateWhenActivating' => 'N',
             'MemorySwitchID' => ''
-        ], $skrzatusz[21]);
+        ], $skrzatusz[1][21]);
     }
 
     public function testContinuousControl() {

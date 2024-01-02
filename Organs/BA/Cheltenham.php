@@ -181,6 +181,50 @@ class Cheltenham extends BAOrgan {
         return $results;
     }
 
+    private function readPitchData(string $file) : array {
+        $fp=fopen($file, "r");
+        $result=[];
+        while (!feof($fp)) {
+            $line=trim(fgets($fp));
+            if (substr($line,0,1)=="/") {
+                $folder=substr($line,1);
+            }
+            elseif (substr($line,-4)==".wav") {
+                $file=$line;
+            }
+            elseif (substr($line,0,13)=="MIDIKeyNumber") {
+                $split=explode("=",$line);
+                $midi=intval(trim($split[1]));
+                $result[$folder][$file]["K"]=$midi;
+            }
+            elseif (substr($line,0,17)=="MIDIPitchFraction") {
+                $split=explode("=",$line);
+                $fraction=floatval(trim($split[1]));
+                $result[$folder][$file]["F"]=$fraction;
+            }
+        }
+        fclose($fp);
+        return $result;
+    }
+    
+    protected function setPitch(\GOClasses\Pipe $pipe) : void {
+        static $pitches=NULL;
+        if (empty($pitches)) {$pitches=$this->readPitchData(__DIR__ . "/CheltenhamPitch.txt");}
+        
+        if (!isset($pipe->MIDIKeyNumber) && $pipe->AttackCount==0) {
+            $base=basename($pipe->Attack);
+            $dir=dirname($pipe->Attack);
+            
+            if (isset($pitches[$dir][$base]["K"])) {
+                $pipe->MIDIKeyOverride=$pitches[$dir][$base]["K"];
+            }
+            
+            if (isset($pitches[$dir][$base]["F"])) {
+                $pipe->MIDIPitchFraction=$pitches[$dir][$base]["F"];
+            }
+        }
+    }
+
     protected function correctFileName(string $filename): string {
         static $files=[];
         if (sizeof($files)==0)
@@ -232,6 +276,12 @@ class Cheltenham extends BAOrgan {
             }
         }
         return NULL;
+    }
+    
+    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        $pipe=parent::processSample($hwdata, $isattack);
+        // if ($isattack && $pipe) {$this->setPitch($pipe);}
+        return $pipe;
     }
     
     /**

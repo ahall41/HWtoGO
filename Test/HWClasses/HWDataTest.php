@@ -26,6 +26,8 @@ class HWDataTest extends \PHPUnit\Framework\TestCase {
         $skrzatusz=self::HWData(self::Skrzatusz);
         $utrecht=self::HWData(self::Utrecht);
         $walcker=self::HWData(self::Walcker);
+        $this->assertEquals(127, sizeof($walcker->combinations()));
+        $this->assertEquals(106, sizeof($walcker->combinationElements()));
         $this->assertEquals(3, sizeof($utrecht->continuousControl(229066)));
         $this->assertEquals(2, sizeof($utrecht->continuousControlLink(11)));
         $this->assertEquals(5, sizeof($skrzatusz->displayPage(2)));
@@ -101,7 +103,7 @@ class HWDataTest extends \PHPUnit\Framework\TestCase {
             throw new \Exception("Did not fail!!!");
         }
         catch (\Exception $ex) {
-            $this->assertEquals("Undefined offset: 4", $ex->getMessage());
+            $this->assertEquals("Undefined array key 4", $ex->getMessage());
         }
     }
     
