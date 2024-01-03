@@ -306,7 +306,7 @@ class Demo extends Luedingworth {
 class Full extends Luedingworth {
     const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Full (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Luedingworth Full (%s) 1.1.organ";
     
     protected string $root=self::ROOT;
     
