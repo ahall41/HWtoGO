@@ -1,0 +1,7384 @@
+/OrganInstallationPackages/002931/Samples/Ch. Claribel Flute 8
+
+048-c.wav
+	HPS detected pitch = 65.09 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=91.681203
+049-c#.wav
+	HPS detected pitch = 137.73 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=89.210759
+050-d.wav
+	HPS detected pitch = 48.97 Hz
+	MIDIKeyNumber=30
+	MIDIPitchFraction=98.934327
+051-d#.wav
+	HPS detected pitch = 154.66 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=89.920687
+052-e.wav
+	HPS detected pitch = 164.09 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.362516
+053-f.wav
+	HPS detected pitch = 173.68 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=90.751783
+054-f#.wav
+	HPS detected pitch = 184.55 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=95.788461
+055-g.wav
+	HPS detected pitch = 98.14 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=2.579259
+056-g#.wav
+	HPS detected pitch = 207.17 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=96.011936
+057-a.wav
+	HPS detected pitch = 109.85 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=97.563502
+058-a#.wav
+	HPS detected pitch = 232.91 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=98.734593
+059-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.688294
+060-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.274732
+061-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.770841
+062-d.wav
+	HPS detected pitch = 292.26 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.669853
+063-d#.wav
+	HPS detected pitch = 309.25 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=89.545883
+064-e.wav
+	HPS detected pitch = 164.18 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=93.319761
+065-f.wav
+	HPS detected pitch = 346.73 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=87.546870
+066-f#.wav
+	HPS detected pitch = 185.30 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=2.815888
+067-g.wav
+	HPS detected pitch = 195.36 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=94.384513
+068-g#.wav
+	HPS detected pitch = 414.55 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.854560
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.065426
+070-a#.wav
+	HPS detected pitch = 467.27 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=4.086483
+071-b.wav
+	HPS detected pitch = 493.65 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=99.188702
+072-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.144655
+073-c#.wav
+	HPS detected pitch = 552.24 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.351427
+074-d.wav
+	HPS detected pitch = 585.94 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=95.891934
+075-d#.wav
+	HPS detected pitch = 620.35 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=94.696551
+076-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.021165
+077-f.wav
+	HPS detected pitch = 694.34 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=89.761555
+078-f#.wav
+	HPS detected pitch = 741.21 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=2.856218
+079-g.wav
+	HPS detected pitch = 783.69 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=99.327453
+080-g#.wav
+	HPS detected pitch = 828.34 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.257377
+081-a.wav
+	HPS detected pitch = 873.78 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=87.718415
+082-a#.wav
+	HPS detected pitch = 931.06 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=97.643823
+083-b.wav
+	HPS detected pitch = 982.18 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=90.176690
+084-c.wav
+	HPS detected pitch = 1042.97 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.144632
+085-c#.wav
+	HPS detected pitch = 1103.76 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=92.220691
+086-d.wav
+	HPS detected pitch = 1176.27 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=2.372331
+087-d#.wav
+	HPS detected pitch = 1243.10 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=98.045593
+088-e.wav
+	HPS detected pitch = 1315.43 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=95.949767
+089-f.wav
+	HPS detected pitch = 1390.81 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=92.422559
+090-f#.wav
+	HPS detected pitch = 1476.56 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=96.000410
+091-g.wav
+	HPS detected pitch = 1562.98 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=94.469743
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Ch. Dulciana 8
+
+036-c.wav
+	HPS detected pitch = 64.45 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=74.582657
+037-c#.wav
+	HPS detected pitch = 35.71 Hz
+	MIDIKeyNumber=25
+	MIDIPitchFraction=52.478348
+038-d.wav
+	HPS detected pitch = 72.92 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=88.199015
+039-d#.wav
+	HPS detected pitch = 76.91 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=80.395459
+040-e.wav
+	HPS detected pitch = 80.70 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=63.674648
+041-f.wav
+	HPS detected pitch = 86.91 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=92.091380
+042-f#.wav
+	HPS detected pitch = 92.27 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=95.791806
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603387
+044-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.725134
+045-a.wav
+	HPS detected pitch = 108.40 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=74.607118
+046-a#.wav
+	HPS detected pitch = 116.29 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=96.246127
+047-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.709985
+048-c.wav
+	HPS detected pitch = 129.64 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.391142
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771233
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.215082
+051-d#.wav
+	HPS detected pitch = 154.43 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=87.334065
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.090366
+053-f.wav
+	HPS detected pitch = 87.16 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=97.011358
+054-f#.wav
+	HPS detected pitch = 184.57 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=95.979105
+055-g.wav
+	HPS detected pitch = 195.55 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=96.055474
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.725166
+057-a.wav
+	HPS detected pitch = 109.20 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=87.342639
+058-a#.wav
+	HPS detected pitch = 232.51 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=95.724818
+059-b.wav
+	HPS detected pitch = 246.83 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=99.188736
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.143584
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369379
+062-d.wav
+	HPS detected pitch = 292.95 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.778017
+063-d#.wav
+	HPS detected pitch = 310.16 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=94.598169
+064-e.wav
+	HPS detected pitch = 328.86 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.950586
+065-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.046875
+066-f#.wav
+	HPS detected pitch = 369.72 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=98.721637
+067-g.wav
+	HPS detected pitch = 391.11 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.099588
+068-g#.wav
+	HPS detected pitch = 414.53 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.749599
+069-a.wav
+	HPS detected pitch = 439.45 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=97.846956
+070-a#.wav
+	HPS detected pitch = 466.55 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=1.444572
+071-b.wav
+	HPS detected pitch = 496.57 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=9.379495
+072-c.wav
+	HPS detected pitch = 521.54 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.341149
+073-c#.wav
+	HPS detected pitch = 552.91 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.441193
+074-d.wav
+	HPS detected pitch = 586.04 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=96.194105
+075-d#.wav
+	HPS detected pitch = 620.36 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=94.727235
+076-e.wav
+	HPS detected pitch = 659.18 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=99.807229
+077-f.wav
+	HPS detected pitch = 697.26 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=97.041748
+078-f#.wav
+	HPS detected pitch = 738.28 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=96.001466
+079-g.wav
+	HPS detected pitch = 391.11 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.099674
+080-g#.wav
+	HPS detected pitch = 827.02 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=92.495516
+081-a.wav
+	HPS detected pitch = 877.44 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=94.958619
+082-a#.wav
+	HPS detected pitch = 929.41 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.578368
+083-b.wav
+	HPS detected pitch = 988.75 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=1.724461
+084-c.wav
+	HPS detected pitch = 1041.50 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=91.711365
+085-c#.wav
+	HPS detected pitch = 1103.65 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=92.055782
+086-d.wav
+	HPS detected pitch = 1170.41 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.726522
+087-d#.wav
+	HPS detected pitch = 1239.26 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=92.682226
+088-e.wav
+	HPS detected pitch = 1315.45 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=95.974605
+089-f.wav
+	HPS detected pitch = 1390.96 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=92.600519
+090-f#.wav
+	HPS detected pitch = 1478.55 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=98.333751
+091-g.wav
+	HPS detected pitch = 1570.20 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=2.443196
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Gt. Flute Harmonique 4
+
+036-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.144603
+037-c#.wav
+	HPS detected pitch = 137.75 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=89.454097
+038-d.wav
+	HPS detected pitch = 146.47 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=95.744006
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583540
+040-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.089455
+041-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756358
+042-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.116723
+043-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.575255
+044-g#.wav
+	HPS detected pitch = 207.64 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=99.911415
+045-a.wav
+	HPS detected pitch = 218.26 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.267408
+046-a#.wav
+	HPS detected pitch = 231.55 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=88.621303
+047-b.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.884648
+048-c.wav
+	HPS detected pitch = 261.47 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=98.980697
+049-c#.wav
+	HPS detected pitch = 276.85 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=97.938735
+050-d.wav
+	HPS detected pitch = 293.70 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=0.217880
+051-d#.wav
+	HPS detected pitch = 310.42 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=96.073072
+052-e.wav
+	HPS detected pitch = 327.39 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.221718
+053-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.046099
+054-f#.wav
+	HPS detected pitch = 369.21 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=96.315094
+055-g.wav
+	HPS detected pitch = 391.18 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.404038
+056-g#.wav
+	HPS detected pitch = 413.92 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=94.215871
+057-a.wav
+	HPS detected pitch = 438.72 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.962045
+058-a#.wav
+	HPS detected pitch = 465.09 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.999873
+059-b.wav
+	HPS detected pitch = 492.92 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=96.619753
+060-c.wav
+	HPS detected pitch = 522.95 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=98.987779
+061-c#.wav
+	HPS detected pitch = 553.26 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=96.553855
+062-d.wav
+	HPS detected pitch = 587.40 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=0.214590
+063-d#.wav
+	HPS detected pitch = 621.09 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.769031
+064-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.021526
+065-f.wav
+	HPS detected pitch = 696.53 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=95.226853
+066-f#.wav
+	HPS detected pitch = 736.90 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.757227
+067-g.wav
+	HPS detected pitch = 780.74 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.798119
+068-g#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.324569
+069-a.wav
+	HPS detected pitch = 877.46 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=94.997988
+070-a#.wav
+	HPS detected pitch = 930.91 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=97.362497
+071-b.wav
+	HPS detected pitch = 984.37 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=94.045099
+072-c.wav
+	HPS detected pitch = 1044.36 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=96.457214
+073-c#.wav
+	HPS detected pitch = 1107.44 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=97.989099
+074-d.wav
+	HPS detected pitch = 1171.23 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=94.946152
+075-d#.wav
+	HPS detected pitch = 1242.49 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=97.188458
+076-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.055657
+077-f.wav
+	HPS detected pitch = 1395.19 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=97.866185
+078-f#.wav
+	HPS detected pitch = 1479.59 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=99.551508
+079-g.wav
+	HPS detected pitch = 1561.06 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.341956
+080-g#.wav
+	HPS detected pitch = 1658.84 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=97.523735
+081-a.wav
+	HPS detected pitch = 1760.01 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=0.009393
+082-a#.wav
+	HPS detected pitch = 1864.93 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=0.254842
+083-b.wav
+	HPS detected pitch = 1971.60 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=96.551939
+084-c.wav
+	HPS detected pitch = 2091.05 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=98.386429
+085-c#.wav
+	HPS detected pitch = 2217.77 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=0.243816
+086-d.wav
+	HPS detected pitch = 2347.80 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=98.881793
+087-d#.wav
+	HPS detected pitch = 2489.57 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=0.383000
+088-e.wav
+	HPS detected pitch = 2631.77 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=96.552334
+089-f.wav
+	HPS detected pitch = 2791.99 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=98.863407
+090-f#.wav
+	HPS detected pitch = 2957.43 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=98.520668
+091-g.wav
+	HPS detected pitch = 3123.71 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=93.222493
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Gt. Small Open Diapason 8
+
+036-c.wav
+	HPS detected pitch = 65.10 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=91.960066
+037-c#.wav
+	HPS detected pitch = 67.95 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=66.107974
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.858398
+039-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.766530
+041-f.wav
+	HPS detected pitch = 87.15 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=96.946096
+042-f#.wav
+	HPS detected pitch = 92.03 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=91.123281
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603390
+044-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.726936
+045-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.266666
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.811747
+047-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.709898
+048-c.wav
+	HPS detected pitch = 130.19 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=91.732399
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.773308
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.214099
+051-d#.wav
+	HPS detected pitch = 154.55 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.655370
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.086644
+053-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756401
+054-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.145940
+055-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603909
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.726360
+057-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066372
+058-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.270370
+059-b.wav
+	HPS detected pitch = 245.80 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=91.968449
+060-c.wav
+	HPS detected pitch = 260.73 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.092142
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369342
+062-d.wav
+	HPS detected pitch = 292.30 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.963349
+063-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.681125
+064-e.wav
+	HPS detected pitch = 328.13 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090393
+065-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404824
+066-f#.wav
+	HPS detected pitch = 366.04 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=81.394194
+067-g.wav
+	HPS detected pitch = 390.20 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.073970
+068-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792869
+069-a.wav
+	HPS detected pitch = 437.41 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=89.779743
+070-a#.wav
+	HPS detected pitch = 464.36 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.271326
+071-b.wav
+	HPS detected pitch = 492.19 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=94.045200
+072-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.144496
+073-c#.wav
+	HPS detected pitch = 552.25 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.368791
+074-d.wav
+	HPS detected pitch = 584.49 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.599987
+075-d#.wav
+	HPS detected pitch = 620.10 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=93.993690
+076-e.wav
+	HPS detected pitch = 656.02 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=91.480012
+077-f.wav
+	HPS detected pitch = 695.50 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=92.662631
+078-f#.wav
+	HPS detected pitch = 736.82 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.561938
+079-g.wav
+	HPS detected pitch = 779.30 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=89.604661
+080-g#.wav
+	HPS detected pitch = 826.43 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=91.269848
+081-a.wav
+	HPS detected pitch = 875.98 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=92.073864
+082-a#.wav
+	HPS detected pitch = 929.11 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.024311
+083-b.wav
+	HPS detected pitch = 982.18 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=90.176716
+084-c.wav
+	HPS detected pitch = 1042.24 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=92.928249
+085-c#.wav
+	HPS detected pitch = 1105.08 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=94.285307
+086-d.wav
+	HPS detected pitch = 1171.14 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=94.810237
+087-d#.wav
+	HPS detected pitch = 1240.74 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=94.748495
+088-e.wav
+	HPS detected pitch = 1314.03 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.109334
+089-f.wav
+	HPS detected pitch = 1390.76 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=92.362858
+090-f#.wav
+	HPS detected pitch = 1473.78 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=92.740099
+091-g.wav
+	HPS detected pitch = 1561.52 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.854604
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Gt. Stopped Diapason 8
+
+036-c.wav
+	HPS detected pitch = 32.23 Hz
+	MIDIKeyNumber=23
+	MIDIPitchFraction=74.620868
+037-c#.wav
+	HPS detected pitch = 68.81 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=87.801869
+038-d.wav
+	HPS detected pitch = 187.47 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=23.008107
+039-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.731557
+040-e.wav
+	HPS detected pitch = 82.02 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=91.766901
+041-f.wav
+	HPS detected pitch = 87.11 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=96.113842
+042-f#.wav
+	HPS detected pitch = 92.29 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=96.000224
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.604826
+044-g#.wav
+	HPS detected pitch = 25.63 Hz
+	MIDIKeyNumber=19
+	MIDIPitchFraction=78.418215
+045-a.wav
+	HPS detected pitch = 109.46 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=91.425380
+046-a#.wav
+	HPS detected pitch = 116.46 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=98.764533
+047-b.wav
+	HPS detected pitch = 61.16 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=83.853534
+048-c.wav
+	HPS detected pitch = 129.82 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=86.788330
+049-c#.wav
+	HPS detected pitch = 138.42 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=97.854400
+050-d.wav
+	HPS detected pitch = 73.23 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.641559
+051-d#.wav
+	HPS detected pitch = 77.63 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.508240
+052-e.wav
+	HPS detected pitch = 82.02 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=91.815693
+053-f.wav
+	HPS detected pitch = 87.14 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=96.773774
+054-f#.wav
+	HPS detected pitch = 183.88 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.472040
+055-g.wav
+	HPS detected pitch = 195.56 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=96.085268
+056-g#.wav
+	HPS detected pitch = 207.28 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=96.854252
+057-a.wav
+	HPS detected pitch = 219.11 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=93.017532
+058-a#.wav
+	HPS detected pitch = 115.44 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=83.627383
+059-b.wav
+	HPS detected pitch = 245.50 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=89.886661
+060-c.wav
+	HPS detected pitch = 260.75 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.166751
+061-c#.wav
+	HPS detected pitch = 139.16 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=7.075830
+062-d.wav
+	HPS detected pitch = 292.25 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.616588
+063-d#.wav
+	HPS detected pitch = 155.29 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=96.899332
+064-e.wav
+	HPS detected pitch = 328.58 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=94.505316
+065-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.039402
+066-f#.wav
+	HPS detected pitch = 368.76 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=94.226356
+067-g.wav
+	HPS detected pitch = 391.11 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.098605
+068-g#.wav
+	HPS detected pitch = 413.94 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=94.317360
+069-a.wav
+	HPS detected pitch = 439.45 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=97.843012
+070-a#.wav
+	HPS detected pitch = 465.09 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=96.013905
+071-b.wav
+	HPS detected pitch = 492.92 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=96.615503
+072-c.wav
+	HPS detected pitch = 522.04 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=95.995322
+073-c#.wav
+	HPS detected pitch = 552.29 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.503333
+074-d.wav
+	HPS detected pitch = 585.21 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=93.726619
+075-d#.wav
+	HPS detected pitch = 621.09 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.768706
+076-e.wav
+	HPS detected pitch = 655.52 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=90.162029
+077-f.wav
+	HPS detected pitch = 695.80 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.402652
+078-f#.wav
+	HPS detected pitch = 737.45 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.054291
+079-g.wav
+	HPS detected pitch = 779.30 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=89.615286
+080-g#.wav
+	HPS detected pitch = 826.17 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=90.726090
+081-a.wav
+	HPS detected pitch = 874.85 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=89.830801
+082-a#.wav
+	HPS detected pitch = 930.91 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=97.363104
+083-b.wav
+	HPS detected pitch = 983.88 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=93.179232
+084-c.wav
+	HPS detected pitch = 1040.04 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=89.273560
+085-c#.wav
+	HPS detected pitch = 1099.71 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=85.857662
+086-d.wav
+	HPS detected pitch = 1165.28 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=86.126064
+087-d#.wav
+	HPS detected pitch = 1239.85 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=93.506176
+088-e.wav
+	HPS detected pitch = 1313.45 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.339847
+089-f.wav
+	HPS detected pitch = 1384.73 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=84.832907
+090-f#.wav
+	HPS detected pitch = 1472.99 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=91.808722
+091-g.wav
+	HPS detected pitch = 1565.27 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=96.999760
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Ped. Bourdon 16
+
+036-c.wav
+	HPS detected pitch = 8.06 Hz
+	MIDIKeyNumber=0
+	MIDIPitchFraction=-25.417887
+037-c#.wav
+	HPS detected pitch = 7.60 Hz
+	MIDIKeyNumber=-1
+	MIDIPitchFraction=-27.524631
+038-d.wav
+	HPS detected pitch = 12.37 Hz
+	MIDIKeyNumber=7
+	MIDIPitchFraction=16.829886
+039-d#.wav
+	HPS detected pitch = 12.54 Hz
+	MIDIKeyNumber=7
+	MIDIPitchFraction=40.879462
+040-e.wav
+	HPS detected pitch = 13.34 Hz
+	MIDIKeyNumber=8
+	MIDIPitchFraction=47.038335
+041-f.wav
+	HPS detected pitch = 14.60 Hz
+	MIDIKeyNumber=10
+	MIDIPitchFraction=3.339675
+042-f#.wav
+	HPS detected pitch = 45.43 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=68.896762
+043-g.wav
+	HPS detected pitch = 49.03 Hz
+	MIDIKeyNumber=31
+	MIDIPitchFraction=0.907456
+044-g#.wav
+	HPS detected pitch = 13.19 Hz
+	MIDIKeyNumber=8
+	MIDIPitchFraction=27.628165
+045-a.wav
+	HPS detected pitch = 54.93 Hz
+	MIDIKeyNumber=32
+	MIDIPitchFraction=97.764364
+046-a#.wav
+	HPS detected pitch = 57.85 Hz
+	MIDIKeyNumber=33
+	MIDIPitchFraction=87.555146
+047-b.wav
+	HPS detected pitch = 60.79 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=73.355041
+048-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.145792
+049-c#.wav
+	HPS detected pitch = 67.54 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=55.486630
+050-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.848322
+051-d#.wav
+	HPS detected pitch = 77.45 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=92.711902
+052-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.089085
+053-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.428934
+054-f#.wav
+	HPS detected pitch = 22.71 Hz
+	MIDIKeyNumber=17
+	MIDIPitchFraction=68.727013
+055-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.601528
+056-g#.wav
+	HPS detected pitch = 102.54 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=78.492666
+057-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.267018
+058-a#.wav
+	HPS detected pitch = 114.76 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=73.351506
+059-b.wav
+	HPS detected pitch = 123.05 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=94.045030
+060-c.wav
+	HPS detected pitch = 129.90 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=87.830042
+061-c#.wav
+	HPS detected pitch = 137.67 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.507137
+062-d.wav
+	HPS detected pitch = 146.48 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=95.891360
+063-d#.wav
+	HPS detected pitch = 154.57 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.957639
+064-e.wav
+	HPS detected pitch = 163.79 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=89.214008
+065-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.760805
+066-f#.wav
+	HPS detected pitch = 184.06 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=91.251466
+067-g.wav
+	HPS detected pitch = 194.83 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.654076
+068-g#.wav
+	HPS detected pitch = 207.27 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=96.840428
+069-a.wav
+	HPS detected pitch = 109.73 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=95.803750
+070-a#.wav
+	HPS detected pitch = 5.13 Hz
+	MIDIKeyNumber=-8
+	MIDIPitchFraction=-7.941950
+071-b.wav
+	HPS detected pitch = 245.42 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=89.293015
+072-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.126694
+073-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369350
+074-d.wav
+	HPS detected pitch = 292.94 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.725197
+075-d#.wav
+	HPS detected pitch = 310.54 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=96.724656
+076-e.wav
+	HPS detected pitch = 328.86 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.938858
+077-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404933
+078-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.561739
+079-g.wav
+	HPS detected pitch = 391.11 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.099501
+080-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.795494
+081-a.wav
+	HPS detected pitch = 438.72 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.965501
+082-a#.wav
+	HPS detected pitch = 464.36 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.272780
+083-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467627
+084-c.wav
+	HPS detected pitch = 522.21 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=96.550506
+085-c#.wav
+	HPS detected pitch = 552.98 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.664051
+086-d.wav
+	HPS detected pitch = 587.40 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=0.214637
+087-d#.wav
+	HPS detected pitch = 621.83 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=98.809505
+088-e.wav
+	HPS detected pitch = 662.84 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=9.393895
+089-f.wav
+	HPS detected pitch = 698.73 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=0.679016
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Sw. Gemshorn 4
+
+036-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.144610
+037-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.787800
+038-d.wav
+	HPS detected pitch = 146.47 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=95.703210
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.599973
+040-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.091053
+041-f.wav
+	HPS detected pitch = 173.59 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.778684
+042-f#.wav
+	HPS detected pitch = 184.57 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=96.000398
+043-g.wav
+	HPS detected pitch = 195.31 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=93.929101
+044-g#.wav
+	HPS detected pitch = 206.83 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=93.157119
+045-a.wav
+	HPS detected pitch = 219.03 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.369200
+046-a#.wav
+	HPS detected pitch = 231.51 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=88.295219
+047-b.wav
+	HPS detected pitch = 246.09 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=94.045380
+048-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.144607
+049-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.359693
+050-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.891214
+051-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.681115
+052-e.wav
+	HPS detected pitch = 328.15 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.241742
+053-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404942
+054-f#.wav
+	HPS detected pitch = 369.14 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=96.000322
+055-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854526
+056-g#.wav
+	HPS detected pitch = 414.54 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.798977
+057-a.wav
+	HPS detected pitch = 438.61 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.521948
+058-a#.wav
+	HPS detected pitch = 465.09 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.999278
+059-b.wav
+	HPS detected pitch = 492.19 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=94.046317
+060-c.wav
+	HPS detected pitch = 521.49 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.148882
+061-c#.wav
+	HPS detected pitch = 552.97 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.650880
+062-d.wav
+	HPS detected pitch = 585.20 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=93.726031
+063-d#.wav
+	HPS detected pitch = 621.09 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.756267
+064-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.021551
+065-f.wav
+	HPS detected pitch = 696.36 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=94.793509
+066-f#.wav
+	HPS detected pitch = 738.28 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=96.000532
+067-g.wav
+	HPS detected pitch = 781.43 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=94.334038
+068-g#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.324340
+069-a.wav
+	HPS detected pitch = 876.75 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=93.587751
+070-a#.wav
+	HPS detected pitch = 929.44 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.636139
+071-b.wav
+	HPS detected pitch = 984.37 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=94.045295
+072-c.wav
+	HPS detected pitch = 1042.97 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.144839
+073-c#.wav
+	HPS detected pitch = 1105.44 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=94.857412
+074-d.wav
+	HPS detected pitch = 1171.14 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=94.811213
+075-d#.wav
+	HPS detected pitch = 1238.53 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=91.657584
+076-e.wav
+	HPS detected pitch = 1314.70 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.989640
+077-f.wav
+	HPS detected pitch = 1393.82 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=96.162815
+078-f#.wav
+	HPS detected pitch = 1475.74 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.030525
+079-g.wav
+	HPS detected pitch = 1563.72 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=95.287491
+080-g#.wav
+	HPS detected pitch = 1637.40 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=75.002535
+081-a.wav
+	HPS detected pitch = 1755.48 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=95.546229
+082-a#.wav
+	HPS detected pitch = 1860.04 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=95.713128
+083-b.wav
+	HPS detected pitch = 1968.02 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=93.400226
+084-c.wav
+	HPS detected pitch = 2087.41 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=95.369388
+085-c#.wav
+	HPS detected pitch = 2213.30 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=96.744977
+086-d.wav
+	HPS detected pitch = 2340.72 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=93.653355
+087-d#.wav
+	HPS detected pitch = 2486.57 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=98.299482
+088-e.wav
+	HPS detected pitch = 2631.29 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=96.235268
+089-f.wav
+	HPS detected pitch = 2790.54 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=97.959592
+090-f#.wav
+	HPS detected pitch = 2951.75 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=95.196640
+091-g.wav
+	HPS detected pitch = 3121.91 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=92.222170
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Sw. Open Diapason 8
+
+036-c.wav
+	HPS detected pitch = 65.11 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=92.087434
+037-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.779566
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.773597
+039-d#.wav
+	HPS detected pitch = 78.30 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=11.502534
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.086207
+041-f.wav
+	HPS detected pitch = 86.52 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=84.247070
+042-f#.wav
+	HPS detected pitch = 92.27 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=95.700118
+043-g.wav
+	HPS detected pitch = 97.46 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=90.470583
+044-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.726102
+045-a.wav
+	HPS detected pitch = 109.15 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.555329
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.796919
+047-b.wav
+	HPS detected pitch = 123.05 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=94.030672
+048-c.wav
+	HPS detected pitch = 129.69 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=85.043285
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.248047
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.087818
+054-f#.wav
+	HPS detected pitch = 184.54 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=95.688087
+055-g.wav
+	HPS detected pitch = 195.54 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=95.961994
+056-g#.wav
+	HPS detected pitch = 206.95 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=94.150172
+058-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271318
+059-b.wav
+	HPS detected pitch = 246.08 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=93.943408
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.139724
+061-c#.wav
+	HPS detected pitch = 276.13 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.404804
+062-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.558400
+063-d#.wav
+	HPS detected pitch = 309.43 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=90.504803
+064-e.wav
+	HPS detected pitch = 328.13 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.107259
+065-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.405223
+066-f#.wav
+	HPS detected pitch = 369.14 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=95.999933
+067-g.wav
+	HPS detected pitch = 389.93 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=90.861090
+068-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792996
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.067004
+070-a#.wav
+	HPS detected pitch = 465.09 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.999237
+071-b.wav
+	HPS detected pitch = 492.15 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=93.898517
+072-c.wav
+	HPS detected pitch = 521.26 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=93.402328
+073-c#.wav
+	HPS detected pitch = 552.98 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.663407
+074-d.wav
+	HPS detected pitch = 584.47 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.558407
+075-d#.wav
+	HPS detected pitch = 619.63 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.682202
+076-e.wav
+	HPS detected pitch = 657.71 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=95.950452
+077-f.wav
+	HPS detected pitch = 695.80 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.408929
+078-f#.wav
+	HPS detected pitch = 737.55 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.282055
+079-g.wav
+	HPS detected pitch = 780.76 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.856621
+080-g#.wav
+	HPS detected pitch = 827.64 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=93.792393
+082-a#.wav
+	HPS detected pitch = 930.18 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=96.008516
+083-b.wav
+	HPS detected pitch = 983.64 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.757012
+084-c.wav
+	HPS detected pitch = 1042.24 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=92.928412
+085-c#.wav
+	HPS detected pitch = 1105.85 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=95.493992
+086-d.wav
+	HPS detected pitch = 1169.68 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=92.641092
+087-d#.wav
+	HPS detected pitch = 1239.71 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=93.319385
+088-e.wav
+	HPS detected pitch = 1314.70 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.986182
+089-f.wav
+	HPS detected pitch = 1396.00 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=98.863670
+090-f#.wav
+	HPS detected pitch = 1475.10 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.282104
+091-g.wav
+	HPS detected pitch = 1560.79 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.042703
+Batch process complete!
+
+/OrganInstallationPackages/002931/Samples/Sw. Vox Humana 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.139750
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.841551
+039-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.745385
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.090450
+041-f.wav
+	HPS detected pitch = 87.16 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=97.043539
+042-f#.wav
+	HPS detected pitch = 92.28 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=95.936240
+043-g.wav
+	HPS detected pitch = 97.52 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=91.538527
+044-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.726420
+045-a.wav
+	HPS detected pitch = 109.86 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=97.865066
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.792918
+047-b.wav
+	HPS detected pitch = 123.05 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=94.043034
+048-c.wav
+	HPS detected pitch = 261.27 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=97.617949
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.214256
+051-d#.wav
+	HPS detected pitch = 153.81 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=80.353495
+052-e.wav
+	HPS detected pitch = 328.86 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.943185
+054-f#.wav
+	HPS detected pitch = 368.01 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=90.707409
+055-g.wav
+	HPS detected pitch = 391.32 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=96.997936
+056-g#.wav
+	HPS detected pitch = 413.09 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=90.726196
+057-a.wav
+	HPS detected pitch = 439.45 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=97.841613
+058-a#.wav
+	HPS detected pitch = 465.97 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=99.289330
+059-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467222
+060-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.275467
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.366904
+062-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.562390
+063-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.682259
+064-e.wav
+	HPS detected pitch = 328.12 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090255
+066-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.561983
+068-g#.wav
+	HPS detected pitch = 415.28 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=99.910335
+069-a.wav
+	HPS detected pitch = 440.18 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=0.721529
+070-a#.wav
+	HPS detected pitch = 464.31 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.108103
+071-b.wav
+	HPS detected pitch = 490.13 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=86.775540
+072-c.wav
+	HPS detected pitch = 521.98 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=95.776810
+073-c#.wav
+	HPS detected pitch = 550.14 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=86.768092
+074-d.wav
+	HPS detected pitch = 585.14 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=93.539015
+075-d#.wav
+	HPS detected pitch = 622.55 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=0.831099
+076-e.wav
+	HPS detected pitch = 657.48 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=95.334405
+077-f.wav
+	HPS detected pitch = 695.27 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=92.078167
+078-f#.wav
+	HPS detected pitch = 740.57 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=1.362066
+079-g.wav
+	HPS detected pitch = 783.68 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=99.303667
+080-g#.wav
+	HPS detected pitch = 828.46 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.516679
+082-a#.wav
+	HPS detected pitch = 929.69 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=95.090177
+083-b.wav
+	HPS detected pitch = 984.40 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=94.082916
+084-c.wav
+	HPS detected pitch = 1048.65 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=3.551559
+085-c#.wav
+	HPS detected pitch = 1102.30 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=89.925202
+086-d.wav
+	HPS detected pitch = 1177.00 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=3.449720
+087-d#.wav
+	HPS detected pitch = 1245.11 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=0.836489
+088-e.wav
+	HPS detected pitch = 1318.84 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=0.435993
+089-f.wav
+	HPS detected pitch = 1388.64 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=89.714483
+090-f#.wav
+	HPS detected pitch = 1475.22 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.419944
+091-g.wav
+	HPS detected pitch = 1566.77 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=98.663590
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ch. Concert Flute 4
+
+036-c.wav
+	HPS detected pitch = 129.63 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.268940
+037-c#.wav
+	HPS detected pitch = 137.76 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=89.528177
+038-d.wav
+	HPS detected pitch = 145.87 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=88.605274
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583468
+040-e.wav
+	HPS detected pitch = 163.34 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=84.461278
+041-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756439
+042-f#.wav
+	HPS detected pitch = 183.85 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.219283
+043-g.wav
+	HPS detected pitch = 194.80 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.381754
+044-g#.wav
+	HPS detected pitch = 205.81 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=84.576442
+045-a.wav
+	HPS detected pitch = 218.30 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.546163
+046-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271313
+047-b.wav
+	HPS detected pitch = 245.34 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.699671
+048-c.wav
+	HPS detected pitch = 260.02 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.311017
+049-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369115
+050-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.559325
+051-d#.wav
+	HPS detected pitch = 310.46 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=96.302115
+052-e.wav
+	HPS detected pitch = 328.86 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.951306
+053-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.045793
+054-f#.wav
+	HPS detected pitch = 369.87 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=99.428024
+055-g.wav
+	HPS detected pitch = 391.85 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=99.336840
+056-g#.wav
+	HPS detected pitch = 414.55 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.854404
+057-a.wav
+	HPS detected pitch = 439.61 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=98.483629
+058-a#.wav
+	HPS detected pitch = 465.81 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=98.692383
+059-b.wav
+	HPS detected pitch = 494.38 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=1.756629
+060-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.144399
+061-c#.wav
+	HPS detected pitch = 552.95 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.568990
+062-d.wav
+	HPS detected pitch = 585.94 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=95.891846
+063-d#.wav
+	HPS detected pitch = 621.09 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.769039
+064-e.wav
+	HPS detected pitch = 658.47 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=97.928042
+065-f.wav
+	HPS detected pitch = 697.27 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=97.047066
+066-f#.wav
+	HPS detected pitch = 737.55 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.282243
+067-g.wav
+	HPS detected pitch = 781.50 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=94.481562
+068-g#.wav
+	HPS detected pitch = 829.81 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=98.335249
+069-a.wav
+	HPS detected pitch = 877.68 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=95.435098
+070-a#.wav
+	HPS detected pitch = 931.46 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=98.379357
+071-b.wav
+	HPS detected pitch = 987.32 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=99.214836
+072-c.wav
+	HPS detected pitch = 1041.31 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=91.385935
+073-c#.wav
+	HPS detected pitch = 1105.96 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=95.663791
+074-d.wav
+	HPS detected pitch = 1171.86 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=95.865244
+075-d#.wav
+	HPS detected pitch = 1242.91 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=97.774802
+076-e.wav
+	HPS detected pitch = 1317.53 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=98.716821
+077-f.wav
+	HPS detected pitch = 1395.26 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=97.954822
+078-f#.wav
+	HPS detected pitch = 1478.76 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=98.572578
+079-g.wav
+	HPS detected pitch = 1563.40 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=94.938116
+080-g#.wav
+	HPS detected pitch = 1658.94 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=97.618366
+081-a.wav
+	HPS detected pitch = 1754.08 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=94.165094
+082-a#.wav
+	HPS detected pitch = 1861.97 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=97.505732
+083-b.wav
+	HPS detected pitch = 1971.68 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=96.620986
+084-c.wav
+	HPS detected pitch = 2083.01 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=91.709359
+085-c#.wav
+	HPS detected pitch = 2212.12 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=95.823628
+086-d.wav
+	HPS detected pitch = 2346.37 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=97.827562
+087-d#.wav
+	HPS detected pitch = 2485.25 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=97.379902
+088-e.wav
+	HPS detected pitch = 2632.20 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=96.829250
+089-f.wav
+	HPS detected pitch = 2788.60 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=96.758000
+090-f#.wav
+	HPS detected pitch = 2953.83 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=96.416335
+091-g.wav
+	HPS detected pitch = 3122.24 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=92.407539
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ch. Corno Di Bassetto 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.144765
+037-c#.wav
+	HPS detected pitch = 68.17 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=71.733621
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.890465
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583701
+040-e.wav
+	HPS detected pitch = 163.33 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=84.342843
+041-f.wav
+	HPS detected pitch = 259.33 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=84.759872
+042-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.116700
+043-g.wav
+	HPS detected pitch = 97.40 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.438880
+044-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.726116
+045-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.264862
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.801384
+047-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.709415
+048-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.144052
+049-c#.wav
+	HPS detected pitch = 688.48 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=75.083737
+050-d.wav
+	HPS detected pitch = 292.98 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.972846
+051-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583971
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.090445
+053-f.wav
+	HPS detected pitch = 174.32 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=97.045637
+054-f#.wav
+	HPS detected pitch = 184.57 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=95.998175
+055-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854445
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.726107
+057-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066503
+059-b.wav
+	HPS detected pitch = 246.83 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=99.192212
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.144582
+061-c#.wav
+	HPS detected pitch = 276.05 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=92.911093
+062-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.891904
+063-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.680983
+064-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.018810
+065-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404959
+066-f#.wav
+	HPS detected pitch = 368.23 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=91.742491
+067-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.840161
+068-g#.wav
+	HPS detected pitch = 412.35 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=87.652620
+069-a.wav
+	HPS detected pitch = 438.71 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.910415
+070-a#.wav
+	HPS detected pitch = 464.35 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.268441
+071-b.wav
+	HPS detected pitch = 492.93 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=96.658429
+072-c.wav
+	HPS detected pitch = 521.64 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.650979
+073-c#.wav
+	HPS detected pitch = 553.50 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=97.286695
+074-d.wav
+	HPS detected pitch = 586.95 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=98.884512
+075-d#.wav
+	HPS detected pitch = 623.03 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=2.169465
+076-e.wav
+	HPS detected pitch = 655.68 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=90.583739
+077-f.wav
+	HPS detected pitch = 695.90 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.650479
+078-f#.wav
+	HPS detected pitch = 737.55 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.282530
+079-g.wav
+	HPS detected pitch = 783.25 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=98.372591
+080-g#.wav
+	HPS detected pitch = 828.64 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.888579
+081-a.wav
+	HPS detected pitch = 878.91 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=97.850676
+082-a#.wav
+	HPS detected pitch = 926.61 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=89.341762
+083-b.wav
+	HPS detected pitch = 988.77 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=1.756664
+084-c.wav
+	HPS detected pitch = 1041.65 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=91.953984
+085-c#.wav
+	HPS detected pitch = 1113.01 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=6.667984
+086-d.wav
+	HPS detected pitch = 1168.22 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=90.480484
+087-d#.wav
+	HPS detected pitch = 1238.52 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=91.657038
+088-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.056676
+089-f.wav
+	HPS detected pitch = 1395.86 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=98.697529
+090-f#.wav
+	HPS detected pitch = 1477.54 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=97.142372
+091-g.wav
+	HPS detected pitch = 1560.94 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.203560
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ch. Gamba 8
+
+036-c.wav
+	HPS detected pitch = 64.47 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=74.968330
+037-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.770989
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.890405
+039-d#.wav
+	HPS detected pitch = 76.17 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=63.804934
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.089720
+041-f.wav
+	HPS detected pitch = 87.11 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=96.136327
+042-f#.wav
+	HPS detected pitch = 23.43 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=22.482642
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603467
+044-g#.wav
+	HPS detected pitch = 51.31 Hz
+	MIDIKeyNumber=31
+	MIDIPitchFraction=79.788270
+045-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.265009
+046-a#.wav
+	HPS detected pitch = 115.71 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.605197
+047-b.wav
+	HPS detected pitch = 58.65 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=11.244122
+048-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.144639
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.790772
+050-d.wav
+	HPS detected pitch = 145.84 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=88.244888
+051-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.681332
+052-e.wav
+	HPS detected pitch = 164.09 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.349267
+053-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756516
+054-f#.wav
+	HPS detected pitch = 184.57 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=96.000335
+055-g.wav
+	HPS detected pitch = 195.24 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=93.322864
+056-g#.wav
+	HPS detected pitch = 206.88 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=93.537160
+057-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.065326
+058-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271329
+059-b.wav
+	HPS detected pitch = 246.09 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=94.044988
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.144606
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.349599
+062-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.893968
+063-d#.wav
+	HPS detected pitch = 309.82 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.721850
+064-e.wav
+	HPS detected pitch = 328.86 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.965079
+065-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.045963
+066-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.564396
+067-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.849846
+068-g#.wav
+	HPS detected pitch = 414.55 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.854330
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.073756
+071-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467239
+072-c.wav
+	HPS detected pitch = 522.95 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=98.996899
+073-c#.wav
+	HPS detected pitch = 552.98 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.664366
+074-d.wav
+	HPS detected pitch = 585.46 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=94.487669
+075-d#.wav
+	HPS detected pitch = 619.63 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.681122
+076-e.wav
+	HPS detected pitch = 657.71 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=95.950447
+077-f.wav
+	HPS detected pitch = 695.07 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.582523
+078-f#.wav
+	HPS detected pitch = 738.28 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=96.000428
+079-g.wav
+	HPS detected pitch = 779.63 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=90.333224
+080-g#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.324370
+081-a.wav
+	HPS detected pitch = 876.61 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=93.313980
+082-a#.wav
+	HPS detected pitch = 929.67 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=95.061337
+083-b.wav
+	HPS detected pitch = 984.27 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=93.860365
+084-c.wav
+	HPS detected pitch = 1042.92 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.063126
+085-c#.wav
+	HPS detected pitch = 1105.89 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=95.554421
+086-d.wav
+	HPS detected pitch = 1173.34 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=98.054469
+087-d#.wav
+	HPS detected pitch = 1240.25 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=94.069499
+088-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.056400
+089-f.wav
+	HPS detected pitch = 1391.86 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.730012
+090-f#.wav
+	HPS detected pitch = 1473.78 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=92.736287
+091-g.wav
+	HPS detected pitch = 1561.60 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.942520
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ch. Lieblich Gedact 8
+
+036-c.wav
+	HPS detected pitch = 32.03 Hz
+	MIDIKeyNumber=23
+	MIDIPitchFraction=63.811416
+037-c#.wav
+	HPS detected pitch = 19.79 Hz
+	MIDIKeyNumber=15
+	MIDIPitchFraction=30.792665
+038-d.wav
+	HPS detected pitch = 23.41 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=21.297796
+039-d#.wav
+	HPS detected pitch = 19.05 Hz
+	MIDIKeyNumber=14
+	MIDIPitchFraction=64.024449
+040-e.wav
+	HPS detected pitch = 20.51 Hz
+	MIDIKeyNumber=15
+	MIDIPitchFraction=92.612748
+041-f.wav
+	HPS detected pitch = 86.44 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.719972
+042-f#.wav
+	HPS detected pitch = 23.10 Hz
+	MIDIKeyNumber=17
+	MIDIPitchFraction=98.138249
+043-g.wav
+	HPS detected pitch = 24.17 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=76.551287
+044-g#.wav
+	HPS detected pitch = 34.42 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=88.776629
+045-a.wav
+	HPS detected pitch = 109.40 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=90.461850
+046-a#.wav
+	HPS detected pitch = 116.24 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=95.464335
+047-b.wav
+	HPS detected pitch = 30.76 Hz
+	MIDIKeyNumber=22
+	MIDIPitchFraction=94.045957
+048-c.wav
+	HPS detected pitch = 65.23 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=95.225924
+049-c#.wav
+	HPS detected pitch = 71.04 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=42.997646
+050-d.wav
+	HPS detected pitch = 73.97 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=12.930979
+052-e.wav
+	HPS detected pitch = 165.69 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=9.155195
+053-f.wav
+	HPS detected pitch = 174.32 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=97.054855
+054-f#.wav
+	HPS detected pitch = 186.04 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=9.704972
+055-g.wav
+	HPS detected pitch = 98.79 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=13.848386
+056-g#.wav
+	HPS detected pitch = 104.73 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=15.076926
+058-a#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.913192
+059-b.wav
+	HPS detected pitch = 2.95 Hz
+	MIDIKeyNumber=-17
+	MIDIPitchFraction=-64.767472
+060-c.wav
+	HPS detected pitch = 9.72 Hz
+	MIDIKeyNumber=2
+	MIDIPitchFraction=99.594985
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.374065
+062-d.wav
+	HPS detected pitch = 73.25 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=96.068239
+063-d#.wav
+	HPS detected pitch = 311.57 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=2.458331
+064-e.wav
+	HPS detected pitch = 329.59 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=99.803035
+065-f.wav
+	HPS detected pitch = 348.63 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.046261
+066-f#.wav
+	HPS detected pitch = 367.68 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.115840
+067-g.wav
+	HPS detected pitch = 391.84 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=99.322897
+068-g#.wav
+	HPS detected pitch = 416.33 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=4.266931
+069-a.wav
+	HPS detected pitch = 439.45 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=97.846631
+070-a#.wav
+	HPS detected pitch = 465.83 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=98.747837
+071-b.wav
+	HPS detected pitch = 495.12 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=4.324039
+072-c.wav
+	HPS detected pitch = 522.84 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=98.649278
+073-c#.wav
+	HPS detected pitch = 555.18 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=2.529356
+074-d.wav
+	HPS detected pitch = 587.95 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=1.834306
+075-d#.wav
+	HPS detected pitch = 623.61 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=3.769220
+076-e.wav
+	HPS detected pitch = 658.45 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=97.877455
+078-f#.wav
+	HPS detected pitch = 739.75 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=99.432041
+079-g.wav
+	HPS detected pitch = 783.69 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=99.342435
+080-g#.wav
+	HPS detected pitch = 832.03 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=2.961458
+081-a.wav
+	HPS detected pitch = 880.38 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=0.753444
+082-a#.wav
+	HPS detected pitch = 933.45 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=2.074910
+083-b.wav
+	HPS detected pitch = 990.34 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=4.504950
+084-c.wav
+	HPS detected pitch = 1045.14 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=97.738973
+085-c#.wav
+	HPS detected pitch = 1108.08 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=98.980143
+086-d.wav
+	HPS detected pitch = 1176.99 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=3.437488
+087-d#.wav
+	HPS detected pitch = 1248.50 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=5.542442
+088-e.wav
+	HPS detected pitch = 1320.29 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=2.329274
+089-f.wav
+	HPS detected pitch = 1398.61 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=2.104213
+090-f#.wav
+	HPS detected pitch = 1479.09 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=98.961787
+091-g.wav
+	HPS detected pitch = 1568.84 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=0.944811
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ch. Piccolo 2
+
+036-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.142156
+037-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369273
+038-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.558483
+039-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.676198
+040-e.wav
+	HPS detected pitch = 328.53 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=94.240734
+041-f.wav
+	HPS detected pitch = 347.17 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=89.756779
+042-f#.wav
+	HPS detected pitch = 369.98 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=99.913631
+043-g.wav
+	HPS detected pitch = 390.44 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=93.099479
+044-g#.wav
+	HPS detected pitch = 414.55 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.854397
+045-a.wav
+	HPS detected pitch = 219.36 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=94.963146
+046-a#.wav
+	HPS detected pitch = 464.79 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=94.900070
+047-b.wav
+	HPS detected pitch = 492.48 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=95.085193
+048-c.wav
+	HPS detected pitch = 521.92 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=95.600489
+049-c#.wav
+	HPS detected pitch = 551.52 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=91.080515
+050-d.wav
+	HPS detected pitch = 586.67 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=98.058583
+051-d#.wav
+	HPS detected pitch = 620.99 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.471522
+052-e.wav
+	HPS detected pitch = 660.45 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=3.143244
+053-f.wav
+	HPS detected pitch = 697.46 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=97.519251
+054-f#.wav
+	HPS detected pitch = 741.13 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=2.656772
+055-g.wav
+	HPS detected pitch = 783.19 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=98.232778
+056-g#.wav
+	HPS detected pitch = 832.76 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=4.474153
+057-a.wav
+	HPS detected pitch = 879.77 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=99.543798
+058-a#.wav
+	HPS detected pitch = 931.65 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=98.737750
+059-b.wav
+	HPS detected pitch = 981.97 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=89.807331
+060-c.wav
+	HPS detected pitch = 1046.74 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=0.399616
+061-c#.wav
+	HPS detected pitch = 1108.16 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=99.106235
+062-d.wav
+	HPS detected pitch = 1175.31 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=0.960359
+063-d#.wav
+	HPS detected pitch = 1242.19 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=96.771180
+064-e.wav
+	HPS detected pitch = 1322.12 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=4.732128
+065-f.wav
+	HPS detected pitch = 1397.67 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=0.938920
+066-f#.wav
+	HPS detected pitch = 1478.90 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=98.734658
+067-g.wav
+	HPS detected pitch = 1564.45 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=96.099642
+068-g#.wav
+	HPS detected pitch = 1663.53 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=2.405540
+069-a.wav
+	HPS detected pitch = 1753.96 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=94.045688
+070-a#.wav
+	HPS detected pitch = 1867.96 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=3.067868
+071-b.wav
+	HPS detected pitch = 1972.83 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=97.629562
+072-c.wav
+	HPS detected pitch = 2095.46 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=2.031967
+073-c#.wav
+	HPS detected pitch = 2216.40 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=99.169644
+074-d.wav
+	HPS detected pitch = 2351.81 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=1.832500
+075-d#.wav
+	HPS detected pitch = 2489.50 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=0.339297
+076-e.wav
+	HPS detected pitch = 2637.83 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=0.532390
+077-f.wav
+	HPS detected pitch = 2784.48 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=94.200745
+078-f#.wav
+	HPS detected pitch = 2959.71 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=99.855659
+079-g.wav
+	HPS detected pitch = 3126.63 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=94.839383
+080-g#.wav
+	HPS detected pitch = 3324.88 Hz
+	MIDIKeyNumber=104
+	MIDIPitchFraction=1.270283
+081-a.wav
+	HPS detected pitch = 3311.36 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=94.217907
+082-a#.wav
+	HPS detected pitch = 3724.67 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=97.842713
+083-b.wav
+	HPS detected pitch = 3949.28 Hz
+	MIDIKeyNumber=106
+	MIDIPitchFraction=99.218723
+084-c.wav
+	HPS detected pitch = 4201.16 Hz
+	MIDIKeyNumber=108
+	MIDIPitchFraction=6.255828
+085-c#.wav
+	HPS detected pitch = 4436.75 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=0.715255
+086-d.wav
+	HPS detected pitch = 4692.79 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=97.845012
+087-d#.wav
+	HPS detected pitch = 4970.76 Hz
+	MIDIKeyNumber=110
+	MIDIPitchFraction=97.470430
+088-e.wav
+	HPS detected pitch = 5278.11 Hz
+	MIDIKeyNumber=112
+	MIDIPitchFraction=1.335890
+089-f.wav
+	HPS detected pitch = 5594.73 Hz
+	MIDIKeyNumber=113
+	MIDIPitchFraction=2.192251
+090-f#.wav
+	HPS detected pitch = 2964.11 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=2.430765
+091-g.wav
+	HPS detected pitch = 3145.09 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=5.028448
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Claribel Flute 8
+
+060-c.wav
+	HPS detected pitch = 259.28 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=84.391795
+061-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.768032
+062-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.216580
+063-d#.wav
+	HPS detected pitch = 309.08 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=88.583458
+064-e.wav
+	HPS detected pitch = 328.12 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.088466
+065-f.wav
+	HPS detected pitch = 346.52 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=86.510082
+066-f#.wav
+	HPS detected pitch = 367.68 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.127632
+067-g.wav
+	HPS detected pitch = 389.65 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.603373
+068-g#.wav
+	HPS detected pitch = 413.81 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.748179
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.071815
+070-a#.wav
+	HPS detected pitch = 462.89 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=87.801103
+071-b.wav
+	HPS detected pitch = 491.38 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.201319
+072-c.wav
+	HPS detected pitch = 520.02 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=89.284777
+073-c#.wav
+	HPS detected pitch = 552.25 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.369420
+074-d.wav
+	HPS detected pitch = 583.72 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=89.329317
+075-d#.wav
+	HPS detected pitch = 619.63 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.681117
+076-e.wav
+	HPS detected pitch = 654.79 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=88.221710
+077-f.wav
+	HPS detected pitch = 695.07 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.581051
+078-f#.wav
+	HPS detected pitch = 736.82 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.561866
+079-g.wav
+	HPS detected pitch = 781.49 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=94.479077
+080-g#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.324526
+081-a.wav
+	HPS detected pitch = 877.44 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=94.959174
+082-a#.wav
+	HPS detected pitch = 927.25 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=90.539479
+083-b.wav
+	HPS detected pitch = 983.63 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.742742
+084-c.wav
+	HPS detected pitch = 1044.33 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=96.394500
+085-c#.wav
+	HPS detected pitch = 1110.92 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=3.408578
+086-d.wav
+	HPS detected pitch = 1169.91 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=92.980295
+087-d#.wav
+	HPS detected pitch = 1240.88 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=94.947225
+088-e.wav
+	HPS detected pitch = 1314.85 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=95.193557
+089-f.wav
+	HPS detected pitch = 1391.60 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.404928
+090-f#.wav
+	HPS detected pitch = 1471.44 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=89.978786
+091-g.wav
+	HPS detected pitch = 1562.26 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=93.666592
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Clarion 4
+
+036-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.144605
+037-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771036
+038-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.214557
+039-d#.wav
+	HPS detected pitch = 156.01 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=4.915406
+040-e.wav
+	HPS detected pitch = 163.33 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=84.344541
+041-f.wav
+	HPS detected pitch = 174.32 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=97.044653
+042-f#.wav
+	HPS detected pitch = 367.66 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.034310
+043-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.605080
+044-g#.wav
+	HPS detected pitch = 412.35 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=87.653829
+045-a.wav
+	HPS detected pitch = 218.26 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.269591
+046-a#.wav
+	HPS detected pitch = 231.45 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=87.801331
+047-b.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.885197
+048-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.272521
+049-c#.wav
+	HPS detected pitch = 275.43 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=89.036572
+050-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.558101
+051-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.678720
+052-e.wav
+	HPS detected pitch = 327.38 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.157410
+053-f.wav
+	HPS detected pitch = 347.17 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=89.757785
+054-f#.wav
+	HPS detected pitch = 367.68 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.116757
+055-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854436
+056-g#.wav
+	HPS detected pitch = 412.35 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=87.654146
+057-a.wav
+	HPS detected pitch = 437.26 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=89.169033
+058-a#.wav
+	HPS detected pitch = 462.16 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=85.059906
+059-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467584
+060-c.wav
+	HPS detected pitch = 517.82 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=81.944173
+061-c#.wav
+	HPS detected pitch = 550.05 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=86.470520
+062-d.wav
+	HPS detected pitch = 583.74 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=89.388964
+063-d#.wav
+	HPS detected pitch = 620.07 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=93.906433
+064-e.wav
+	HPS detected pitch = 654.66 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=87.878907
+065-f.wav
+	HPS detected pitch = 695.80 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.404751
+066-f#.wav
+	HPS detected pitch = 735.35 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=89.106398
+067-g.wav
+	HPS detected pitch = 780.85 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=93.044260
+068-g#.wav
+	HPS detected pitch = 826.25 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=90.883887
+069-a.wav
+	HPS detected pitch = 874.49 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=89.118292
+070-a#.wav
+	HPS detected pitch = 927.25 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=90.538513
+071-b.wav
+	HPS detected pitch = 982.90 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=91.455728
+072-c.wav
+	HPS detected pitch = 1041.54 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=91.771605
+073-c#.wav
+	HPS detected pitch = 1102.46 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=90.178687
+074-d.wav
+	HPS detected pitch = 1166.02 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=87.214031
+075-d#.wav
+	HPS detected pitch = 1238.28 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=91.317219
+076-e.wav
+	HPS detected pitch = 1310.19 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=89.045359
+078-f#.wav
+	HPS detected pitch = 1474.36 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=93.419908
+079-g.wav
+	HPS detected pitch = 1555.66 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=86.340690
+080-g#.wav
+	HPS detected pitch = 1653.46 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=91.891493
+081-a.wav
+	HPS detected pitch = 1751.00 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=91.122191
+082-a#.wav
+	HPS detected pitch = 1853.75 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=89.844787
+083-b.wav
+	HPS detected pitch = 1966.58 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=92.135367
+084-c.wav
+	HPS detected pitch = 2082.23 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=91.065927
+085-c#.wav
+	HPS detected pitch = 2203.86 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=89.348932
+087-d#.wav
+	HPS detected pitch = 2495.35 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=4.398763
+088-e.wav
+	HPS detected pitch = 2625.62 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=92.498779
+089-f.wav
+	HPS detected pitch = 2589.72 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=68.661874
+090-f#.wav
+	HPS detected pitch = 2937.50 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=86.814460
+091-g.wav
+	HPS detected pitch = 3120.13 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=91.238579
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Double Open Diapason 16
+
+036-c.wav
+	HPS detected pitch = 32.23 Hz
+	MIDIKeyNumber=23
+	MIDIPitchFraction=74.585610
+037-c#.wav
+	HPS detected pitch = 34.42 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=88.709923
+038-d.wav
+	HPS detected pitch = 36.62 Hz
+	MIDIKeyNumber=25
+	MIDIPitchFraction=95.891850
+039-d#.wav
+	HPS detected pitch = 38.82 Hz
+	MIDIKeyNumber=26
+	MIDIPitchFraction=96.761526
+040-e.wav
+	HPS detected pitch = 41.02 Hz
+	MIDIKeyNumber=27
+	MIDIPitchFraction=92.090325
+042-f#.wav
+	HPS detected pitch = 22.72 Hz
+	MIDIKeyNumber=17
+	MIDIPitchFraction=69.553320
+043-g.wav
+	HPS detected pitch = 24.17 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=76.532517
+044-g#.wav
+	HPS detected pitch = 51.27 Hz
+	MIDIKeyNumber=31
+	MIDIPitchFraction=78.403810
+045-a.wav
+	HPS detected pitch = 27.10 Hz
+	MIDIKeyNumber=20
+	MIDIPitchFraction=74.606924
+046-a#.wav
+	HPS detected pitch = 57.86 Hz
+	MIDIKeyNumber=33
+	MIDIPitchFraction=87.800941
+047-b.wav
+	HPS detected pitch = 60.89 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=76.067275
+049-c#.wav
+	HPS detected pitch = 68.60 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=82.423563
+050-d.wav
+	HPS detected pitch = 72.51 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.499125
+051-d#.wav
+	HPS detected pitch = 76.90 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=80.365284
+052-e.wav
+	HPS detected pitch = 81.69 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=84.931067
+053-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.436240
+054-f#.wav
+	HPS detected pitch = 92.27 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=95.719050
+055-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.602937
+056-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.687371
+057-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.270014
+058-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.801707
+059-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.711288
+060-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.128115
+061-c#.wav
+	HPS detected pitch = 139.16 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=7.088147
+062-d.wav
+	HPS detected pitch = 145.76 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.303775
+063-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583490
+064-e.wav
+	HPS detected pitch = 164.04 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=91.876774
+065-f.wav
+	HPS detected pitch = 172.85 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=82.437105
+066-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.116701
+067-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603386
+068-g#.wav
+	HPS detected pitch = 205.80 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=84.477866
+069-a.wav
+	HPS detected pitch = 218.26 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.266695
+070-a#.wav
+	HPS detected pitch = 231.45 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=87.801268
+071-b.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.885117
+072-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.275567
+073-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.769948
+074-d.wav
+	HPS detected pitch = 291.50 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=87.217386
+075-d#.wav
+	HPS detected pitch = 309.08 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=88.583497
+076-e.wav
+	HPS detected pitch = 327.39 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.219294
+077-f.wav
+	HPS detected pitch = 346.44 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=86.100230
+078-f#.wav
+	HPS detected pitch = 367.40 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=87.824694
+079-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854597
+080-g#.wav
+	HPS detected pitch = 414.55 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.843822
+081-a.wav
+	HPS detected pitch = 436.53 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=86.289565
+082-a#.wav
+	HPS detected pitch = 463.62 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=90.538575
+083-b.wav
+	HPS detected pitch = 491.23 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=90.668584
+084-c.wav
+	HPS detected pitch = 520.02 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=89.274755
+085-c#.wav
+	HPS detected pitch = 551.52 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=91.099025
+086-d.wav
+	HPS detected pitch = 584.47 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.551608
+087-d#.wav
+	HPS detected pitch = 618.90 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=90.633520
+088-e.wav
+	HPS detected pitch = 655.51 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=90.130700
+089-f.wav
+	HPS detected pitch = 694.34 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=89.756162
+090-f#.wav
+	HPS detected pitch = 735.35 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=89.116784
+091-g.wav
+	HPS detected pitch = 778.69 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=88.256822
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Fifteenth 2
+
+036-c.wav
+	HPS detected pitch = 259.64 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=86.836607
+037-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.770994
+038-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.888726
+039-d#.wav
+	HPS detected pitch = 309.08 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=88.584168
+040-e.wav
+	HPS detected pitch = 327.39 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.222441
+041-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404495
+042-f#.wav
+	HPS detected pitch = 367.68 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.115308
+043-g.wav
+	HPS detected pitch = 389.65 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.603337
+044-g#.wav
+	HPS detected pitch = 414.52 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=96.738760
+045-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.058778
+046-a#.wav
+	HPS detected pitch = 464.25 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=92.863546
+047-b.wav
+	HPS detected pitch = 490.72 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=88.885247
+048-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.134328
+049-c#.wav
+	HPS detected pitch = 553.71 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=97.955494
+050-d.wav
+	HPS detected pitch = 584.47 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.563053
+051-d#.wav
+	HPS detected pitch = 620.78 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=95.891235
+052-e.wav
+	HPS detected pitch = 657.71 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=95.949987
+053-f.wav
+	HPS detected pitch = 695.79 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.372888
+054-f#.wav
+	HPS detected pitch = 736.81 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.556492
+055-g.wav
+	HPS detected pitch = 781.49 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=94.477839
+056-g#.wav
+	HPS detected pitch = 827.63 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=93.787049
+057-a.wav
+	HPS detected pitch = 876.10 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=92.316083
+058-a#.wav
+	HPS detected pitch = 929.46 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.670118
+059-b.wav
+	HPS detected pitch = 983.73 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.912272
+060-c.wav
+	HPS detected pitch = 1041.50 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=91.711513
+061-c#.wav
+	HPS detected pitch = 1105.22 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=94.517002
+062-d.wav
+	HPS detected pitch = 1169.68 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=92.642852
+063-d#.wav
+	HPS detected pitch = 1240.92 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=94.997560
+064-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.056338
+065-f.wav
+	HPS detected pitch = 1391.05 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=92.714782
+066-f#.wav
+	HPS detected pitch = 1476.27 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.653143
+067-g.wav
+	HPS detected pitch = 1561.52 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.853260
+068-g#.wav
+	HPS detected pitch = 1657.56 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=96.180890
+069-a.wav
+	HPS detected pitch = 1754.88 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=94.958858
+070-a#.wav
+	HPS detected pitch = 1859.62 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=95.317651
+071-b.wav
+	HPS detected pitch = 1969.56 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=94.759463
+072-c.wav
+	HPS detected pitch = 2089.60 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=97.179986
+073-c#.wav
+	HPS detected pitch = 2211.18 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=95.091983
+074-d.wav
+	HPS detected pitch = 2343.20 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=95.486315
+075-d#.wav
+	HPS detected pitch = 2482.18 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=95.238093
+076-e.wav
+	HPS detected pitch = 2630.87 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=95.957941
+077-f.wav
+	HPS detected pitch = 2792.83 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=99.381022
+078-f#.wav
+	HPS detected pitch = 2951.50 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=95.049422
+079-g.wav
+	HPS detected pitch = 3130.29 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=96.867696
+080-g#.wav
+	HPS detected pitch = 3312.03 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=94.566416
+081-a.wav
+	HPS detected pitch = 3513.50 Hz
+	MIDIKeyNumber=104
+	MIDIPitchFraction=96.798313
+082-a#.wav
+	HPS detected pitch = 3727.85 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=99.321614
+083-b.wav
+	HPS detected pitch = 3940.88 Hz
+	MIDIKeyNumber=106
+	MIDIPitchFraction=95.529044
+084-c.wav
+	HPS detected pitch = 4192.66 Hz
+	MIDIKeyNumber=108
+	MIDIPitchFraction=2.747548
+085-c#.wav
+	HPS detected pitch = 4437.02 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=0.820671
+086-d.wav
+	HPS detected pitch = 4683.75 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=94.505915
+087-d#.wav
+	HPS detected pitch = 4964.15 Hz
+	MIDIKeyNumber=110
+	MIDIPitchFraction=95.163827
+088-e.wav
+	HPS detected pitch = 5272.20 Hz
+	MIDIKeyNumber=111
+	MIDIPitchFraction=99.394109
+089-f.wav
+	HPS detected pitch = 5581.02 Hz
+	MIDIKeyNumber=112
+	MIDIPitchFraction=97.942647
+090-f#.wav
+	HPS detected pitch = 5906.45 Hz
+	MIDIKeyNumber=113
+	MIDIPitchFraction=96.057975
+091-g.wav
+	HPS detected pitch = 2090.29 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=97.749121
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Open Diapason 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.147508
+037-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.771172
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.891814
+039-d#.wav
+	HPS detected pitch = 77.61 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.115883
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.090406
+041-f.wav
+	HPS detected pitch = 87.14 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=96.722669
+042-f#.wav
+	HPS detected pitch = 92.29 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=95.998576
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603471
+044-g#.wav
+	HPS detected pitch = 103.28 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.820334
+045-a.wav
+	HPS detected pitch = 109.17 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.900821
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.802004
+047-b.wav
+	HPS detected pitch = 123.04 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=93.912357
+048-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.095076
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.800394
+050-d.wav
+	HPS detected pitch = 141.28 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=33.251012
+051-d#.wav
+	HPS detected pitch = 155.13 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=95.131376
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.090394
+053-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.760988
+054-f#.wav
+	HPS detected pitch = 183.86 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.312360
+055-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603245
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.728131
+058-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271505
+059-b.wav
+	HPS detected pitch = 246.07 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=93.858455
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.144608
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.364668
+062-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.607309
+063-d#.wav
+	HPS detected pitch = 309.82 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.721722
+064-e.wav
+	HPS detected pitch = 328.13 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090397
+065-f.wav
+	HPS detected pitch = 347.75 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=92.661886
+066-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.561782
+067-g.wav
+	HPS detected pitch = 389.64 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.574093
+068-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.789640
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.065371
+070-a#.wav
+	HPS detected pitch = 464.36 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.271311
+071-b.wav
+	HPS detected pitch = 491.51 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.647652
+072-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.144339
+073-c#.wav
+	HPS detected pitch = 552.96 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.614856
+074-d.wav
+	HPS detected pitch = 584.16 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=90.630977
+075-d#.wav
+	HPS detected pitch = 619.63 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.689839
+076-e.wav
+	HPS detected pitch = 655.53 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=90.190431
+077-f.wav
+	HPS detected pitch = 695.07 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.581619
+078-f#.wav
+	HPS detected pitch = 736.82 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.562305
+079-g.wav
+	HPS detected pitch = 780.76 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.854155
+080-g#.wav
+	HPS detected pitch = 826.89 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=92.227731
+081-a.wav
+	HPS detected pitch = 875.98 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=92.066513
+082-a#.wav
+	HPS detected pitch = 927.98 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=91.905887
+083-b.wav
+	HPS detected pitch = 983.64 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.757683
+084-c.wav
+	HPS detected pitch = 1042.32 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=93.061151
+085-c#.wav
+	HPS detected pitch = 1105.95 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=95.655849
+086-d.wav
+	HPS detected pitch = 1171.14 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=94.811946
+087-d#.wav
+	HPS detected pitch = 1238.63 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=91.806793
+088-e.wav
+	HPS detected pitch = 1313.91 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.955618
+089-f.wav
+	HPS detected pitch = 1386.27 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=86.765167
+090-f#.wav
+	HPS detected pitch = 1473.63 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=92.563335
+091-g.wav
+	HPS detected pitch = 1561.48 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.811530
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Posaune 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.144339
+037-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.772051
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.889785
+039-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.769036
+040-e.wav
+	HPS detected pitch = 163.34 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=84.432135
+041-f.wav
+	HPS detected pitch = 87.02 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=94.317525
+042-f#.wav
+	HPS detected pitch = 184.08 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=91.351144
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603737
+044-g#.wav
+	HPS detected pitch = 515.63 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=74.582471
+045-a.wav
+	HPS detected pitch = 109.86 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=97.846913
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.801267
+047-b.wav
+	HPS detected pitch = 123.78 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=4.319861
+048-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.275068
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771218
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.214060
+051-d#.wav
+	HPS detected pitch = 154.55 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.655687
+052-e.wav
+	HPS detected pitch = 164.05 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=91.982435
+053-f.wav
+	HPS detected pitch = 174.30 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=96.920544
+054-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.116752
+055-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603413
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.725182
+057-a.wav
+	HPS detected pitch = 218.28 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.425965
+058-a#.wav
+	HPS detected pitch = 231.45 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=87.801365
+059-b.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.900902
+060-c.wav
+	HPS detected pitch = 260.02 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.332973
+061-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.771660
+062-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.552846
+063-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.680916
+064-e.wav
+	HPS detected pitch = 328.09 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=91.907221
+065-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404910
+066-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.547328
+067-g.wav
+	HPS detected pitch = 389.66 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.632891
+068-g#.wav
+	HPS detected pitch = 413.29 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=91.585674
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.066493
+070-a#.wav
+	HPS detected pitch = 462.89 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=87.801305
+071-b.wav
+	HPS detected pitch = 491.05 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=90.057027
+072-c.wav
+	HPS detected pitch = 520.02 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=89.274740
+073-c#.wav
+	HPS detected pitch = 552.25 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.369967
+074-d.wav
+	HPS detected pitch = 582.27 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=85.032387
+075-d#.wav
+	HPS detected pitch = 621.41 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=97.644545
+076-e.wav
+	HPS detected pitch = 656.25 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=92.084443
+077-f.wav
+	HPS detected pitch = 695.71 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.184703
+078-f#.wav
+	HPS detected pitch = 737.29 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=93.664840
+079-g.wav
+	HPS detected pitch = 780.05 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=91.265871
+080-g#.wav
+	HPS detected pitch = 826.17 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=90.724979
+081-a.wav
+	HPS detected pitch = 874.51 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=89.168464
+082-a#.wav
+	HPS detected pitch = 925.05 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=86.427774
+084-c.wav
+	HPS detected pitch = 1042.95 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.121171
+085-c#.wav
+	HPS detected pitch = 1102.29 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=89.921839
+086-d.wav
+	HPS detected pitch = 1167.48 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=89.387586
+087-d#.wav
+	HPS detected pitch = 1248.20 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=5.134616
+088-e.wav
+	HPS detected pitch = 1311.15 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=90.308576
+089-f.wav
+	HPS detected pitch = 1388.77 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=89.873365
+090-f#.wav
+	HPS detected pitch = 1475.18 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.377565
+091-g.wav
+	HPS detected pitch = 1558.66 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=89.675561
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Principal 4
+
+036-c.wav
+	HPS detected pitch = 129.77 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=86.202998
+037-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771093
+038-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.237418
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.584004
+040-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.089870
+041-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756831
+042-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.119641
+043-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603443
+044-g#.wav
+	HPS detected pitch = 206.63 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=91.429441
+045-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066218
+046-a#.wav
+	HPS detected pitch = 232.13 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=92.948773
+047-b.wav
+	HPS detected pitch = 245.68 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=91.133721
+048-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.274821
+049-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369339
+050-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.568037
+051-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.681156
+052-e.wav
+	HPS detected pitch = 328.12 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090369
+053-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.403101
+054-f#.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.561992
+055-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.852141
+056-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792905
+057-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.066861
+058-a#.wav
+	HPS detected pitch = 463.62 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=90.538514
+059-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467759
+060-c.wav
+	HPS detected pitch = 520.75 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=91.711382
+061-c#.wav
+	HPS detected pitch = 552.17 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.143615
+062-d.wav
+	HPS detected pitch = 584.71 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=92.268121
+063-d#.wav
+	HPS detected pitch = 619.65 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.737544
+064-e.wav
+	HPS detected pitch = 656.25 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=92.090446
+065-f.wav
+	HPS detected pitch = 695.07 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.582203
+066-f#.wav
+	HPS detected pitch = 736.82 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.565417
+067-g.wav
+	HPS detected pitch = 780.75 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.832396
+068-g#.wav
+	HPS detected pitch = 826.91 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=92.262593
+069-a.wav
+	HPS detected pitch = 875.98 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=92.066501
+070-a#.wav
+	HPS detected pitch = 927.98 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=91.907039
+071-b.wav
+	HPS detected pitch = 983.64 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.756651
+072-c.wav
+	HPS detected pitch = 1042.74 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=93.766155
+073-c#.wav
+	HPS detected pitch = 1105.32 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=94.673855
+074-d.wav
+	HPS detected pitch = 1169.68 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=92.643295
+075-d#.wav
+	HPS detected pitch = 1240.72 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=94.726637
+076-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.058544
+077-f.wav
+	HPS detected pitch = 1391.59 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.395486
+078-f#.wav
+	HPS detected pitch = 1475.10 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.282246
+079-g.wav
+	HPS detected pitch = 1562.26 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=93.667188
+080-g#.wav
+	HPS detected pitch = 1656.72 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=95.306780
+081-a.wav
+	HPS detected pitch = 1754.61 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=94.688316
+082-a#.wav
+	HPS detected pitch = 1861.02 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=96.625304
+083-b.wav
+	HPS detected pitch = 1968.04 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=93.421088
+084-c.wav
+	HPS detected pitch = 2085.94 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=94.144642
+085-c#.wav
+	HPS detected pitch = 2212.64 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=96.235157
+086-d.wav
+	HPS detected pitch = 2341.88 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=94.506636
+087-d#.wav
+	HPS detected pitch = 2486.61 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=98.326023
+088-e.wav
+	HPS detected pitch = 2631.59 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=96.432513
+089-f.wav
+	HPS detected pitch = 2780.26 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=91.572065
+090-f#.wav
+	HPS detected pitch = 2959.20 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=99.557107
+091-g.wav
+	HPS detected pitch = 3130.79 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=97.140475
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Twelfth 3
+
+036-c.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.595166
+037-c#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.726079
+038-d.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066502
+039-d#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271347
+040-e.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.885228
+041-f.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.116831
+042-f#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.364249
+043-g.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.558413
+044-g#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.681415
+045-a.wav
+	HPS detected pitch = 328.12 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090389
+046-a#.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404714
+047-b.wav
+	HPS detected pitch = 368.41 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.562012
+048-c.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854501
+049-c#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792965
+050-d.wav
+	HPS detected pitch = 438.72 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.959099
+051-d#.wav
+	HPS detected pitch = 465.09 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.999840
+052-e.wav
+	HPS detected pitch = 492.92 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=96.619695
+053-f.wav
+	HPS detected pitch = 522.22 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=96.574402
+054-f#.wav
+	HPS detected pitch = 552.25 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.383613
+055-g.wav
+	HPS detected pitch = 585.21 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=93.728516
+056-g#.wav
+	HPS detected pitch = 620.36 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=94.726334
+057-a.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.021324
+058-a#.wav
+	HPS detected pitch = 695.80 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.404931
+059-b.wav
+	HPS detected pitch = 736.90 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=92.764599
+060-c.wav
+	HPS detected pitch = 780.03 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=91.229506
+061-c#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.321518
+062-d.wav
+	HPS detected pitch = 877.44 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=94.954271
+063-d#.wav
+	HPS detected pitch = 929.54 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.812123
+064-e.wav
+	HPS detected pitch = 982.91 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=91.467222
+065-f.wav
+	HPS detected pitch = 1042.97 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.143099
+066-f#.wav
+	HPS detected pitch = 1104.49 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=93.369338
+067-g.wav
+	HPS detected pitch = 1170.41 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.729151
+068-g#.wav
+	HPS detected pitch = 1243.65 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=98.807194
+069-a.wav
+	HPS detected pitch = 1314.70 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.986109
+070-a#.wav
+	HPS detected pitch = 1394.53 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=97.049001
+072-c.wav
+	HPS detected pitch = 1565.19 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=96.911439
+073-c#.wav
+	HPS detected pitch = 1657.47 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=96.089560
+074-d.wav
+	HPS detected pitch = 1754.15 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=94.236412
+075-d#.wav
+	HPS detected pitch = 1859.17 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=94.895518
+076-e.wav
+	HPS detected pitch = 1969.48 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=94.688926
+077-f.wav
+	HPS detected pitch = 2089.94 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=97.463315
+078-f#.wav
+	HPS detected pitch = 2216.25 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=99.052229
+079-g.wav
+	HPS detected pitch = 2344.40 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=96.372707
+080-g#.wav
+	HPS detected pitch = 2484.34 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=96.742237
+081-a.wav
+	HPS detected pitch = 2635.99 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=99.321031
+082-a#.wav
+	HPS detected pitch = 2787.71 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=96.206716
+083-b.wav
+	HPS detected pitch = 2955.63 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=97.468120
+084-c.wav
+	HPS detected pitch = 3135.50 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=99.743013
+085-c#.wav
+	HPS detected pitch = 3320.71 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=99.097330
+086-d.wav
+	HPS detected pitch = 3514.51 Hz
+	MIDIKeyNumber=104
+	MIDIPitchFraction=97.295983
+087-d#.wav
+	HPS detected pitch = 3720.73 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=96.014485
+088-e.wav
+	HPS detected pitch = 3959.96 Hz
+	MIDIKeyNumber=107
+	MIDIPitchFraction=3.890634
+089-f.wav
+	HPS detected pitch = 4187.88 Hz
+	MIDIKeyNumber=108
+	MIDIPitchFraction=0.771866
+090-f#.wav
+	HPS detected pitch = 4439.29 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=1.702317
+091-g.wav
+	HPS detected pitch = 4691.08 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=97.212680
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ped. Open Diapason 16
+
+036-c.wav
+	HPS detected pitch = 16.01 Hz
+	MIDIKeyNumber=11
+	MIDIPitchFraction=63.145921
+037-c#.wav
+	HPS detected pitch = 34.42 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=88.742368
+038-d.wav
+	HPS detected pitch = 36.62 Hz
+	MIDIKeyNumber=25
+	MIDIPitchFraction=95.880961
+039-d#.wav
+	HPS detected pitch = 19.06 Hz
+	MIDIKeyNumber=14
+	MIDIPitchFraction=65.080620
+040-e.wav
+	HPS detected pitch = 41.02 Hz
+	MIDIKeyNumber=27
+	MIDIPitchFraction=92.089806
+041-f.wav
+	HPS detected pitch = 21.96 Hz
+	MIDIKeyNumber=17
+	MIDIPitchFraction=10.914982
+042-f#.wav
+	HPS detected pitch = 46.14 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=95.999790
+043-g.wav
+	HPS detected pitch = 24.17 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=76.654944
+044-g#.wav
+	HPS detected pitch = 25.63 Hz
+	MIDIKeyNumber=19
+	MIDIPitchFraction=78.337017
+045-a.wav
+	HPS detected pitch = 54.93 Hz
+	MIDIKeyNumber=32
+	MIDIPitchFraction=97.769765
+046-a#.wav
+	HPS detected pitch = 57.86 Hz
+	MIDIKeyNumber=33
+	MIDIPitchFraction=87.806311
+047-b.wav
+	HPS detected pitch = 30.75 Hz
+	MIDIKeyNumber=22
+	MIDIPitchFraction=93.584646
+048-c.wav
+	HPS detected pitch = 65.18 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.081529
+049-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.774477
+050-d.wav
+	HPS detected pitch = 35.27 Hz
+	MIDIKeyNumber=25
+	MIDIPitchFraction=30.694876
+051-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.763885
+052-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.089482
+053-f.wav
+	HPS detected pitch = 87.16 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=97.045735
+054-f#.wav
+	HPS detected pitch = 46.14 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=95.980899
+055-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603574
+056-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.745938
+057-a.wav
+	HPS detected pitch = 109.73 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=95.781270
+058-a#.wav
+	HPS detected pitch = 115.69 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.258356
+059-b.wav
+	HPS detected pitch = 123.04 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=93.984638
+060-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.147730
+061-c#.wav
+	HPS detected pitch = 138.43 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=97.954905
+062-d.wav
+	HPS detected pitch = 147.22 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=4.524844
+063-d#.wav
+	HPS detected pitch = 156.01 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=4.916078
+064-e.wav
+	HPS detected pitch = 164.80 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=99.803506
+065-f.wav
+	HPS detected pitch = 175.05 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=4.302359
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ped. Ophicleide 16
+
+036-c.wav
+	HPS detected pitch = 64.45 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=74.583058
+037-c#.wav
+	HPS detected pitch = 34.42 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=88.770135
+038-d.wav
+	HPS detected pitch = 72.51 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.492234
+039-d#.wav
+	HPS detected pitch = 76.90 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=80.358516
+040-e.wav
+	HPS detected pitch = 41.02 Hz
+	MIDIKeyNumber=27
+	MIDIPitchFraction=92.090336
+041-f.wav
+	HPS detected pitch = 43.21 Hz
+	MIDIKeyNumber=28
+	MIDIPitchFraction=82.436135
+042-f#.wav
+	HPS detected pitch = 46.14 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=95.907252
+043-g.wav
+	HPS detected pitch = 48.34 Hz
+	MIDIKeyNumber=30
+	MIDIPitchFraction=76.537242
+044-g#.wav
+	HPS detected pitch = 50.96 Hz
+	MIDIKeyNumber=31
+	MIDIPitchFraction=68.069374
+045-a.wav
+	HPS detected pitch = 54.49 Hz
+	MIDIKeyNumber=32
+	MIDIPitchFraction=83.791561
+046-a#.wav
+	HPS detected pitch = 57.86 Hz
+	MIDIKeyNumber=33
+	MIDIPitchFraction=87.798585
+047-b.wav
+	HPS detected pitch = 60.88 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=75.926586
+048-c.wav
+	HPS detected pitch = 65.17 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=93.746125
+049-c#.wav
+	HPS detected pitch = 136.96 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=79.537856
+050-d.wav
+	HPS detected pitch = 72.51 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.493199
+051-d#.wav
+	HPS detected pitch = 77.59 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=95.639818
+052-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.090402
+053-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.436088
+054-f#.wav
+	HPS detected pitch = 91.55 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=82.205964
+055-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603313
+056-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.724559
+057-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.267252
+058-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.801387
+059-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.698949
+060-c.wav
+	HPS detected pitch = 129.64 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.370835
+061-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.770657
+062-d.wav
+	HPS detected pitch = 145.18 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=80.433070
+063-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583661
+064-e.wav
+	HPS detected pitch = 163.41 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=85.233414
+065-f.wav
+	HPS detected pitch = 172.85 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=82.435983
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Ped. Principal 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.144428
+037-c#.wav
+	HPS detected pitch = 68.87 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=89.317850
+038-d.wav
+	HPS detected pitch = 73.24 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=95.891959
+039-d#.wav
+	HPS detected pitch = 77.64 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.769019
+040-e.wav
+	HPS detected pitch = 82.29 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=97.463008
+041-f.wav
+	HPS detected pitch = 87.16 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=97.045861
+042-f#.wav
+	HPS detected pitch = 92.30 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=96.249253
+043-g.wav
+	HPS detected pitch = 97.61 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=93.057085
+044-g#.wav
+	HPS detected pitch = 103.87 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=0.763258
+045-a.wav
+	HPS detected pitch = 109.86 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=97.840469
+046-a#.wav
+	HPS detected pitch = 116.45 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=98.705004
+047-b.wav
+	HPS detected pitch = 123.05 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=94.045080
+048-c.wav
+	HPS detected pitch = 131.09 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=3.627335
+049-c#.wav
+	HPS detected pitch = 137.79 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=89.954442
+050-d.wav
+	HPS detected pitch = 146.72 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=98.641715
+051-d#.wav
+	HPS detected pitch = 155.27 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=96.769023
+052-e.wav
+	HPS detected pitch = 164.68 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=98.550098
+053-f.wav
+	HPS detected pitch = 173.60 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.931006
+054-f#.wav
+	HPS detected pitch = 183.85 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.194543
+055-g.wav
+	HPS detected pitch = 194.09 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=83.072639
+056-g#.wav
+	HPS detected pitch = 207.28 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=96.862806
+057-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066484
+058-a#.wav
+	HPS detected pitch = 232.85 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=98.247518
+059-b.wav
+	HPS detected pitch = 246.82 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=99.157740
+060-c.wav
+	HPS detected pitch = 261.66 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=0.214171
+061-c#.wav
+	HPS detected pitch = 277.95 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=4.783220
+062-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.891925
+063-d#.wav
+	HPS detected pitch = 311.28 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=0.847902
+064-e.wav
+	HPS detected pitch = 327.77 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=90.194284
+065-f.wav
+	HPS detected pitch = 348.82 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.970030
+066-f#.wav
+	HPS detected pitch = 368.34 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.247503
+067-g.wav
+	HPS detected pitch = 389.65 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.603812
+068-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.795922
+069-a.wav
+	HPS detected pitch = 437.99 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=92.067408
+070-a#.wav
+	HPS detected pitch = 464.84 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.059298
+071-b.wav
+	HPS detected pitch = 490.92 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=89.594243
+072-c.wav
+	HPS detected pitch = 520.78 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=91.793109
+073-c#.wav
+	HPS detected pitch = 552.25 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=93.369761
+074-d.wav
+	HPS detected pitch = 584.04 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=90.290778
+075-d#.wav
+	HPS detected pitch = 619.63 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=92.683357
+076-e.wav
+	HPS detected pitch = 656.25 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=92.090350
+077-f.wav
+	HPS detected pitch = 695.80 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.406320
+078-f#.wav
+	HPS detected pitch = 736.10 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=90.867712
+079-g.wav
+	HPS detected pitch = 780.57 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.438058
+080-g#.wav
+	HPS detected pitch = 827.64 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=93.792961
+081-a.wav
+	HPS detected pitch = 875.97 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=92.050102
+082-a#.wav
+	HPS detected pitch = 928.50 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=92.880404
+083-b.wav
+	HPS detected pitch = 984.18 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=93.697049
+084-c.wav
+	HPS detected pitch = 1043.06 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=94.294965
+085-c#.wav
+	HPS detected pitch = 1104.10 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=92.752268
+086-d.wav
+	HPS detected pitch = 1170.41 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.728664
+087-d#.wav
+	HPS detected pitch = 1241.46 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=95.747916
+088-e.wav
+	HPS detected pitch = 1313.25 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.076883
+089-f.wav
+	HPS detected pitch = 1391.53 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.312658
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Clarion 4
+
+036-c.wav
+	HPS detected pitch = 129.64 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.391133
+037-c#.wav
+	HPS detected pitch = 134.77 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=51.559135
+038-d.wav
+	HPS detected pitch = 144.29 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=69.726827
+039-d#.wav
+	HPS detected pitch = 153.82 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=80.464386
+040-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.090388
+041-f.wav
+	HPS detected pitch = 172.92 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=83.071615
+042-f#.wav
+	HPS detected pitch = 184.56 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=95.909574
+043-g.wav
+	HPS detected pitch = 194.68 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=88.312845
+044-g#.wav
+	HPS detected pitch = 206.51 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.470349
+045-a.wav
+	HPS detected pitch = 218.63 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=89.219125
+046-a#.wav
+	HPS detected pitch = 232.91 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=98.729767
+047-b.wav
+	HPS detected pitch = 244.63 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=83.684971
+048-c.wav
+	HPS detected pitch = 260.98 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=95.729924
+049-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.368323
+050-d.wav
+	HPS detected pitch = 292.97 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.891902
+051-d#.wav
+	HPS detected pitch = 309.73 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.204352
+052-e.wav
+	HPS detected pitch = 328.85 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=95.905924
+053-f.wav
+	HPS detected pitch = 346.44 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=86.100126
+054-f#.wav
+	HPS detected pitch = 368.98 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=95.253890
+055-g.wav
+	HPS detected pitch = 388.92 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=86.346148
+056-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792967
+057-a.wav
+	HPS detected pitch = 437.25 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=89.146603
+058-a#.wav
+	HPS detected pitch = 463.62 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=90.538516
+059-b.wav
+	HPS detected pitch = 490.72 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=88.885429
+060-c.wav
+	HPS detected pitch = 522.22 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=96.574405
+061-c#.wav
+	HPS detected pitch = 552.11 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=92.929235
+062-d.wav
+	HPS detected pitch = 583.01 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=87.213966
+063-d#.wav
+	HPS detected pitch = 623.25 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=2.766204
+064-e.wav
+	HPS detected pitch = 657.68 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=95.848225
+065-f.wav
+	HPS detected pitch = 698.50 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=0.106524
+066-f#.wav
+	HPS detected pitch = 736.08 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=90.840229
+067-g.wav
+	HPS detected pitch = 781.53 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=94.560059
+068-g#.wav
+	HPS detected pitch = 827.80 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=94.132989
+069-a.wav
+	HPS detected pitch = 880.29 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=0.572629
+070-a#.wav
+	HPS detected pitch = 933.43 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=2.053532
+071-b.wav
+	HPS detected pitch = 986.37 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=97.547306
+072-c.wav
+	HPS detected pitch = 1046.48 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=99.967680
+073-c#.wav
+	HPS detected pitch = 1111.32 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=4.045434
+074-d.wav
+	HPS detected pitch = 1168.99 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=91.619588
+076-e.wav
+	HPS detected pitch = 1313.23 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.051309
+077-f.wav
+	HPS detected pitch = 1415.86 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=23.319629
+078-f#.wav
+	HPS detected pitch = 1475.88 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.203057
+079-g.wav
+	HPS detected pitch = 1561.48 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.804102
+080-g#.wav
+	HPS detected pitch = 1650.86 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=89.166046
+081-a.wav
+	HPS detected pitch = 1759.92 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=99.916827
+082-a#.wav
+	HPS detected pitch = 1858.13 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=93.931618
+083-b.wav
+	HPS detected pitch = 1965.60 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=91.276411
+085-c#.wav
+	HPS detected pitch = 2214.66 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=97.812620
+086-d.wav
+	HPS detected pitch = 2337.25 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=91.086707
+087-d#.wav
+	HPS detected pitch = 2494.51 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=3.819952
+088-e.wav
+	HPS detected pitch = 2616.23 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=86.295134
+089-f.wav
+	HPS detected pitch = 2835.21 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=25.455721
+090-f#.wav
+	HPS detected pitch = 2946.58 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=92.160190
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Contra Posaune 16
+
+036-c.wav
+	HPS detected pitch = 32.24 Hz
+	MIDIKeyNumber=23
+	MIDIPitchFraction=75.116482
+037-c#.wav
+	HPS detected pitch = 33.72 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=53.227860
+038-d.wav
+	HPS detected pitch = 35.90 Hz
+	MIDIKeyNumber=25
+	MIDIPitchFraction=61.429324
+039-d#.wav
+	HPS detected pitch = 77.04 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=83.299216
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.088961
+041-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.436269
+042-f#.wav
+	HPS detected pitch = 45.80 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=83.247625
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.602513
+044-g#.wav
+	HPS detected pitch = 103.22 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=89.886277
+045-a.wav
+	HPS detected pitch = 54.93 Hz
+	MIDIKeyNumber=32
+	MIDIPitchFraction=97.847032
+046-a#.wav
+	HPS detected pitch = 57.86 Hz
+	MIDIKeyNumber=33
+	MIDIPitchFraction=87.801332
+047-b.wav
+	HPS detected pitch = 61.52 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=93.899255
+048-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.144613
+049-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.771027
+050-d.wav
+	HPS detected pitch = 72.70 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=83.139325
+051-d#.wav
+	HPS detected pitch = 77.63 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=96.541546
+052-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.084393
+053-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.523726
+054-f#.wav
+	HPS detected pitch = 91.55 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=82.205790
+055-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.565532
+056-g#.wav
+	HPS detected pitch = 103.27 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.726070
+057-a.wav
+	HPS detected pitch = 109.13 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=86.266714
+058-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.801290
+059-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.710194
+060-c.wav
+	HPS detected pitch = 130.37 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=94.136126
+061-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771005
+062-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.214057
+063-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583829
+064-e.wav
+	HPS detected pitch = 163.33 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=84.347350
+065-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.758125
+066-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.116756
+067-g.wav
+	HPS detected pitch = 195.56 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=96.099590
+068-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.726155
+069-a.wav
+	HPS detected pitch = 218.91 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=91.386615
+070-a#.wav
+	HPS detected pitch = 231.45 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=87.801404
+071-b.wav
+	HPS detected pitch = 245.40 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=89.181084
+072-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.274743
+073-c#.wav
+	HPS detected pitch = 276.07 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.016830
+074-d.wav
+	HPS detected pitch = 290.77 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=82.859435
+076-e.wav
+	HPS detected pitch = 327.39 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.221713
+077-f.wav
+	HPS detected pitch = 347.17 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=89.756388
+078-f#.wav
+	HPS detected pitch = 369.27 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=96.597158
+079-g.wav
+	HPS detected pitch = 388.93 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=86.416394
+080-g#.wav
+	HPS detected pitch = 413.09 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=90.726226
+081-a.wav
+	HPS detected pitch = 437.26 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=89.169031
+082-a#.wav
+	HPS detected pitch = 469.07 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=10.750841
+083-b.wav
+	HPS detected pitch = 489.99 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=86.299383
+084-c.wav
+	HPS detected pitch = 521.49 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.147486
+085-c#.wav
+	HPS detected pitch = 554.06 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=99.050961
+086-d.wav
+	HPS detected pitch = 584.47 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.558451
+088-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.021431
+089-f.wav
+	HPS detected pitch = 693.61 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=87.941656
+090-f#.wav
+	HPS detected pitch = 738.28 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=95.999338
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Flageolet 2
+
+036-c.wav
+	HPS detected pitch = 260.01 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.303603
+037-c#.wav
+	HPS detected pitch = 276.85 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=97.930090
+038-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.558390
+039-d#.wav
+	HPS detected pitch = 309.08 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=88.584176
+040-e.wav
+	HPS detected pitch = 327.94 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=91.103274
+041-f.wav
+	HPS detected pitch = 347.17 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=89.756462
+042-f#.wav
+	HPS detected pitch = 367.68 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=89.151154
+043-g.wav
+	HPS detected pitch = 389.65 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=89.603822
+044-g#.wav
+	HPS detected pitch = 413.81 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.764030
+045-a.wav
+	HPS detected pitch = 436.52 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=86.266434
+046-a#.wav
+	HPS detected pitch = 464.83 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.055453
+047-b.wav
+	HPS detected pitch = 491.46 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=91.467257
+048-c.wav
+	HPS detected pitch = 520.75 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=91.710872
+049-c#.wav
+	HPS detected pitch = 550.78 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=88.763223
+050-d.wav
+	HPS detected pitch = 585.94 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=95.891972
+051-d#.wav
+	HPS detected pitch = 619.36 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=91.919518
+052-e.wav
+	HPS detected pitch = 656.98 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=94.025927
+053-f.wav
+	HPS detected pitch = 695.09 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.646448
+054-f#.wav
+	HPS detected pitch = 738.28 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=96.000399
+055-g.wav
+	HPS detected pitch = 780.03 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=91.229738
+056-g#.wav
+	HPS detected pitch = 828.79 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=96.195414
+058-a#.wav
+	HPS detected pitch = 929.44 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.635963
+059-b.wav
+	HPS detected pitch = 984.37 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=94.045392
+060-c.wav
+	HPS detected pitch = 1044.13 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=96.067834
+061-c#.wav
+	HPS detected pitch = 1107.41 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=97.942659
+062-d.wav
+	HPS detected pitch = 1171.88 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=95.892642
+063-d#.wav
+	HPS detected pitch = 1242.18 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=96.758521
+064-e.wav
+	HPS detected pitch = 1313.51 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=93.418667
+065-f.wav
+	HPS detected pitch = 1393.26 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=95.466801
+066-f#.wav
+	HPS detected pitch = 1476.46 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.878734
+067-g.wav
+	HPS detected pitch = 1561.93 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=93.301482
+068-g#.wav
+	HPS detected pitch = 1658.31 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=96.961250
+069-a.wav
+	HPS detected pitch = 1763.66 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=3.600161
+070-a#.wav
+	HPS detected pitch = 1861.82 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=97.361933
+071-b.wav
+	HPS detected pitch = 1971.03 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=96.048301
+072-c.wav
+	HPS detected pitch = 2090.33 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=97.787869
+073-c#.wav
+	HPS detected pitch = 2218.41 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=0.743868
+074-d.wav
+	HPS detected pitch = 2345.04 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=96.846831
+075-d#.wav
+	HPS detected pitch = 2493.32 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=2.987828
+076-e.wav
+	HPS detected pitch = 2638.92 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=1.244522
+077-f.wav
+	HPS detected pitch = 2806.64 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=7.922768
+078-f#.wav
+	HPS detected pitch = 2961.18 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=0.715764
+079-g.wav
+	HPS detected pitch = 3138.41 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=1.352029
+080-g#.wav
+	HPS detected pitch = 3348.53 Hz
+	MIDIKeyNumber=104
+	MIDIPitchFraction=13.544671
+081-a.wav
+	HPS detected pitch = 3537.30 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=8.487813
+082-a#.wav
+	HPS detected pitch = 3729.90 Hz
+	MIDIKeyNumber=106
+	MIDIPitchFraction=0.272572
+083-b.wav
+	HPS detected pitch = 3962.64 Hz
+	MIDIKeyNumber=107
+	MIDIPitchFraction=5.061961
+084-c.wav
+	HPS detected pitch = 4184.00 Hz
+	MIDIKeyNumber=107
+	MIDIPitchFraction=99.168843
+085-c#.wav
+	HPS detected pitch = 4464.34 Hz
+	MIDIKeyNumber=109
+	MIDIPitchFraction=11.446549
+086-d.wav
+	HPS detected pitch = 4706.54 Hz
+	MIDIKeyNumber=110
+	MIDIPitchFraction=2.911231
+087-d#.wav
+	HPS detected pitch = 4984.23 Hz
+	MIDIKeyNumber=111
+	MIDIPitchFraction=2.154585
+088-e.wav
+	HPS detected pitch = 5265.68 Hz
+	MIDIKeyNumber=111
+	MIDIPitchFraction=97.254778
+089-f.wav
+	HPS detected pitch = 5597.66 Hz
+	MIDIKeyNumber=113
+	MIDIPitchFraction=3.098978
+090-f#.wav
+	HPS detected pitch = 5911.24 Hz
+	MIDIKeyNumber=113
+	MIDIPitchFraction=97.461882
+091-g.wav
+	HPS detected pitch = 2088.65 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=96.390726
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Lieblich Gedact 8
+
+036-c.wav
+	HPS detected pitch = 32.96 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=13.482481
+037-c#.wav
+	HPS detected pitch = 22.67 Hz
+	MIDIKeyNumber=17
+	MIDIPitchFraction=65.591496
+038-d.wav
+	HPS detected pitch = 72.51 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.491353
+039-d#.wav
+	HPS detected pitch = 19.15 Hz
+	MIDIKeyNumber=14
+	MIDIPitchFraction=73.600498
+040-e.wav
+	HPS detected pitch = 79.76 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=43.508374
+041-f.wav
+	HPS detected pitch = 19.06 Hz
+	MIDIKeyNumber=14
+	MIDIPitchFraction=65.354631
+042-f#.wav
+	HPS detected pitch = 46.14 Hz
+	MIDIKeyNumber=29
+	MIDIPitchFraction=95.891220
+043-g.wav
+	HPS detected pitch = 24.17 Hz
+	MIDIKeyNumber=18
+	MIDIPitchFraction=76.698296
+044-g#.wav
+	HPS detected pitch = 3.95 Hz
+	MIDIKeyNumber=-12
+	MIDIPitchFraction=-57.995498
+045-a.wav
+	HPS detected pitch = 24.90 Hz
+	MIDIKeyNumber=19
+	MIDIPitchFraction=27.790037
+046-a#.wav
+	HPS detected pitch = 116.13 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=93.847037
+047-b.wav
+	HPS detected pitch = 61.52 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=93.835714
+048-c.wav
+	HPS detected pitch = 33.05 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=18.167813
+049-c#.wav
+	HPS detected pitch = 34.43 Hz
+	MIDIKeyNumber=24
+	MIDIPitchFraction=89.266154
+050-d.wav
+	HPS detected pitch = 73.70 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=6.715122
+051-d#.wav
+	HPS detected pitch = 38.82 Hz
+	MIDIKeyNumber=26
+	MIDIPitchFraction=96.678725
+052-e.wav
+	HPS detected pitch = 82.80 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=8.224764
+053-f.wav
+	HPS detected pitch = 58.47 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=5.946152
+054-f#.wav
+	HPS detected pitch = 61.62 Hz
+	MIDIKeyNumber=34
+	MIDIPitchFraction=96.694011
+055-g.wav
+	HPS detected pitch = 195.55 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=96.081546
+056-g#.wav
+	HPS detected pitch = 209.47 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=15.108708
+057-a.wav
+	HPS detected pitch = 219.73 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=97.846657
+058-a#.wav
+	HPS detected pitch = 233.64 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=4.159457
+059-b.wav
+	HPS detected pitch = 246.20 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=94.777445
+060-c.wav
+	HPS detected pitch = 261.47 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=99.000380
+061-c#.wav
+	HPS detected pitch = 276.86 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=97.955313
+062-d.wav
+	HPS detected pitch = 293.70 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=0.214583
+063-d#.wav
+	HPS detected pitch = 310.55 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=96.769031
+064-e.wav
+	HPS detected pitch = 328.11 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.010768
+065-f.wav
+	HPS detected pitch = 348.69 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=97.315674
+066-f#.wav
+	HPS detected pitch = 369.87 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=99.431913
+067-g.wav
+	HPS detected pitch = 392.58 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=2.569236
+068-g#.wav
+	HPS detected pitch = 414.72 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=97.549240
+069-a.wav
+	HPS detected pitch = 439.45 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=97.846605
+070-a#.wav
+	HPS detected pitch = 3.87 Hz
+	MIDIKeyNumber=-12
+	MIDIPitchFraction=-94.484057
+071-b.wav
+	HPS detected pitch = 4.40 Hz
+	MIDIKeyNumber=-10
+	MIDIPitchFraction=-73.833929
+072-c.wav
+	HPS detected pitch = 522.95 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=99.000131
+073-c#.wav
+	HPS detected pitch = 553.71 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=97.955547
+074-d.wav
+	HPS detected pitch = 586.67 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=98.054651
+075-d#.wav
+	HPS detected pitch = 622.59 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=0.923425
+076-e.wav
+	HPS detected pitch = 658.43 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=97.824295
+077-f.wav
+	HPS detected pitch = 697.20 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=96.888252
+078-f#.wav
+	HPS detected pitch = 739.01 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=97.717705
+079-g.wav
+	HPS detected pitch = 782.96 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=97.719861
+080-g#.wav
+	HPS detected pitch = 829.14 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=96.938557
+081-a.wav
+	HPS detected pitch = 878.17 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=96.402583
+082-a#.wav
+	HPS detected pitch = 930.91 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=97.362596
+083-b.wav
+	HPS detected pitch = 985.11 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=95.332950
+084-c.wav
+	HPS detected pitch = 1045.17 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=97.787898
+085-c#.wav
+	HPS detected pitch = 1108.30 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=99.328062
+086-d.wav
+	HPS detected pitch = 1172.50 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=96.810620
+087-d#.wav
+	HPS detected pitch = 1243.66 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=98.820453
+088-e.wav
+	HPS detected pitch = 1318.84 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=0.429144
+089-f.wav
+	HPS detected pitch = 1394.65 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=97.190884
+090-f#.wav
+	HPS detected pitch = 1478.01 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=97.694499
+091-g.wav
+	HPS detected pitch = 1565.19 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=96.909750
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Oboe 8
+
+036-c.wav
+	HPS detected pitch = 65.19 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=94.144316
+037-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.771197
+038-d.wav
+	HPS detected pitch = 72.52 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.811173
+039-d#.wav
+	HPS detected pitch = 154.54 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=88.583508
+040-e.wav
+	HPS detected pitch = 81.47 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=80.272437
+041-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.756431
+042-f#.wav
+	HPS detected pitch = 91.55 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=82.205891
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603391
+044-g#.wav
+	HPS detected pitch = 103.26 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.548058
+045-a.wav
+	HPS detected pitch = 109.77 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=96.382416
+046-a#.wav
+	HPS detected pitch = 115.00 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=76.917184
+047-b.wav
+	HPS detected pitch = 122.32 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.740607
+048-c.wav
+	HPS detected pitch = 129.66 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.671280
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.769716
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.173716
+051-d#.wav
+	HPS detected pitch = 154.25 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=85.268065
+052-e.wav
+	HPS detected pitch = 164.05 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=91.919214
+053-f.wav
+	HPS detected pitch = 173.67 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=90.582167
+055-g.wav
+	HPS detected pitch = 194.09 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=83.089470
+056-g#.wav
+	HPS detected pitch = 206.16 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=87.479216
+057-a.wav
+	HPS detected pitch = 218.26 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.267169
+058-a#.wav
+	HPS detected pitch = 231.45 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=87.799854
+059-b.wav
+	HPS detected pitch = 246.08 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=93.966762
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.128140
+061-c#.wav
+	HPS detected pitch = 275.82 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=91.442266
+062-d.wav
+	HPS detected pitch = 291.53 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=87.356622
+063-d#.wav
+	HPS detected pitch = 309.08 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=88.583515
+064-e.wav
+	HPS detected pitch = 327.39 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=88.221713
+066-f#.wav
+	HPS detected pitch = 367.19 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=86.837243
+068-g#.wav
+	HPS detected pitch = 411.95 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=85.974269
+069-a.wav
+	HPS detected pitch = 440.19 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=0.736872
+070-a#.wav
+	HPS detected pitch = 462.55 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=86.528564
+071-b.wav
+	HPS detected pitch = 489.97 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=86.230451
+072-c.wav
+	HPS detected pitch = 518.78 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=85.152734
+073-c#.wav
+	HPS detected pitch = 550.05 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=86.467307
+074-d.wav
+	HPS detected pitch = 581.54 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=82.858734
+075-d#.wav
+	HPS detected pitch = 609.83 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=65.084604
+076-e.wav
+	HPS detected pitch = 649.65 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=74.596168
+077-f.wav
+	HPS detected pitch = 693.02 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=86.478258
+078-f#.wav
+	HPS detected pitch = 734.62 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=87.391615
+079-g.wav
+	HPS detected pitch = 777.03 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=84.562792
+080-g#.wav
+	HPS detected pitch = 802.20 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=39.740212
+082-a#.wav
+	HPS detected pitch = 924.32 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=85.058249
+083-b.wav
+	HPS detected pitch = 976.35 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=79.880819
+084-c.wav
+	HPS detected pitch = 1036.38 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=83.168158
+085-c#.wav
+	HPS detected pitch = 1101.50 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=88.670251
+086-d.wav
+	HPS detected pitch = 1161.19 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=80.034829
+087-d#.wav
+	HPS detected pitch = 1230.67 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=80.643844
+088-e.wav
+	HPS detected pitch = 1305.18 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=82.402579
+089-f.wav
+	HPS detected pitch = 1384.99 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=85.154132
+090-f#.wav
+	HPS detected pitch = 1458.06 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=74.166294
+091-g.wav
+	HPS detected pitch = 1561.52 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.854733
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Salcional 8
+
+036-c.wav
+	HPS detected pitch = 65.12 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=92.468166
+037-c#.wav
+	HPS detected pitch = 68.85 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=88.772827
+038-d.wav
+	HPS detected pitch = 72.52 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=78.639711
+039-d#.wav
+	HPS detected pitch = 25.21 Hz
+	MIDIKeyNumber=19
+	MIDIPitchFraction=49.591668
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.063984
+041-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.456475
+042-f#.wav
+	HPS detected pitch = 91.74 Hz
+	MIDIKeyNumber=41
+	MIDIPitchFraction=85.829555
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603399
+044-g#.wav
+	HPS detected pitch = 103.26 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=90.516545
+045-a.wav
+	HPS detected pitch = 109.18 Hz
+	MIDIKeyNumber=44
+	MIDIPitchFraction=87.091438
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.807669
+047-b.wav
+	HPS detected pitch = 123.04 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=93.955300
+048-c.wav
+	HPS detected pitch = 129.64 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.397243
+049-c#.wav
+	HPS detected pitch = 137.70 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=88.771104
+050-d.wav
+	HPS detected pitch = 146.46 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=95.606092
+051-d#.wav
+	HPS detected pitch = 76.98 Hz
+	MIDIKeyNumber=38
+	MIDIPitchFraction=82.001175
+052-e.wav
+	HPS detected pitch = 164.06 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=92.017002
+053-f.wav
+	HPS detected pitch = 173.58 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=89.755068
+054-f#.wav
+	HPS detected pitch = 187.42 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=22.482592
+055-g.wav
+	HPS detected pitch = 194.82 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=89.603436
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.726202
+057-a.wav
+	HPS detected pitch = 218.99 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.066291
+058-a#.wav
+	HPS detected pitch = 232.18 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.271551
+059-b.wav
+	HPS detected pitch = 245.36 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=88.910683
+060-c.wav
+	HPS detected pitch = 260.74 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=94.115870
+061-c#.wav
+	HPS detected pitch = 276.12 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.369388
+062-d.wav
+	HPS detected pitch = 292.96 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=95.821691
+063-d#.wav
+	HPS detected pitch = 309.81 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.680811
+064-e.wav
+	HPS detected pitch = 328.13 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=92.090403
+065-f.wav
+	HPS detected pitch = 347.90 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.404984
+066-f#.wav
+	HPS detected pitch = 369.14 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=95.981734
+067-g.wav
+	HPS detected pitch = 390.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=92.854645
+068-g#.wav
+	HPS detected pitch = 413.82 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=93.792969
+069-a.wav
+	HPS detected pitch = 219.03 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=92.380254
+070-a#.wav
+	HPS detected pitch = 465.08 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=95.958633
+071-b.wav
+	HPS detected pitch = 492.19 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=94.045307
+072-c.wav
+	HPS detected pitch = 521.48 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=94.144574
+073-c#.wav
+	HPS detected pitch = 552.98 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=95.663882
+074-d.wav
+	HPS detected pitch = 585.24 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=93.825355
+075-d#.wav
+	HPS detected pitch = 621.09 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=96.768975
+076-e.wav
+	HPS detected pitch = 655.52 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=90.157880
+077-f.wav
+	HPS detected pitch = 695.73 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=93.229557
+078-f#.wav
+	HPS detected pitch = 737.55 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.282492
+079-g.wav
+	HPS detected pitch = 780.76 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.861543
+080-g#.wav
+	HPS detected pitch = 828.37 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.324392
+081-a.wav
+	HPS detected pitch = 876.71 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=93.512711
+082-a#.wav
+	HPS detected pitch = 929.44 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.636139
+083-b.wav
+	HPS detected pitch = 984.35 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=93.998378
+085-c#.wav
+	HPS detected pitch = 1105.21 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=94.495128
+086-d.wav
+	HPS detected pitch = 1170.41 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.726546
+087-d#.wav
+	HPS detected pitch = 1242.19 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=96.772167
+089-f.wav
+	HPS detected pitch = 1391.60 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.404917
+090-f#.wav
+	HPS detected pitch = 1475.53 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.785080
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Trumpet 8
+
+036-c.wav
+	HPS detected pitch = 64.45 Hz
+	MIDIKeyNumber=35
+	MIDIPitchFraction=74.597695
+037-c#.wav
+	HPS detected pitch = 67.38 Hz
+	MIDIKeyNumber=36
+	MIDIPitchFraction=51.538824
+038-d.wav
+	HPS detected pitch = 72.60 Hz
+	MIDIKeyNumber=37
+	MIDIPitchFraction=80.741382
+039-d#.wav
+	HPS detected pitch = 153.87 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=81.018230
+040-e.wav
+	HPS detected pitch = 82.03 Hz
+	MIDIKeyNumber=39
+	MIDIPitchFraction=92.088129
+041-f.wav
+	HPS detected pitch = 86.43 Hz
+	MIDIKeyNumber=40
+	MIDIPitchFraction=82.436133
+042-f#.wav
+	HPS detected pitch = 183.17 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=82.856344
+043-g.wav
+	HPS detected pitch = 97.41 Hz
+	MIDIKeyNumber=42
+	MIDIPitchFraction=89.603256
+044-g#.wav
+	HPS detected pitch = 102.70 Hz
+	MIDIKeyNumber=43
+	MIDIPitchFraction=81.097268
+045-a.wav
+	HPS detected pitch = 218.26 Hz
+	MIDIKeyNumber=56
+	MIDIPitchFraction=86.266833
+046-a#.wav
+	HPS detected pitch = 115.72 Hz
+	MIDIKeyNumber=45
+	MIDIPitchFraction=87.796561
+047-b.wav
+	HPS detected pitch = 122.31 Hz
+	MIDIKeyNumber=46
+	MIDIPitchFraction=83.709604
+048-c.wav
+	HPS detected pitch = 129.64 Hz
+	MIDIKeyNumber=47
+	MIDIPitchFraction=84.468843
+050-d.wav
+	HPS detected pitch = 145.75 Hz
+	MIDIKeyNumber=49
+	MIDIPitchFraction=87.213947
+051-d#.wav
+	HPS detected pitch = 154.76 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=91.069282
+052-e.wav
+	HPS detected pitch = 164.76 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=99.435874
+053-f.wav
+	HPS detected pitch = 172.86 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=82.476915
+054-f#.wav
+	HPS detected pitch = 183.84 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=89.093717
+055-g.wav
+	HPS detected pitch = 194.99 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=91.060040
+056-g#.wav
+	HPS detected pitch = 206.54 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=90.731094
+058-a#.wav
+	HPS detected pitch = 232.17 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=93.231564
+059-b.wav
+	HPS detected pitch = 243.53 Hz
+	MIDIKeyNumber=58
+	MIDIPitchFraction=75.921649
+060-c.wav
+	HPS detected pitch = 260.03 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=89.391339
+061-c#.wav
+	HPS detected pitch = 275.39 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=88.770884
+062-d.wav
+	HPS detected pitch = 292.24 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=91.576414
+063-d#.wav
+	HPS detected pitch = 309.82 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.699856
+064-e.wav
+	HPS detected pitch = 326.66 Hz
+	MIDIKeyNumber=63
+	MIDIPitchFraction=84.339709
+066-f#.wav
+	HPS detected pitch = 368.33 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=92.177786
+068-g#.wav
+	HPS detected pitch = 415.83 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=2.176576
+069-a.wav
+	HPS detected pitch = 436.52 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=86.266466
+070-a#.wav
+	HPS detected pitch = 464.36 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=93.271321
+071-b.wav
+	HPS detected pitch = 490.72 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=88.885230
+072-c.wav
+	HPS detected pitch = 523.68 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=1.423805
+073-c#.wav
+	HPS detected pitch = 554.57 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=0.629038
+074-d.wav
+	HPS detected pitch = 582.82 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=86.671044
+075-d#.wav
+	HPS detected pitch = 620.36 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=94.726273
+076-e.wav
+	HPS detected pitch = 656.47 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=92.678236
+077-f.wav
+	HPS detected pitch = 696.53 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=95.226318
+078-f#.wav
+	HPS detected pitch = 743.41 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=7.981288
+079-g.wav
+	HPS detected pitch = 780.76 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.857619
+080-g#.wav
+	HPS detected pitch = 826.17 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=90.726628
+081-a.wav
+	HPS detected pitch = 883.30 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=6.481918
+082-a#.wav
+	HPS detected pitch = 935.24 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=5.405303
+083-b.wav
+	HPS detected pitch = 985.11 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=95.330790
+084-c.wav
+	HPS detected pitch = 1044.34 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=96.421064
+085-c#.wav
+	HPS detected pitch = 1110.45 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=2.690316
+086-d.wav
+	HPS detected pitch = 1171.53 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=95.374959
+087-d#.wav
+	HPS detected pitch = 1254.77 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=14.215198
+088-e.wav
+	HPS detected pitch = 1314.25 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.400335
+090-f#.wav
+	HPS detected pitch = 1486.27 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=7.341778
+091-g.wav
+	HPS detected pitch = 1559.36 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=90.453297
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Gt. Sesquialtera III
+
+036-c.wav
+	FFT detected pitch = 389.38 Hz
+	MIDIKeyNumber=66
+	MIDIPitchFraction=88.417621
+037-c#.wav
+	FFT detected pitch = 406.39 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=62.452171
+038-d.wav
+	FFT detected pitch = 584.35 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.204298
+039-d#.wav
+	FFT detected pitch = 619.87 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=93.346870
+040-e.wav
+	FFT detected pitch = 656.37 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=92.408155
+041-f.wav
+	FFT detected pitch = 695.19 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=91.892085
+042-f#.wav
+	FFT detected pitch = 735.46 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=89.381272
+043-g.wav
+	FFT detected pitch = 780.42 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=92.089192
+044-g#.wav
+	FFT detected pitch = 828.34 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=95.270753
+045-a.wav
+	FFT detected pitch = 876.54 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=93.187579
+046-a#.wav
+	FFT detected pitch = 667.44 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=21.367320
+047-b.wav
+	FFT detected pitch = 983.77 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=92.974498
+048-c.wav
+	FFT detected pitch = 650.02 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=75.568304
+049-c#.wav
+	FFT detected pitch = 858.42 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=57.011122
+050-d.wav
+	FFT detected pitch = 1171.29 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=95.029476
+051-d#.wav
+	FFT detected pitch = 775.86 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=81.942535
+052-e.wav
+	FFT detected pitch = 1314.18 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=94.309423
+053-f.wav
+	FFT detected pitch = 1275.22 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=42.202403
+054-f#.wav
+	FFT detected pitch = 1475.19 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.394571
+055-g.wav
+	FFT detected pitch = 1415.15 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=22.449837
+056-g#.wav
+	FFT detected pitch = 1658.75 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=97.430346
+057-a.wav
+	FFT detected pitch = 1608.44 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=44.102332
+058-a#.wav
+	FFT detected pitch = 1393.44 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=95.691491
+059-b.wav
+	FFT detected pitch = 1969.46 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=94.673382
+060-c.wav
+	FFT detected pitch = 1042.32 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=93.074746
+061-c#.wav
+	FFT detected pitch = 1104.15 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=92.832962
+062-d.wav
+	FFT detected pitch = 1170.21 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.429104
+063-d#.wav
+	FFT detected pitch = 929.55 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.830046
+064-e.wav
+	FFT detected pitch = 1643.49 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=81.429432
+065-f.wav
+	FFT detected pitch = 1391.71 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.544383
+066-f#.wav
+	FFT detected pitch = 1138.91 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=46.489098
+067-g.wav
+	FFT detected pitch = 1561.23 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=92.527790
+068-g#.wav
+	FFT detected pitch = 1795.03 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=34.123610
+069-a.wav
+	FFT detected pitch = 1750.22 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=90.348306
+070-a#.wav
+	FFT detected pitch = 1862.38 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=97.884256
+071-b.wav
+	FFT detected pitch = 1476.38 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.792025
+072-c.wav
+	FFT detected pitch = 1563.95 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=95.538638
+073-c#.wav
+	FFT detected pitch = 2418.26 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=50.076062
+074-d.wav
+	FFT detected pitch = 2936.50 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=86.228585
+075-d#.wav
+	FFT detected pitch = 3113.91 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=87.781473
+076-e.wav
+	FFT detected pitch = 2628.21 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=94.203542
+077-f.wav
+	FFT detected pitch = 2787.66 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=96.172634
+078-f#.wav
+	FFT detected pitch = 1474.99 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=94.154117
+079-g.wav
+	FFT detected pitch = 3147.47 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=6.340905
+080-g#.wav
+	FFT detected pitch = 1656.73 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=95.320203
+081-a.wav
+	FFT detected pitch = 2758.18 Hz
+	MIDIKeyNumber=100
+	MIDIPitchFraction=77.771781
+082-a#.wav
+	FFT detected pitch = 1863.88 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=99.279286
+083-b.wav
+	FFT detected pitch = 1971.04 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=96.055150
+084-c.wav
+	FFT detected pitch = 2086.03 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=94.222319
+085-c#.wav
+	FFT detected pitch = 2898.22 Hz
+	MIDIKeyNumber=101
+	MIDIPitchFraction=63.510325
+086-d.wav
+	FFT detected pitch = 2343.20 Hz
+	MIDIKeyNumber=97
+	MIDIPitchFraction=95.489131
+087-d#.wav
+	FFT detected pitch = 3263.94 Hz
+	MIDIKeyNumber=103
+	MIDIPitchFraction=69.246795
+088-e.wav
+	FFT detected pitch = 3621.90 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=49.404423
+089-f.wav
+	FFT detected pitch = 3098.52 Hz
+	MIDIKeyNumber=102
+	MIDIPitchFraction=79.206689
+090-f#.wav
+	FFT detected pitch = 3607.81 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=42.658392
+091-g.wav
+	FFT detected pitch = 3709.00 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=90.545756
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Mixture III
+
+036-c.wav
+	FFT detected pitch = 518.66 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=84.733538
+037-c#.wav
+	FFT detected pitch = 411.73 Hz
+	MIDIKeyNumber=67
+	MIDIPitchFraction=85.014925
+038-d.wav
+	FFT detected pitch = 452.37 Hz
+	MIDIKeyNumber=69
+	MIDIPitchFraction=47.993794
+039-d#.wav
+	FFT detected pitch = 1233.34 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=84.395487
+040-e.wav
+	FFT detected pitch = 491.72 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=92.400094
+041-f.wav
+	FFT detected pitch = 692.00 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=83.919659
+042-f#.wav
+	FFT detected pitch = 735.54 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=89.560002
+043-g.wav
+	FFT detected pitch = 777.36 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=85.289083
+044-g#.wav
+	FFT detected pitch = 823.79 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=85.718119
+045-a.wav
+	FFT detected pitch = 807.82 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=51.837188
+046-a#.wav
+	FFT detected pitch = 925.26 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=86.822598
+047-b.wav
+	FFT detected pitch = 980.72 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=87.605888
+048-c.wav
+	FFT detected pitch = 520.15 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=89.707702
+049-c#.wav
+	FFT detected pitch = 549.95 Hz
+	MIDIKeyNumber=72
+	MIDIPitchFraction=86.163137
+050-d.wav
+	FFT detected pitch = 584.56 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=91.815457
+051-d#.wav
+	FFT detected pitch = 616.92 Hz
+	MIDIKeyNumber=74
+	MIDIPitchFraction=85.109007
+052-e.wav
+	FFT detected pitch = 655.23 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=89.386502
+053-f.wav
+	FFT detected pitch = 693.51 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=87.705990
+054-f#.wav
+	FFT detected pitch = 736.22 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=91.161812
+055-g.wav
+	FFT detected pitch = 779.14 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=89.256158
+056-g#.wav
+	FFT detected pitch = 825.81 Hz
+	MIDIKeyNumber=79
+	MIDIPitchFraction=89.969260
+057-a.wav
+	FFT detected pitch = 874.46 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=89.065359
+058-a#.wav
+	FFT detected pitch = 924.38 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=85.187341
+059-b.wav
+	FFT detected pitch = 1178.06 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=5.003083
+060-c.wav
+	FFT detected pitch = 1040.62 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=90.238480
+061-c#.wav
+	FFT detected pitch = 1102.41 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=90.099095
+062-d.wav
+	FFT detected pitch = 1204.89 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=43.990627
+063-d#.wav
+	FFT detected pitch = 1236.77 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=89.208144
+064-e.wav
+	FFT detected pitch = 984.00 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=93.393319
+065-f.wav
+	FFT detected pitch = 1389.94 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=91.337340
+066-f#.wav
+	FFT detected pitch = 1472.59 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=91.340314
+067-g.wav
+	FFT detected pitch = 1210.58 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=52.147037
+068-g#.wav
+	FFT detected pitch = 1650.57 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=88.868341
+069-a.wav
+	FFT detected pitch = 2435.87 Hz
+	MIDIKeyNumber=98
+	MIDIPitchFraction=62.634524
+070-a#.wav
+	FFT detected pitch = 1856.82 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=92.708723
+071-b.wav
+	FFT detected pitch = 1967.32 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=92.791328
+072-c.wav
+	FFT detected pitch = 1039.94 Hz
+	MIDIKeyNumber=83
+	MIDIPitchFraction=89.106919
+073-c#.wav
+	FFT detected pitch = 2025.80 Hz
+	MIDIKeyNumber=95
+	MIDIPitchFraction=43.496206
+074-d.wav
+	FFT detected pitch = 1168.34 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=90.656026
+075-d#.wav
+	FFT detected pitch = 1862.31 Hz
+	MIDIKeyNumber=93
+	MIDIPitchFraction=97.823070
+076-e.wav
+	FFT detected pitch = 1458.23 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=74.373294
+077-f.wav
+	FFT detected pitch = 1390.18 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=91.633531
+078-f#.wav
+	FFT detected pitch = 1473.32 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=92.193974
+079-g.wav
+	FFT detected pitch = 1558.22 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=89.188436
+080-g#.wav
+	FFT detected pitch = 1654.03 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=92.494742
+081-a.wav
+	FFT detected pitch = 1752.27 Hz
+	MIDIKeyNumber=92
+	MIDIPitchFraction=92.376690
+082-a#.wav
+	FFT detected pitch = 3712.93 Hz
+	MIDIKeyNumber=105
+	MIDIPitchFraction=92.377925
+083-b.wav
+	FFT detected pitch = 1964.98 Hz
+	MIDIKeyNumber=94
+	MIDIPitchFraction=90.731129
+085-c#.wav
+	FFT detected pitch = 2208.64 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=93.098196
+086-d.wav
+	FFT detected pitch = 1170.19 Hz
+	MIDIKeyNumber=85
+	MIDIPitchFraction=93.405438
+087-d#.wav
+	FFT detected pitch = 1490.51 Hz
+	MIDIKeyNumber=90
+	MIDIPitchFraction=12.273072
+088-e.wav
+	FFT detected pitch = 1309.86 Hz
+	MIDIKeyNumber=87
+	MIDIPitchFraction=88.604277
+089-f.wav
+	FFT detected pitch = 2187.83 Hz
+	MIDIKeyNumber=96
+	MIDIPitchFraction=76.712413
+090-f#.wav
+	FFT detected pitch = 1469.72 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=87.953533
+091-g.wav
+	FFT detected pitch = 2497.13 Hz
+	MIDIKeyNumber=99
+	MIDIPitchFraction=5.632274
+Batch process complete!
+
+/OrganInstallationPackages/002932/Samples/Sw. Vox Angelica 8
+
+048-c.wav
+	FFT detected pitch = 165.65 Hz
+	MIDIKeyNumber=52
+	MIDIPitchFraction=8.766288
+049-c#.wav
+	FFT detected pitch = 131.41 Hz
+	MIDIKeyNumber=48
+	MIDIPitchFraction=7.863639
+050-d.wav
+	FFT detected pitch = 220.38 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=2.995005
+051-d#.wav
+	FFT detected pitch = 154.39 Hz
+	MIDIKeyNumber=50
+	MIDIPitchFraction=86.911237
+052-e.wav
+	FFT detected pitch = 157.46 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=20.961314
+053-f.wav
+	FFT detected pitch = 164.79 Hz
+	MIDIKeyNumber=51
+	MIDIPitchFraction=99.776212
+054-f#.wav
+	FFT detected pitch = 183.44 Hz
+	MIDIKeyNumber=53
+	MIDIPitchFraction=85.381329
+055-g.wav
+	FFT detected pitch = 189.49 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=41.575586
+056-g#.wav
+	FFT detected pitch = 193.62 Hz
+	MIDIKeyNumber=54
+	MIDIPitchFraction=78.886753
+057-a.wav
+	FFT detected pitch = 203.06 Hz
+	MIDIKeyNumber=55
+	MIDIPitchFraction=61.265446
+058-a#.wav
+	FFT detected pitch = 232.56 Hz
+	MIDIKeyNumber=57
+	MIDIPitchFraction=96.139794
+059-b.wav
+	FFT detected pitch = 247.22 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=1.949733
+060-c.wav
+	FFT detected pitch = 260.32 Hz
+	MIDIKeyNumber=59
+	MIDIPitchFraction=91.369394
+061-c#.wav
+	FFT detected pitch = 276.14 Hz
+	MIDIKeyNumber=60
+	MIDIPitchFraction=93.450520
+062-d.wav
+	FFT detected pitch = 292.74 Hz
+	MIDIKeyNumber=61
+	MIDIPitchFraction=94.523897
+063-d#.wav
+	FFT detected pitch = 309.72 Hz
+	MIDIKeyNumber=62
+	MIDIPitchFraction=92.149013
+064-e.wav
+	FFT detected pitch = 330.94 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=6.859769
+065-f.wav
+	FFT detected pitch = 347.95 Hz
+	MIDIKeyNumber=64
+	MIDIPitchFraction=93.672940
+066-f#.wav
+	FFT detected pitch = 368.98 Hz
+	MIDIKeyNumber=65
+	MIDIPitchFraction=95.231874
+067-g.wav
+	FFT detected pitch = 709.82 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=27.935976
+068-g#.wav
+	FFT detected pitch = 416.95 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=6.837108
+069-a.wav
+	FFT detected pitch = 438.58 Hz
+	MIDIKeyNumber=68
+	MIDIPitchFraction=94.413125
+070-a#.wav
+	FFT detected pitch = 467.97 Hz
+	MIDIKeyNumber=70
+	MIDIPitchFraction=6.708249
+071-b.wav
+	FFT detected pitch = 494.55 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=2.336987
+072-c.wav
+	FFT detected pitch = 521.33 Hz
+	MIDIKeyNumber=71
+	MIDIPitchFraction=93.631518
+073-c#.wav
+	FFT detected pitch = 556.57 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=6.879648
+074-d.wav
+	FFT detected pitch = 584.67 Hz
+	MIDIKeyNumber=73
+	MIDIPitchFraction=92.155495
+075-d#.wav
+	FFT detected pitch = 624.65 Hz
+	MIDIKeyNumber=75
+	MIDIPitchFraction=6.660870
+076-e.wav
+	FFT detected pitch = 659.84 Hz
+	MIDIKeyNumber=76
+	MIDIPitchFraction=1.529128
+077-f.wav
+	FFT detected pitch = 699.52 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=2.645065
+078-f#.wav
+	FFT detected pitch = 737.66 Hz
+	MIDIKeyNumber=77
+	MIDIPitchFraction=94.533616
+079-g.wav
+	FFT detected pitch = 780.34 Hz
+	MIDIKeyNumber=78
+	MIDIPitchFraction=91.918654
+080-g#.wav
+	FFT detected pitch = 832.55 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=4.044743
+081-a.wav
+	FFT detected pitch = 876.77 Hz
+	MIDIKeyNumber=80
+	MIDIPitchFraction=93.641815
+082-a#.wav
+	FFT detected pitch = 929.36 Hz
+	MIDIKeyNumber=81
+	MIDIPitchFraction=94.489719
+083-b.wav
+	FFT detected pitch = 984.61 Hz
+	MIDIKeyNumber=82
+	MIDIPitchFraction=94.466102
+085-c#.wav
+	FFT detected pitch = 1104.55 Hz
+	MIDIKeyNumber=84
+	MIDIPitchFraction=93.458758
+086-d.wav
+	FFT detected pitch = 1176.98 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=3.420834
+087-d#.wav
+	FFT detected pitch = 1241.33 Hz
+	MIDIKeyNumber=86
+	MIDIPitchFraction=95.577648
+088-e.wav
+	FFT detected pitch = 1318.52 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=0.014702
+089-f.wav
+	FFT detected pitch = 1392.04 Hz
+	MIDIKeyNumber=88
+	MIDIPitchFraction=93.950431
+090-f#.wav
+	FFT detected pitch = 1475.81 Hz
+	MIDIKeyNumber=89
+	MIDIPitchFraction=95.113839
+091-g.wav
+	FFT detected pitch = 1570.21 Hz
+	MIDIKeyNumber=91
+	MIDIPitchFraction=2.460035
+Batch process complete!
+

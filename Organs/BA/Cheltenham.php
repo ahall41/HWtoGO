@@ -186,21 +186,25 @@ class Cheltenham extends BAOrgan {
         $result=[];
         while (!feof($fp)) {
             $line=trim(fgets($fp));
-            if (substr($line,0,1)=="/") {
+           if (substr($line,0,1)=="/") {
                 $folder=substr($line,1);
+                // echo $folder, "\n";
             }
             elseif (substr($line,-4)==".wav") {
                 $file=$line;
+                // echo $file, "\n";
             }
             elseif (substr($line,0,13)=="MIDIKeyNumber") {
                 $split=explode("=",$line);
                 $midi=intval(trim($split[1]));
                 $result[$folder][$file]["K"]=$midi;
+                // echo "result[$folder][$file][\"K\"]=$midi", "\n";
             }
             elseif (substr($line,0,17)=="MIDIPitchFraction") {
                 $split=explode("=",$line);
                 $fraction=floatval(trim($split[1]));
                 $result[$folder][$file]["F"]=$fraction;
+                // echo "result[$folder][$file][\"F\"]=$fraction", "\n";
             }
         }
         fclose($fp);
@@ -209,11 +213,15 @@ class Cheltenham extends BAOrgan {
     
     protected function setPitch(\GOClasses\Pipe $pipe) : void {
         static $pitches=NULL;
-        if (empty($pitches)) {$pitches=$this->readPitchData(__DIR__ . "/CheltenhamPitch.txt");}
+        if (empty($pitches)) {$pitches=$this->readPitchData(__DIR__ . "/CheltenhamHPS.txt");}
         
         if (!isset($pipe->MIDIKeyNumber) && $pipe->AttackCount==0) {
             $base=basename($pipe->Attack);
             $dir=dirname($pipe->Attack);
+            
+            /* if (!isset($pitches[$dir][$base])) {
+                echo "[$dir][$base]\n";
+            } */
             
             if (isset($pitches[$dir][$base]["K"])) {
                 $pipe->MIDIKeyOverride=$pitches[$dir][$base]["K"];

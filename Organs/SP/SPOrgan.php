@@ -298,10 +298,6 @@ abstract class SPOrgan extends \Import\Organ {
             else
                 unset($hwdata["ReleaseCrossfadeLengthMs"]);
         }
-        
-        if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
-                && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
-                $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
 
         return parent::processSample($hwdata, $isattack);
     }

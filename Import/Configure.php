@@ -545,11 +545,11 @@ abstract Class Configure extends Create {
      */
     protected function configureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
-                && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
+                && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>3000)
             throw new \Exception(
                     "LoopCrossfadeLength " 
                     . $hwdata["LoopCrossfadeLengthInSrcSampleMs"] 
-                    . ">120, attack "
+                    . ">3000, attack "
                     . $hwdata["UniqueID"] . " "
                     . $hwdata["SampleFilename"]);
         if ($pipe instanceof \GOClasses\Noise) 
@@ -579,11 +579,11 @@ abstract Class Configure extends Create {
      */
     protected function configureRelease(array $hwdata, \GOClasses\Pipe $pipe) : void {
         if (isset($hwdata["ReleaseCrossfadeLengthMs"]) 
-                && $hwdata["ReleaseCrossfadeLengthMs"]>200)
+                && $hwdata["ReleaseCrossfadeLengthMs"]>3000)
             throw new \Exception(
                     "ReleaseCrossfadeLength " 
                     . $hwdata["ReleaseCrossfadeLengthMs"] 
-                    . ">200, release "
+                    . ">3000, release "
                     . $hwdata["UniqueID"] . " "
                     . $hwdata["SampleFilename"]);
         if ($pipe instanceof \GOClasses\Noise)
