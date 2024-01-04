@@ -39,6 +39,7 @@ class Segovia extends SPOrganV2 {
     ];
     
     public $positions=[];
+    public static $singleRelease=FALSE;
     protected $switchGroups=[801, 802, 803, 804];
     
     protected $patchDisplayPages=[ // Set is for background, Switch/Layout is for controls
@@ -70,9 +71,11 @@ class Segovia extends SPOrganV2 {
     ];
 
     protected $patchDivisions=[
-            6=>["DivisionID"=>6, "Name"=>"Blower"],
-            7=>["DivisionID"=>7, "Name"=>"Tracker"],
-            8=>["DivisionID"=>8, "Name"=>"Stop"]
+            6=>["DivisionID"=>6,  "Name"=>"Blower"],
+            7=>["DivisionID"=>7,  "Name"=>"Tracker"],
+            8=>["DivisionID"=>8,  "Name"=>"Stop"],
+            9=>["DivisionID"=>9,  "Name"=>"Tambores"],
+           10=>["DivisionID"=>10, "Name"=>"Paxaros"]
     ];
 
     protected $patchTremulants=[
@@ -94,22 +97,37 @@ class Segovia extends SPOrganV2 {
         908=>["Panels"=>[5=>[1690]], "EnclosureID"=>908,"Name"=>"Stops",
             "GroupIDs"=>[801,802,804], "AmpMinimumLevel"=>1],
         
+        909=>["Panels"=>[5=>[1693]], "EnclosureID"=>909,"Name"=>"Tambores",
+            "GroupIDs"=>[901,902,904], "AmpMinimumLevel"=>1],
+        910=>["Panels"=>[5=>[1694]], "EnclosureID"=>910,"Name"=>"Paxaros",
+            "GroupIDs"=>[1001,1002,1004], "AmpMinimumLevel"=>1],
+
         998=>["Panels"=>[2=>[988, NULL, 988], 3=>[984, NULL, 984], 6=>[986, 986]], 
             "GroupIDs"=>[201,202,204], "AmpMinimumLevel"=>20], // Echo
    ];
 
     protected $patchStops=[
-        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
-        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
-        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>1050, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
-        -110=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -111=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"1 Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -112=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"2 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -113=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"2 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -120=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -121=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"1 Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -122=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"2 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -123=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"3 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
+        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
+        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
+        -111=>["StopID"=>-110, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -112=>["StopID"=>-111, "DivisionID"=>2, "Name"=>"1 Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -113=>["StopID"=>-112, "DivisionID"=>3, "Name"=>"2 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -114=>["StopID"=>-113, "DivisionID"=>4, "Name"=>"3 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"1 Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"2 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"3 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        
+           1=>["StopID"=>1,   "DivisionID"=>1, "Name"=>"Paxaros",  "ControllingSwitchID"=>19001, "Ambient"=>TRUE, "GroupID"=>1001],
+          65=>["StopID"=>65,  "DivisionID"=>1, "Name"=>"Tambor D", "ControllingSwitchID"=>19065, "Ambient"=>TRUE, "GroupID"=>901],
+          66=>["StopID"=>66,  "DivisionID"=>1, "Name"=>"Tambor A", "ControllingSwitchID"=>19066, "Ambient"=>TRUE, "GroupID"=>901],
+         101=>["StopID"=>101, "DivisionID"=>1, "Name"=>"Paxaros",  "ControllingSwitchID"=>19001, "Ambient"=>TRUE, "GroupID"=>1002],
+         165=>["StopID"=>165, "DivisionID"=>1, "Name"=>"Tambor D", "ControllingSwitchID"=>19065, "Ambient"=>TRUE, "GroupID"=>902],
+         166=>["StopID"=>166, "DivisionID"=>1, "Name"=>"Tambor A", "ControllingSwitchID"=>19066, "Ambient"=>TRUE, "GroupID"=>902],
+         201=>["StopID"=>201, "DivisionID"=>1, "Name"=>"Paxaros",  "ControllingSwitchID"=>19001, "Ambient"=>TRUE, "GroupID"=>1004],
+         265=>["StopID"=>265, "DivisionID"=>1, "Name"=>"Tambor D", "ControllingSwitchID"=>19065, "Ambient"=>TRUE, "GroupID"=>904],
+         266=>["StopID"=>266, "DivisionID"=>1, "Name"=>"Tambor A", "ControllingSwitchID"=>19066, "Ambient"=>TRUE, "GroupID"=>904],
      ];
     
     protected $patchRanks=[
@@ -117,6 +135,18 @@ class Segovia extends SPOrganV2 {
         999911=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[-102]],
         999941=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[-104]],
         
+        999901=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[-101]],
+        999911=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[-102]],
+        999941=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[-104]],
+        
+        999903=>["RankID"=>999903, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[ 65, 66]],
+        999913=>["RankID"=>999913, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[165,166]],
+        999943=>["RankID"=>999943, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[265,366]],
+        
+        999904=>["RankID"=>999904, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[  1]],
+        999914=>["RankID"=>999914, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[101]],
+        999944=>["RankID"=>999944, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[201]],
+
         999800=>["Noise"=>"StopOff", "GroupID"=>801, "StopIDs"=>[]],
         999810=>["Noise"=>"StopOff", "GroupID"=>802, "StopIDs"=>[]],
         999840=>["Noise"=>"StopOff", "GroupID"=>803, "StopIDs"=>[]],
@@ -124,32 +154,31 @@ class Segovia extends SPOrganV2 {
         999910=>["Noise"=>"StopOn",  "GroupID"=>802, "StopIDs"=>[]],
         999940=>["Noise"=>"StopOn",  "GroupID"=>803, "StopIDs"=>[]],
 
-        998602=>["Noise"=>"KeyOn",   "GroupID"=>901, "StopIDs"=>[-110]],
-        998612=>["Noise"=>"KeyOn",   "GroupID"=>902, "StopIDs"=>[-110]],
-        998642=>["Noise"=>"KeyOn",   "GroupID"=>904, "StopIDs"=>[-110]],
-        998102=>["Noise"=>"KeyOn",   "GroupID"=>901, "StopIDs"=>[-111]],
-        998112=>["Noise"=>"KeyOn",   "GroupID"=>902, "StopIDs"=>[-111]],
-        998142=>["Noise"=>"KeyOn",   "GroupID"=>904, "StopIDs"=>[-111]],
-        998202=>["Noise"=>"KeyOn",   "GroupID"=>901, "StopIDs"=>[-112]],
-        998212=>["Noise"=>"KeyOn",   "GroupID"=>902, "StopIDs"=>[-112]],
-        998242=>["Noise"=>"KeyOn",   "GroupID"=>904, "StopIDs"=>[-112]],
-        998302=>["Noise"=>"KeyOn",   "GroupID"=>901, "StopIDs"=>[-113]],
-        998312=>["Noise"=>"KeyOn",   "GroupID"=>902, "StopIDs"=>[-113]],
-        998342=>["Noise"=>"KeyOn",   "GroupID"=>904, "StopIDs"=>[-113]],
+        998602=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-111]],
+        998612=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-111]],
+        998642=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-111]],
+        998102=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-112]],
+        998112=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-112]],
+        998142=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-112]],
+        998202=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-113]],
+        998212=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-113]],
+        998242=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-113]],
+        998302=>["Noise"=>"KeyOn",   "GroupID"=>701, "StopIDs"=>[-114]],
+        998312=>["Noise"=>"KeyOn",   "GroupID"=>702, "StopIDs"=>[-114]],
+        998342=>["Noise"=>"KeyOn",   "GroupID"=>704, "StopIDs"=>[-114]],
 
-        998652=>["Noise"=>"KeyOff",  "GroupID"=>901, "StopIDs"=>[-120]],
-        998662=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-120]],
-        998692=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-120]],
-        998152=>["Noise"=>"KeyOff",  "GroupID"=>901, "StopIDs"=>[-121]],
-        998162=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-121]],
-        998192=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-121]],
-        998252=>["Noise"=>"KeyOff",  "GroupID"=>901, "StopIDs"=>[-122]],
-        998262=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-122]],
-        998292=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-122]],
-        998352=>["Noise"=>"KeyOff",  "GroupID"=>901, "StopIDs"=>[-123]],
-        998362=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-123]],
-        998392=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-123]],
-
+        998652=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-121]],
+        998662=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-121]],
+        998692=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-121]],
+        998152=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-122]],
+        998162=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-122]],
+        998192=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-122]],
+        998252=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-123]],
+        998262=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-123]],
+        998292=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-123]],
+        998352=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-124]],
+        998362=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-124]],
+        998392=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-124]],
     ];
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
@@ -159,8 +188,10 @@ class Segovia extends SPOrganV2 {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
                 case 2:
-                    echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
-                         $instance["Name"], ": "; 
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
                     foreach ($this->hwdata->switches() as $switch) {
                         if (isset($switch["Disp_ImageSetInstanceID"])  && 
                                $switch["Disp_ImageSetInstanceID"]==$instanceID)
@@ -185,7 +216,7 @@ class Segovia extends SPOrganV2 {
     public function createStops(array $stopsdata) : void {
         parent::createStops($stopsdata);
         
-        $switch=$this->getSwitch(1050); // Blower
+        $switch=$this->getSwitch(250); // Blower
         $panel=$this->getPanel(50);
         $pe=$panel->GUIElement($switch);
         $this->configureImage($pe, ["SwitchID"=>1050], 0);
@@ -223,7 +254,7 @@ class Segovia extends SPOrganV2 {
         if (isset($data["Panels"])) {
             foreach ($data["Panels"] as $panelid=>$instances) {
                 foreach ($instances as $layout=>$instanceid) {
-                    if ($instanceid!==NULL) {
+                    if ($instanceid!==NULL && $this->hwdata->imageSetInstance($instanceid, TRUE)) {
                         $panel=$this->getPanel(($panelid*10)+$layout, FALSE);
                         if ($panel!==NULL) {
                             $pe=$this->getPanel(($panelid*10)+$layout)->GUIElement($enclosure);
@@ -235,21 +266,19 @@ class Segovia extends SPOrganV2 {
         }
     }
     
-    public function isNoiseSample(array $hwdata): bool {
-        if (in_array($hwdata["RankID"],[999903, 999913, 999943, 999904, 999904, 999904])) {
-            echo $hwdata["RankID"], "\t",
-                 $hwdata["SampleID"], "\t",
-                 $hwdata["SampleFilename"], "\n";
-        }
-        return parent::isNoiseSample($hwdata);
-    }
-
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $rankdata=$this->patchRanks[$hwdata["RankID"]];
         
         if ($rankdata["Noise"]=="Ambient") {
-            $stop=$this->getStop($rankdata["StopIDs"][0]);
+            if (in_array($hwdata["PipeID"],[99065, 99165, 99465])) {
+                $stopid=$rankdata["StopIDs"][1];
+            }
+            else {
+                $stopid=$rankdata["StopIDs"][0];
+            };
+            
+            $stop=$this->getStop($stopid);
             if ($stop!==NULL) {
                 $ambience=$stop->Ambience();
                 if ($isattack) {
@@ -276,6 +305,7 @@ class Segovia extends SPOrganV2 {
     }
     
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        if (self::$singleRelease && $hwdata["reltime"]>0) {return NULL;}
         $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
             case 9:
@@ -304,7 +334,7 @@ class Segovia extends SPOrganV2 {
 
 class SegoviaDemo extends Segovia {
     const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.2.organ";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.3.organ";
 
     /**
      * Run the import
@@ -341,11 +371,17 @@ class SegoviaDemo extends Segovia {
             self::Segovia(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
+
+            /* self::$singleRelease=TRUE;
+            self::Segovia(
+                    [self::RANKS_REAR=>"Rear"],
+                    "Rear-SR");
+            self::$singleRelease=FALSE; */
+
             self::Segovia(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
-                        self::RANKS_DISTANT=>"Distant",
                         self::RANKS_REAR=>"Rear"
                     ],
                    "Surround");
@@ -397,7 +433,6 @@ class SegoviaFull extends Segovia {
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
-                        self::RANKS_DISTANT=>"Distant",
                         self::RANKS_REAR=>"Rear"
                     ],
                    "Surround");
@@ -412,3 +447,4 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
 set_error_handler("Organs\SP\ErrorHandler");
 
 SegoviaFull::Segovia();
+SegoviaDemo::Segovia();
