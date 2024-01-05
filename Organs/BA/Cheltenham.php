@@ -308,7 +308,7 @@ class Cheltenham extends BAOrgan {
 class CheltenhamDemo extends Cheltenham {
     const ODF="St. Matthew Cheltenham Demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham demo.1.0.organ";
+    const TARGET=self::ROOT . "Cheltenham demo.1.1.organ";
     
     protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
@@ -329,7 +329,7 @@ class CheltenhamDemo extends Cheltenham {
 class CheltenhamFull extends Cheltenham {
     const ODF="St. Matthew Cheltenham.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham full.1.0.organ";
+    const TARGET=self::ROOT . "Cheltenham full.1.1.organ";
 
     static function Full () {
         self::Cheltenham(new CheltenhamFull(self::SOURCE), self::TARGET);
