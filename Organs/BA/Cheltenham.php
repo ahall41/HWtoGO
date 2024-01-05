@@ -6,13 +6,14 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Combinations
- *        Reversible Pistons 
+ * @todo: Combinations + Reversible Pistons 
  * 
  */
 
 namespace Organs\BA;
 require_once(__DIR__ . "/BAOrgan.php");
+require_once(__DIR__ . "/../../Import/AubioPitch.php");
+
 
 /**
  * Import Father Willis Organ of St. Matthew, Cheltenham to GrandOrgue
@@ -24,6 +25,8 @@ class Cheltenham extends BAOrgan {
     const COMMENTS=
               "Father Willis, St. Matthew, Cheltenham\n"
             . "https://barrittaudio.co.uk/pages/st-matthew-cheltenham\n"
+            . "\n"
+            . "1.1 Added MIDKeyNumbers (derived from sample file name)\n"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -211,28 +214,6 @@ class Cheltenham extends BAOrgan {
         return $result;
     }
     
-    protected function setPitch(\GOClasses\Pipe $pipe) : void {
-        static $pitches=NULL;
-        if (empty($pitches)) {$pitches=$this->readPitchData(__DIR__ . "/CheltenhamHPS.txt");}
-        
-        if (!isset($pipe->MIDIKeyNumber) && $pipe->AttackCount==0) {
-            $base=basename($pipe->Attack);
-            $dir=dirname($pipe->Attack);
-            
-            /* if (!isset($pitches[$dir][$base])) {
-                echo "[$dir][$base]\n";
-            } */
-            
-            if (isset($pitches[$dir][$base]["K"])) {
-                $pipe->MIDIKeyOverride=$pitches[$dir][$base]["K"];
-            }
-            
-            if (isset($pitches[$dir][$base]["F"])) {
-                $pipe->MIDIPitchFraction=$pitches[$dir][$base]["F"];
-            }
-        }
-    }
-
     protected function correctFileName(string $filename): string {
         static $files=[];
         if (sizeof($files)==0)
@@ -287,8 +268,18 @@ class Cheltenham extends BAOrgan {
     }
     
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        $hn=[4=>-12, 8=>0, 16=>12, 32=>24, 64=>36];
         $pipe=parent::processSample($hwdata, $isattack);
-        // if ($isattack && $pipe) {$this->setPitch($pipe);}
+        $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
+        if ($isattack 
+                && $pipe 
+                && !isset($rankdata["Noise"])
+                && !isset($pipe->MIDIKeyOverride) 
+                && $pipe->AttackCount==0) {
+            $pipe->MIDIKeyOverride=$this->sampleMidiKey(["SampleFilename"=>$hwdata["SampleFilename"]])
+                    + intval(12*log($pipe->HarmonicNumber,2)) - 36;
+            //echo $pipe->MIDIKeyOverride, "\t", $hwdata["SampleFilename"], "\n";
+        }
         return $pipe;
     }
     

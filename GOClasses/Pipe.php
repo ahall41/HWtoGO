@@ -171,6 +171,8 @@ class Pipe extends GOBase {
                 return $this->get("");
             case "MIDIKeyNumber":
                 return $this->midikey;
+            case "MIDIKeyOverride":
+                return parent::get("MIDIKeyNumber");
             default:
                 return parent::get($property, $default);
         }
