@@ -23,4 +23,14 @@ class PanelElement extends GOObject {
         $this->section=$section;
         parent::__construct(); 
     }
+    
+    public function set(string $name, ?string $value): void {
+        // According to Lars Palo, we should do this!
+        if ($name=="DispLabelText" && empty($value)) {
+            unset($this->DispLabelText);
+            $this->TextBreakWidth=0;
+            return;
+        }   
+        parent::set($name, $value);
+    }
 }

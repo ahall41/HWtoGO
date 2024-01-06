@@ -13,6 +13,7 @@
 namespace Organs\BA;
 require_once(__DIR__ . "/BAOrgan.php");
 require_once(__DIR__ . "/../../Import/AubioPitch.php");
+require_once(__DIR__ . "/../../GOClasses/ReversiblePiston.php");
 
 
 /**
@@ -26,7 +27,8 @@ class Cheltenham extends BAOrgan {
               "Father Willis, St. Matthew, Cheltenham\n"
             . "https://barrittaudio.co.uk/pages/st-matthew-cheltenham\n"
             . "\n"
-            . "1.1 Added MIDKeyNumbers (derived from sample file name)\n"
+            . "1.1 Added MIDKeyNumbers (derived from sample file name)"
+            . "    Added Combinations and Reversible Pistons\n"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -78,10 +80,52 @@ class Cheltenham extends BAOrgan {
         110=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-4]],
     ];
     
+    protected $combinations=[ // Don't show on panel 1 - its a 1x1 .png !!!
+        ["SwitchIDs"=>[/* 1=>10068, */ 2=>10069], "ManualID"=>2, "SetterID"=>0],
+        ["SwitchIDs"=>[/* 1=>10070, */ 2=>10071], "ManualID"=>2, "SetterID"=>1],
+        ["SwitchIDs"=>[/* 1=>10072, */ 2=>10073], "ManualID"=>2, "SetterID"=>2],
+        ["SwitchIDs"=>[/* 1=>10074, */ 2=>10075], "ManualID"=>2, "SetterID"=>3],
+        ["SwitchIDs"=>[/* 1=>10076, */ 2=>10077], "ManualID"=>3, "SetterID"=>0],
+        ["SwitchIDs"=>[/* 1=>10078, */ 2=>10079], "ManualID"=>3, "SetterID"=>1],
+        ["SwitchIDs"=>[/* 1=>10080, */ 2=>10081], "ManualID"=>3, "SetterID"=>2],
+    ];
+    
+    protected $pistons=[
+        ["SwitchIDs"=>[1=>10230, 2=>10231], "SwitchID"=>10207, "Name"=>"Sw to Gt"],
+        ["SwitchIDs"=>[1=>10233, 2=>10234], "SwitchID"=>10103, "Name"=>"Ped Reed 16"],
+        ["SwitchIDs"=>[1=>10236, 2=>10237], "SwitchID"=>10216, "Name"=>"Gt to Ped"],
+    ];
+    
     public function createManuals(array $keyboards): void {
         foreach([1,4,2,3] as $id) {
             parent::createManual($keyboards[$id]);
         }
+    }
+    
+    public function import() : void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 2:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        } 
+        exit(); //*/
+        parent::import();
+        $this->createCombinations();
+        $this->createPistons();
     }
     
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
@@ -91,6 +135,30 @@ class Cheltenham extends BAOrgan {
             return parent::createRank($hwdata, $keynoise);
     }
   
+    private function createCombinations() : void {
+        foreach ($this->combinations as $combinationdata) {
+            foreach($combinationdata["SwitchIDs"] as $panelid=>$switchid) {
+                $panel=$this->getPanel($panelid);
+                $pe=$panel->Element();
+                $pe->Type=sprintf("Setter%03dDivisional%03d",$combinationdata["ManualID"],$combinationdata["SetterID"]);
+                $this->configurePanelSwitchImage($pe, ["SwitchID"=>$switchid]);
+            }
+        }
+    }
+
+    private function createPistons() : void {
+        foreach ($this->pistons as $pistondata) {
+            $switch=$this->getSwitch($pistondata["SwitchID"]);
+            $piston=new \GOClasses\ReversiblePiston($pistondata["Name"]);
+            $piston->Switch($this->getSwitch($pistondata["SwitchID"]));
+            foreach($pistondata["SwitchIDs"] as $panelid=>$switchid) {
+                $panel=$this->getPanel($panelid);
+                $pe=$panel->GUIElement($piston);
+                $this->configurePanelSwitchImage($pe, ["SwitchID"=>$switchid]);
+            }
+        }
+    }
+
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
         $switchid=$data["SwitchID"];
         $slinkid=$this->hwdata->switchLink($switchid)["D"][0]["SourceSwitchID"];

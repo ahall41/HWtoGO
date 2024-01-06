@@ -66,7 +66,7 @@ class Panel extends GOObject {
      * @param string|null $label
      * @return PanelElement
      */
-    private function Element(?string $name=NULL, ?string $label=NULL) : PanelElement {
+    public function Element(?string $name=NULL, ?string $label=NULL) : PanelElement {
         $instance=$this->instance();
         $this->NumberOfGUIElements++;
         $element=new PanelElement("Panel${instance}Element");
