@@ -24,6 +24,7 @@ class Segovia extends SPOrganV2 {
     const REVISIONS="\n"
             . "1.1 Corrected releases on ranks without tremmed samples\n"
             . "1.2 Corrected panel image placement\n"
+            . "1.3 Added 'Toys' (to full surround)\n"
             . "\n";
     
     const RANKS_DIRECT=1;
@@ -141,7 +142,7 @@ class Segovia extends SPOrganV2 {
         
         999903=>["RankID"=>999903, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[ 65, 66]],
         999913=>["RankID"=>999913, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[165,166]],
-        999943=>["RankID"=>999943, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[265,366]],
+        999943=>["RankID"=>999943, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[265,266]],
         
         999904=>["RankID"=>999904, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[  1]],
         999914=>["RankID"=>999914, "Noise"=>"Ambient", "GroupID"=>0, "StopIDs"=>[101]],
@@ -178,7 +179,7 @@ class Segovia extends SPOrganV2 {
         998292=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-123]],
         998352=>["Noise"=>"KeyOff",  "GroupID"=>701, "StopIDs"=>[-124]],
         998362=>["Noise"=>"KeyOff",  "GroupID"=>702, "StopIDs"=>[-124]],
-        998392=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-124]],
+        998392=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-124]],
     ];
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
@@ -266,12 +267,19 @@ class Segovia extends SPOrganV2 {
         }
     }
     
+    protected function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
+        if (isset($data["StopID"])) {
+            if (($stopid=$data["StopID"])>100) {$data["StopID"]=$stopid % 100;}
+        }
+        parent::configurePanelSwitchImages($switch, $data);
+    }
+    
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $rankdata=$this->patchRanks[$hwdata["RankID"]];
         
         if ($rankdata["Noise"]=="Ambient") {
-            if (in_array($hwdata["PipeID"],[99065, 99165, 99465])) {
+            if (in_array($hwdata["PipeID"],[99066, 99166, 99466])) {
                 $stopid=$rankdata["StopIDs"][1];
             }
             else {
@@ -371,7 +379,6 @@ class SegoviaDemo extends Segovia {
             self::Segovia(
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
-
             /* self::$singleRelease=TRUE;
             self::Segovia(
                     [self::RANKS_REAR=>"Rear"],

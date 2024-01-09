@@ -25,7 +25,7 @@ abstract class SPOrgan extends \Import\Organ {
     protected array  $rankpositions=[];
     protected int    $switchwcg=900;
     
-    protected int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=0;
     
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -289,14 +289,14 @@ abstract class SPOrgan extends \Import\Organ {
             $isattack=$rankdata["Noise"]=="KeyOn";
         }
 
-        if (empty($this->releaseCrossfadeLengthMs)) {
+        if (empty($this->releaseCrossfadeLengthMs==0)) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
-        else {
-            if ($this->releaseCrossfadeLengthMs>0)
-                $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
-            else
-                unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        elseif ($this->releaseCrossfadeLengthMs>0) {
+            $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
+        }
+        elseif ($this->releaseCrossfadeLengthMs<0) {
+            unset($hwdata["ReleaseCrossfadeLengthMs"]);
         }
 
         return parent::processSample($hwdata, $isattack);

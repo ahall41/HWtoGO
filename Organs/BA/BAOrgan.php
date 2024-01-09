@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class BAOrgan extends \Import\Organ {
     
-    protected int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=0;
     protected string $root="";
 
     /*
@@ -142,15 +142,17 @@ abstract class BAOrgan extends \Import\Organ {
                     return parent::processSample($hwdata, FALSE);
             }
         }
-        if (empty($this->releaseCrossfadeLengthMs)) {
+        
+        if (empty($this->releaseCrossfadeLengthMs==0)) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
-        else {
-            if ($this->releaseCrossfadeLengthMs>0)
-                $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
-            //else
-            //    unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        elseif ($this->releaseCrossfadeLengthMs>0) {
+            $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
         }
+        elseif ($this->releaseCrossfadeLengthMs<0) {
+            unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        }
+
         return parent::processSample($hwdata, $isattack);
     }
 }
