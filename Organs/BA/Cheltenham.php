@@ -22,13 +22,15 @@ require_once(__DIR__ . "/../../GOClasses/ReversiblePiston.php");
  * @author andrew
  */
 class Cheltenham extends BAOrgan {
+    
     const ROOT="/GrandOrgue/Organs/BA/Cheltenham/";
     const COMMENTS=
               "Father Willis, St. Matthew, Cheltenham\n"
             . "https://barrittaudio.co.uk/pages/st-matthew-cheltenham\n"
             . "\n"
-            . "1.1 Added MIDKeyNumbers (derived from sample file name)"
+            . "1.1 Added MIDKeyNumbers (derived from sample file name)\n"
             . "    Added Combinations and Reversible Pistons\n"
+            . "1.2 Added MIDIPitchFraction\n"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -335,6 +337,32 @@ class Cheltenham extends BAOrgan {
         return NULL;
     }
     
+    private function MIDIFraction(\GOClasses\Pipe $pipe) : void {
+        static $pitchdata=[];
+        if (sizeof($pitchdata)==0) {
+            $fp=fopen(__DIR__ . "/Cheltenham.csv", "r");
+            fgets($fp); // header line
+            while (!feof($fp)) {
+                $line=trim(fgets($fp));
+                $explode=explode("\t",$line);
+                //error_log(print_r($explode,1));
+                if (array_key_exists(16, $explode) && is_numeric($explode[16])) {
+                    $file="OrganInstallationPackages" . $explode[0] . "/" . $explode[4];
+                    $correction=-floatval($explode[16]);
+                    $pitchdata[$file]=$correction;
+                    //error_log("pitchdata[$file]=$correction");
+                }
+            }
+        }
+        
+        $correction=$pitchdata[$pipe->Attack];
+        $offset=floor($correction/100);
+        $fraction=$correction-($offset*100);
+        $pipe->MIDIKeyOverride+=$offset;
+        $pipe->MIDIPitchFraction=$fraction;
+        //error_log($pipe);        
+    }
+    
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $hn=[4=>-12, 8=>0, 16=>12, 32=>24, 64=>36];
         $pipe=parent::processSample($hwdata, $isattack);
@@ -346,6 +374,7 @@ class Cheltenham extends BAOrgan {
                 && $pipe->AttackCount==0) {
             $pipe->MIDIKeyOverride=$this->sampleMidiKey(["SampleFilename"=>$hwdata["SampleFilename"]])
                     + intval(12*log($pipe->HarmonicNumber,2)) - 36;
+            $this->MIDIFraction($pipe);
             //echo $pipe->MIDIKeyOverride, "\t", $hwdata["SampleFilename"], "\n";
         }
         return $pipe;
