@@ -31,6 +31,7 @@ class Cheltenham extends BAOrgan {
             . "1.1 Added MIDKeyNumbers (derived from sample file name)\n"
             . "    Added Combinations and Reversible Pistons\n"
             . "1.2 Added MIDIPitchFraction\n"
+            . "1.3 Corrected Sesquialter Harmonic Number; softened tremulant\n"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -44,7 +45,7 @@ class Cheltenham extends BAOrgan {
     ];
     
     protected $patchTremulants=[
-        1720=>["Type"=>"Synth", "GroupIDs"=>[301], "Period"=>200, "AmpModDepth"=>20],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301], "Period"=>200, "AmpModDepth"=>10],
     ];
     
     protected $patchStops=[
@@ -341,6 +342,7 @@ class Cheltenham extends BAOrgan {
                 && !isset($rankdata["Noise"])
                 && !isset($pipe->MIDIKeyOverride) 
                 && $pipe->AttackCount==0) {
+            if ($hwdata["RankID"]==21) {$pipe->HarmonicNumber=36;}
             $pipe->MIDIKeyOverride=$this->sampleMidiKey(["SampleFilename"=>$hwdata["SampleFilename"]])
                     + intval(12*log($pipe->HarmonicNumber,2)) - 36;
             $this->MIDIFraction($pipe);
@@ -368,13 +370,6 @@ class Cheltenham extends BAOrgan {
         $salcional=$hwi->getStop(2203); // sic
         if ($salcional) {unset($salcional->Rank001PipeCount);}
         
-        $sesquialtera=$hwi->getRank(21);
-        if ($sesquialtera)  {
-            foreach($sesquialtera->Pipes() as $pipe) {
-                $pipe->HarmonicNumber=41;
-            }
-        }
-        
         $hwi->saveODF($target, self::COMMENTS);
     }   
 }
@@ -382,7 +377,7 @@ class Cheltenham extends BAOrgan {
 class CheltenhamDemo extends Cheltenham {
     const ODF="St. Matthew Cheltenham Demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham demo.1.2.organ";
+    const TARGET=self::ROOT . "Cheltenham demo.1.3.organ";
     
     protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
@@ -403,7 +398,7 @@ class CheltenhamDemo extends Cheltenham {
 class CheltenhamFull extends Cheltenham {
     const ODF="St. Matthew Cheltenham.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham full.1.2.organ";
+    const TARGET=self::ROOT . "Cheltenham full.1.3.organ";
 
     static function Full () {
         self::Cheltenham(new CheltenhamFull(self::SOURCE), self::TARGET);
