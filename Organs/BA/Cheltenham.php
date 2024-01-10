@@ -254,36 +254,6 @@ class Cheltenham extends BAOrgan {
         return $results;
     }
 
-    private function readPitchData(string $file) : array {
-        $fp=fopen($file, "r");
-        $result=[];
-        while (!feof($fp)) {
-            $line=trim(fgets($fp));
-           if (substr($line,0,1)=="/") {
-                $folder=substr($line,1);
-                // echo $folder, "\n";
-            }
-            elseif (substr($line,-4)==".wav") {
-                $file=$line;
-                // echo $file, "\n";
-            }
-            elseif (substr($line,0,13)=="MIDIKeyNumber") {
-                $split=explode("=",$line);
-                $midi=intval(trim($split[1]));
-                $result[$folder][$file]["K"]=$midi;
-                // echo "result[$folder][$file][\"K\"]=$midi", "\n";
-            }
-            elseif (substr($line,0,17)=="MIDIPitchFraction") {
-                $split=explode("=",$line);
-                $fraction=floatval(trim($split[1]));
-                $result[$folder][$file]["F"]=$fraction;
-                // echo "result[$folder][$file][\"F\"]=$fraction", "\n";
-            }
-        }
-        fclose($fp);
-        return $result;
-    }
-    
     protected function correctFileName(string $filename): string {
         static $files=[];
         if (sizeof($files)==0)
@@ -345,12 +315,12 @@ class Cheltenham extends BAOrgan {
             while (!feof($fp)) {
                 $line=trim(fgets($fp));
                 $explode=explode("\t",$line);
-                //error_log(print_r($explode,1));
+                // error_log(print_r($explode,1));
                 if (array_key_exists(16, $explode) && is_numeric($explode[16])) {
                     $file="OrganInstallationPackages" . $explode[0] . "/" . $explode[4];
                     $correction=-floatval($explode[16]);
                     $pitchdata[$file]=$correction;
-                    //error_log("pitchdata[$file]=$correction");
+                    // error_log("pitchdata[$file]=$correction");
                 }
             }
         }
@@ -364,7 +334,6 @@ class Cheltenham extends BAOrgan {
     }
     
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $hn=[4=>-12, 8=>0, 16=>12, 32=>24, 64=>36];
         $pipe=parent::processSample($hwdata, $isattack);
         $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
         if ($isattack 
@@ -398,6 +367,14 @@ class Cheltenham extends BAOrgan {
         
         $salcional=$hwi->getStop(2203); // sic
         if ($salcional) {unset($salcional->Rank001PipeCount);}
+        
+        $sesquialtera=$hwi->getRank(21);
+        if ($sesquialtera)  {
+            foreach($sesquialtera->Pipes() as $pipe) {
+                $pipe->HarmonicNumber=41;
+            }
+        }
+        
         $hwi->saveODF($target, self::COMMENTS);
     }   
 }
@@ -405,7 +382,7 @@ class Cheltenham extends BAOrgan {
 class CheltenhamDemo extends Cheltenham {
     const ODF="St. Matthew Cheltenham Demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham demo.1.1.organ";
+    const TARGET=self::ROOT . "Cheltenham demo.1.2.organ";
     
     protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
@@ -426,7 +403,7 @@ class CheltenhamDemo extends Cheltenham {
 class CheltenhamFull extends Cheltenham {
     const ODF="St. Matthew Cheltenham.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham full.1.1.organ";
+    const TARGET=self::ROOT . "Cheltenham full.1.2.organ";
 
     static function Full () {
         self::Cheltenham(new CheltenhamFull(self::SOURCE), self::TARGET);
