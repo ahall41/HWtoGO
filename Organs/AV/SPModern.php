@@ -23,8 +23,10 @@ class SPModern extends AVOrgan {
     const COMMENTS=
               "Sonus Paradisi Great Modern composite set\n"
             . "https://hauptwerk-augustine.info/SP_Modern.php\n"
+            . "\n"
+            . "1.1 Added Virtual Keyboards; added missing key actions\n"
             . "\n";
-    const TARGET=self::ROOT . "SP Modern demo composite.1.0.organ";
+    const TARGET=self::ROOT . "SP Modern demo composite.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -121,7 +123,8 @@ class SPModern extends AVOrgan {
         58=>["HN"=>8], //POS- 58 Krumhorn 4
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4], "Name"=>"Key Action On"],
+       -93=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[1,2,3,4], "RankID"=>-93, "Name"=>"Key Action Off"]
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -377,6 +380,13 @@ class SPModern extends AVOrgan {
             case 28:
                 if ($midi>73) return NULL;
                 break;
+                
+            case 93:
+                $keyoff=$hwdata;
+                $keyoff["RankID"]=-93;
+                $keyoff["PipeID"]+=10000;
+                parent::processSample($keyoff, FALSE);
+                break;
             
             default:
                 if ($rankid<17 && $midi>68) return NULL;
@@ -436,8 +446,15 @@ class SPModern extends AVOrgan {
                     }
                 }
             }
+            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             
-            $hwi->getRank(93)->Gain=9;
+            $keyon=$hwi->getRank(93);
+            $keyoff=$hwi->getRank(-93);
+            $keyoff->Gain=$keyon->Gain=9;
+            for ($midi=84; $midi<=91; $midi++) {
+                $keyon->Pipe($midi, $keyon->Pipe($midi-12));
+                $keyoff->Pipe($midi, $keyoff->Pipe($midi-12));
+            }
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
         
