@@ -18,6 +18,8 @@ abstract class AVOrgan extends \Import\Organ {
     
     protected int $releaseCrossfadeLengthMs=0;
     protected int $noiseVersion=2;
+    
+    protected array $positions;
 
     /*
      * Create Windchest Groups. 1 per position/division + 1 for all noise effects
@@ -112,7 +114,7 @@ abstract class AVOrgan extends \Import\Organ {
                 && in_array($rankdata["Noise"], ["StopOn","StopOff","Ambient"]);
     }
     
-     public function processNoiseV2(array $hwdata, $isattack): ?\GOClasses\Noise {
+    public function processNoiseV2(array $hwdata, $isattack): ?\GOClasses\Noise {
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $type=$this->hwdata->rank($rankid=$hwdata["RankID"])["Noise"];
         if ($type=="Ambient") {

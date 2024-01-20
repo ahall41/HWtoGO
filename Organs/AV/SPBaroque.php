@@ -23,8 +23,10 @@ class SPBaroque extends AVOrgan {
     const COMMENTS=
               "Sonus Paradisi Great Baroque composite set\n"
             . "https://hauptwerk-augustine.info/SP Great Baroque.php\n"
+            . "\n"
+            . "1.1 Added Virtual Keyboards; added missing key actions\n"
             . "\n";
-    const TARGET=self::ROOT . "SP Great Baroque.1.0.organ";
+    const TARGET=self::ROOT . "SP Great Baroque.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -137,7 +139,8 @@ class SPBaroque extends AVOrgan {
         73=>["HN"=>8], //CHR- 73 Cromorn8 Bed        
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4,5]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4,5], "5,Name"=>"Key Action On"],
+       -93=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[1,2,3,4,5], "RankID"=>-93, "Name"=>"Key Action Off"]
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -269,6 +272,7 @@ class SPBaroque extends AVOrgan {
                     $panelelement->DispLabelFontSize=7;
                     unset($panelelement->MouseRectHeight);
                     unset($panelelement->MouseRectWidth);
+                    // echo $panelelement, "\n";
                     break; // Only the one?
                 }
             }
@@ -339,7 +343,7 @@ class SPBaroque extends AVOrgan {
             $imagedata=$this->getImageData($data);
             $this->map($map, $imagedata, $panel);
             $image=$panel->Image(reset($imagedata["Images"]));
-            echo $image; exit();
+            //echo $image; exit();
         }
     }
 
@@ -422,6 +426,13 @@ class SPBaroque extends AVOrgan {
     }    
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         
+        if ($hwdata["RankID"]==93) {
+            $keyoff=$hwdata;
+            $keyoff["RankID"]=-93;
+            $keyoff["PipeID"]+=10000;
+            parent::processSample($keyoff, FALSE);
+        }
+ 
         $pipe=parent::processSample($hwdata, $isattack);
         if ($pipe && !empty($pitchtuning=$pipe->PitchTuning)) {
             if ($pitchtuning<-1800 || $pitchtuning>1800) $pipe->Dummy();
@@ -459,7 +470,16 @@ class SPBaroque extends AVOrgan {
                 }
                 $hwi->getRank(93)->Gain=9;
             }
+            $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
             
+            $keyon=$hwi->getRank(93);
+            $keyoff=$hwi->getRank(-93);
+            $keyoff->Gain=$keyon->Gain=9;
+            for ($midi=84; $midi<=91; $midi++) {
+                $keyon->Pipe($midi, $keyon->Pipe($midi-12));
+                $keyoff->Pipe($midi, $keyoff->Pipe($midi-12));
+            }
+
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
         

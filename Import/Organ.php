@@ -325,6 +325,7 @@ abstract class Organ extends Images {
     public function addVirtualKeyboards(int $manuals, array $targets,  array $defaults) : void {
         $nt=sizeof($targets);
         $panel=$this->newPanel(-999,"Virtual Keyboards");
+        $panel->HasPedals="N";
         $panel->DispDrawstopRows=1;
         $panel->DispDrawstopCols=2;
         $panel->DispExtraDrawstopCols=$nt;

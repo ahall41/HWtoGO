@@ -183,6 +183,7 @@ class Objects {
     }
 
     protected function makeSwitch(int $id, string $name) : \GOClasses\Sw1tch {
+//      echo "makeSwitch(int $id, $name)\n";
         if (isset($this->Model[self::Switches][$id]))
             return $this->Model[self::Switches][$id];
         else
