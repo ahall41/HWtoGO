@@ -23,9 +23,12 @@ class SPRomantic extends AVOrgan {
     const COMMENTS=
               "Sonus Paradisi Great Romantic composite set\n"
             . "https://hauptwerk-augustine.info/SP_Romantic.php\n"
-            . "2.0.1 Corrected harmonic number on mixtures"
+            . "\n"
+            . "2.0.1 Corrected harmonic number on mixtures\n"
+            . "2.1.0 Added Virtual Keyboards; added missing key actions\n"
+            . "      Corrected folder locations for update SP sample sets\n"
             . "\n";
-    const TARGET=self::ROOT . "SP Great Romantic.2.0.1.organ";
+    const TARGET=self::ROOT . "SP Great Romantic.2.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -149,7 +152,8 @@ class SPRomantic extends AVOrgan {
         80=>["HN"=>8], // "POS- 80 Violin Celeste
         91=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2690]],
         92=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4]],
+        93=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[1,2,3,4], "Name"=>"Key Action On"],
+       -93=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[1,2,3,4], "RankID"=>-93, "Name"=>"Key Action Off"]
     ];
     
     public function createManual(array $hwdata) : ?\GOClasses\Manual {
@@ -174,46 +178,81 @@ class SPRomantic extends AVOrgan {
             $switchdata=$this->hwdata->switch($destid=$link["DestSwitchID"]);
             if (isset($switchdata["Disp_ImageSetInstanceID"])) {
                 $instancedata=$this->hwdata->imageSetInstance($instanceid=$switchdata["Disp_ImageSetInstanceID"]);
-                //error_log(print_r($instancedata, 1));
                 $panel=$this->getPanel($instancedata["DisplayPageID"]);
-                foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
-                    $panelelement=$panel->GUIElement($switch);
-                    $this->configureImage($panelelement, ["SwitchID"=>$destid]);
-                    $panelelement->DispLabelText=str_replace("\n", " ", $textInstance["Text"]);
-                    switch ($textInstance["TextStyleID"]) {
+                $panelelement=$panel->GUIElement($switch);
+                 $this->configureImage($panelelement, ["SwitchID"=>$destid]);
+                
+                $name=$data["Name"];
+
+                switch ($switchid) {
+                    case 10141:
+                    case 10143:
+                    case 10145:
+                    case 10147:
+                    case 10175:
+                    case 10177:
+                    case 10181:
+                    case 10221:
+                    case 10227:
+                    case 10269:
+                    case 10271:
+                        $name=substr($name, 5, 9999);
+                        $panelelement->DispLabelColour="Dark Red";
+                        break;
                         
-                        case 23:
-                            $panelelement->DispLabelColour="Dark Blue";
-                            break;
+                    case 10333:
+                    case 10335:
+                    case 10337:
+                    case 10339:
+                        $panelelement->DispLabelColour="Dark Green";
+                        break;
                         
-                        default:
-                            // echo $switchid, "\t", $textInstance["TextStyleID"], "\t", $panelelement->DispLabelText, "\n";
-                            $panelelement->DispLabelColour="Black";
-                            
-                    }
-
-                    switch ($switchid) {
-                        case 10141:
-                        case 10143:
-                        case 10145:
-                        case 10147:
-                        case 10175:
-                        case 10177:
-                        case 10181:
-                        case 10221:
-                        case 10227:
-                        case 10269:
-                        case 10271:
-                            $panelelement->DispLabelColour="Dark Red";
-                    }
-
-                    if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
-                    $panelelement->DispLabelFontSize=7;
-                    unset($panelelement->MouseRectHeight);
-                    unset($panelelement->MouseRectWidth);
-
-                    break; // Only the one?
-                }
+                    case 10283:
+                    case 10285:
+                    case 10287:
+                    case 10289:
+                    case 10291:
+                    case 10293:
+                    case 10295:
+                    case 10297:
+                    case 10299:
+                    case 10301:
+                    case 10303:
+                    case 10305:
+                    case 10307:
+                    case 10309:
+                    case 10311:
+                    case 10313:
+                    case 10315:
+                    case 10317:
+                    case 10319:
+                    case 10321:
+                    case 10323:
+                    case 10325:
+                    case 10327:
+                    case 10329:
+                    case 10331:
+                        $panelelement->DispLabelColour="Dark Blue";
+                        break;
+                    
+                    case 10281:
+                        $name="Blower";
+                        $panelelement->DispLabelColour="Black";
+                        break;
+                    
+                    default:
+                        $name=substr($name, 5, 9999);
+                        $panelelement->DispLabelColour="Black";
+                        break;
+                  }
+                
+                $panelelement->set("DispLabelText", "$name");
+                
+                if (!isset($panelelement->PositionX)) {$panelelement->PositionX=0;}
+                $panelelement->DispLabelFontSize=7;
+                unset($panelelement->MouseRectHeight);
+                unset($panelelement->MouseRectWidth);
+                // echo $panelelement, "\n";
             }
         }
     }
@@ -288,8 +327,27 @@ class SPRomantic extends AVOrgan {
                  "OrganInstallationPackages/000001/HauptwerkStandardImages/Button06-Wood-Large-On.bmp",
                  "OrganInstallationPackages/000001/HauptwerkStandardImages/Button06-Wood-Large-Off.bmp",
                  //"OrganInstallationPackages/000001/HauptwerkStandardImages/ExpressionPedalLargeStage",
-                 //"001704/pipe/ped/",
-                 //"001307/pipe/ped/",
+                 "001704/pipe/ped",
+                 "001704/pipe/rec",
+                 "001704/pipe/go",
+                 "001704/pipe/pos",
+                 "001317/ped/AB_PrincipalBas16/",
+                 "001317/ped/AB_SubBas16/",
+                 "001317/ped/AB_Posaune16/",
+                 "001317/HW/AB_grossprinc8/",
+                 "001317/HW/AB_mixtur",
+                 "001317/HW/AB_jubalflt8/",
+                 "001317/HW/AB_prest4/",
+                 "001317/HW/AB_gemsh8/",
+                 "001317/HW/AB_vdigamba8/",
+                 "001317/Pos/AB_orchOboe/",
+                 "001317/Pos/AB_flprincp8/",
+                 "001317/Pos/AB_cello8",
+                 "001317/Pos/AB_DoppelGedeckt8/",
+                 "001317/Pos/AB_harmon8/",
+                 "001317/Pos/AB_fluteharm8/",
+                 "001317/Pos/AB_orchFlote/",
+                 "001317/Pos/AB_Piccolo/",
                  "//"],
                 ["OrganInstallationPackages/001631/Images/Pedals/",
                  "OrganInstallationPackages/001631/Images/Keys/",
@@ -299,9 +357,28 @@ class SPRomantic extends AVOrgan {
                  "OrganInstallationPackages/001631/Images/Button04-grey-Large-On.bmp",
                  "OrganInstallationPackages/001631/Images/Button04-grey-Large-Off.bmp",
                  //"OrganInstallationPackages/001631/Images/expressionPedal/expres",
-                 //"001704/pipe/pedDiff/",
-                 //"001307/pipe/ped/",
-                 "/"], 
+                 "001704/pipe/pedDiff",
+                 "001704/pipe/recDiff",
+                 "001704/pipe/goDiff",
+                 "001704/pipe/posDiff",
+                 "002292/Ped/princip16/01-AB_PrincipalBas16/", 
+                 "002292/Ped/subbas16/01-AB_SubBas16/", 
+                 "002292/Ped/posaune16/01-AB_Posaune16/", 
+                 "002292/I_Man/grossprincip8/01-AB_grossprinc8/",
+                 "002292/I_Man/mxit/01-AB_mixtur/",
+                 "002292/I_Man/jubal8/01-AB_jubalflt8/",
+                 "002292/I_Man/prest4/01-AB_prest4/",
+                 "002292/I_Man/gemsh8/01-AB_gemsh8/",
+                 "002292/I_Man/violgamba/01-AB_vdigamba8/",
+                 "002292/II_Pos/OrchOboe8/AB_orchOboe8/",
+                 "002292/II_Pos/flPrincip/AB_flprincp8/",
+                 "002292/II_Pos/cello/AB_cello8",
+                 "002292/II_Pos/doppelGedeckt/AB_doppelGedeckt8/",
+                 "002292/II_Pos/Harmon8/AB_harmon8/",
+                 "002292/II_Pos/FluteHarm/AB_fluteharm8/",
+                 "002292/II_Pos/OrchFlet4/AB_orchFlote4/",
+                 "002292/II_Pos/piccolo/AB_Piccolo2/",
+                 "/"],
                 $filename);  
         if (sizeof($files)==0)
             $files=$this->treeWalk(getenv("HOME") . self::ROOT);
@@ -339,6 +416,13 @@ class SPRomantic extends AVOrgan {
             case 9:
             case 13:
                 if ($midi>55) return NULL;
+                break;
+                
+            case 93:
+                $keyoff=$hwdata;
+                $keyoff["RankID"]=-93;
+                $keyoff["PipeID"]+=10000;
+                parent::processSample($keyoff, FALSE);
                 break;
                 
             default:
@@ -388,8 +472,17 @@ class SPRomantic extends AVOrgan {
                         }
                     }
                 }
-                $hwi->getRank(93)->Gain=9;
             }
+            $hwi->addVirtualKeyboards(3,[1,2,3],[1,2,3]);
+            
+            $keyon=$hwi->getRank(93);
+            $keyoff=$hwi->getRank(-93);
+            $keyoff->Gain=$keyon->Gain=9;
+            for ($midi=80; $midi<=96; $midi++) {
+                $keyon->Pipe($midi, $keyon->Pipe($midi-12));
+                $keyoff->Pipe($midi, $keyoff->Pipe($midi-12));
+            }
+
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
         
