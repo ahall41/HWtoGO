@@ -18,7 +18,6 @@ abstract class BAOrgan extends \Import\Organ {
     
     protected ?int $releaseCrossfadeLengthMs=0;
     protected string $root="";
-    protected array $positions=[];
 
     /*
      * Create Windchest Groups. 1 per position/division + 1 for all noise effects
