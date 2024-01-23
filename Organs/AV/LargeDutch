@@ -17,14 +17,16 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class LargeDutch extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Dutch/";
+    const ROOT="/GrandOrgue/Organs/AV/Dutch/";
     const ODF="Large Dutch.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Large Dutch composite set\n"
             . "https://hauptwerk-augustine.info/Large_Dutch.php\n"
+            . "\n"
+            . "1.1 Added virtual keyboards\n"
             . "\n";
-    const TARGET=self::ROOT . "Large Dutch.1.0.organ";
+    const TARGET=self::ROOT . "Large Dutch.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -385,6 +387,8 @@ class LargeDutch extends AVOrgan {
             $hwi->label(130, 210, "GREAT");
             $hwi->label(920, 210, "POSITIVE");
             $hwi->label(130, 410, "SWELL");
+            
+            $hwi->addVirtualKeyboards(4,[1,2,3,4],[1,2,3,4]);
             
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }

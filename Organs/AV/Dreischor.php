@@ -14,6 +14,8 @@ require_once(__DIR__ . "/AVOrgan.php");
 /**
  * Import Rieger Organ of the Name of Mary Church from Dreischor (Serbia) to GrandOrgue
  * 
+ * @todo: virtual keyboards
+ * 
  * @author andrew
  */
 class Dreischor extends AVOrgan {
@@ -23,6 +25,8 @@ class Dreischor extends AVOrgan {
     const COMMENTS=
               "Vierdag Organ from Adriaanskerk in Dreischor (Netherlands)\n"
             . "https://hauptwerk-augustine.info/Dreischor.php\n"
+            . "\n"
+            . "1.1 Added virtual keyboards\n"
             . "\n";
     const TARGET=self::ROOT . "Dreischor %s.1.1.organ";
 
@@ -153,6 +157,7 @@ class Dreischor extends AVOrgan {
                 unset($stop->Rank005PipeCount);
                 unset($stop->Rank006PipeCount);
             }
+            $hwi->addVirtualKeyboards(3,[1,2,3],[1,2,3]);
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {

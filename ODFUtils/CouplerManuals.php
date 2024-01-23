@@ -26,22 +26,23 @@ class CouplerManuals extends ODF {
 
     public static function main() {
         $p="/home/andrew/GrandOrgue/Organs";
-        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
-        (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
-        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
-        (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
+        // (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->textBreakWidth(0);
+        // (new CouplerManuals("${p}/PG/Friesach/Friesach.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
+        // (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
+        // (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/LP/NorrfjardenChurch/NorrfjardenChurch.organ"))->run(3, [5,6,7], [5,6,7]);
-        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(3, [1,2,3], [1,2,3]);
-        (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]);
-        (new CouplerManuals("${p}/AV/New Haven/New Haven Ghent Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
-        (new CouplerManuals())->fixColumns(
-                "${p}/AV/New Haven/New Haven Lurie Surround.organ",
-                "${p}/AV/New Haven/New Haven Surround.organ");
-        (new CouplerManuals("${p}/AV/New Haven/New Haven Lurie Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
-        (new CouplerManuals())->fixColumns(
-                "${p}/AV/New Haven/New Haven Ghent Surround.organ",
-                "${p}/AV/New Haven/New Haven Surround.organ");
-        (new CouplerManuals("${p}/Melotone/Barton3-7/Barton3-7.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
+        (new CouplerManuals("${p}/LP/PiteaMHS/PiteaMHS.organ"))->run(3, [1,2,3], [1,2,3]);
+        // (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(3, [1,2,3], [1,2,3]);
+        // (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]);
+        // (new CouplerManuals("${p}/AV/New Haven/New Haven Ghent Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
+        // (new CouplerManuals())->fixColumns(
+        //        "${p}/AV/New Haven/New Haven Lurie Surround.organ",
+        //        "${p}/AV/New Haven/New Haven Surround.organ");
+        // (new CouplerManuals("${p}/AV/New Haven/New Haven Lurie Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);
+        // (new CouplerManuals())->fixColumns(
+        //        "${p}/AV/New Haven/New Haven Ghent Surround.organ",
+        //        "${p}/AV/New Haven/New Haven Surround.organ");
+        // (new CouplerManuals("${p}/Melotone/Barton3-7/Barton3-7.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         
      }
     
@@ -100,7 +101,7 @@ class CouplerManuals extends ODF {
             $manual->instance($this->mmanuals+$mn);
             $manual->Displayed="N";
             $me=$panel->GUIElement($manual);
-            foreach($targets as $tn) {
+            foreach($targets as $ti=>$tn) {
                 $coupler=new \GOClasses\Coupler("VK $mn to $tn");
                 $coupler->instance(++$couplerid);
                 $manual->Coupler($coupler);
@@ -123,7 +124,7 @@ class CouplerManuals extends ODF {
                 
                 $pe=$panel->GUIElement($switch);
                 $pe->DispDrawstopRow=100+$manuals-$mn;
-                $pe->DispDrawstopCol=$tn;
+                $pe->DispDrawstopCol=1+$ti;
                 $this->newLine("\n$coupler");
                 $this->newLine("\n$switch");
                 $this->newLine("\n$pe");

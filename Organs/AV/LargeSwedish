@@ -17,14 +17,17 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class LargeSwedish extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Swedish/";
+    const ROOT="/GrandOrgue/Organs/AV/Swedish/";
     const ODF="Large Swedish.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Large Dutch composite set\n"
-            . "https://hauptwerk-augustine.info/Large_Dutch.php\n"
+            . "https://hauptwerk-augustine.info/Large_Swedish.php\n"
+            . "\n"
+            . "1.1 Includes Pitea composite\n"
+            . "1.2 Added virtual keyboards; now includes Burea composite!\n"
             . "\n";
-    const TARGET=self::ROOT . "Large Swedish.1.0.organ";
+    const TARGET=self::ROOT . "Large Swedish.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -489,6 +492,8 @@ class LargeSwedish extends AVOrgan {
             $hwi->label(940,  30, "POSITIVE");
             $hwi->label( 30, 320, "PEDAL");
             $hwi->label(940, 320, "SWELL");
+            
+            $hwi->addVirtualKeyboards(3,[1,2,3],[1,2,3]);
             
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }
