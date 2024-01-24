@@ -60,6 +60,10 @@ class ODF {
         fclose($fp);
     }
     
+    public function getIndex() : array {
+        return $this->index;
+    }
+    
     public function getLine(int $lineno) : mixed {
         return $this->buffer[$lineno];
     }
@@ -68,9 +72,13 @@ class ODF {
         return $this->index[$section];
     }
     
-    public function getItem(string $section, string $key) : mixed {
-        $lineno=$this->index[$section][$key];
-        return $this->buffer[$lineno][$key];
+    public function getItem(string $section, string $key, mixed $default=NULL) : mixed {
+        if (array_key_exists($section, $this->index) && 
+            array_key_exists($key, $this->index[$section])) {
+            $lineno=$this->index[$section][$key];
+            return $this->buffer[$lineno][$key];
+        }
+        return $default;
     }
 
     public function hasItem(string $section, string $key) : bool {
