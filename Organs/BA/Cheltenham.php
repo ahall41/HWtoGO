@@ -32,6 +32,7 @@ class Cheltenham extends BAOrgan {
             . "    Added Combinations and Reversible Pistons\n"
             . "1.2 Added MIDIPitchFraction\n"
             . "1.3 Corrected Sesquialter Harmonic Number; softened tremulant\n"
+            . "1.4 Further pitch corrections\n"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -308,6 +309,35 @@ class Cheltenham extends BAOrgan {
         return NULL;
     }
     
+    private function MIDIPraat(\GOClasses\Pipe $pipe) : void {
+        static $pitchdata=[];
+        if (sizeof($pitchdata)==0) {
+            $fp=fopen(__DIR__ . "/Cheltenham.pc", "r");
+            fgets($fp);
+            while (!feof($fp)) {
+                $line=explode("\t", trim(fgets($fp)));
+                if (sizeof($line)>1) {
+                    $pitchdata[$line[0]]["hn"]=$line[1];
+                    $pitchdata[$line[0]]["midi"]=$line[2];
+                }
+            }
+            fclose($fp);
+        }
+        
+        $attack=explode("/",$pipe->Attack,3);
+        $key=str_replace(
+                [".wav", " ", ".", ",", "#", "/"],
+                ["", "_", "_", "_", "_", "-"],
+                 $attack[2]);
+        if (array_key_exists($key, $pitchdata)) {
+            $pipe->MIDIKeyOverride=$override=floor($pitchdata[$key]["midi"]);
+            $pipe->MIDIPitchFraction=sprintf("%0.2f", 100*($pitchdata[$key]["midi"]-$override));
+            $pipe->HarmonicNumber=$pitchdata[$key]["hn"];
+            //echo $pipe; exit;
+        }
+        
+    }
+
     private function MIDIFraction(\GOClasses\Pipe $pipe) : void {
         static $pitchdata=[];
         if (sizeof($pitchdata)==0) {
@@ -330,7 +360,7 @@ class Cheltenham extends BAOrgan {
         $offset=floor($correction/100);
         $fraction=$correction-($offset*100);
         $pipe->MIDIKeyOverride+=$offset;
-        $pipe->MIDIPitchFraction=$fraction;
+        $pipe->MIDIPitchFraction=sprintf("%0.2f",$fraction);
         //error_log($pipe);        
     }
     
@@ -345,7 +375,7 @@ class Cheltenham extends BAOrgan {
             if ($hwdata["RankID"]==21) {$pipe->HarmonicNumber=36;}
             $pipe->MIDIKeyOverride=$this->sampleMidiKey(["SampleFilename"=>$hwdata["SampleFilename"]])
                     + intval(12*log($pipe->HarmonicNumber,2)) - 36;
-            $this->MIDIFraction($pipe);
+            $this->MIDIPraat($pipe);
             //echo $pipe->MIDIKeyOverride, "\t", $hwdata["SampleFilename"], "\n";
         }
         return $pipe;
@@ -377,7 +407,7 @@ class Cheltenham extends BAOrgan {
 class CheltenhamDemo extends Cheltenham {
     const ODF="St. Matthew Cheltenham Demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham demo.1.3.organ";
+    const TARGET=self::ROOT . "Cheltenham demo.1.4.organ";
     
     protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
@@ -398,7 +428,7 @@ class CheltenhamDemo extends Cheltenham {
 class CheltenhamFull extends Cheltenham {
     const ODF="St. Matthew Cheltenham.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Cheltenham full.1.3.organ";
+    const TARGET=self::ROOT . "Cheltenham full.1.4.organ";
 
     static function Full () {
         self::Cheltenham(new CheltenhamFull(self::SOURCE), self::TARGET);
