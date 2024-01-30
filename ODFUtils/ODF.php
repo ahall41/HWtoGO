@@ -80,6 +80,22 @@ class ODF {
         }
         return $default;
     }
+    
+    public function setItem(string $section, string $key, mixed $value) : void {
+        if (array_key_exists($section, $this->index) && 
+            array_key_exists($key, $this->index[$section])) {
+            $lineno=$this->index[$section][$key];
+            $this->buffer[$lineno][$key]=$value;
+        }
+    }
+    
+    public function addItem(string $section, string $key, mixed $value) : void {
+        if (array_key_exists($section, $this->index) && 
+            array_key_exists($key, $this->index[$section])) {
+            $lineno=$this->index[$section][$key];
+            $this->buffer[$lineno][$key].="/n$value";
+        }
+    }
 
     public function hasItem(string $section, string $key) : bool {
         return  isset($this->index[$section][$key]);

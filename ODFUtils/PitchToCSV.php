@@ -147,10 +147,10 @@ class PitchToCSV {
         }
     }
     
-    private function maskFn(String $filename) : String {
+    public static function maskFn(String $filename) : String {
         return str_replace(
-                [".wav", " ", ".", ",", "#"],
-                ["", "_", "_", "_", "_"],
+                [".wav", " ", ".", ",", "#", "/"],
+                ["", "_", "_", "_", "_", "-"],
                  $filename);
     }
 }
