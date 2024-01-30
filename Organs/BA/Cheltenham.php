@@ -312,7 +312,7 @@ class Cheltenham extends BAOrgan {
     private function MIDIPraat(\GOClasses\Pipe $pipe) : void {
         static $pitchdata=[];
         if (sizeof($pitchdata)==0) {
-            $fp=fopen(__DIR__ . "/Cheltenham.pc", "r");
+            $fp=fopen(__DIR__ . "/Cheltenham.csv", "r");
             fgets($fp);
             while (!feof($fp)) {
                 $line=explode("\t", trim(fgets($fp)));
