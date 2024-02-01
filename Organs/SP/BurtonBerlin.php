@@ -21,8 +21,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlin extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinDemo/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.0.organ";
-    
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.1.organ";
+    const COMMENTS="/n"
+            . "1.1 Corrected surround channels\n"
+            . "\n";
     protected string $root=self::ROOT;
     protected array  $rankpositions=[
         0=>self::RANKS_DIFFUSE,  9=>self::RANKS_DIFFUSE,
@@ -199,7 +201,7 @@ class BurtonBerlin extends SPOrgan {
                 unset($stop->Rank003PipeCount);
             }
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::BurtonBerlin(
@@ -212,7 +214,7 @@ class BurtonBerlin extends SPOrgan {
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
              self::BurtonBerlin(
-                    [self::RANKS_DIRECT=>"Direct", self::RANKS_SEMI_DRY=>"Diffuse", self::RANKS_DIFFUSE=>"Rear"],
+                    [self::RANKS_DIRECT=>"Direct", self::RANKS_DIFFUSE=>"Diffuse", self::RANKS_REAR=>"Rear"],
                      "Surround");
         }
     }
