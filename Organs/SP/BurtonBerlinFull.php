@@ -233,7 +233,7 @@ class BurtonBerlinFull extends SPOrgan {
                     [self::RANKS_REAR=>"Rear"],
                     "Rear");
              self::BurtonBerlinFull(
-                    [self::RANKS_DIRECT=>"Direct", self::RANKS_SEMI_DRY=>"Diffuse", self::RANKS_DIFFUSE=>"Rear"],
+                    [self::RANKS_DIRECT=>"Direct", self::RANKS_DIFFUSE=>"Diffuse", self::RANKS_REAR=>"Rear"],
                      "Surround");
         }
     }
