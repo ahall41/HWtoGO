@@ -96,6 +96,7 @@ class Arnstadt extends SPOrganV2 {
 
     protected $patchKeyActions=[
         1=>"DELETE",
+        2=>["MIDINoteNumOfFirstSourceKey"=>36, "NumberOfKeys"=>30],
         3=>"DELETE",
         4=>"DELETE",
     ];

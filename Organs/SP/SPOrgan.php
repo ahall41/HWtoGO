@@ -260,6 +260,17 @@ abstract class SPOrgan extends \Import\Organ {
         return NULL;
     }
 
+    public function addPanelImages(int $pageid, int $instanceid) : void {
+        foreach($this->patchDisplayPages[$pageid] as $layoutid=>$layout) {
+            $panel=$this->getPanel(($pageid*10)+$layoutid, FALSE);
+            if ($panel) {
+                $this->createPanelImage(
+                    $panel, 
+                    ["InstanceID"=>$instanceid, "ImageIDX"=>1], 
+                    $layoutid);
+            }
+        }
+    }
     
     public function getImageData(array $data, int $layout=0) : array {
         $imagedata=parent::getImageData($data, $layout);
@@ -289,7 +300,7 @@ abstract class SPOrgan extends \Import\Organ {
             $isattack=$rankdata["Noise"]=="KeyOn";
         }
 
-        if (empty($this->releaseCrossfadeLengthMs==0)) {
+        if ($this->releaseCrossfadeLengthMs==0) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
         elseif ($this->releaseCrossfadeLengthMs>0) {
