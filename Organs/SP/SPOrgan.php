@@ -26,6 +26,7 @@ abstract class SPOrgan extends \Import\Organ {
     protected int    $switchwcg=900;
     
     protected ?int $releaseCrossfadeLengthMs=0;
+    protected ?int $loopCrosfadeLengthMs=NULL;
     
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -139,6 +140,10 @@ abstract class SPOrgan extends \Import\Organ {
     }
 
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
+        if (isset($hwdata["Noise"])
+                && in_array($hwdata["Noise"], ["StopOn","StopOff","Ambient"])) {
+            return NULL;
+        }
         $rankid=$hwdata["RankID"];
         if (!isset($hwdata["StopIDs"])) {
             $stopids=[];
@@ -291,7 +296,7 @@ abstract class SPOrgan extends \Import\Organ {
         if (intval($hwdata["RankID"]/10)==54) $key+=12;
         return $key;
     }
-
+    
     public function processSample(array $hwdata, bool $isattack) : ?\GOClasses\Pipe {
         $rankid=$hwdata["RankID"];
         
@@ -300,7 +305,7 @@ abstract class SPOrgan extends \Import\Organ {
             $isattack=$rankdata["Noise"]=="KeyOn";
         }
 
-        if ($this->releaseCrossfadeLengthMs==0) {
+        if ($this->releaseCrossfadeLengthMs===0) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
         elseif ($this->releaseCrossfadeLengthMs>0) {
@@ -308,6 +313,16 @@ abstract class SPOrgan extends \Import\Organ {
         }
         elseif ($this->releaseCrossfadeLengthMs<0) {
             unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        }
+        
+        if ($this->loopCrossfadeLengthMs===0) {
+            $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=0;
+        }
+        elseif ($this->loopCrossfadeLengthMs>0) {
+            $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=$this->loopCrossfadeLengthMs;
+        }
+        elseif ($this->loopCrossfadeLengthMs<0) {
+            unset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]);
         }
 
         return parent::processSample($hwdata, $isattack);

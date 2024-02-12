@@ -29,7 +29,8 @@ class Arnstadt extends SPOrganV2 {
     const RANKS_DISTANT=3;
     const RANKS_REAR=4;
 
-    protected ?int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=-1;
+    protected ?int $loopCrossfadeLengthMs=-1;
     
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,      9=>self::RANKS_DIRECT,
@@ -102,12 +103,12 @@ class Arnstadt extends SPOrganV2 {
     ];
     
     protected $patchStops=[
-        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower (Semi Dry)",    "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
-        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower (Diffuse)",     "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>802],
-        -103=>["StopID"=>-103, "DivisionID"=>1, "Name"=>"Blower (Distant)",     "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>803],
-        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower (Rear)",        "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>804],
-        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Tremulant (Semi Dry)", "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>601],
-        -112=>["StopID"=>-112, "DivisionID"=>1, "Name"=>"Tremulant (Diffuse)",  "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>602],
+        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower (Direct)",     "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
+        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower (Diffuse)",    "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>802],
+        -103=>["StopID"=>-103, "DivisionID"=>1, "Name"=>"Blower (Distant)",    "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>803],
+        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower (Rear)",       "ControllingSwitchID"=>1050,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>804],
+        -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Tremulant (Direct)",  "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>601],
+        -112=>["StopID"=>-112, "DivisionID"=>1, "Name"=>"Tremulant (Diffuse)", "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>602],
         -113=>["StopID"=>-113, "DivisionID"=>1, "Name"=>"Tremulant (Distant)",  "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>603],
         -114=>["StopID"=>-114, "DivisionID"=>1, "Name"=>"Tremulant (Rear)",     "ControllingSwitchID"=>26, "Engaged"=>"N", "Ambient"=>TRUE, "GroupID"=>604],
 
@@ -118,21 +119,21 @@ class Arnstadt extends SPOrganV2 {
         -132=>["StopID"=>-132, "DivisionID"=>3, "Name"=>"OW Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         -133=>["StopID"=>-133, "DivisionID"=>1, "Name"=>"P Key Off",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
         
-          -7=>["StopID"=>  -7, "DivisionID"=>1, "Name"=>"Glocken C (Semi Dry)", "ControllingSwitchID"=>19007, "Ambient"=>TRUE, "GroupID"=>1101],
+          -7=>["StopID"=>  -7, "DivisionID"=>1, "Name"=>"Glocken C (Direct)",   "ControllingSwitchID"=>19007, "Ambient"=>TRUE, "GroupID"=>1101],
         -107=>["StopID"=>-107, "DivisionID"=>1, "Name"=>"Glocken C (Diffuse)",  "ControllingSwitchID"=>19007, "Ambient"=>TRUE, "GroupID"=>1102],
         -207=>["StopID"=>-207, "DivisionID"=>1, "Name"=>"Glocken C (Distant)",  "ControllingSwitchID"=>19007, "Ambient"=>TRUE, "GroupID"=>1103],
         -407=>["StopID"=>-407, "DivisionID"=>1, "Name"=>"Glocken C (Rear)",     "ControllingSwitchID"=>19007, "Ambient"=>TRUE, "GroupID"=>1104],
-         -15=>["StopID"=> -15, "DivisionID"=>1, "Name"=>"Glocken G (Semi Dry)", "ControllingSwitchID"=>19015, "Ambient"=>TRUE, "GroupID"=>1101],
+         -15=>["StopID"=> -15, "DivisionID"=>1, "Name"=>"Glocken G (Direct)",   "ControllingSwitchID"=>19015, "Ambient"=>TRUE, "GroupID"=>1101],
         -115=>["StopID"=>-115, "DivisionID"=>1, "Name"=>"Glocken G (Diffuse)",  "ControllingSwitchID"=>19015, "Ambient"=>TRUE, "GroupID"=>1102],
         -215=>["StopID"=>-215, "DivisionID"=>1, "Name"=>"Glocken G (Distant)",  "ControllingSwitchID"=>19015, "Ambient"=>TRUE, "GroupID"=>1103],
         -415=>["StopID"=>-415, "DivisionID"=>1, "Name"=>"Glocken G (Rear)",     "ControllingSwitchID"=>19015, "Ambient"=>TRUE, "GroupID"=>1104],
-         -28=>["StopID"=> -28, "DivisionID"=>1, "Name"=>"Calcant (Semi Dry)",   "ControllingSwitchID"=>19028, "Ambient"=>TRUE, "GroupID"=>1001],
+         -28=>["StopID"=> -28, "DivisionID"=>1, "Name"=>"Calcant (Direct)",     "ControllingSwitchID"=>19028, "Ambient"=>TRUE, "GroupID"=>1001],
         -128=>["StopID"=>-128, "DivisionID"=>1, "Name"=>"Calcant (Diffuse)",    "ControllingSwitchID"=>19028, "Ambient"=>TRUE, "GroupID"=>1002],
         -228=>["StopID"=>-228, "DivisionID"=>1, "Name"=>"Calcant (Distant)",    "ControllingSwitchID"=>19028, "Ambient"=>TRUE, "GroupID"=>1003],
         -428=>["StopID"=>-428, "DivisionID"=>1, "Name"=>"Calcant (Rear)",       "ControllingSwitchID"=>19028, "Ambient"=>TRUE, "GroupID"=>1004],
-         -29=>["StopID"=> -29, "DivisionID"=>1, "Name"=>"Vogelsang (Semi Dry)", "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1001],
+         -29=>["StopID"=> -29, "DivisionID"=>1, "Name"=>"Vogelsang (Direct)",   "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1001],
         -129=>["StopID"=>-129, "DivisionID"=>1, "Name"=>"Vogelsang (Diffuse)",  "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1002],
-        -229=>["StopID"=>-339, "DivisionID"=>1, "Name"=>"Vogelsang (Distant)",  "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1003],
+        -229=>["StopID"=>-229, "DivisionID"=>1, "Name"=>"Vogelsang (Distant)",  "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1003],
         -429=>["StopID"=>-429, "DivisionID"=>1, "Name"=>"Vogelsang (Rear)",     "ControllingSwitchID"=>19029, "Ambient"=>TRUE, "GroupID"=>1004],
  ];
     
@@ -169,26 +170,25 @@ class Arnstadt extends SPOrganV2 {
         998662=>["Noise"=>"KeyOff",  "GroupID"=>902, "StopIDs"=>[-133]], // Front B (diffuse): Keyboard noise Off Pedal
         998672=>["Noise"=>"KeyOff",  "GroupID"=>903, "StopIDs"=>[-133]], // Front C (distant): Keyboard noise Off Pedal
         998692=>["Noise"=>"KeyOff",  "GroupID"=>904, "StopIDs"=>[-133]], // Rear: Keyboard noise Off Pedal
-        999901=>["Noise"=>"Ambient", "GroupID"=>801, "StopIDs"=>[+250]], // Front A (direct): Blower noise
+        999901=>["Noise"=>"Ambient", "GroupID"=>801, "StopIDs"=>[-101]], // Front A (direct): Blower noise
         999903=>["Noise"=>"Ambient", "GroupID"=>1101, "StopIDs"=>[]], // Front A (direct): Glocken
         999904=>["Noise"=>"Ambient", "GroupID"=>1001, "StopIDs"=>[]], // Front A (direct): Vogelsang
         999905=>["Noise"=>"Ambient", "GroupID"=>601, "StopIDs"=>[-111]], // Front A (direct): Tremulant noise
-        999911=>["Noise"=>"Ambient", "GroupID"=>802, "StopIDs"=>[+251]], // Front B (diffuse): Blower noise
+        999911=>["Noise"=>"Ambient", "GroupID"=>802, "StopIDs"=>[-102]], // Front B (diffuse): Blower noise
         999913=>["Noise"=>"Ambient", "GroupID"=>1102, "StopIDs"=>[]], // Front B (diffuse): Glocken
         999914=>["Noise"=>"Ambient", "GroupID"=>1002, "StopIDs"=>[]], // Front B (diffuse): Vogelsang
         999915=>["Noise"=>"Ambient", "GroupID"=>602, "StopIDs"=>[-112]], // Front B (diffuse): Tremulant noise
-        999921=>["Noise"=>"Ambient", "GroupID"=>803, "StopIDs"=>[+252]], // Front C (distant): Blower noise
+        999921=>["Noise"=>"Ambient", "GroupID"=>803, "StopIDs"=>[-103]], // Front C (distant): Blower noise
         999923=>["Noise"=>"Ambient", "GroupID"=>1003, "StopIDs"=>[]], // Front C (distant): Glocken
         999924=>["Noise"=>"Ambient", "GroupID"=>1003, "StopIDs"=>[]], // Front C (distant): Vogelsang
         999925=>["Noise"=>"Ambient", "GroupID"=>603, "StopIDs"=>[-113]], // Front C (distant): Tremulant noise
-        999941=>["Noise"=>"Ambient", "GroupID"=>804, "StopIDs"=>[+253]], // Rear: Blower noise
+        999941=>["Noise"=>"Ambient", "GroupID"=>804, "StopIDs"=>[-104]], // Rear: Blower noise
         999943=>["Noise"=>"Ambient", "GroupID"=>1004, "StopIDs"=>[]], // Rear: Glocken
         999944=>["Noise"=>"Ambient", "GroupID"=>1004, "StopIDs"=>[]], // Rear: Vogelsang
         999945=>["Noise"=>"Ambient", "GroupID"=>604, "StopIDs"=>[-114]], // Rear: Tremulant noise
     ];
 
     public function import(): void {
-        $this->releaseCrossfadeLengthMs=NULL;
         $this->root=self::ROOT;
         parent::import();
         foreach ($this->getStops() as $stop) {
@@ -322,20 +322,26 @@ class Arnstadt extends SPOrganV2 {
     }
     
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        if (strpos($hwdata["SampleFilename"],"Calcant") ||
+        unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        unset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]);
+        if (($calcant=strpos($hwdata["SampleFilename"],"Calcant")) ||
             in_array($hwdata["RankID"]%100,[3,4,13,14,23,24,43,44])) {
             $stop=$this->getStop(-$hwdata["PipeID"] % 1000);
             if ($stop!==NULL) {
+                if ($calcant) {$stop->Percussive="Y";}
                 $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
                 $ambience=$stop->Ambience();
-                $this->configureAttack($hwdata, $ambience);
+                if ($isattack) {
+                    $this->configureAttack($hwdata, $ambience);
+                } else {
+                    $this->configureRelease($hwdata, $ambience);
+                }
                 return $ambience;
             }
             return NULL;
         }
         return parent::processNoise($hwdata, $isattack);
     }
-    
 }
 
 class ArnstadtDemo extends Arnstadt {
