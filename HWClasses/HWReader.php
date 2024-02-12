@@ -400,9 +400,57 @@ class HWReader {
      * @param string $index - Optional indexing
      */
     public function read(string $name, string $index=NULL) {
-        if (isset($this->cache[$name]))
+        if (isset($this->cache[$name])) {
             return $this->cache[$name];
+        }
+        return $this->domRead($name, $index);
+    }
+    
+    private function objectList(string $name) {
+        foreach($this->document->firstChild->childNodes as $node) {
+            if ($node->nodeType!=XML_ELEMENT_NODE) {continue;}
+            $objecttype=$node->attributes->getNamedItem("ObjectType");
+            //print_r($objecttype);
+            if ($objecttype->nodeValue==$name) {
+                return $node;
+            }
+        }
+        return NULL;
+    }
+
+    public function domRead($name, $index) {
+        $map=[];
+        foreach (self::$maps[$name] as $fr=>$to) {
+            $map[$fr]=$to;
+            $map[$to]=$to;
+        }
+        $result=[];
         
+        $objectList=$this->objectList($name);  
+        if (!$objectList) {return [];}
+        
+        foreach($objectList->childNodes as $row) {
+            if ($row->nodeType!=XML_ELEMENT_NODE) {continue;}
+            $data=[];
+            foreach($row->childNodes as $cell) {
+                if ($cell->nodeType!=XML_ELEMENT_NODE) {continue;}
+                if (array_key_exists($nodename=$cell->nodeName, $map)) {
+                    $data[$map[$nodename]]=$cell->nodeValue;
+                }
+            }
+            if (sizeof($data)>0) {
+                if (empty($index)) {
+                    $result[]=$data;
+                }
+                else {
+                    $result[$data[$index]]=$data;
+                }
+            }
+        }
+        return $this->cache[$name]=$result;
+    }
+
+    public function xpathRead(string $name, string $index=NULL) {
         $map=[];
         foreach (self::$maps[$name] as $fr=>$to) {
             $map[$fr]=$to;
@@ -424,7 +472,7 @@ class HWReader {
                     if (empty($index))
                         $result[]=$data;
                     else
-                         $result[$data[$index]]=$data;
+                        $result[$data[$index]]=$data;
                 }
             }
         }
