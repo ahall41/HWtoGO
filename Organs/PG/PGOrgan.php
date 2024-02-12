@@ -20,6 +20,8 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class PGOrgan extends \Import\Organ {
     
+    protected int $switchNoiseWCG=800;
+    
     protected bool $switchedtremulants=TRUE;
     
     public function createOrgan(array $hwdata): \GOClasses\Organ {
@@ -134,7 +136,7 @@ abstract class PGOrgan extends \Import\Organ {
                 if (isset($switchdata["GroupID"]))
                     $groupid=$switchdata["GroupID"];
                 else
-                    $groupid=800+$posid;
+                    $groupid=$this->switchNoiseWCG+$posid;
                 $windchestgroup=$this->getWindchestGroup($groupid);
                 if ($windchestgroup!==NULL 
                         && $this->getSwitchNoise(($switchid*10)+$posid, FALSE)===NULL) {
