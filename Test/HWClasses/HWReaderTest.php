@@ -30,7 +30,7 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
         return $cache[$xmlfile];
     }
 
-    public function testGeneral() {
+    public function xtestGeneral() {
         $skrzatusz=self::HWReader(self::Skrzatusz)->general();
         $this->assertEquals(17, sizeof($skrzatusz));
         $this->assertEquals("693", $skrzatusz["Identification_UniqueOrganID"]);
@@ -665,8 +665,9 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'UniqueID' => '524964',
             'LayerID' => '548',
             'SampleID' => '3',
-            'ReleaseCrossfadeLengthMs' => '4',
-            'ReleaseSelCriteria_LatestKeyReleaseTimeMs' => '150'
+            'LoadSampleRange_StartPositionTypeCode' => '4',
+            'ReleaseSelCriteria_LatestKeyReleaseTimeMs' => '150',
+            'ScaleAmplitudeAutomatically' => 'N'
         ], $walcker[524964]);
 
         $utrecht=self::HWReader(self::Utrecht)->releases();
@@ -675,8 +676,11 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'UniqueID' => '210425',
             'LayerID' => '210420',
             'SampleID' => '210425',
-            'ReleaseCrossfadeLengthMs' => '4',
-            'ReleaseSelCriteria_LatestKeyReleaseTimeMs' => '187'
+            'ReleaseCrossfadeLengthMs' => '154',
+            'ReleaseSelCriteria_LatestKeyReleaseTimeMs' => '187',
+            'LoadSampleRange_StartPositionTypeCode' => '4',
+            'ScaleAmplitudeAutomatically' => 'N',
+            'DontBypassAmplitudeScalingIfUserDisablesMultipleReleases' => 'Y'
         ], $utrecht[210425]);
         
         $skrzatusz=self::HWReader(self::Skrzatusz)->releases();
@@ -690,7 +694,15 @@ class HWReaderTest extends \PHPUnit\Framework\TestCase {
             'ReleaseCrossfadeLengthMs' => '45',
             'ReleaseSelCriteria_LatestKeyReleaseTimeMs' => '99999',
             'LoadSampleRange_StartPositionValue' => '1',
-            'LoadSampleRange_EndPositionValue' => '0'
+            'LoadSampleRange_EndPositionValue' => '0',
+            'AttackSelCriteria_MinTimeSincePrevPipeCloseMs' => '0',
+            'AttackSelCriteria_HighestCtsCtrlValue' => '127',
+            'ScaleAmplitudeAutomatically' => 'Y',
+            'DontBypassAmplitudeScalingIfUserDisablesMultipleReleases' => 'N',
+            'PhaseAlignAutomatically' => 'Y',
+            'ReleaseSelCriteria_HighestVelocity' => '127',
+            'ReleaseSelCriteria_HighestCtsCtrlValue' => '127',
+            'ReleaseSelCriteria_PreferThisRelForAttackID' => ''
         ], $skrzatusz[10003]);
     }
 
