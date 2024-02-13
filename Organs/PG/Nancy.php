@@ -19,16 +19,15 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Nancy extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/PG/Nancy/";
-    const ODF="Nancy (demo).Organ_Hauptwerk_xml";
+    const ROOT="/GrandOrgue/Organs/PG/NancyFull/";
     const COMMENTS=
-              "Nancy, Cathédrale Notre-Dame-de-l'Annonciation, France (" . self::ODF . ")\n"
+              "Nancy, Cathédrale Notre-Dame-de-l'Annonciation, France (%s)\n"
             . "https://piotrgrabowski.pl/nancy/\n"
             . "\n"
-            . "1.1 Functional couplers; Wave based tremulant (on Positif)"
+            . "1.1 Functional couplers; Wave based tremulant (on Positif)\n"
+            . "1.2 Added full surround\n"
             . "\n";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nancy (demo - %s) 1.1.organ";
+    const VERSION="1.2";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected bool $switchedtremulants=FALSE;
@@ -47,18 +46,18 @@ class Nancy extends PGOrgan {
                ],
             2=>[
                 0=>["Group"=>"Left", "Name"=>"1",   "SetID"=>2000],
-                1=>["Group"=>"Left", "Name"=>"2",   "SetID"=>2200],
-                2=>["Group"=>"Left", "Name"=>"3",   "SetID"=>2400],
+                1=>["Group"=>"Left", "Name"=>"2",   "SetID"=>2200, "Display_ConsoleScreenWidthPixels"=>1920, "Display_ConsoleScreenHeightPixels"=>1440],
+                2=>["Group"=>"Left", "Name"=>"3",   "SetID"=>2400, "Display_ConsoleScreenWidthPixels"=>1440, "Display_ConsoleScreenHeightPixels"=>2560],
                ],
             3=>[
                 0=>["Group"=>"Right", "Name"=>"1",  "SetID"=>3000],
-                1=>["Group"=>"Right", "Name"=>"2",  "SetID"=>3200],
-                2=>["Group"=>"Right", "Name"=>"3",  "SetID"=>3400],
+                1=>["Group"=>"Right", "Name"=>"2",  "SetID"=>3200, "Display_ConsoleScreenWidthPixels"=>1920, "Display_ConsoleScreenHeightPixels"=>1440],
+                2=>["Group"=>"Right", "Name"=>"3",  "SetID"=>3400, "Display_ConsoleScreenWidthPixels"=>1440, "Display_ConsoleScreenHeightPixels"=>2560],
                ],
             4=>[
                 0=>["Group"=>"Simple", "Name"=>"1", "SetID"=>93947],
-                1=>["Group"=>"Simple", "Name"=>"2", "SetID"=>94032],
-                2=>["Group"=>"Simple", "Name"=>"3", "SetID"=>94117],
+                1=>["Group"=>"Simple", "Name"=>"2", "SetID"=>94032, "Display_ConsoleScreenWidthPixels"=>1920, "Display_ConsoleScreenHeightPixels"=>1440],
+                2=>["Group"=>"Simple", "Name"=>"3", "SetID"=>94117, "Display_ConsoleScreenWidthPixels"=>1440, "Display_ConsoleScreenHeightPixels"=>2560],
                ],
             5=>"DELETE", // Crescendo
             6=>[
@@ -189,6 +188,18 @@ class Nancy extends PGOrgan {
         3092=>["Noise"=>"KeyOff",     "GroupID"=>704, "StopIDs"=>[92]],
     ];
     
+    public function import(): void {
+        parent::import();
+
+        foreach($this->getStops() as $stop) {
+            for ($i=1; $i<6; $i++) {
+                $stop->unset("Rank00${i}PipeCount");
+                $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
+            }
+        }
+        $this->getSwitch(20070)->DisplayInInvertedState="Y";  
+    }
+    
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
         $switch=$this->hwdata->switch($switchid);
         if (!empty($switch["Disp_ImageSetIndexEngaged"])) 
@@ -228,27 +239,63 @@ class Nancy extends PGOrgan {
     
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
+        if (!isset($hwdata["PipeLayerNumber"])) {$hwdata["PipeLayerNumber"]=1;}
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return parent::processSample($hwdata, $isattack);
     }
+}
 
+class NancyDemo extends Nancy {
+    
+    const ODF="Nancy (demo).Organ_Hauptwerk_xml";
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;     
+    const TARGET=self::ROOT . "Nancy (demo - %s) " . self::VERSION . ".organ";
+    
     public static function Nancy(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop
-                ="./OrganInstallationPackages/002514/Noises/BlankLoop.wav";
+        \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002514/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
-            $hwi=new Nancy(self::SOURCE);
+            $hwi=new NancyDemo(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getStops() as $stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                }
-            }
-            $hwi->getSwitch(20070)->DisplayInInvertedState="Y";
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+        }
+        else {
+             self::Nancy(
+                    [1=>"(close)"],
+                    "close");
+            self::Nancy( 
+                    [2=>"(front)"],
+                    "front");
+            self::Nancy( 
+                    [3=>"(middle)"],
+                    "middle");
+            self::Nancy(
+                    [4=>"(rear)"],
+                    "rear");
+            self::Nancy( 
+                    [1=>"(close)", 2=>"(front)", 3=> "(middle)", 4=>"(rear)"],
+                    "surround");
+        }
+    }   
+} 
+
+class NancyFull extends Nancy {
+    
+    const ODF="Nancy.Organ_Hauptwerk_xml";
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;     
+    const TARGET=self::ROOT . "Nancy (%s)" . self::VERSION . ".organ";
+    
+    public static function Nancy(array $positions=[], string $target="") {
+        \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002513/Noises/BlankLoop.wav";
+        if (sizeof($positions)>0) {
+            $hwi=new NancyFull(self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            $hwi->getOrgan()->ChurchName .= " ($target)";
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
             self::Nancy(
@@ -268,6 +315,7 @@ class Nancy extends PGOrgan {
                     "surround");
         }
     }   
-    
-}
-Nancy::Nancy();
+} 
+
+NancyFull::Nancy();
+NancyDemo::Nancy();

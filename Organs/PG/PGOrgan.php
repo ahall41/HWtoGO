@@ -244,7 +244,7 @@ abstract class PGOrgan extends \Import\Organ {
         $method=$isattack ? "configureAttack" : "configureRelease";
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
-        $midi=$hwdata["NormalMIDINoteNumber"];
+        $midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60;
         if ($type=="Ambient" && in_array($midi,[36,37,38])) { // Ignore Rank 4 Trem for now
             $stop=$this->getStop(($isattack ? +1 : -1) * ($hwdata["RankID"] + $midi-36));
             if ($stop!==NULL) {
