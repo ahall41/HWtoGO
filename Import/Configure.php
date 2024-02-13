@@ -52,21 +52,19 @@ abstract Class Configure extends Create {
     public function createPanel(array $hwdata) : ?\GOClasses\Panel {
         $panelid=(isset($hwdata["PanelID"])) ? $hwdata["PanelID"]
                 : (isset($hwdata["PageID"]) ? $hwdata["PageID"] : FALSE);
-        if ($panelid===FALSE)
-            return NULL;
-        else {
-            $hwdata["PanelID"]=$panelid;
-            $panel=parent::createPanel($hwdata);
-            $map=[
-                ["Name","Identification_LCDDisplayShortName"],
-                ["Name","Name"],
-                ["Group","Group"],
-                ["DispScreenSizeHoriz","Display_ConsoleScreenWidthPixels"],
-                ["DispScreenSizeVert","Display_ConsoleScreenHeightPixels"]
-            ];
-            $this->map($map, $hwdata, $panel);
-            return $panel;
-        }
+        if ($panelid===FALSE) {return NULL;}
+        
+        $hwdata["PanelID"]=$panelid;
+        $panel=parent::createPanel($hwdata);
+        $map=[
+            ["Name","Identification_LCDDisplayShortName"],
+            ["Name","Name"],
+            ["Group","Group"],
+            ["DispScreenSizeHoriz","Display_ConsoleScreenWidthPixels"],
+            ["DispScreenSizeVert","Display_ConsoleScreenHeightPixels"]
+        ];
+        $this->map($map, $hwdata, $panel);
+        return $panel;
     }
 
     /**
