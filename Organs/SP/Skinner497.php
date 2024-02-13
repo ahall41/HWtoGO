@@ -23,9 +23,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Skinner497 extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/Skinner497/";
-    const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3.organ";
+    const ROOT="/GrandOrgue/Organs/SP/Skinner497Full/";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -63,21 +61,21 @@ class Skinner497 extends SPOrgan {
     ];
 
     protected $patchDivisions=[
-            6=>"DELETE", // Echo
+            //6=>"DELETE", // Echo
             8=>["DivisionID"=>8, "Name"=>"Blower", "Noise"=>TRUE],
             9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
     ];
 
     protected $patchTremulants=[
         126=>["Type"=>"Switched", "DivisionID"=>5], // Solo
-        125=>"DELETE", // Echo
+        125=>["Type"=>"Switched", "DivisionID"=>5], // Echo
          38=>["Type"=>"Switched", "DivisionID"=>4], // Swell
         127=>["Type"=>"Synth",    "DivisionID"=>3, "GroupIDs"=>[301,302,303,304]], // Great
         128=>["Type"=>"Switched", "DivisionID"=>2], // Choir
     ];
 
     protected $patchEnclosures=[
-        995=>"DELETE", // Echo
+        995=>["GroupIDs"=>[601,603,604], "AmpMinimumLevel"=>40], // Echo
         996=>["GroupIDs"=>[501,503,504], "AmpMinimumLevel"=>40], // Solo
         997=>["GroupIDs"=>[401,403,404], "AmpMinimumLevel"=>40], // Swell
         998=>["GroupIDs"=>[201,203,204], "AmpMinimumLevel"=>40], // Choir
@@ -137,19 +135,38 @@ class Skinner497 extends SPOrgan {
     ];
 
     public function import(): void {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=61;
         parent::import();
-        foreach ($this->getStops() as $stop) {
+        foreach ($this->getStops() as $id=>$stop) {
             for ($rn=1; $rn<10; $rn++) {
-                $r=sprintf("Rank%03dPipeCount", $rn);
-                if ($stop->isset($r) && $stop->get($r)>61)
-                    $stop->set($r, 61);
-            }
+                $pc=sprintf("Rank%03dPipeCount", $rn);
+                switch ($id) {
+                    case 8:     // P. Bourdon 32
+                    case 91:    // G. Second Diapason 8
+                        break;
+                    
+                    default:
+                        $stop->unset($pc);
+                        break;
+                }
+           }
         }
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2304; 
         return parent::createOrgan($hwdata);
+    }
+    
+    public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
+        if ($hwdata["DivisionID"]==6) {$hwdata["DivisionID"]=5;}
+        return parent::createStop($hwdata);
+    }
+    
+    public function createSwitchNoise(string $type, array $hwdata): void {
+        if (isset($hwdata["DivisionID"]) && $hwdata["DivisionID"]==6) {$hwdata["DivisionID"]=5;}
+        parent::createSwitchNoise($type, $hwdata);
     }
     
     private function treeWalk($root, $dir="", &$results=[]) {
@@ -221,15 +238,19 @@ class Skinner497 extends SPOrgan {
         unset($hwdata["ReleaseCrossfadeLengthMs"]); // =30;
         return parent::processSample($hwdata, $isattack);
     }
+}
+
+class Skinner497Demo extends Skinner497 {
+    
+    const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3.organ";
     
     /**
      * Run the import
      */
     public static function Skinner497(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=61;
         if (sizeof($positions)>0) {
-            $hwi=new Skinner497(self::ROOT . self::SOURCE);
+            $hwi=new Skinner497Demo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace(", Demo", " ($target)", $hwi->getOrgan()->ChurchName);
@@ -253,12 +274,55 @@ class Skinner497 extends SPOrgan {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "6ch");
+                   "Surround");
         }
     }
 }
+
+class Skinner497Full extends Skinner497 {
+    
+    const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (%s) 1.3.organ";
+    
+    /**
+     * Run the import
+     */
+    public static function Skinner497(array $positions=[], string $target="") {
+        if (sizeof($positions)>0) {
+            $hwi=new Skinner497Full(self::ROOT . self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            $hwi->getOrgan()->ChurchName.=" ($target)";
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->getManual(4)->NumberOfLogicalKeys=73;
+            $hwi->saveODF(sprintf(self::TARGET, $target));
+        }
+        else {
+            self::Skinner497(
+                    [self::RANKS_DIRECT=>"Direct"],
+                    "Direct");
+            self::Skinner497(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "Diffuse");
+            self::Skinner497(
+                    [self::RANKS_REAR=>"Rear"],
+                    "Rear");
+            self::Skinner497(
+                    [
+                        self::RANKS_DIRECT=>"Direct", 
+                        self::RANKS_DIFFUSE=>"Diffuse", 
+                        self::RANKS_REAR=>"Rear"
+                    ],
+                   "Surround");
+        }
+    }
+}
+
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
     throw new \Exception("Error $errstr");
     die();
 }
-set_error_handler("Organs\SP\ErrorHandler");Skinner497::Skinner497();
+set_error_handler("Organs\SP\ErrorHandler");
+
+Skinner497Full::Skinner497();
+Skinner497Demo::Skinner497();
