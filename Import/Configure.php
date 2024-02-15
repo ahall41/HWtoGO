@@ -146,6 +146,9 @@ abstract Class Configure extends Create {
                     $switch->DefaultToEngaged=$hwdata["Engaged"];
                     $switch->GCState=-1;
                 }
+                if (isset($hwdata["GCState"])) {
+                    $switch->GCState=$hwdata["GCState"];
+                }
                 if (isset($hwdata["StoreInGeneral"])) {
                     $stop->StoreInGeneral=$hwdata["StoreInGeneral"];
                 }
