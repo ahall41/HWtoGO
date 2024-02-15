@@ -17,18 +17,16 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Goch extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/PG/Goch/";
-    const ODF="Goch (demo).Organ_Hauptwerk_xml";
+    const ROOT="/GrandOrgue/Organs/PG/GochFull/";
+    const VERSION="1.2";
     const COMMENTS=
-              "Pfarrkirche St. Maria Magdalena in Goch, Germany (" . self::ODF . ")\n"
+              "Pfarrkirche St. Maria Magdalena in Goch, Germany (%s)\n"
             . "https://piotrgrabowski.pl/goch/\n"
             . "\n"
             . "1.1 wave based tremulant model\n"
+            . "1.2 full surround included\n"
             . "\n";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Goch (demo - %s) 1.1.organ";
     
-    protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected bool $switchedtremulants=FALSE;
     
     public $positions=[];
@@ -87,16 +85,22 @@ class Goch extends PGOrgan {
           403=>["EnclosureID"=>403, "Name"=>"Rear SL",      "Panels"=>[60=>523], "GroupIDs"=>[403], "AmpMinimumLevel"=>0],
           609=>["EnclosureID"=>609, "Name"=>"Key Actions",  "Panels"=>[60=>571], "GroupIDs"=>[601,602,603,604], "AmpMinimumLevel"=>0],
           709=>["EnclosureID"=>709, "Name"=>"Stop Actions", "Panels"=>[60=>572], "GroupIDs"=>[701,702,703,704], "AmpMinimumLevel"=>0],
-          801=>["EnclosureID"=>801, "Name"=>"Blower",       "Panels"=>[60=>573], "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>0],
+          801=>["EnclosureID"=>801, "Name"=>"Ambient",      "Panels"=>[60=>573], "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>0],
           901=>["EnclosureID"=>901, "Name"=>"Close",        "Panels"=>[60=>540], "GroupIDs"=>[101,201,301,401], "AmpMinimumLevel"=>0],
           902=>["EnclosureID"=>902, "Name"=>"Front",        "Panels"=>[60=>541], "GroupIDs"=>[102,202,302,402], "AmpMinimumLevel"=>0],
           903=>["EnclosureID"=>903, "Name"=>"Rear",         "Panels"=>[60=>542], "GroupIDs"=>[103,203,303,403], "AmpMinimumLevel"=>0],
     ];
     
     protected $patchStops=[
-          80=>["StopID"=>   80, "DivisionID"=>1, "Name"=>"Noises (close)",      "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
-        1080=>["StopID"=> 1080, "DivisionID"=>1, "Name"=>"Noises (front)",      "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
-        2080=>["StopID"=> 2080, "DivisionID"=>1, "Name"=>"Noises (rear)",       "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>801],
+        8001=>["StopID"=>   8001, "DivisionID"=>1, "Name"=>"Ambience (close)",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
+      108001=>["StopID"=> 108001, "DivisionID"=>1, "Name"=>"Ambience (front)",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
+      208001=>["StopID"=> 208001, "DivisionID"=>1, "Name"=>"Ambience (rear)",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
+        8002=>["StopID"=>   8002, "DivisionID"=>1, "Name"=>"Blower (close)",    "ControllingSwitchID"=>141,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
+      108002=>["StopID"=> 108002, "DivisionID"=>1, "Name"=>"Blower (front)",    "ControllingSwitchID"=>141,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
+      208002=>["StopID"=> 208002, "DivisionID"=>1, "Name"=>"Blower (rear)",     "ControllingSwitchID"=>141,  "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>903],
+        8003=>["StopID"=>   8003, "DivisionID"=>1, "Name"=>"Tremulant (close)", "ControllingSwitchID"=>56,   "Ambient"=>TRUE, "GroupID"=>901],
+      108003=>["StopID"=> 108003, "DivisionID"=>1, "Name"=>"Tremulant (front)", "ControllingSwitchID"=>56,   "Ambient"=>TRUE, "GroupID"=>902],
+      208003=>["StopID"=> 208003, "DivisionID"=>1, "Name"=>"Tremulant (rear)",  "ControllingSwitchID"=>56,   "Ambient"=>TRUE, "GroupID"=>903],
           83=>["StopID"=>   83, "DivisionID"=>1, "Name"=>"P Key On",            "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
           84=>["StopID"=>   84, "DivisionID"=>1, "Name"=>"P Key Off",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
           85=>["StopID"=>   85, "DivisionID"=>2, "Name"=>"GO Key On",           "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
@@ -144,29 +148,42 @@ class Goch extends PGOrgan {
         2089=>["Noise"=>"KeyOn",      "GroupID"=>703, "StopIDs"=>[89]],
         2090=>["Noise"=>"KeyOff",     "GroupID"=>703, "StopIDs"=>[90]],
     ];
-    
-    public function patchData(\HWClasses\HWData $hwd): void {
-        $index=10000;
-        foreach ([2,5,6,11,12,14,16,19,22,23] as $stopid) {
-            $nodes=($stopid<10 ? 29 : 61);
-            $increment=($stopid==5 ? 12 : 0);
-            foreach([0, 1000, 2000] as $baseid) {
-                $rankid=$baseid + ($stopid==5 ? 2 : $stopid);
-                $this->patchStopRanks[$index++]=[
-                    "StopID"=>$stopid, 
-                    "RankID"=>$rankid,
-                    "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
-                    "NumberOfMappedDivisionInputNodes"=>$nodes,
-                        "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+
+    public function import(): void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 6:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        } 
+        exit(); //*/
+        parent::import();
+        foreach($this->getStops() as $stop) {
+            for ($i=1; $i<6; $i++) {
+                $stop->unset("Rank00${i}PipeCount");
+                $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
             }
         }
-        parent::patchData($hwd);
-    }
+}
     
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
         $switch=$this->hwdata->switch($switchid);
-        if (!empty($switch["Disp_ImageSetIndexEngaged"])) 
+        if (!empty($switch["Disp_ImageSetIndexEngaged"])) {
             parent::configureKeyboardKey($manual, $switchid, $midikey);
+        }
     }
 
     public function createPanel($hwdata): ?\GOClasses\Panel {
@@ -189,21 +206,25 @@ class Goch extends PGOrgan {
         if ($hwdata["ConditionSwitchID"]>200) $hwdata["ConditionSwitchID"]-=200;
         return parent::createCoupler($hwdata);
     }
-
+    
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Noise {
         $method=$isattack ? "configureAttack" : "configureRelease";
         $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
         $type=$this->hwdata->rank($hwdata["RankID"])["Noise"];
         $midi=$hwdata["NormalMIDINoteNumber"];
         if ($type=="Ambient") {
-            /* error_log(print_r($hwdata, TRUE));
-            $stop=$this->getStop(($isattack ? +1 : -1) * ($hwdata["RankID"] + $midi-26));
-            if ($stop!==NULL) {
-                $ambience=$stop->Ambience();
-                $ambience->LoadRelease="Y";
-                unset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]);
-                $this->$method($hwdata, $ambience);
-            } */
+            switch (($pipeid=$hwdata["PipeID"]) % 10000) {
+                case 8001: // Ambience
+                case 8002: // Blower
+                case 8003: // Tremulant?
+                    $stop=$this->getStop($hwdata["PipeID"]);
+                    if ($stop) {
+                        $ambience=$stop->Ambience();
+                        $ambience->LoadRelease="Y";
+                        $this->$method($hwdata, $ambience);
+                    }
+                    break;
+            }
         }
         else {
             unset($hwdata["NormalMIDINoteNumber"]); // Use filename
@@ -225,22 +246,41 @@ class Goch extends PGOrgan {
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
         return parent::processSample($hwdata, $isattack);
     }
+}
+
+class GochDemo extends Goch {
+    
+    const ODF="Goch (demo).Organ_Hauptwerk_xml";
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
+    const TARGET=self::ROOT . "Goch (demo - %s) " . self::VERSION . ".organ";
    
+    public function patchData(\HWClasses\HWData $hwd): void {
+        $index=10000;
+        foreach ([2,5,6,11,12,14,16,19,22,23] as $stopid) {
+            $nodes=($stopid<10 ? 29 : 61);
+            $increment=($stopid==5 ? 12 : 0);
+            foreach([0, 1000, 2000] as $baseid) {
+                $rankid=$baseid + ($stopid==5 ? 2 : $stopid);
+                $this->patchStopRanks[$index++]=[
+                    "StopID"=>$stopid, 
+                    "RankID"=>$rankid,
+                    "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
+                    "NumberOfMappedDivisionInputNodes"=>$nodes,
+                        "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+            }
+        }
+        parent::patchData($hwd);
+    }
+
     public static function Goch(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop="BlankLoop.wav";
+        \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002518/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
-            $hwi=new Goch(self::SOURCE);
+            $hwi=new GochDemo(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getStops() as $stop) {
-                for ($i=1; $i<6; $i++) {
-                    $stop->unset("Rank00${i}PipeCount");
-                    $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
-                }
-            }
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
             self::Goch(
@@ -257,11 +297,91 @@ class Goch extends PGOrgan {
                     "surround");
         }
     }   
-    
 }
+
+class GochFull extends Goch {
+    
+    const ODF="Goch.Organ_Hauptwerk_xml";
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
+    const TARGET=self::ROOT . "Goch (%s) " . self::VERSION . ".organ";
+
+    public function patchData(\HWClasses\HWData $hwd): void {
+        $index=10000;
+        for ($stopid=1; $stopid<=42; $stopid++) {
+            // if ($stopid>=25 && $stopid!=36) continue;
+            $nodes=($stopid<10 ? 29 : 61);
+            $increment=($stopid==5 ? 12 : 0);
+            foreach([0, 1000, 2000] as $baseid) {
+                switch ($stopid) {
+                    case  3: // P Flûte 16
+                        $rankid=$baseid + 11;
+                        $increment=0;
+                        break;
+                        
+                    case  4: // P Violonbasse 16’
+                        $rankid=$baseid + 1;
+                        $increment=12;
+                        break;
+                    
+                    case  5: // P Soubasse 16
+                        $rankid=$baseid + 2;
+                        $increment=12;
+                        break;
+                        
+                    case 36: // SL Montre 8
+                        $rankid=$baseid + 11;
+                        $increment=12;
+                        break;
+                  
+                    default:
+                        $rankid=$baseid + $stopid;
+                        $increment=0;
+                        break;
+                }
+                
+                $this->patchStopRanks[$index++]=[
+                    "StopID"=>$stopid, 
+                    "RankID"=>$rankid,
+                    "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
+                    "NumberOfMappedDivisionInputNodes"=>$nodes,
+                    "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+            }
+        }
+        parent::patchData($hwd);
+    }
+    
+    public static function Goch(array $positions=[], string $target="") {
+        \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002518/Noises/BlankLoop.wav";
+        if (sizeof($positions)>0) {
+            $hwi=new GochFull(self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            $hwi->getOrgan()->ChurchName.=" ($target)";
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+        }
+        else {
+            self::Goch(
+                    [1=>"(close)"],
+                    "close");
+            self::Goch( 
+                    [2=>"(front)"],
+                    "front");
+            self::Goch(
+                    [3=>"(rear)"],
+                    "rear");
+            self::Goch( 
+                    [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
+                    "surround");
+        }
+    }   
+}
+
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
     throw new \Exception("Error $errstr");
     die();
 }
 set_error_handler("Organs\PG\ErrorHandler");
-Goch::Goch();
+
+GochFull::Goch();
+GochDemo::Goch();

@@ -21,6 +21,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
 abstract class PGOrgan extends \Import\Organ {
     
     protected int $switchNoiseWCG=800;
+    protected int $loopCrossfadeLengthInSrcSampleMs=-1;
     
     protected bool $switchedtremulants=TRUE;
     
@@ -269,7 +270,9 @@ abstract class PGOrgan extends \Import\Organ {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=$this->loopCrossfadeLengthInSrcSampleMs;
+        if ($this->loopCrossfadeLengthInSrcSampleMs>-1) {
+            $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=$this->loopCrossfadeLengthInSrcSampleMs;
+        }
         if ($hwdata["PipeLayerNumber"]==2) {
             if ($this->switchedtremulants) {
                 $hwdata["RankID"]=-$hwdata["RankID"];
