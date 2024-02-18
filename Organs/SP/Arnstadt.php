@@ -22,6 +22,7 @@ class Arnstadt extends SPOrganV2 {
     const VERSION="1.1";
     const REVISIONS="\n"
             . "1.1 Added full surround\n"
+            . "    Added Calcant to demo version\n"
             . "\n";
     
     const RANKS_DIRECT=1;
@@ -29,8 +30,8 @@ class Arnstadt extends SPOrganV2 {
     const RANKS_DISTANT=3;
     const RANKS_REAR=4;
 
-    protected ?int $releaseCrossfadeLengthMs=-1;
-    protected ?int $loopCrossfadeLengthMs=-1;
+    protected ?int $releaseCrossfadeLengthMs=NULL;
+    protected ?int $loopCrossfadeLengthMs=NULL;
     
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,      9=>self::RANKS_DIRECT,
@@ -352,6 +353,14 @@ class ArnstadtDemo extends Arnstadt {
         unset ($this->patchDivisions[11]);
         unset ($this->patchEnclosures[910]);
         unset ($this->patchEnclosures[911]);
+        unset ($this->patchStops[-29]); // Vogelsang
+        unset ($this->patchStops[-129]);
+        unset ($this->patchStops[-229]);
+        unset ($this->patchStops[-429]);
+        unset ($this->patchRanks[999904]);
+        unset ($this->patchRanks[999914]);
+        unset ($this->patchRanks[999924]);
+        unset ($this->patchRanks[999944]);
         parent::patchData($hwd);
     }
     
@@ -378,7 +387,7 @@ class ArnstadtDemo extends Arnstadt {
             $hwi->saveODF(sprintf(self::TARGET, $target), Arnstadt::REVISIONS);
         }
         else { 
-            self::Arnstadt(
+            /* self::Arnstadt(
                     [Arnstadt::RANKS_DIRECT=>"Direct"],
                     "Semi-Dry");
             self::Arnstadt(
@@ -389,7 +398,7 @@ class ArnstadtDemo extends Arnstadt {
                      "Distant");
             self::Arnstadt(
                     [Arnstadt::RANKS_REAR=>"Rear"],
-                    "Rear");
+                    "Rear"); */
             self::Arnstadt(
                     [
                         Arnstadt::RANKS_DIRECT=>"Direct", 
