@@ -265,13 +265,13 @@ abstract class SPOrgan extends \Import\Organ {
         return NULL;
     }
 
-    public function addPanelImages(int $pageid, int $instanceid) : void {
+    public function addPanelImages(int $pageid, int $instanceid, int $idx=1) : void {
         foreach($this->patchDisplayPages[$pageid] as $layoutid=>$layout) {
             $panel=$this->getPanel(($pageid*10)+$layoutid, FALSE);
             if ($panel) {
                 $this->createPanelImage(
                     $panel, 
-                    ["InstanceID"=>$instanceid, "ImageIDX"=>1], 
+                    ["InstanceID"=>$instanceid, "ImageIDX"=>$idx], 
                     $layoutid);
             }
         }
