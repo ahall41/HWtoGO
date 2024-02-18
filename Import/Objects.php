@@ -191,6 +191,13 @@ class Objects {
         else
             return $this->newSwitch($id, $name);
     }
+    
+    public function getSwitches() : array {
+        if (isset($this->Model[self::Switches]))
+            return $this->Model[self::Switches];
+        else
+            return [];
+    }
 
     public function getSwitch(int $id, bool $hardfail=TRUE) : ?\GOClasses\Sw1tch {
         if ($hardfail || isset($this->Model[self::Switches][$id]))
