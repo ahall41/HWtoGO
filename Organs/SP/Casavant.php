@@ -18,7 +18,7 @@ require_once __DIR__ . "/SPOrgan.php";
  * 
  * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) start at MIDI 48
  *        Full Organ should turn all stops on
- *        Clochettes (its a 'Toy') not working
+ *        Clochettes which is near & which is far?
  * 
  * @author andrew
  */
@@ -218,7 +218,7 @@ class Casavant extends SPOrgan {
         else
             throw new \Exception ("File $filename does not exist!");
     }
-
+    
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
         $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
@@ -231,8 +231,22 @@ class Casavant extends SPOrgan {
                 $hwdata["IsTremulant"]=1;
                 break;
         }
-    if (strpos("cloch/", $hwdata["SampleFilename"])) {print_r($hwdata); exit;}
-        return parent::processSample($hwdata, $isattack);
+        
+        switch (($pipeid=$hwdata["PipeID"])) {
+            case 96088:
+            case 96588:
+                $stop=$this->getStop($pipeid%1000);
+                if ($stop && $isattack) {
+                    $ambience=$stop->Ambience();
+                    $this->configureAttack($hwdata, $ambience);
+                }
+                break;
+            
+            default:
+                return parent::processSample($hwdata, $isattack);
+                break;
+        }
+        return NULL;
     }
 }
 
@@ -314,7 +328,7 @@ class CasavantFull extends Casavant {
 
     protected $patchDivisions=[
         6=>"DELETE",
-        7=>["DivisionID"=>7, "Name"=>"Toys",    "Noise"=>TRUE],
+        7=>["DivisionID"=>7, "Name"=>"Toys"],
         8=>["DivisionID"=>8, "Name"=>"Blower",  "Noise"=>TRUE],
         9=>["DivisionID"=>9, "Name"=>"Tracker", "Noise"=>TRUE]
     ];
@@ -329,8 +343,8 @@ class CasavantFull extends Casavant {
         -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"Grt Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"Rec key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"Pos key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
-        - 88=>["StopID"=>- 88, "DivisionID"=>1, "Name"=>"Clochette (Front)", "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>701],
-        -188=>["StopID"=>-188, "DivisionID"=>1, "Name"=>"Clochette (Rear)",  "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>704],
+          88=>["StopID"=>  88, "DivisionID"=>1, "Name"=>"Clochette (Front)", "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>701],
+         588=>["StopID"=> 588, "DivisionID"=>1, "Name"=>"Clochette (Rear)",  "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>704],
     ];
     
     protected $patchRanks=[
