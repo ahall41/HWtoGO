@@ -18,7 +18,8 @@ require_once __DIR__ . "/SPOrgan.php";
  * 
  * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) start at MIDI 48
  *        Full Organ should turn all stops on
- *        Clochettes which is near & which is far?
+ *        Clochettes - which is near & which is far?
+ *        Stop effects
  * 
  * @author andrew
  */
@@ -146,7 +147,7 @@ class Casavant extends SPOrgan {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 5:
+                case 10:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
                          isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
                          isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
@@ -177,7 +178,6 @@ class Casavant extends SPOrgan {
     
     public function addImages() : void {
         $this->addPanelImages(2, 13087); // Full Organ
-        //$this->addPanelImages(2, 13088); // Clochettes
         $this->addPanelImages(2, 914); // Crescendo
         $this->addPanelImages(2, 1458); // Matrix 1
         $this->addPanelImages(2, 1459); // Matrix 2
@@ -189,7 +189,6 @@ class Casavant extends SPOrgan {
         $this->addPanelImages(5, 200010); // Pipe Detume
         
         $this->addPanelImages(10, 11087); // Full Organ
-        //$this->addPanelImages(10, 11088); // Clochettes
         $this->addPanelImages(10, 916); // Crescendo
         $this->addPanelImages(10, 1455); // Matrix 1
         $this->addPanelImages(10, 1456); // Matrix 2
@@ -291,6 +290,7 @@ class CasavantDemo extends Casavant {
         parent::addImages();;
         $this->addPanelImages(2, 13088); // Clochettes;
         $this->addPanelImages(10, 11088); // Clochettes;
+        $this->addPanelImages(10, 11089); // Blower;
     }
     
     /**
@@ -439,6 +439,10 @@ class CasavantFull extends Casavant {
                 break;
         }
         return parent::createRank($hwdata, $keynoise);
+    }
+    
+    public function import(): void {
+        parent::import();
     }
     
     /**
