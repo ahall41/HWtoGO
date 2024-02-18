@@ -123,10 +123,6 @@ class Casavant extends SPOrgan {
         $this->addVirtualKeyboards(3, [1,2,3],[1,2,3]);
     }
     
-    public function createSwitchNoise(string $type, array $hwdata) : void {
-        return; // No Op
-    }
-    
     public function createManuals(array $keyboards): void {
         foreach ([1,2,3,4] as $id) {
             $this->createManual($keyboards[$id]);
@@ -305,6 +301,10 @@ class CasavantDemo extends Casavant {
         998=>["Name"=>"Pos", "Panels"=>[2=>[978, NULL, 978], 3=>[976, NULL, 976], 10=>[980, NULL, 980]], 
             "GroupIDs"=>[301,304], "AmpMinimumLevel"=>20], 
     ];
+    
+    public function createSwitchNoise(string $type, array $hwdata): void {
+        return;
+    }
 
     public function addImages() : void {
         parent::addImages();;
@@ -361,7 +361,7 @@ class CasavantFull extends Casavant {
     ];
 
     protected $patchStops=[
-          89=>["StopID"=>  89, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>1050, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N", "Ambient"=>TRUE, "GroupID"=>800],
+          89=>["StopID"=>  89, "DivisionID"=>1, "Name"=>"Blower",      "ControllingSwitchID"=>19089, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N", "Ambient"=>TRUE, "GroupID"=>800],
         -111=>["StopID"=>-111, "DivisionID"=>1, "Name"=>"Ped Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -112=>["StopID"=>-112, "DivisionID"=>2, "Name"=>"Grt Key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -113=>["StopID"=>-113, "DivisionID"=>3, "Name"=>"Rec key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
@@ -375,9 +375,9 @@ class CasavantFull extends Casavant {
     ];
     
     protected $patchRanks=[
-          8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
-          9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
-        950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[124]],
+          8=>["Noise"=>"StopOff",  "GroupID"=>900, "StopIDs"=>[]],
+          9=>["Noise"=>"StopOn",   "GroupID"=>900, "StopIDs"=>[]],
+        950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[89]],
         981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-111]],
         982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-112]],
         983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-113]],
@@ -449,6 +449,31 @@ class CasavantFull extends Casavant {
                 break;
         }
         return parent::createStop($hwdata);
+    }
+
+    public function createSwitchNoise(string $type, array $hwdata): void {
+       
+        switch (isset($hwdata["StopID"]) ?  $hwdata["StopID"] : 0 ) {
+            case 11: // Ped. Clairon en chamade
+            case 16: // Ped. Trompette en chamade
+                $hwdata["DivisionID"]=1;
+                break;
+            
+            case 45: // GO. Trompette en chamade 8
+                $hwdata["DivisionID"]=2;
+                break;
+            
+            case 40: // Rec. Trompette en chamade 8
+                $hwdata["DivisionID"]=4;
+                break;
+            
+            case 62: // Pos. Clairon en chamade
+            case 67: // Pos. Trompette en chamade 8
+            case 71: // Pos. Bombarde en chamade 16
+                $hwdata["DivisionID"]=3;
+                break;
+        }
+        parent::createSwitchNoise($type, $hwdata);
     }
     
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
