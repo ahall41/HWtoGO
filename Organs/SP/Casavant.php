@@ -10,14 +10,14 @@
 
 namespace Organs\SP;
 require_once __DIR__ . "/SPOrgan.php";
+require_once __DIR__ . "/../../GOClasses/General.php";
 
 /**
  * Import Sonus Paradisi Casavant, opus 3742 (1995), Bellevue, Washington to GrandOrgue
  * The mixer panel could not be completed as the HW ODF references
  * to the corresponding images are missing
  * 
- * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) start at MIDI 48
- *        Full Organ should turn all stops on
+ * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) [???]
  *        Clochettes - which is near & which is far?
  *        Stop effects
  * 
@@ -82,6 +82,28 @@ class Casavant extends SPOrgan {
 
     public function import(): void {
         parent::import();
+               
+        $general=new \GOClasses\General("Full Organ");
+        foreach ($this->getStops() as $stopid=>$stop) {
+            if (($switch=$this->getSwitch($stopid, FALSE))) {
+                $general->Switch($switch);
+            }
+        }        
+        foreach([20, 22, 100, 102] as $panelid) {
+            $panel=$this->getPanel($panelid);
+            $element=$panel->GUIElement($general);
+            switch($panelid) {
+                case 20:
+                case 22:
+                    $this->configureImage($element, ["SwitchID"=>13087], $panelid % 10);
+                    break;
+                case 100:
+                case 102:
+                    $this->configureImage($element, ["SwitchID"=>11087], $panelid % 10);
+            }
+        }
+        
+ 
         
         $this->addImages();
         foreach([440,444,448,449,660,664,668,669] as $rankid) { // Celeste
@@ -177,7 +199,6 @@ class Casavant extends SPOrgan {
     }
     
     public function addImages() : void {
-        $this->addPanelImages(2, 13087); // Full Organ
         $this->addPanelImages(2, 914); // Crescendo
         $this->addPanelImages(2, 1458); // Matrix 1
         $this->addPanelImages(2, 1459); // Matrix 2
@@ -188,7 +209,6 @@ class Casavant extends SPOrgan {
         $this->addPanelImages(5, 200000); // Pipe Coupling
         $this->addPanelImages(5, 200010); // Pipe Detume
         
-        $this->addPanelImages(10, 11087); // Full Organ
         $this->addPanelImages(10, 916); // Crescendo
         $this->addPanelImages(10, 1455); // Matrix 1
         $this->addPanelImages(10, 1456); // Matrix 2
@@ -288,7 +308,8 @@ class CasavantDemo extends Casavant {
 
     public function addImages() : void {
         parent::addImages();;
-        $this->addPanelImages(2, 13088); // Clochettes;
+        $this->addPanelImages( 2, 13088); // Clochettes;
+        $this->addPanelImages( 2, 11089); // Blower;
         $this->addPanelImages(10, 11088); // Clochettes;
         $this->addPanelImages(10, 11089); // Blower;
     }
@@ -439,10 +460,6 @@ class CasavantFull extends Casavant {
                 break;
         }
         return parent::createRank($hwdata, $keynoise);
-    }
-    
-    public function import(): void {
-        parent::import();
     }
     
     /**
