@@ -17,9 +17,7 @@ require_once __DIR__ . "/../../GOClasses/General.php";
  * The mixer panel could not be completed as the HW ODF references
  * to the corresponding images are missing
  * 
- * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) [???]
- *        Clochettes - which is near & which is far?
- *        Stop effects
+ * @todo: Full Organ, Crescendo
  * 
  * @author andrew
  */
@@ -258,8 +256,9 @@ class Casavant extends SPOrgan {
                 break;
             
             default:
-                return parent::processSample($hwdata, $isattack);
-                break;
+                $pipe=parent::processSample($hwdata, $isattack);
+                unset($pipe->PitchTuning);
+                return $pipe;
         }
         return NULL;
     }
