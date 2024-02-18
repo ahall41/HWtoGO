@@ -10,7 +10,6 @@
 
 namespace Organs\SP;
 require_once __DIR__ . "/SPOrgan.php";
-require_once __DIR__ . "/../../GOClasses/General.php";
 
 /**
  * Import Sonus Paradisi Casavant, opus 3742 (1995), Bellevue, Washington to GrandOrgue
@@ -81,12 +80,16 @@ class Casavant extends SPOrgan {
     public function import(): void {
         parent::import();
                
-        $general=new \GOClasses\General("Full Organ");
-        foreach ($this->getStops() as $stopid=>$stop) {
-            if (($switch=$this->getSwitch($stopid, FALSE))) {
-                $general->Switch($switch);
+        $general=new \GOClasses\Sw1tch("Full Organ");
+        foreach($this->hwdata->switchLink(13087)["S"] as $link) {
+            if (($destid=$link["DestSwitchID"])>19000 &&
+                ($stop=$this->getStop($destid % 100))) {
+                $stop->Switch($general);
+                $stop->Function="Or";
             }
-        }        
+        }
+        exit;
+        
         foreach([20, 22, 100, 102] as $panelid) {
             $panel=$this->getPanel($panelid);
             $element=$panel->GUIElement($general);
