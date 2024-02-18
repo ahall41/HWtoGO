@@ -177,7 +177,7 @@ class Casavant extends SPOrgan {
     
     public function addImages() : void {
         $this->addPanelImages(2, 13087); // Full Organ
-        $this->addPanelImages(2, 13088); // Clochettes
+        //$this->addPanelImages(2, 13088); // Clochettes
         $this->addPanelImages(2, 914); // Crescendo
         $this->addPanelImages(2, 1458); // Matrix 1
         $this->addPanelImages(2, 1459); // Matrix 2
@@ -189,7 +189,7 @@ class Casavant extends SPOrgan {
         $this->addPanelImages(5, 200010); // Pipe Detume
         
         $this->addPanelImages(10, 11087); // Full Organ
-        $this->addPanelImages(10, 11088); // Clochettes
+        //$this->addPanelImages(10, 11088); // Clochettes
         $this->addPanelImages(10, 916); // Crescendo
         $this->addPanelImages(10, 1455); // Matrix 1
         $this->addPanelImages(10, 1456); // Matrix 2
@@ -287,6 +287,12 @@ class CasavantDemo extends Casavant {
             "GroupIDs"=>[301,304], "AmpMinimumLevel"=>20], 
     ];
 
+    public function addImages() : void {
+        parent::addImages();;
+        $this->addPanelImages(2, 13088); // Clochettes;
+        $this->addPanelImages(10, 11088); // Clochettes;
+    }
+    
     /**
      * Run the import
      */

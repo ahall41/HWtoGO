@@ -113,7 +113,7 @@ class Objects {
     }
 
     protected function newSwitchNoise(int $id, string $name) : \GOClasses\SwitchNoise {
-        //echo "newSwitchNoise(int $id, string $name)\r";
+        //echo "newSwitchNoise(int $id, string $name)\n";
         return $this->Model[self::SwitchNoises][$id]=new \GOClasses\SwitchNoise($name);
     }
 
@@ -133,10 +133,12 @@ class Objects {
 
     
     protected function newAmbientNoise(int $id, string $name) : \GOClasses\AmbientNoise {
+        // echo "newAmbientNoise(int $id, string $name)\n";
         return $this->Model[self::Stops][$id]=new \GOClasses\AmbientNoise($name);
     }
 
     protected function newStop(int $id, string $name) : \GOClasses\Stop {
+        // echo "newStop(int $id, string $name)\n";
         return $this->Model[self::Stops][$id]=new \GOClasses\Stop($name);
     }
 
@@ -178,7 +180,7 @@ class Objects {
     }
 
     protected function newSwitch($id, $name) : \GOClasses\Sw1tch {
-        //echo "newSwitch(int $id, string $name)\r";
+        //echo "newSwitch(int $id, string $name)\n";
         return $this->Model[self::Switches][$id]=new \GOClasses\Sw1tch($name);
     }
 
