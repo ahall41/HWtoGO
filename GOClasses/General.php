@@ -24,6 +24,7 @@ class General extends Button {
         $this->NumberOfTremulants=0;
         $this->NumberOfSwitches=0;
         $this->NumberOfDivisionalCouplers=0;
+        Organ::Organ()->NumberOfGenerals++;
     }
     
     public function Coupler(Coupler $coupler, Manual $manual) {
