@@ -15,7 +15,11 @@ require_once __DIR__ . "/SPOrgan.php";
  * Import Sonus Paradisi Casavant, opus 3742 (1995), Bellevue, Washington to GrandOrgue
  * The mixer panel could not be completed as the HW ODF references
  * to the corresponding images are missing
- *  
+ * 
+ * @todo: Voce Umana and Flute celeste (pos) and Voix celeste (recit) start at MIDI 48
+ *        Full Organ should turn all stops on
+ *        Clochettes (its a 'Toy') not working
+ * 
  * @author andrew
  */
 class Casavant extends SPOrgan {
@@ -24,8 +28,10 @@ class Casavant extends SPOrgan {
     const REVISIONS=
               "\n"
             . "1.1 Correct voix celeste pitch; remove empty tremulant ranks\n"
-            . "1.2 Added full surround, Unison Off\n"
+            . "1.2 Added full surround, Unison Off couplers\n"
             . "\n";
+
+    protected ?int $releaseCrossfadeLengthMs=NULL;
 
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -73,29 +79,56 @@ class Casavant extends SPOrgan {
         72=>["Type"=>"Wave", "GroupIDs"=>[301,304]], // Pos
     ];
 
+    public function import(): void {
+        parent::import();
+        
+        $this->addImages();
+        foreach([440,444,448,449,660,664,668,669] as $rankid) { // Celeste
+            if (($rank=$this->getRank($rankid))) {
+                foreach ($rank->Pipes() as $pipe) {
+                    unset($pipe->PitchTuning);
+                }
+            }
+        }
+        
+        foreach ([570, 574] as $rankid) { // Chimes
+            if (($rank=$this->getRank($rankid))) {
+                $rank->Percussive="Y";
+            }
+        }
+        
+        $this->addVirtualKeyboards(3, [1,2,3],[1,2,3]);
+    }
+    
     public function createSwitchNoise(string $type, array $hwdata) : void {
         return; // No Op
+    }
+    
+    public function createManuals(array $keyboards): void {
+        foreach ([1,2,3,4] as $id) {
+            $this->createManual($keyboards[$id]);
+        }
     }
     
     public function createCouplers(array $keyactions): void {
         parent::createCouplers($keyactions);
         $this->createCoupler(
-                ["SourceKeyboardID"=>2, 
+                ["SourceKeyboardID"=>2,  // GO
                  "DestDivisionID"=>2,
                  "ConditionSwitchID"=>19053,
                  "ActionEffectCode"=>1,
                  "ConditionSwitchLinkIfEngaged"=>"Y",
                  "Name"=>"Unison Off 2"]);
         $this->createCoupler(
-                ["SourceKeyboardID"=>2, 
-                 "DestDivisionID"=>2,
+                ["SourceKeyboardID"=>4,  // RE
+                 "DestDivisionID"=>4,
                  "ConditionSwitchID"=>19030,
                  "ActionEffectCode"=>1,
                  "ConditionSwitchLinkIfEngaged"=>"Y",
                  "Name"=>"Unison Off 3"]);
         $this->createCoupler(
-                ["SourceKeyboardID"=>2, 
-                 "DestDivisionID"=>2,
+                ["SourceKeyboardID"=>3, // PO
+                 "DestDivisionID"=>3,
                  "ConditionSwitchID"=>19076,
                  "ActionEffectCode"=>1,
                  "ConditionSwitchLinkIfEngaged"=>"Y",
@@ -132,9 +165,12 @@ class Casavant extends SPOrgan {
         return parent::createOrgan($hwdata);
     }
     
+
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        if (($hwdata["RankID"] % 10)<5)
+        
+        if (($hwdata["RankID"] % 10)<5) {
             return parent::createRank($hwdata, $keynoise);
+        }
         else
             return NULL;
     }
@@ -195,6 +231,7 @@ class Casavant extends SPOrgan {
                 $hwdata["IsTremulant"]=1;
                 break;
         }
+    if (strpos("cloch/", $hwdata["SampleFilename"])) {print_r($hwdata); exit;}
         return parent::processSample($hwdata, $isattack);
     }
 }
@@ -246,16 +283,8 @@ class CasavantDemo extends Casavant {
             $hwi=new CasavantDemo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addImages();
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            foreach([440,444,448,449] as $rankid) {
-                $rank=$hwi->getRank($rankid);
-                if ($rank) {
-                    foreach ($rank->Pipes() as $pipe) unset($pipe->PitchTuning);
-                }
-            }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
@@ -298,8 +327,10 @@ class CasavantFull extends Casavant {
         -114=>["StopID"=>-114, "DivisionID"=>4, "Name"=>"Pos key On",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"Ped Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"Grt Key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
-        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"Rev key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"Rec key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
         -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"Pos key Off", "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "StoreInGeneral"=>"N", "StoreInDivisional"=>"N"],
+        - 88=>["StopID"=>- 88, "DivisionID"=>1, "Name"=>"Clochette (Front)", "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>701],
+        -188=>["StopID"=>-188, "DivisionID"=>1, "Name"=>"Clochette (Rear)",  "ControllingSwitchID"=>19088, "Ambient"=>TRUE, "GroupID"=>704],
     ];
     
     protected $patchRanks=[
@@ -342,7 +373,7 @@ class CasavantFull extends Casavant {
         954=>["EnclosureID"=>954, "Name"=>"Chm Rear", "Panels"=>[5=>[1554]], 
             "GroupIDs"=>[504], "AmpMinimumLevel"=>1],
         970=>["EnclosureID"=>970, "Name"=>"Toys Front", "Panels"=>[5=>[1596]], 
-            "GroupIDs"=>[700], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[701], "AmpMinimumLevel"=>1],
         974=>["EnclosureID"=>974, "Name"=>"Toys Rear", "Panels"=>[5=>[1597]], 
             "GroupIDs"=>[704], "AmpMinimumLevel"=>1],
         980=>["EnclosureID"=>990, "Name"=>"Blower", "Panels"=>[5=>[1595]], 
@@ -367,13 +398,13 @@ class CasavantFull extends Casavant {
                 break;
             
             case 40: // Rec. Trompette en chamade 8
-                $hwdata["DivisionID"]=3;
+                $hwdata["DivisionID"]=4;
                 break;
             
             case 62: // Pos. Clairon en chamade
             case 67: // Pos. Trompette en chamade 8
             case 71: // Pos. Bombarde en chamade 16
-                $hwdata["DivisionID"]=4;
+                $hwdata["DivisionID"]=3;
                 break;
         }
         return parent::createStop($hwdata);
@@ -390,8 +421,6 @@ class CasavantFull extends Casavant {
         return parent::createRank($hwdata, $keynoise);
     }
     
- 
-    
     /**
      * Run the import
      */
@@ -402,16 +431,8 @@ class CasavantFull extends Casavant {
             $hwi=new CasavantFull(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addImages();
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            foreach([440,444,448,449] as $rankid) {
-                $rank=$hwi->getRank($rankid);
-                if ($rank) {
-                    foreach ($rank->Pipes() as $pipe) unset($pipe->PitchTuning);
-                }
-            }
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
@@ -434,6 +455,12 @@ class CasavantFull extends Casavant {
         }
     }
 }
+
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
+    throw new \Exception("Error $errstr");
+    die();
+}
+set_error_handler("Organs\SP\ErrorHandler");
 
 CasavantFull::Casavant();
 CasavantDemo::Casavant();
