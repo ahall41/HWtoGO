@@ -172,12 +172,44 @@ class SwietaLipka extends PGOrgan {
     ];
     
     public function import(): void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 1:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        } 
+        exit(); //*/        
+        
         parent::import();
         foreach($this->getStops() as $stop) {
             for ($i=1; $i<6; $i++) {
                 $stop->unset("Rank00${i}PipeCount");
                 $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
             }
+        }
+        
+        foreach ([10=>115572,40=>113361] as $pageid=>$instanceid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+            
         }
     }
     
@@ -238,7 +270,11 @@ class SwietaLipka extends PGOrgan {
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
-        return \Import\Configure::processSample($hwdata, $isattack);
+        $pipe=\Import\Configure::processSample($hwdata, $isattack);
+        if ($pipe && ($hwdata["RankID"] % 100)==31) {
+            $pipe->Percussive="Y";
+        }
+        return $pipe;
     }
 }
 
