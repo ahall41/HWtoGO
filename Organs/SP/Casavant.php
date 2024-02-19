@@ -26,7 +26,7 @@ class Casavant extends SPOrgan {
     const REVISIONS=
               "\n"
             . "1.1 Correct voix celeste pitch; remove empty tremulant ranks\n"
-            . "1.2 Added full surround, Unison Off couplers\n"
+            . "1.2 Added full surround, Crescendo Pedal and Unison Off couplers\n"
             . "\n";
 
     protected ?int $releaseCrossfadeLengthMs=NULL;
@@ -88,23 +88,24 @@ class Casavant extends SPOrgan {
                 $stop->Function="Or";
             }
         }
-        exit;
-        
         foreach([20, 22, 100, 102] as $panelid) {
             $panel=$this->getPanel($panelid);
-            $element=$panel->GUIElement($general);
+            $ge=$panel->GUIElement($general);
+            $cr=$panel->Element();
+            $cr->Type="Swell";
             switch($panelid) {
                 case 20:
                 case 22:
-                    $this->configureImage($element, ["SwitchID"=>13087], $panelid % 10);
+                    $this->configureImage($ge, ["SwitchID"=>13087], $panelid % 10);
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>914], $panelid % 10);
                     break;
                 case 100:
                 case 102:
-                    $this->configureImage($element, ["SwitchID"=>11087], $panelid % 10);
+                    $this->configureImage($ge, ["SwitchID"=>11087], $panelid % 10);
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>916], $panelid % 10);
+                    break;
             }
         }
-        
- 
         
         $this->addImages();
         foreach([440,444,448,449,660,664,668,669] as $rankid) { // Celeste
@@ -196,7 +197,6 @@ class Casavant extends SPOrgan {
     }
     
     public function addImages() : void {
-        $this->addPanelImages(2, 914); // Crescendo
         $this->addPanelImages(2, 1458); // Matrix 1
         $this->addPanelImages(2, 1459); // Matrix 2
         $this->addPanelImages(2, 1460); // Matrix 3
@@ -206,7 +206,6 @@ class Casavant extends SPOrgan {
         $this->addPanelImages(5, 200000); // Pipe Coupling
         $this->addPanelImages(5, 200010); // Pipe Detume
         
-        $this->addPanelImages(10, 916); // Crescendo
         $this->addPanelImages(10, 1455); // Matrix 1
         $this->addPanelImages(10, 1456); // Matrix 2
         $this->addPanelImages(10, 1457); // Matrix 3
@@ -251,6 +250,7 @@ class Casavant extends SPOrgan {
         switch (($pipeid=$hwdata["PipeID"])) {
             case 96088:
             case 96588:
+                $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
                 $stop=$this->getStop($pipeid%1000);
                 if ($stop && $isattack) {
                     $ambience=$stop->Ambience();
@@ -311,7 +311,7 @@ class CasavantDemo extends Casavant {
     public function addImages() : void {
         parent::addImages();;
         $this->addPanelImages( 2, 13088); // Clochettes;
-        $this->addPanelImages( 2, 11089); // Blower;
+        $this->addPanelImages( 2, 13089); // Blower;
         $this->addPanelImages(10, 11088); // Clochettes;
         $this->addPanelImages(10, 11089); // Blower;
     }
