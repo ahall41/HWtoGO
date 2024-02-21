@@ -44,7 +44,7 @@ class Casavant extends SPOrgan {
         "crescendos"=>[
             "A"=>[1501,1503,1505,1507,1509,1511,1513,1515,1517,1519,
                   1521,1523,1525,1527,1529,1531,1533,1535,1537,1539,
-                  1541,1543,1545,1547,1549,1551,1553,1555,1557,1559,1561,1561]
+                  1541,1543,1545,1547,1549,1551,1553,1555,1557,1559,1560,1561]
                 ]
         ];
 
@@ -171,6 +171,31 @@ class Casavant extends SPOrgan {
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
+        /* Uncomment to analyse equalisation
+        $levels=[];
+        foreach($this->hwdata->layers() as $layer) {
+            foreach ($layer as $name=>$value) {
+                switch ($name) {
+                    case "HarmonicShaping_ThirdAndUpperHarmonicsLevelAdjustDecibels":
+                    case "HarmonicShaping_ThirdAndUpperHarmonicsAttnAtThisFlowRateDecibls":
+                    case "HarmonicShaping_WindModelModDepthAdjustDecibelsAtThirdHarmonic":
+                    case "HarmonicShaping_TremulantModDepthAdjustDecibelsAtThirdHarmonic":
+                    case "HarmonicShaping_IncrementingContinuousControlID":
+                    case "VoicingEQ01_TransitionFrequencyKHertz":
+                    case "VoicingEQ01_TransitionWidthAsPercentOfTransitionFrequency":
+                    case "VoicingEQ01_HighFrequencyBoostDecibels":
+                        if (isset($levels[$name][$value])) {
+                            $levels[$name][$value]++;
+                        }
+                        else {
+                            $levels[$name][$value]=1;
+                        }
+                }
+            }
+        }
+        print_r($levels);
+        exit(); //*/
+        
         /* Uncomment to determine image instances on each page ...
         $instances=$this->hwdata->imageSetInstances();
         foreach ($instances as $instance) {
