@@ -24,6 +24,16 @@ require_once __DIR__ . "/SPOrgan.php";
  */
 class Skinner497 extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Skinner497Full/";
+
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1501,1503,1505,1507,1509,1511,1513,1515,1517,1519,
+                  1521,1523,1525,1527,1529,1531,1533,1535,1537,1539,
+                  1541,1543,1545,1547,1549,1551,1553,1555,1557,1559,1561,1563]
+                ]
+        ];
+    
+    protected $crescendo=[914=>1, 916=>2, 913=>4, 918=>4, 911=>6];
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -73,7 +83,7 @@ class Skinner497 extends SPOrgan {
         127=>["Type"=>"Synth",    "DivisionID"=>3, "GroupIDs"=>[301,302,303,304]], // Great
         128=>["Type"=>"Switched", "DivisionID"=>2], // Choir
     ];
-
+    
     protected $patchEnclosures=[
         995=>["GroupIDs"=>[601,603,604], "AmpMinimumLevel"=>40], // Echo
         996=>["GroupIDs"=>[501,503,504], "AmpMinimumLevel"=>40], // Solo
@@ -152,9 +162,70 @@ class Skinner497 extends SPOrgan {
                 }
            }
         }
+        
+        foreach ($this->crescendo as $instanceid=>$pageid) {
+            foreach([0,1,2,3] as $layoutid) {
+                $panel=$this->getPanel(($pageid*10)+$layoutid, FALSE);
+                if ($panel) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        }
+        
+        $this->addPanelImages(5, 200000); // PipeCoupling Level:
+        $this->addPanelImages(5, 200010); // PipeDetun Level
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
+        /* Uncomment to analyse equalisation
+        $levels=[];
+        foreach($this->hwdata->layers() as $layer) {
+            foreach ($layer as $name=>$value) {
+                switch ($name) {
+                    case "HarmonicShaping_ThirdAndUpperHarmonicsLevelAdjustDecibels":
+                    case "HarmonicShaping_ThirdAndUpperHarmonicsAttnAtThisFlowRateDecibls":
+                    case "HarmonicShaping_WindModelModDepthAdjustDecibelsAtThirdHarmonic":
+                    case "HarmonicShaping_TremulantModDepthAdjustDecibelsAtThirdHarmonic":
+                    case "HarmonicShaping_IncrementingContinuousControlID":
+                    case "VoicingEQ01_TransitionFrequencyKHertz":
+                    case "VoicingEQ01_TransitionWidthAsPercentOfTransitionFrequency":
+                    case "VoicingEQ01_HighFrequencyBoostDecibels":
+                        if (isset($levels[$name][$value])) {
+                            $levels[$name][$value]++;
+                        }
+                        else {
+                            $levels[$name][$value]=1;
+                        }
+                }
+            }
+        }
+        print_r($levels);
+        exit(); //*/
+        
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 5:
+                    echo $instance["DisplayPageID"], "\t",
+                        ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        } 
+        exit(); //*/
+        
         $hwdata["Identification_UniqueOrganID"]=2304; 
         return parent::createOrgan($hwdata);
     }
@@ -243,7 +314,7 @@ class Skinner497 extends SPOrgan {
 class Skinner497Demo extends Skinner497 {
     
     const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3.organ";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3";
     
     /**
      * Run the import
@@ -256,9 +327,9 @@ class Skinner497Demo extends Skinner497 {
             $hwi->getOrgan()->ChurchName=str_replace(", Demo", " ($target)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->save(sprintf(self::TARGET, $target));
         }
-        else {
+        else { /*
             self::Skinner497(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
@@ -267,7 +338,7 @@ class Skinner497Demo extends Skinner497 {
                      "Diffuse");
             self::Skinner497(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear");
+                    "Rear"); */
             self::Skinner497(
                     [
                         self::RANKS_DIRECT=>"Direct", 
@@ -282,7 +353,7 @@ class Skinner497Demo extends Skinner497 {
 class Skinner497Full extends Skinner497 {
     
     const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (%s) 1.3.organ";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (%s) 1.3";
     
     /**
      * Run the import
@@ -295,7 +366,7 @@ class Skinner497Full extends Skinner497 {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->save(sprintf(self::TARGET, $target));
         }
         else {
             self::Skinner497(
