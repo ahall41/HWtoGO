@@ -20,15 +20,25 @@ require_once __DIR__ . "/PGOrgan.php";
 class SwietaLipka extends PGOrgan {
 
     const ROOT="/GrandOrgue/Organs/PG/SwietaLipkaFull/";
-    const VERSION="1.2";
+    const VERSION="1.3";
     const COMMENTS=
               "Święta Lipka, Sanktuarium Nawiedzenia Najświętszej Maryi Panny, Poland (%s)\n"
             . "https://piotrgrabowski.pl/swieta-lipka/\n"
             . "\n"
             . "1.1 Functional couplers; Wave based tremulants\n"
-            . "1.2 Added full surround\n "
+            . "1.2 Added full surround\n"
+            . "1.3 Added crescendo program\n"
             . "\n";
 
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1000,1001,1002,1003,1004,1005,1006,1007,1008,1009,
+                  1010,1011,1012,1013,1014,1015,1016,1017,1018,1020,
+                  1022,1024,1026,1028,1030,1032,1034,1036,1038,1040,
+                  1042,1044]
+                ]
+        ];
+    
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected int $switchNoiseWCG=700;
     
@@ -282,7 +292,7 @@ class SwietaLipkaDemo extends SwietaLipka {
     
     const ODF="Swieta Lipka (demo).Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Swieta Lipka (demo - %s)" . self::VERSION .".organ";
+    const TARGET=self::ROOT . "Swieta Lipka (demo - %s)" . self::VERSION;
 
     public static function SwietaLipka(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002519/Noises/BlankLoop.wav";
@@ -292,10 +302,10 @@ class SwietaLipkaDemo extends SwietaLipka {
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
-            self::SwietaLipka(
+            /* self::SwietaLipka(
                     [1=>"(close)"],
                     "close");
             self::SwietaLipka( 
@@ -306,7 +316,7 @@ class SwietaLipkaDemo extends SwietaLipka {
                     "middle");
             self::SwietaLipka(
                     [4=>"(rear)"],
-                    "rear");
+                    "rear"); */
             self::SwietaLipka( 
                     [1=>"(close)", 2=>"(front)", 3=>"(middle)", 4=>"(rear)"],
                     "surround");
@@ -318,7 +328,7 @@ class SwietaLipkaFull extends SwietaLipka {
     
     const ODF="Swieta Lipka.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Swieta Lipka (%s)" . self::VERSION .".organ";
+    const TARGET=self::ROOT . "Swieta Lipka (%s)" . self::VERSION;
 
     public static function SwietaLipka(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002520/Noises/BlankLoop.wav";
@@ -328,7 +338,7 @@ class SwietaLipkaFull extends SwietaLipka {
             $hwi->import();
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
             self::SwietaLipka(
