@@ -36,6 +36,7 @@ abstract class Organ extends Images {
     protected $patchWindCompartments=[];
     
     protected $samplePitches=[]; // [Filename=>PitchHz, ...
+    protected $combinations=[];
     
     /**
      * Full import
@@ -322,7 +323,7 @@ abstract class Organ extends Images {
     /**
      * Add coupler manuals panel
      */
-    public function addVirtualKeyboards(int $manuals, array $targets,  array $defaults) : void {
+    public function addVirtualKeyboards(int $manuals, array $targets,  array $defaults) : \GOClasses\Panel {
         $nt=sizeof($targets);
         $panel=$this->newPanel(-999,"Virtual Keyboards");
         $panel->HasPedals="N";
@@ -331,7 +332,15 @@ abstract class Organ extends Images {
         $panel->DispExtraDrawstopCols=$nt;
         $panel->DispExtraDrawstopRows=$manuals;
         $panel->DispScreenSizeHoriz="Small";
-        $panel->DispScreenSizeVert=($manuals<3 ? "Small" : "Medium");
+        if ($manuals<3) {
+            $panel->DispScreenSizeVert="Small";
+        }
+        elseif ($manuals<4) {
+            $panel->DispScreenSizeVert="Small";
+        }
+        else {
+            $panel->DispScreenSizeVert="Large";
+        }
         
         $couplerid=-999;
      
@@ -363,6 +372,7 @@ abstract class Organ extends Images {
                 $pe->DispDrawstopCol=$tn;
             }
         }
+        return $panel;
     }
     
     /**
@@ -479,5 +489,91 @@ abstract class Organ extends Images {
                 }
             }
         }
+    }
+    
+    public function save(string $filename) : void {
+        $this->saveODF("$filename.organ");
+        if (sizeof($this->combinations)>0) {
+            $this->saveCombinations("$filename.yaml");
+        }
+    }
+
+    private function saveCombinations(string $filename) : void {
+        $date=(new \DateTime())->format(DATE_COOKIE);
+        $yaml=["info"=>[
+                "content-type" => "GrandOrgue Combinations",
+                "organ-name"=> $this->getOrgan()->ChurchName,
+                "grandorgue-version" => "v3.13.3-1",
+                "saved_time" => $date]];
+        
+        foreach ($this->combinations as $type=>$banks) {
+            foreach ($banks as $bank=>$idlist) {
+                switch ($type) {
+                    case "crescendos":
+                        $yaml[$type][$bank]=$this->crescendos($idlist);
+                        break;
+                }
+            }
+        }
+
+        $fp=fopen(getenv("HOME") . $filename, "w");
+        fwrite($fp, $this->yaml_emit($yaml));
+        fclose($fp);
+        
+    }
+    
+    protected function crescendos(array $idlist) : array {
+        foreach ($idlist as $stepid=>$combid) {
+            $step=[];
+            $scope=[];
+            foreach($this->hwdata->combinationElement($combid) as $ce) {
+               $switch=$this->getSwitch($ce["ControlledSwitchID"] % 100, FALSE);
+               if ($switch && sizeof($yamldata=$switch->getYaml())==3) {
+                    $engaged=isset($ce["InitialStoredStateIsEngaged"]) && $ce["InitialStoredStateIsEngaged"]=="Y";
+                    if ($yamldata["ManualID"]===NULL) {
+                        if ($engaged) {
+                            $step["switches"][$yamldata["Number"]]=$switch->Name;
+                        }
+                        $scope["switches"][$yamldata["Number"]]=$switch->Name;
+                    }
+                    else {
+                        if ($engaged) {
+                            $step["manuals"][$yamldata["ManualID"]]["Name"]=$yamldata["ManualName"];
+                            $step["manuals"][$yamldata["ManualID"]]["switches"][$yamldata["Number"]]=$switch->Name;
+                        }
+                        $scope["manuals"][$yamldata["ManualID"]]["Name"]=$yamldata["ManualName"];
+                        $scope["manuals"][$yamldata["ManualID"]]["switches"][$yamldata["Number"]]=$switch->Name;
+                    }
+                }
+            }
+            $step["scope"]=$scope;
+            $steps[$stepid+1]=$step;
+        }
+        return ["override"=>TRUE, "steps"=>$steps];
+    }
+    
+    private function yaml_emit(array $yaml, int $depth=0) : string {
+    
+        $result="";
+        if ($depth==0) {$result .= "---\n";}
+        $spaces="";
+        for ($i=0; $i<$depth; $i++) {$spaces .= "  ";}
+        
+        foreach ($yaml as $name=>$value) {
+            $result .= sprintf((is_int($name) && $depth>4 ? "%s%03d: " : "%s%s: "), $spaces, $name);
+            if (is_array($value)) {
+                if (sizeof($value)>0) {
+                    $result .= "\n" . $this->yaml_emit($value, $depth+1);
+                }
+            }
+            else if (is_bool($value)) {
+                $result .= $value ? "true\n" : "false\n";
+            } 
+            else {
+                $result .= "$value\n";
+            }
+        }
+        if ($depth==0) {$result .= "---\n";}
+        return $result;
     }
 }
