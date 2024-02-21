@@ -22,9 +22,54 @@ class DurenFull extends Duren {
     const COMMENTS=
               "Annakirche in Düren, Germany (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/duren/\n"
+            . "\n"
+            . "1.1 Added crescendo program\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Duren (%s) 1.1";
+ 
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1000,1001,1001,1002,1002,1003,1004,1005,1006,1007,
+                  1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,
+                  1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,
+                  1028,1029]
+                ]
+        ];
+    
+    public function import(): void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 4:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        } 
+        exit(); //*/
+        
+        parent::import();
+        foreach ([40=>13693] as $pageid=>$instanceid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        } 
+    }
     
     // Create dummy sample file for testing ...
     public function createSample($hwdata) {
@@ -32,7 +77,7 @@ class DurenFull extends Duren {
         if (!file_exists($file)) {
             $dir=dirname($file);
             if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Ambience::$blankloop;
+            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
             symlink($blank, $file);
         }
     }
@@ -51,13 +96,12 @@ class DurenFull extends Duren {
 
     public static function DurenFull(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
                 "OrganInstallationPackages/002525/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new DurenFull(self::SOURCE);
             self::Duren($hwi, $positions, $target);
             $hwi->getOrgan()->ChurchName.=sprintf(" (%s)", $target);
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->save(sprintf(self::TARGET, $target));
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {
