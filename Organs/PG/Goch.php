@@ -25,8 +25,18 @@ class Goch extends PGOrgan {
             . "\n"
             . "1.1 wave based tremulant model\n"
             . "1.2 full surround included\n"
+            . "    added crescendo control and program\n"
             . "\n";
     
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1000,1002,1004,1005,1007,1008,1010,1011,
+                  1013,1015,1016,1018,1019,1021,1022,1024,
+                  1026,1027,1029,1030,1032,1033,1035,1036,
+                  1038,1040,1041,1043,1044,1046,1047,1050]
+                ]
+        ];
+
     protected bool $switchedtremulants=FALSE;
     
     public $positions=[];
@@ -155,7 +165,7 @@ class Goch extends PGOrgan {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 6:
+                case 4:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
                          isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
                          isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
@@ -170,6 +180,7 @@ class Goch extends PGOrgan {
             }
         } 
         exit(); //*/
+        
         parent::import();
         foreach($this->getStops() as $stop) {
             for ($i=1; $i<6; $i++) {
@@ -177,6 +188,16 @@ class Goch extends PGOrgan {
                 $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
             }
         }
+        
+        foreach ([40=>121889] as $pageid=>$instanceid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        } 
 }
     
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
@@ -252,7 +273,7 @@ class GochDemo extends Goch {
     
     const ODF="Goch (demo).Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Goch (demo - %s) " . self::VERSION . ".organ";
+    const TARGET=self::ROOT . "Goch (demo - %s) " . self::VERSION;
    
     public function patchData(\HWClasses\HWData $hwd): void {
         $index=10000;
@@ -280,10 +301,10 @@ class GochDemo extends Goch {
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
-            self::Goch(
+            /* self::Goch(
                     [1=>"(close)"],
                     "close");
             self::Goch( 
@@ -291,7 +312,7 @@ class GochDemo extends Goch {
                     "front");
             self::Goch(
                     [3=>"(rear)"],
-                    "rear");
+                    "rear"); */
             self::Goch( 
                     [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
                     "surround");
@@ -303,7 +324,7 @@ class GochFull extends Goch {
     
     const ODF="Goch.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Goch (%s) " . self::VERSION . ".organ";
+    const TARGET=self::ROOT . "Goch (%s) " . self::VERSION;
 
     public function patchData(\HWClasses\HWData $hwd): void {
         $index=10000;
@@ -358,7 +379,7 @@ class GochFull extends Goch {
             $hwi->import();
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
             self::Goch(
