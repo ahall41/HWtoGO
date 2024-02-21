@@ -57,6 +57,7 @@ class Manual extends GOObject {
             $this->switches[$switch->instance()]=TRUE;
             $this->setObject("Switch", "NumberOfSwitches", $switch);
         }
+        $switch->setYaml($this->instance(), $this->Name, $this->int2str($this->NumberOfSwitches));
     }
 
     public function Coupler(Coupler $coupler) {

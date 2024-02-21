@@ -23,6 +23,8 @@ class Sw1tch extends Drawstop {
         Organ::Organ()->NumberOfSwitches++;
     }
     
+    private array $yamldata=[];
+    
     /**
      * Link a switch. There should only be one
      * @param Sw1tch $switch
@@ -31,5 +33,16 @@ class Sw1tch extends Drawstop {
     public function Switch(Sw1tch $switch) : void {
         parent::Switch($switch); 
         unset($this->SwitchCount);
+    }
+        
+    public function setYaml(?int $manualid, ?string $manualName, int $number) {
+        $this->yamldata=
+                ["ManualID"=>$manualid, 
+                 "ManualName"=>$manualName, 
+                 "Number"=>$number];
+    }
+    
+    public function getYaml() : array {
+        return $this->yamldata;
     }
 }

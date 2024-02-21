@@ -40,5 +40,6 @@ class Tremulant extends Button {
         $this->setObject("Switch", "SwitchCount", $switch);
         $this->Displayed="N";
         unset($this->DefaultToEngaged);
+        $switch->setYaml(NULL, NULL, $switch->instance());
     }
 }
