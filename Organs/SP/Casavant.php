@@ -38,6 +38,12 @@ class Casavant extends SPOrgan {
     ];
     
     public $positions=[];
+    
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1501,1561]
+        ]
+    ];
 
     protected $patchDisplayPages=[ // Set is for background, Switch/Layout is for controls
         1=>[
@@ -123,6 +129,74 @@ class Casavant extends SPOrgan {
         }
         
         $this->addVirtualKeyboards(3, [1,2,3],[1,2,3]);
+    }
+    
+    public function saveCombinations(string $filename) {
+        $date=(new \DateTime())->format(DATE_COOKIE);
+        $yaml=["info"=>[
+                "content-type" => "GrandOrgue Combinations",
+                "organ-name"=> $this->getOrgan()->ChurchName,
+                "grandorgue-version" => "v3.13.3-1",
+                "saved_time" => $date]];
+        
+        $steps=[];
+        for ($stepid=0; $stepid<31; $stepid++) {
+            $combid=1501+($stepid*2);
+            $step=[];
+            $scope=[];
+            foreach($this->hwdata->combinationElement($combid) as $ce) {
+               $switch=$this->getSwitch($ce["ControlledSwitchID"] % 100, FALSE);
+               if ($switch && sizeof($yamldata=$switch->getYaml())==3) {
+                    $engaged=isset($ce["InitialStoredStateIsEngaged"]) && $ce["InitialStoredStateIsEngaged"]=="Y";
+                    if ($yamldata["ManualID"]===NULL) {
+                        if ($engaged) {
+                            $step["switches"][$yamldata["Number"]]=$switch->Name;
+                        }
+                        $scope["switches"][$yamldata["Number"]]=$switch->Name;
+                    }
+                    else {
+                        if ($engaged) {
+                            $step["manuals"][$yamldata["ManualID"]]["Name"]=$yamldata["ManualName"];
+                            $step["manuals"][$yamldata["ManualID"]]["switches"][$yamldata["Number"]]=$switch->Name;
+                        }
+                        $scope["manuals"][$yamldata["ManualID"]]["Name"]=$yamldata["ManualName"];
+                        $scope["manuals"][$yamldata["ManualID"]]["switches"][$yamldata["Number"]]=$switch->Name;
+                    }
+                }
+            }
+            $step["scope"]=$scope;
+            $steps[$stepid+1]=$step;
+        }
+        
+        $yaml["crescendos"]["A"]=["override-mode"=>TRUE, "steps"=>$steps];
+        $fp= fopen(getenv("HOME") . $filename, "w");
+        fwrite($fp, $this->yaml_emit($yaml));
+        fclose($fp);
+    }
+    
+    private function yaml_emit(array $yaml, int $depth=0) : string {
+    
+        $result="";
+        if ($depth==0) {$result .= "---\n";}
+        $spaces="";
+        for ($i=0; $i<$depth; $i++) {$spaces .= "  ";}
+        
+        foreach ($yaml as $name=>$value) {
+            $result .= sprintf((is_int($name) && $depth>4 ? "%s%03d: " : "%s%s: "), $spaces, $name);
+            if (is_array($value)) {
+                if (sizeof($value)>0) {
+                    $result .= "\n" . $this->yaml_emit($value, $depth+1);
+                }
+            }
+            else if (is_bool($value)) {
+                $result .= $value ? "true\n" : "false\n";
+            } 
+            else {
+                $result .= "$value\n";
+            }
+        }
+        if ($depth==0) {$result .= "---\n";}
+        return $result;
     }
     
     public function createManuals(array $keyboards): void {
@@ -270,6 +344,7 @@ class Casavant extends SPOrgan {
 class CasavantDemo extends Casavant {
     const SOURCE="OrganDefinitions/Bellevue, Casavant Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Bellevue, Casavant (Demo - %s) " . self::VERSION . ".organ";
+    const YAML=self::ROOT . "Bellevue, Casavant (Demo - %s) " . self::VERSION . ".yaml";
 
     protected $patchDivisions=[
             5=>"DELETE", // Chamade
@@ -329,6 +404,7 @@ class CasavantDemo extends Casavant {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
+            $hwi->saveCombinations(sprintf(self::YAML, $target));
         }
         else {
             self::Casavant(
@@ -354,6 +430,7 @@ class CasavantDemo extends Casavant {
 class CasavantFull extends Casavant {
     const SOURCE="OrganDefinitions/Bellevue, Casavant Surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Bellevue, Casavant (Surround - %s) " . self::VERSION . ".organ";
+    const YAML=self::ROOT . "Bellevue, Casavant (Surround - %s) " . self::VERSION . ".yaml";
 
     protected $patchDivisions=[
         6=>"DELETE",
@@ -502,6 +579,7 @@ class CasavantFull extends Casavant {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
+            $hwi->saveCombinations(sprintf(self::YAML, $target));
         }
         else {
             self::Casavant(
