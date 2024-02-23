@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
  */
 abstract class AVOrgan extends \Import\Organ {
     
-    protected int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=NULL;
     protected int $noiseVersion=2;
     
     protected array $positions;
@@ -194,15 +194,17 @@ abstract class AVOrgan extends \Import\Organ {
                     return parent::processSample($hwdata, FALSE);
             }
         }
-        if (empty($this->releaseCrossfadeLengthMs)) {
+
+        if ($this->releaseCrossfadeLengthMs===0) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
-        else {
-            if ($this->releaseCrossfadeLengthMs>0)
-                $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
-            else
-                unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        elseif ($this->releaseCrossfadeLengthMs>0) {
+            $hwdata["ReleaseCrossfadeLengthMs"]=$this->releaseCrossfadeLengthMs;
         }
+        elseif ($this->releaseCrossfadeLengthMs<0) {
+            unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        }
+
         return parent::processSample($hwdata, $isattack);
     }
 }

@@ -21,17 +21,40 @@ require_once(__DIR__ . "/AVOrgan.php");
 class Redeemer extends AVOrgan {
 
     const ROOT="/GrandOrgue/Organs/AV/New Haven/";
+    const VERSION="1.1";
     const COMMENTS=
               "Aeolian-Skinner Organ (Op 1132) of the Redeemer church of New Haven\n"
             . "https://hauptwerk-augustine.info/Aeolian-Skinner.php\n"
+            . "\n"
+            . "1.1 Added chimes, AmpMinDepth=1\n"
             . "\n";
-   
+
+    protected ?int $releaseCrossfadeLengthMs=0;
+        
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
         2=>["SetID"=>2, "Name"=>"Stops"],
         3=>["SetID"=>3, "Name"=>"Left Jamb"],
         4=>["SetID"=>4, "Name"=>"Right Jamb"],
     ];
+    
+    public function import() : void {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=61;
+        \GOClasses\Manual::$pedals=32;
+        parent::import();
+        foreach($this->getManuals() as $manual) unset($manual->DisplayKeys);
+        foreach($this->getStops() as $id=>$stop) {
+            unset($stop->Rank001PipeCount);
+            unset($stop->Rank002PipeCount);
+            unset($stop->Rank003PipeCount);
+            unset($stop->Rank004PipeCount);
+            unset($stop->Rank005PipeCount);
+            unset($stop->Rank006PipeCount);
+        }   
+        unset($this->getOrgan()->InfoFilename);
+        foreach($this->getManuals() as $manual) unset($manual->DisplayKeys);
+    }
     
     public function createManuals(array $keyboards): void {
         foreach ([1,5,2,3,4] as $kbdid) {
@@ -161,14 +184,14 @@ class Redeemer extends AVOrgan {
 class Extended extends Redeemer {
     const ODF="Redemeer Aeolian-Skinner_surround extend.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Redemeer Aeolian-Skinner (extended %s).organ";
+    const TARGET=self::ROOT . "Redemeer Aeolian-Skinner (extended %s) %s.organ";
 
     protected $patchEnclosures=[
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         230=>[                     "Name"=>"PO",    "GroupIDs"=>[401,402], "InstanceID"=>17],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502], "InstanceID"=>19],
-         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>0],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>0],
+         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
     
     protected $patchTremulants=[
@@ -210,31 +233,14 @@ class Extended extends Redeemer {
      * Run the import
      */
     public static function Redeemer(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=61;
-        \GOClasses\Manual::$pedals=32;
         if (sizeof($positions)>0) {
             $hwi=new Extended(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
-            foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
-            foreach($hwi->getStops() as $id=>$stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-            }   
-            unset($hwi->getOrgan()->InfoFilename);
-            foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
-
-            // $hwi->Chimes();
-            
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            $hwi->saveODF(sprintf(self::TARGET, $target, self::VERSION), self::COMMENTS);
         }
         else {
             self::Redeemer([1=>"Far", 2=>"Near"], "surround");
@@ -244,16 +250,92 @@ class Extended extends Redeemer {
     }   
 }
 
+class Chimes extends Extended {
+    const TARGET=self::ROOT . "Redemeer Aeolian-Skinner (chimes %s) %s.organ";
+
+    private function addStop(int $manualid, string $label, \GOClasses\Rank $rank, array $positions) : void {
+        $stop=$this->newStop(10000-$manualid, $label);
+        $stop->Displayed="N";
+        $switch=$this->newSwitch(10000-$manualid, $label);
+        $switch->Displayed="N";
+        $stop->Switch($switch);
+        $stop->Rank($rank);
+        $this->getManual($manualid)->Stop($stop);
+        
+        foreach($positions as $panelid=>$attributes) {
+            $panel=$this->getPanel($panelid);
+            $element=$panel->GUIElement($switch);
+            $element->ImageOn="OrganInstallationPackages/002384/images/Stops/stop_in.png";
+            $element->ImageOff="OrganInstallationPackages/002384/images/Stops/stop_out.png";
+            $element->PositionX=$attributes[0];
+            $element->PositionY=$attributes[1];
+            $element->MouseRectWidth=65;
+            $element->MouseRectHeight=65;
+            $element->MouseRadius=0;
+            $element->DispLabelText=$attributes[2];
+            $element->DispLabelColour="Dark Green";
+            $element->DispLabelFontSize=10;
+        }
+    }
+    
+    public function addChimes() : void {
+        $chimes=new \HWClasses\HWData(getenv("HOME") . self::ROOT . "/OrganDefinitions/GhentCarillon.Organ_Hauptwerk_xml");
+        $wcg=$this->newWindchestGroup(9999, "Chimes");
+        $rank=$this->newRank(9999, "Ghent Carillon by Al Morse");
+        $rank->HarmonicNumber=8;
+        $rank->WindchestGroup($wcg);
+        
+        $this->addStop(1, "Ped. Chimes", $rank, 
+                [2=>[675,  510, "Ped Chimes"],
+                 3=>[ 50,  150, "Chimes"]]);
+        $this->addStop(2, "Gt. Chimes", $rank, 
+                [2=>[600,  510, "Gt Chimes"],
+                 4=>[210,  550, "Chimes"]]);
+        
+        $panel=$this->getPanel(2); // Stops
+        $panel->getElement(2)->PositionY=590; // Sw. Tremulant
+        $panel->getElement(89)->PositionY=590; // Blower
+        
+        foreach($chimes->attacks() as $attack) {
+            $layer=$chimes->layer($attack["LayerID"]);
+            $sample=$chimes->sample($attack["SampleID"]);
+            $midikey=$chimes->pipe($layer["PipeID"])["NormalMIDINoteNumber"];
+            $pipe=$rank->Pipe($midikey, TRUE);
+            $pipe->Percussive="Y";
+            $pipe->Attack="OrganInstallationPackages/001654/" . $sample["SampleFilename"];
+        }
+    }
+    
+    public static function Redeemer(array $positions=[], string $target="") {
+        if (sizeof($positions)>0) {
+            $hwi=new Chimes(self::SOURCE);
+            $hwi->positions=$positions;
+            $hwi->import();
+            $hwi->addChimes();
+            $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
+            $hwi->getOrgan()->ChurchName.=" ($target)";
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->saveODF(sprintf(self::TARGET, $target, self::VERSION), self::COMMENTS);
+        }
+        else {
+            self::Redeemer([1=>"Far", 2=>"Near"], "surround");
+            self::Redeemer([1=>"Far"], "wet");
+            self::Redeemer([2=>"Near"], "dry");
+        }
+    }   
+    
+}
+
 class Original extends Redeemer {
     const ODF="Redemeer Aeolian-Skinner_surround orig.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Redemeer Aeolian-Skinner (original %s).organ";
+    const TARGET=self::ROOT . "Redemeer Aeolian-Skinner (original %s) %s.organ";
 
     protected $patchEnclosures=[
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502], "InstanceID"=>17],
-         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>0],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>0],
+         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
 
     protected $patchTremulants=[
@@ -278,9 +360,6 @@ class Original extends Redeemer {
      * Run the import
      */
     public static function Redeemer(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop="BlankLoop.wav";
-        \GOClasses\Manual::$keys=61;
-        \GOClasses\Manual::$pedals=32;
         if (sizeof($positions)>0) {
             $hwi=new Original(self::SOURCE);
             $hwi->positions=$positions;
@@ -289,18 +368,8 @@ class Original extends Redeemer {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             $hwi->getManual(4)->Displayed="N";
-            foreach($hwi->getStops() as $id=>$stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount); 
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-            }   
-            unset($hwi->getOrgan()->InfoFilename);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            $hwi->saveODF(sprintf(self::TARGET, $target, self::VERSION), self::COMMENTS);
         }
         else {
             self::Redeemer([1=>"Far", 2=>"Near"], "surround");
@@ -319,3 +388,4 @@ set_error_handler("Organs\AV\ErrorHandler");
 
 Extended::Redeemer();
 Original::Redeemer();
+Chimes::Redeemer();
