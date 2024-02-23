@@ -27,9 +27,10 @@ class Redeemer extends AVOrgan {
             . "https://hauptwerk-augustine.info/Aeolian-Skinner.php\n"
             . "\n"
             . "1.1 Added chimes, AmpMinDepth=1\n"
+            . "1.2 Added chimes to choir enclosure\n" // Not yet published
             . "\n";
 
-    protected ?int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=200;
         
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
@@ -189,7 +190,7 @@ class Extended extends Redeemer {
     protected $patchEnclosures=[
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         230=>[                     "Name"=>"PO",    "GroupIDs"=>[401,402], "InstanceID"=>17],
-        240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502], "InstanceID"=>19],
+        240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502,9999], "InstanceID"=>19],
          11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
          12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
@@ -281,6 +282,8 @@ class Chimes extends Extended {
     public function addChimes() : void {
         $chimes=new \HWClasses\HWData(getenv("HOME") . self::ROOT . "/OrganDefinitions/GhentCarillon.Organ_Hauptwerk_xml");
         $wcg=$this->newWindchestGroup(9999, "Chimes");
+        $wcg->Enclosure($this->getEnclosure(240));
+        
         $rank=$this->newRank(9999, "Ghent Carillon by Al Morse");
         $rank->HarmonicNumber=8;
         $rank->WindchestGroup($wcg);
