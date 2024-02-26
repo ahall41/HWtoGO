@@ -14,7 +14,7 @@ require_once __DIR__ . "/PGOrgan.php";
 /**
  * Import Nancy Demo
  *
- * @todo: OG Coupler, Appelles etc
+ * @todo: Appelles
  */
 
 class Nancy extends PGOrgan {
@@ -35,6 +35,14 @@ class Nancy extends PGOrgan {
     protected bool $switchedtremulants=FALSE;
 
     public $positions=[];
+    
+    private $appelles=[ // switchid => [data]
+        80=>["stops"=>[8,9,10,12,14],   "instances"=>[10=>80, 40=>344906], "Name"=>"Anches 32"],
+        81=>["stops"=>[11,13,15],       "instances"=>[10=>81, 40=>344907], "Name"=>"Anches Pédale"],
+        82=>["stops"=>[26,27,28,29],    "instances"=>[10=>82, 40=>344908], "Name"=>"Anches Positif"],
+        83=>["stops"=>[61,62,63,64,65], "instances"=>[10=>83, 40=>344909], "Name"=>"Anches Récit expressif"],
+    ];
+    
     protected $combinations=[
         "crescendos"=>[
             "A"=>[1000,1002,1004,1006,1008,1010,1012,1014,1016,1018,
@@ -204,6 +212,7 @@ class Nancy extends PGOrgan {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
+                case 1:
                 case 4:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
                          isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
@@ -219,6 +228,7 @@ class Nancy extends PGOrgan {
             }
         }
         exit(); //*/
+        
         parent::import();
 
         foreach($this->getStops() as $stop) {
@@ -228,6 +238,10 @@ class Nancy extends PGOrgan {
             }
         }
         $this->getSwitch(20070)->DisplayInInvertedState="Y";
+        
+        foreach ($this->getManuals() as $manualid=>$manual) {
+            $manual->NumberOfLogicalKeys=$manual->NumberOfAccessibleKeys=$manualid==1 ? 32 : 61;
+        }
 
         foreach ([40=>101681] as $pageid=>$instanceid) {
             foreach([0,1,2] as $layoutid) {
@@ -235,6 +249,24 @@ class Nancy extends PGOrgan {
                     $cr=$panel->Element();
                     $cr->Type="Swell";
                     $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        }
+        
+        foreach ($this->appelles as $switchid=>$data) {
+            $switch=$this->newSwitch($switchid, $data["Name"]);
+            foreach ($data["instances"] as $pageid=>$instanceid) {
+                foreach([0,1,2] as $layoutid) {
+                    if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                        $pe=$panel->GUIElement($switch);
+                        $this->configureImage($pe, ["SwitchID"=>$instanceid], $layoutid);
+                    }
+                }
+            }
+            
+            foreach ($data["stops"] as $stopid) {
+                if (($stop=$this->getStop($stopid))) {
+                    $stop->Switch($switch);
                 }
             }
         }
