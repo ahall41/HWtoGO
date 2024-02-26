@@ -2,10 +2,10 @@
 
 /*
  * Copyright (C) 2022 Andrew E Hall (ahall.ahall.41@gmail.com)
- * 
+ *
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
- * 
+ *
  */
 
 namespace Organs\PG;
@@ -13,7 +13,7 @@ require_once __DIR__ . "/PGOrgan.php";
 
 /**
  * Import Nancy Demo
- * 
+ *
  * @todo: OG Coupler, Appelles etc
  */
 
@@ -26,13 +26,23 @@ class Nancy extends PGOrgan {
             . "\n"
             . "1.1 Functional couplers; Wave based tremulant (on Positif)\n"
             . "1.2 Added full surround\n"
+            . "    Added crescendo program\n"
             . "\n";
-    const VERSION="1.2";
     
+    const VERSION="1.2";
+
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected bool $switchedtremulants=FALSE;
-    
+
     public $positions=[];
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1000,1002,1004,1006,1008,1010,1012,1014,1016,1018,
+                  1020,1022,1024,1026,1012,1030,1032,1034,1036,1038,
+                  1040,1042,1045,1048,1051,1054,1057,1060,1063,1066,
+                  1069,1072]
+                ]
+        ];
 
     public $patchDivisions=[
             7=>["DivisionID"=>7, "Name"=>"Key Actions"],
@@ -72,11 +82,11 @@ class Nancy extends PGOrgan {
             1=>["Type"=>"Synth", "GroupIDs"=>[501,502,503,504]],
             2=>["TremulantID"=>2, "ControllingSwitchID"=>77, "Type"=>"Wave", "Name"=>"Pos Tremulant", "GroupIDs"=>[201,202,203,204]],
     ];
-    
+
     public $patchKeyActions=[
             4=>["ConditionSwitchID"=>20070]
     ];
-    
+
     public $patchEnclosures=[
             1=>["Panels"=>[10=>11, 40=>101680, 41=>101680, 42=>101680], "GroupIDs"=>[501,502,503,504]],
             2=>["Panels"=>[        40=>101679, 41=>101679, 42=>101679], "GroupIDs"=>[201,202,203,204]],
@@ -108,7 +118,7 @@ class Nancy extends PGOrgan {
           903=>["EnclosureID"=>903, "Name"=>"Middle",       "Panels"=>[60=>542], "GroupIDs"=>[103,203,303,403,503], "AmpMinimumLevel"=>0],
           904=>["EnclosureID"=>904, "Name"=>"Rear",         "Panels"=>[60=>543], "GroupIDs"=>[104,204,304,404,504], "AmpMinimumLevel"=>0],
     ];
-    
+
     protected $patchStops=[
           80=>["StopID"=>   80, "DivisionID"=>1, "Name"=>"Ambient (close)",     "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>901],
         1080=>["StopID"=> 1080, "DivisionID"=>1, "Name"=>"Ambient (front)",     "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>902],
@@ -144,7 +154,7 @@ class Nancy extends PGOrgan {
           90=>["Noise"=>"KeyOff",     "GroupID"=>701, "StopIDs"=>[90]],
           91=>["Noise"=>"KeyOff",     "GroupID"=>701, "StopIDs"=>[91]],
           92=>["Noise"=>"KeyOff",     "GroupID"=>701, "StopIDs"=>[92]],
-        
+
         1080=>["Noise"=>"Ambient",    "GroupID"=>902, "StopIDs"=>[]],
         1081=>["Noise"=>"StopOn",     "GroupID"=>802, "StopIDs"=>[]],
         1083=>["Noise"=>"StopOff",    "GroupID"=>802, "StopIDs"=>[]],
@@ -187,8 +197,28 @@ class Nancy extends PGOrgan {
         3091=>["Noise"=>"KeyOff",     "GroupID"=>704, "StopIDs"=>[91]],
         3092=>["Noise"=>"KeyOff",     "GroupID"=>704, "StopIDs"=>[92]],
     ];
-    
+
     public function import(): void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 4:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  &&
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        }
+        exit(); //*/
         parent::import();
 
         foreach($this->getStops() as $stop) {
@@ -197,12 +227,22 @@ class Nancy extends PGOrgan {
                 $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
             }
         }
-        $this->getSwitch(20070)->DisplayInInvertedState="Y";  
+        $this->getSwitch(20070)->DisplayInInvertedState="Y";
+
+        foreach ([40=>101681] as $pageid=>$instanceid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        }
     }
-    
+
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
         $switch=$this->hwdata->switch($switchid);
-        if (!empty($switch["Disp_ImageSetIndexEngaged"])) 
+        if (!empty($switch["Disp_ImageSetIndexEngaged"]))
             parent::configureKeyboardKey($manual, $switchid, $midikey);
     }
 
@@ -220,12 +260,12 @@ class Nancy extends PGOrgan {
         }
         return NULL;
     }
-    
+
     public function createManual(array $hwdata): ?\GOClasses\Manual {
         if ($hwdata["KeyboardID"]>5) return NULL;
         return parent::createManual($hwdata);
     }
-    
+
     public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
         if ($hwdata["SourceKeyboardID"]==6) $hwdata["SourceKeyboardID"]=3;
         if ($hwdata["DestKeyboardID"]==6) $hwdata["DestKeyboardID"]=3;
@@ -236,7 +276,7 @@ class Nancy extends PGOrgan {
         $data["SwitchID"]=$data["SwitchID"] % 1000;
         parent::configurePanelSwitchImages($switch, $data);
     }
-    
+
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
         if (!isset($hwdata["PipeLayerNumber"])) {$hwdata["PipeLayerNumber"]=1;}
@@ -246,11 +286,11 @@ class Nancy extends PGOrgan {
 }
 
 class NancyDemo extends Nancy {
-    
+
     const ODF="Nancy (demo).Organ_Hauptwerk_xml";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;     
-    const TARGET=self::ROOT . "Nancy (demo - %s) " . self::VERSION . ".organ";
-    
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
+    const TARGET=self::ROOT . "Nancy (demo - %s) " . self::VERSION;
+
     public static function Nancy(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002514/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
@@ -259,34 +299,34 @@ class NancyDemo extends Nancy {
             $hwi->import();
             $hwi->getOrgan()->ChurchName=str_replace("demo", "demo $target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
-        else {
+        else { /*
              self::Nancy(
                     [1=>"(close)"],
                     "close");
-            self::Nancy( 
+            self::Nancy(
                     [2=>"(front)"],
                     "front");
-            self::Nancy( 
+            self::Nancy(
                     [3=>"(middle)"],
                     "middle");
             self::Nancy(
                     [4=>"(rear)"],
-                    "rear");
-            self::Nancy( 
+                    "rear"); */
+            self::Nancy(
                     [1=>"(close)", 2=>"(front)", 3=> "(middle)", 4=>"(rear)"],
                     "surround");
         }
-    }   
-} 
+    }
+}
 
 class NancyFull extends Nancy {
-    
+
     const ODF="Nancy.Organ_Hauptwerk_xml";
-    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;     
-    const TARGET=self::ROOT . "Nancy (%s)" . self::VERSION . ".organ";
-    
+    const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
+    const TARGET=self::ROOT . "Nancy (%s)" . self::VERSION;
+
     public static function Nancy(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002513/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
@@ -295,27 +335,27 @@ class NancyFull extends Nancy {
             $hwi->import();
             $hwi->getOrgan()->ChurchName .= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
+            $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else {
             self::Nancy(
                     [1=>"(close)"],
                     "close");
-            self::Nancy( 
+            self::Nancy(
                     [2=>"(front)"],
                     "front");
-            self::Nancy( 
+            self::Nancy(
                     [3=>"(middle)"],
                     "middle");
             self::Nancy(
                     [4=>"(rear)"],
                     "rear");
-            self::Nancy( 
+            self::Nancy(
                     [1=>"(close)", 2=>"(front)", 3=> "(middle)", 4=>"(rear)"],
                     "surround");
         }
-    }   
-} 
+    }
+}
 
 NancyFull::Nancy();
 NancyDemo::Nancy();
