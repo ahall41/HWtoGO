@@ -18,13 +18,13 @@ require_once __DIR__ . "/PGOrgan.php";
 class Goch extends PGOrgan {
 
     const ROOT="/GrandOrgue/Organs/PG/GochFull/";
-    const VERSION="1.2";
+    const VERSION="1.1";
     const COMMENTS=
               "Pfarrkirche St. Maria Magdalena in Goch, Germany (%s)\n"
             . "https://piotrgrabowski.pl/goch/\n"
             . "\n"
             . "1.1 wave based tremulant model\n"
-            . "1.2 full surround included\n"
+            . "    full surround included\n"
             . "    added crescendo control and program\n"
             . "\n";
 
