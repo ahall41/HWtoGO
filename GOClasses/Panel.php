@@ -18,6 +18,7 @@ require_once __DIR__ . "/PanelElement.php";
  */
 class Panel extends GOObject {
     protected string $section="Panel";
+    private array $elements=[];
 
     public function __construct($name) {
         if (!array_key_exists("Panel", self::$Instances)) 
@@ -69,7 +70,7 @@ class Panel extends GOObject {
     public function Element(?string $name=NULL, ?string $label=NULL) : PanelElement {
         $instance=$this->instance();
         $this->NumberOfGUIElements++;
-        $element=new PanelElement("Panel${instance}Element");
+        $this->elements[$this->NumberOfGUIElements]=$element=new PanelElement("Panel${instance}Element");
         if (!empty($name)) $element->Name=$name;
         if (!empty($label)) $element->DispLabelText=$label;
         return $element;
@@ -118,6 +119,10 @@ class Panel extends GOObject {
         $element->PositionX=$x;
         $element->PositionY=$y;
         return $element;
+    }
+    
+    public function getElement(int $index) : ?PanelElement {
+        return array_key_exists($index, $this->elements) ? $this->elements[$index] : NULL;
     }
     
 }
