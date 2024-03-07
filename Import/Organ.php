@@ -491,8 +491,8 @@ abstract class Organ extends Images {
         }
     }
     
-    public function save(string $filename) : void {
-        $this->saveODF("$filename.organ");
+    public function save(string $filename, string $comments="") : void {
+        $this->saveODF("$filename.organ", $comments);
         if (sizeof($this->combinations)>0) {
             $this->saveCombinations("$filename.yaml");
         }
@@ -517,6 +517,7 @@ abstract class Organ extends Images {
         }
 
         $fp=fopen(getenv("HOME") . $filename, "w");
+        fputs($fp, hex2bin("EFBBBF")); // UTF-8 Marker
         fwrite($fp, $this->yaml_emit($yaml));
         fclose($fp);
         
