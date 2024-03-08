@@ -20,12 +20,22 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlinFull extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinFull/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.2.organ";
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.3";
     const COMMENTS="/n"
             . "1.1 Corrected tremulants and Diffuse expression\n"
             . "1.2 Added virtual keyboards for 2 keyboard operation\n"
             . "    Corrected surround channels\n"
+            . "1.3 Includes crescendo (for program see .yaml)\n"
             . "\n";
+    
+    protected $combinations=[
+        "crescendos"=>[
+            "A"=>[1501,1503,1505,1507,1509,1511,1513,1515,1517,1519,
+                  1521,1523,1525,1527,1529,1531,1533,1535,1537,1539,
+                  1541,1543,1545,1547,1549,1551,1553,1555,1557,1559,
+                  1562,1565]
+                ]
+        ];
     
     protected ?int $releaseCrossfadeLengthMs=NULL;
             
@@ -112,6 +122,65 @@ class BurtonBerlinFull extends SPOrgan {
         98=>["Name"=>"CH Uni Off", "SourceKeyboardID"=>2, "DestKeyboardID"=>2, "ConditionSwitchID"=>19075],
         99=>["Name"=>"Sw Uni Off", "SourceKeyboardID"=>4, "DestKeyboardID"=>4, "ConditionSwitchID"=>19074]
     ];
+    
+    public function import(): void {
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                //case 1:
+                //case 4:
+                //case 6:
+                case 5:
+                case 6: 
+                case 7: 
+                case 8: 
+                case 9: 
+                    break;
+                
+                default:
+                    echo $instance["DisplayPageID"], "\t",
+                        ($instanceID=$instance["ImageSetInstanceID"]), "\t",
+                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
+                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
+                         $instance["Name"], ": ";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"])  &&
+                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
+                            echo $switch["SwitchID"], " ",
+                                 $switch["Name"], ", ";
+                    }
+                    echo "\n";
+            }
+        }
+        exit(); //*/
+
+        parent::import();
+        
+        foreach([20=>11038, 30=>12038, 100=>13038] as $pageid=>$switchid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="CrescendoNext";
+                    $this->configureImage($cr, ["SwitchID"=>$switchid], $layoutid);
+                    echo $cr; exit();
+                }
+            }
+        }
+        
+        foreach ([20=>913] as $pageid=>$instanceid) {
+            foreach([0,1,2] as $layoutid) {
+                if (($panel=$this->getPanel($pageid+$layoutid, FALSE))) {
+                    $cr=$panel->Element();
+                    $cr->Type="Swell";
+                    $this->configureEnclosureImage($cr, ["InstanceID"=>$instanceid], $layoutid);
+                }
+            }
+        }
+
+    }
+    
     
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2261; 
@@ -223,7 +292,7 @@ class BurtonBerlinFull extends SPOrgan {
                 }
             }
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
+            $hwi->save(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::BurtonBerlinFull(
