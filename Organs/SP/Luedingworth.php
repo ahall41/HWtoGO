@@ -21,7 +21,9 @@ class Luedingworth extends SPOrgan {
     const COMMENTS= 
               "\n"
             . "1.1 Added Ventils, Toys and Full surround ODFs\n"
+            . "1.2 Reversed 'polarity' n the Ventils\n"
             . "\n";
+    const VERSION="1.2";
     
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,  9=>self::RANKS_DIRECT,
@@ -113,10 +115,10 @@ class Luedingworth extends SPOrgan {
     ];
     
     protected $patchKeyActions=[
-          1=>["SourceKeyboardID"=>2, "DestKeyboardID"=>2, "Name"=>"RP Ventil",  "ConditionSwitchID"=>19001],
-          7=>["SourceKeyboardID"=>1, "DestKeyboardID"=>1, "Name"=>"Ped Ventil", "ConditionSwitchID"=>19007],
-         13=>["SourceKeyboardID"=>3, "DestKeyboardID"=>3, "Name"=>"OW Ventil",  "ConditionSwitchID"=>19013],
-         19=>["SourceKeyboardID"=>4, "DestKeyboardID"=>4, "Name"=>"BP Ventil",  "ConditionSwitchID"=>19019  ],
+          1=>["SourceKeyboardID"=>2, "DestKeyboardID"=>2, "Name"=>"RP Ventil",  "ConditionSwitchID"=>19001, "Ventil"=>TRUE],
+          7=>["SourceKeyboardID"=>1, "DestKeyboardID"=>1, "Name"=>"Ped Ventil", "ConditionSwitchID"=>19007, "Ventil"=>TRUE],
+         13=>["SourceKeyboardID"=>3, "DestKeyboardID"=>3, "Name"=>"OW Ventil",  "ConditionSwitchID"=>19013, "Ventil"=>TRUE],
+         19=>["SourceKeyboardID"=>4, "DestKeyboardID"=>4, "Name"=>"BP Ventil",  "ConditionSwitchID"=>19019, "Ventil"=>TRUE],
     ];
 
     protected $patchRanks=[
@@ -147,6 +149,17 @@ class Luedingworth extends SPOrgan {
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2302; 
         return parent::createOrgan($hwdata);
+    }
+    
+    public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
+        $switch=parent::createCoupler($hwdata);
+        if (array_key_exists("Ventil", $hwdata)) {
+            $coupler=$this->getCoupler($hwdata["ConditionSwitchID"] % 1000);
+            $coupler->Function="Not";
+            unset($coupler->SwitchCount);
+            $switch->DefaultToEngaged="Y";
+        }
+        return $switch;
     }
     
     public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
@@ -246,7 +259,7 @@ class Luedingworth extends SPOrgan {
 class Demo extends Luedingworth {
     const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Demo (%s) 1.1.organ";
+    const TARGET=self::ROOT . "Luedingworth Demo (%s) " . self::VERSION . ".organ";
     
     protected string $root=self::ROOT;
     
@@ -306,7 +319,7 @@ class Demo extends Luedingworth {
 class Full extends Luedingworth {
     const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Luedingworth Full (%s) 1.1.organ";
+    const TARGET=self::ROOT . "Luedingworth Full (%s) " . self::VERSION . ".organ";
     
     protected string $root=self::ROOT;
     
