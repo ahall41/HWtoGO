@@ -239,7 +239,6 @@ abstract class SPOrgan extends \Import\Organ {
         $hwdata["ConditionSwitchID"]=$hwdata["ConditionSwitchID"] % 1000;
         return parent::createCoupler($hwdata);
     }
-
     
     public function createTremulant(array $hwdata): ?\GOClasses\Sw1tch {
         $hwdata["SwitchID"]=$hwdata["TremulantID"];
