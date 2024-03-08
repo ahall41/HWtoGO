@@ -23,10 +23,12 @@ class BurtonBerlinFull extends SPOrgan {
     const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.2.organ";
     const COMMENTS="/n"
             . "1.1 Corrected tremulants and Diffuse expression\n"
-            . "1.2 Added virtul keyboards for 2 keyboard operation\n"
+            . "1.2 Added virtual keyboards for 2 keyboard operation\n"
             . "    Corrected surround channels\n"
             . "\n";
     
+    protected ?int $releaseCrossfadeLengthMs=NULL;
+            
     protected string $root=self::ROOT;
     protected array  $rankpositions=[
         0=>self::RANKS_DIFFUSE,  9=>self::RANKS_DIFFUSE,
