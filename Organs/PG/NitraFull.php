@@ -22,9 +22,12 @@ class NitraFull extends Nitra {
     const COMMENTS=
               "Nitra, Katedrála sv. Emeráma, Slovakia (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nitra/\n"
+            . "\n"
+            . "1.1 Corrected pitch for other temperaments\n"
             . "\n";
+    
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Nitra (%s) 1.1.organ";
   
     // Create dummy sample file for testing ...
     public function createSample($hwdata) {
@@ -32,7 +35,7 @@ class NitraFull extends Nitra {
         if (!file_exists($file)) {
             $dir=dirname($file);
             if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Ambience::$blankloop;
+            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
             symlink($blank, $file);
         }
     }
@@ -50,8 +53,8 @@ class NitraFull extends Nitra {
     }
     
     public static function NitraFull(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop
-                ="./OrganInstallationPackages/002515/Noises/BlankLoop.wav";
+        \GOClasses\Noise::$blankloop=
+                "./OrganInstallationPackages/002515/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new NitraFull(self::SOURCE);
             $hwi->positions=$positions;

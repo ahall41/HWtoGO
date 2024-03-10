@@ -19,21 +19,20 @@ require_once __DIR__ . "/Nitra.php";
 
 class NitraDemo extends Nitra {
 
-    const ROOT="/GrandOrgue/Organs/PG/Nitra/";
+    const ROOT="/GrandOrgue/Organs/PG/NitraFull/";
     const ODF="Nitra (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Nitra, Katedrála sv. Emeráma, Slovakia (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nitra/\n"
             . "\n"
             . "1.1 Wave based tremulant\n"
-            . "1.2 Add switches to manuals (for divisionals)"
+            . "   Corrected pitch for other temperaments\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (demo - %s) 1.3.organ";
+    const TARGET=self::ROOT . "Nitra (demo - %s) 1.1.organ";
     
     public static function NitraDemo(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=\GOClasses\Ambience::$blankloop
-                ="./OrganInstallationPackages/002516/Noises/BlankLoop.wav";
+        \GOClasses\Noise::$blankloop="./OrganInstallationPackages/002516/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new NitraDemo(self::SOURCE);
             $hwi->positions=$positions;

@@ -194,6 +194,11 @@ class Nitra extends PGOrgan {
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
         if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
-        return parent::processSample($hwdata, $isattack);
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && $isattack) {
+            $pipe->MIDIKeyOverride=$or=floor($key=$this->samplePitchMidi($hwdata));
+            $pipe->MIDIPitchFraction=100*($key-$or);
+        }
+        return $pipe;
     }
 }
