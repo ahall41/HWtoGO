@@ -231,7 +231,12 @@ class Duren extends PGOrgan {
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
         $rankid=$hwdata["RankID"];
         if ((intval($rankid/100) % 10)==5) $hwdata["RankID"]=-($rankid-500);
-        return parent::processSample($hwdata, $isattack);
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && $isattack) {
+            $pipe->MIDIKeyOverride=$or=floor($key=$this->samplePitchMidi($hwdata));
+            $pipe->MIDIPitchFraction=100*($key-$or);
+        }
+        return $pipe;
     }
     
     protected static function Duren(Duren $hwi, array $positions, string $target) {

@@ -17,18 +17,20 @@ require_once __DIR__ . "/Duren.php";
 
 class DurenDemo extends Duren {
 
-    const ROOT="/GrandOrgue/Organs/PG/Duren/";
+    const ROOT="/GrandOrgue/Organs/PG/DurenFull/";
     const ODF="Duren (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Annakirche in Düren, Germany (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/duren/\n"
+            . "\n"
+            . "1.1 Pitch correction for other temperaments\n"
             . "\n";
+    
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
     const TARGET=self::ROOT . "Duren (demo - %s) 1.1.organ";
     
     public static function DurenDemo(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
                 "OrganInstallationPackages/002526/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new DurenDemo(self::SOURCE);

@@ -24,9 +24,10 @@ class DurenFull extends Duren {
             . "https://piotrgrabowski.pl/duren/\n"
             . "\n"
             . "1.1 Added crescendo program\n"
+            . "1.2 Pitch correction for other temperaments\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (%s) 1.1";
+    const TARGET=self::ROOT . "Duren (%s) 1.2";
  
     protected $combinations=[
         "crescendos"=>[
