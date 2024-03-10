@@ -22,9 +22,11 @@ class ErmeloFull extends Ermelo {
     const COMMENTS=
               "Immanuelkerk in Ermelo, Netherlands (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/ermelo/\n"
+            . "\n"
+            . "1.1 Corrected pitch for other temperaments\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Ermelo (%s) 1.1.organ";
     
     // Create dummy sample file for testing ...
     public function createSample($hwdata) {
@@ -32,7 +34,7 @@ class ErmeloFull extends Ermelo {
         if (!file_exists($file)) {
             $dir=dirname($file);
             if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Ambience::$blankloop;
+            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
             symlink($blank, $file);
         }
     }
@@ -53,7 +55,6 @@ class ErmeloFull extends Ermelo {
    
     public static function ErmeloFull(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
                 "OrganInstallationPackages/002521/Noises/BlankLoop.wav";
         
         if (sizeof($positions)>0) {

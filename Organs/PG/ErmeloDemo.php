@@ -17,23 +17,31 @@ require_once __DIR__ . "/Ermelo.php";
 
 class ErmeloDemo extends Ermelo {
 
-    const ROOT="/GrandOrgue/Organs/PG/Ermelo/";
+    const ROOT="/GrandOrgue/Organs/PG/ErmeloFull/";
     const ODF="Ermelo (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Immanuelkerk in Ermelo, Netherlands (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/ermelo/\n"
+            . "\n"
+            . "1.1 Corrected pitch for other temperaments\n"
             . "\n";
+    
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Ermelo (demo - %s) 1.1.organ";
     
     public static function ErmeloDemo(array $positions=[], string $target="") {
-       if (sizeof($positions)>0) {
+        \GOClasses\Noise::$blankloop=
+                "OrganInstallationPackages/002522/Noises/BlankLoop.wav";
+        if (sizeof($positions)>0) {
             $hwi=new ErmeloDemo(self::SOURCE);
             self::Ermelo($hwi, $positions, $target);
             $hwi->saveODF(sprintf(self::TARGET, $target));
             echo $hwi->getOrgan()->ChurchName, "\n";
         }
         else {
+            self::ErmeloDemo( 
+                    [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
+                    "surround");
             self::ErmeloDemo(
                     [1=>"(close)"],
                     "close");
@@ -43,9 +51,6 @@ class ErmeloDemo extends Ermelo {
             self::ErmeloDemo(
                     [3=>"(rear)"],
                     "rear");
-            self::ErmeloDemo( 
-                    [1=>"(close)", 2=>"(front)", 3=>"(rear)"],
-                    "surround");
         }
     }   
     
