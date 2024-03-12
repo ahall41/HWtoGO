@@ -753,15 +753,17 @@ abstract Class Configure extends Create {
     
     public function readSamplePitch($filename) : float {
         require_once (__DIR__ . "/WavReader.php");
-        $reader=new WavReader(getenv("HOME") . $filename);
-        $reader->header();
-        while (!$reader->isEof()) {
-            $chunk=$reader->chunk();
-            if ($chunk["id"]=="smpl" && $chunk["size"]>20) {
-                $midi=$chunk["MIDINote"] + ($chunk["MIDICents"]/100);
-                return $this->MidiToHz($midi);
+        if (is_file(getenv("HOME") . $filename)) {
+            $reader=new WavReader(getenv("HOME") . $filename);
+            $reader->header();
+            while (!$reader->isEof()) {
+                $chunk=$reader->chunk();
+                if ($chunk["id"]=="smpl" && $chunk["size"]>20) {
+                    $midi=$chunk["MIDINote"] + ($chunk["MIDICents"]/100);
+                    return $this->MidiToHz($midi);
+                }
             }
         }
-        return 0.0;
+        return 0.1;
     }
 }

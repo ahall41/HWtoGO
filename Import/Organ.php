@@ -335,11 +335,11 @@ abstract class Organ extends Images {
         if ($manuals<3) {
             $panel->DispScreenSizeVert="Small";
         }
-        elseif ($manuals<4) {
-            $panel->DispScreenSizeVert="Small";
+        elseif ($manuals<5) {
+            $panel->DispScreenSizeVert="Medium";
         }
         else {
-            $panel->DispScreenSizeVert="Large";
+            $panel->DispScreenSizeVert="Lerge";
         }
         
         $couplerid=-999;
