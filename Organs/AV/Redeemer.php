@@ -21,13 +21,14 @@ require_once(__DIR__ . "/AVOrgan.php");
 class Redeemer extends AVOrgan {
 
     const ROOT="/GrandOrgue/Organs/AV/New Haven/";
-    const VERSION="1.1";
+    const VERSION="1.2";
     const COMMENTS=
               "Aeolian-Skinner Organ (Op 1132) of the Redeemer church of New Haven\n"
             . "https://hauptwerk-augustine.info/Aeolian-Skinner.php\n"
             . "\n"
             . "1.1 Added chimes, AmpMinDepth=1\n"
-            . "1.2 Added chimes to choir enclosure\n" // Not yet published
+            . "1.2 Added chimes to choir enclosure\n"
+            . "    Added positive to near/far enclosures\n"
             . "\n";
 
     protected ?int $releaseCrossfadeLengthMs=200;
@@ -191,8 +192,8 @@ class Extended extends Redeemer {
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         230=>[                     "Name"=>"PO",    "GroupIDs"=>[401,402], "InstanceID"=>17],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502,9999], "InstanceID"=>19],
-         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
+         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401,501], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402,501], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
     
     protected $patchTremulants=[
@@ -337,8 +338,8 @@ class Original extends Redeemer {
     protected $patchEnclosures=[
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502], "InstanceID"=>17],
-         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
+         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401,501], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402,502], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
 
     protected $patchTremulants=[

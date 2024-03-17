@@ -225,12 +225,18 @@ class BrasovBuckholz extends SPOrgan {
                    "6ch");
             self::BrasovBuckholz(
                     [
+                        self::RANKS_DIFFUSE=>"Diffuse",
+                    ],
+                   "diffuse");
+            self::BrasovBuckholz(
+                    [
                         self::RANKS_DIRECT=>"Direct",
                     ],
                    "direct");
         }
     }
 }
+
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
     throw new \Exception("Error $errstr");
     die();

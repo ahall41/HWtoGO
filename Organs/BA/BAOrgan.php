@@ -145,7 +145,7 @@ abstract class BAOrgan extends \Import\Organ {
             }
         }
         
-        if (empty($this->releaseCrossfadeLengthMs==0)) {
+        if ($this->releaseCrossfadeLengthMs==0) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }
         elseif ($this->releaseCrossfadeLengthMs>0) {

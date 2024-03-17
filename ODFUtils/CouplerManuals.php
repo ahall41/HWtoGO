@@ -31,7 +31,7 @@ class CouplerManuals extends ODF {
         // (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->textBreakWidth(1);
         // (new CouplerManuals("${p}/PG/Cracov st John Cantius/Cracov st John Cantius.goodf.organ"))->run(3, [1,2,3], [1,2,3]);
         (new CouplerManuals("${p}/LP/NorrfjardenChurch/NorrfjardenChurch.organ"))->run(3, [5,6,7], [5,6,7]);
-        (new CouplerManuals("${p}/LP/PiteaMHS/PiteaMHS.organ"))->run(3, [1,2,3], [1,2,3]);
+        //(new CouplerManuals("${p}/LP/PiteaMHS/PiteaMHS.organ"))->run(3, [1,2,3], [1,2,3]);
         // (new CouplerManuals("${p}/LP/BureaChurch/BureaChurch.organ"))->run(3, [1,2,3], [1,2,3]);
         // (new CouplerManuals("${p}/LP/BureaChurch/BureaChurchExtended.organ"))->run(3, [1,2,3], [1,2,3]);
         // (new CouplerManuals("${p}/AV/New Haven/New Haven Ghent Surround.organ"))->run(4, [1,2,3,4], [1,2,3,4]);

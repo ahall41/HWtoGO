@@ -98,33 +98,33 @@ class Nancy extends PGOrgan {
     public $patchEnclosures=[
             1=>["Panels"=>[10=>11, 40=>101680, 41=>101680, 42=>101680], "GroupIDs"=>[501,502,503,504]],
             2=>["Panels"=>[        40=>101679, 41=>101679, 42=>101679], "GroupIDs"=>[201,202,203,204]],
-          101=>["EnclosureID"=>101, "Name"=>"Close Ped",    "Panels"=>[60=>500], "GroupIDs"=>[101], "AmpMinimumLevel"=>0],
-          102=>["EnclosureID"=>102, "Name"=>"Front Ped",    "Panels"=>[60=>510], "GroupIDs"=>[102], "AmpMinimumLevel"=>0],
-          103=>["EnclosureID"=>103, "Name"=>"Middle Ped",   "Panels"=>[60=>520], "GroupIDs"=>[103], "AmpMinimumLevel"=>0],
-          104=>["EnclosureID"=>104, "Name"=>"Rear Ped",     "Panels"=>[60=>530], "GroupIDs"=>[104], "AmpMinimumLevel"=>0],
-          201=>["EnclosureID"=>201, "Name"=>"Close Pos",    "Panels"=>[60=>501], "GroupIDs"=>[201], "AmpMinimumLevel"=>0],
-          202=>["EnclosureID"=>202, "Name"=>"Front Pos",    "Panels"=>[60=>511], "GroupIDs"=>[202], "AmpMinimumLevel"=>0],
-          203=>["EnclosureID"=>203, "Name"=>"Middle Pos",   "Panels"=>[60=>521], "GroupIDs"=>[203], "AmpMinimumLevel"=>0],
-          204=>["EnclosureID"=>204, "Name"=>"Rear Pos",     "Panels"=>[60=>531], "GroupIDs"=>[204], "AmpMinimumLevel"=>0],
-          301=>["EnclosureID"=>301, "Name"=>"Close GO",     "Panels"=>[60=>502], "GroupIDs"=>[301], "AmpMinimumLevel"=>0],
-          302=>["EnclosureID"=>302, "Name"=>"Front GO",     "Panels"=>[60=>512], "GroupIDs"=>[302], "AmpMinimumLevel"=>0],
-          303=>["EnclosureID"=>303, "Name"=>"Middle GO",    "Panels"=>[60=>522], "GroupIDs"=>[303], "AmpMinimumLevel"=>0],
-          304=>["EnclosureID"=>304, "Name"=>"Rear GO",      "Panels"=>[60=>532], "GroupIDs"=>[304], "AmpMinimumLevel"=>0],
-          401=>["EnclosureID"=>401, "Name"=>"Close Bombd",  "Panels"=>[60=>503], "GroupIDs"=>[401], "AmpMinimumLevel"=>0],
-          402=>["EnclosureID"=>402, "Name"=>"Front Bombd",  "Panels"=>[60=>513], "GroupIDs"=>[402], "AmpMinimumLevel"=>0],
-          403=>["EnclosureID"=>403, "Name"=>"Middle Bombd", "Panels"=>[60=>523], "GroupIDs"=>[403], "AmpMinimumLevel"=>0],
-          404=>["EnclosureID"=>404, "Name"=>"Rear Bombd",   "Panels"=>[60=>533], "GroupIDs"=>[404], "AmpMinimumLevel"=>0],
-          501=>["EnclosureID"=>501, "Name"=>"Close Rec",    "Panels"=>[60=>504], "GroupIDs"=>[501], "AmpMinimumLevel"=>0],
-          502=>["EnclosureID"=>502, "Name"=>"Front Rec",    "Panels"=>[60=>514], "GroupIDs"=>[502], "AmpMinimumLevel"=>0],
-          503=>["EnclosureID"=>503, "Name"=>"Middle Rec",   "Panels"=>[60=>524], "GroupIDs"=>[503], "AmpMinimumLevel"=>0],
-          504=>["EnclosureID"=>504, "Name"=>"Rear Rec",     "Panels"=>[60=>534], "GroupIDs"=>[504], "AmpMinimumLevel"=>0],
-          609=>["EnclosureID"=>609, "Name"=>"Key Actions",  "Panels"=>[60=>571], "GroupIDs"=>[701,702,703,704], "AmpMinimumLevel"=>0],
-          709=>["EnclosureID"=>709, "Name"=>"Stop Actions", "Panels"=>[60=>572], "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>0],
-          801=>["EnclosureID"=>801, "Name"=>"Blower",       "Panels"=>[60=>573], "GroupIDs"=>[901,902,903,904], "AmpMinimumLevel"=>0],
-          901=>["EnclosureID"=>901, "Name"=>"Close",        "Panels"=>[60=>540], "GroupIDs"=>[101,201,301,401,501], "AmpMinimumLevel"=>0],
-          902=>["EnclosureID"=>902, "Name"=>"Front",        "Panels"=>[60=>541], "GroupIDs"=>[102,202,302,402,502], "AmpMinimumLevel"=>0],
-          903=>["EnclosureID"=>903, "Name"=>"Middle",       "Panels"=>[60=>542], "GroupIDs"=>[103,203,303,403,503], "AmpMinimumLevel"=>0],
-          904=>["EnclosureID"=>904, "Name"=>"Rear",         "Panels"=>[60=>543], "GroupIDs"=>[104,204,304,404,504], "AmpMinimumLevel"=>0],
+          101=>["EnclosureID"=>101, "Name"=>"Close Ped",    "Panels"=>[60=>500], "GroupIDs"=>[101], "AmpMinimumLevel"=>1],
+          102=>["EnclosureID"=>102, "Name"=>"Front Ped",    "Panels"=>[60=>510], "GroupIDs"=>[102], "AmpMinimumLevel"=>1],
+          103=>["EnclosureID"=>103, "Name"=>"Middle Ped",   "Panels"=>[60=>520], "GroupIDs"=>[103], "AmpMinimumLevel"=>1],
+          104=>["EnclosureID"=>104, "Name"=>"Rear Ped",     "Panels"=>[60=>530], "GroupIDs"=>[104], "AmpMinimumLevel"=>1],
+          201=>["EnclosureID"=>201, "Name"=>"Close Pos",    "Panels"=>[60=>501], "GroupIDs"=>[201], "AmpMinimumLevel"=>1],
+          202=>["EnclosureID"=>202, "Name"=>"Front Pos",    "Panels"=>[60=>511], "GroupIDs"=>[202], "AmpMinimumLevel"=>1],
+          203=>["EnclosureID"=>203, "Name"=>"Middle Pos",   "Panels"=>[60=>521], "GroupIDs"=>[203], "AmpMinimumLevel"=>1],
+          204=>["EnclosureID"=>204, "Name"=>"Rear Pos",     "Panels"=>[60=>531], "GroupIDs"=>[204], "AmpMinimumLevel"=>1],
+          301=>["EnclosureID"=>301, "Name"=>"Close GO",     "Panels"=>[60=>502], "GroupIDs"=>[301], "AmpMinimumLevel"=>1],
+          302=>["EnclosureID"=>302, "Name"=>"Front GO",     "Panels"=>[60=>512], "GroupIDs"=>[302], "AmpMinimumLevel"=>1],
+          303=>["EnclosureID"=>303, "Name"=>"Middle GO",    "Panels"=>[60=>522], "GroupIDs"=>[303], "AmpMinimumLevel"=>1],
+          304=>["EnclosureID"=>304, "Name"=>"Rear GO",      "Panels"=>[60=>532], "GroupIDs"=>[304], "AmpMinimumLevel"=>1],
+          401=>["EnclosureID"=>401, "Name"=>"Close Bombd",  "Panels"=>[60=>503], "GroupIDs"=>[401], "AmpMinimumLevel"=>1],
+          402=>["EnclosureID"=>402, "Name"=>"Front Bombd",  "Panels"=>[60=>513], "GroupIDs"=>[402], "AmpMinimumLevel"=>1],
+          403=>["EnclosureID"=>403, "Name"=>"Middle Bombd", "Panels"=>[60=>523], "GroupIDs"=>[403], "AmpMinimumLevel"=>1],
+          404=>["EnclosureID"=>404, "Name"=>"Rear Bombd",   "Panels"=>[60=>533], "GroupIDs"=>[404], "AmpMinimumLevel"=>1],
+          501=>["EnclosureID"=>501, "Name"=>"Close Rec",    "Panels"=>[60=>504], "GroupIDs"=>[501], "AmpMinimumLevel"=>1],
+          502=>["EnclosureID"=>502, "Name"=>"Front Rec",    "Panels"=>[60=>514], "GroupIDs"=>[502], "AmpMinimumLevel"=>1],
+          503=>["EnclosureID"=>503, "Name"=>"Middle Rec",   "Panels"=>[60=>524], "GroupIDs"=>[503], "AmpMinimumLevel"=>1],
+          504=>["EnclosureID"=>504, "Name"=>"Rear Rec",     "Panels"=>[60=>534], "GroupIDs"=>[504], "AmpMinimumLevel"=>1],
+          609=>["EnclosureID"=>609, "Name"=>"Key Actions",  "Panels"=>[60=>571], "GroupIDs"=>[701,702,703,704], "AmpMinimumLevel"=>1],
+          709=>["EnclosureID"=>709, "Name"=>"Stop Actions", "Panels"=>[60=>572], "GroupIDs"=>[801,802,803,804], "AmpMinimumLevel"=>1],
+          801=>["EnclosureID"=>801, "Name"=>"Blower",       "Panels"=>[60=>573], "GroupIDs"=>[901,902,903,904], "AmpMinimumLevel"=>1],
+          901=>["EnclosureID"=>901, "Name"=>"Close",        "Panels"=>[60=>540], "GroupIDs"=>[101,201,301,401,501], "AmpMinimumLevel"=>1],
+          902=>["EnclosureID"=>902, "Name"=>"Front",        "Panels"=>[60=>541], "GroupIDs"=>[102,202,302,402,502], "AmpMinimumLevel"=>1],
+          903=>["EnclosureID"=>903, "Name"=>"Middle",       "Panels"=>[60=>542], "GroupIDs"=>[103,203,303,403,503], "AmpMinimumLevel"=>1],
+          904=>["EnclosureID"=>904, "Name"=>"Rear",         "Panels"=>[60=>543], "GroupIDs"=>[104,204,304,404,504], "AmpMinimumLevel"=>1],
     ];
 
     protected $patchStops=[
@@ -212,8 +212,9 @@ class Nancy extends PGOrgan {
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 1:
-                case 4:
+                //case 1:
+                //case 4:
+                case 6:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
                          isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
                          isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
@@ -231,12 +232,21 @@ class Nancy extends PGOrgan {
         
         parent::import();
 
-        foreach($this->getStops() as $stop) {
+        foreach($this->getStops() as $stopid=>$stop) {
             for ($i=1; $i<6; $i++) {
                 $stop->unset("Rank00${i}PipeCount");
                 $stop->unset("Rank00${i}FirstAccessibleKeyNumber");
             }
+            switch ($stopid) {
+                case 24: // PO  Cornet 5
+                case 40: // GO Septième 1 1/7
+                case 44: // B  Cornet 5
+                case 59: // R  Cornet 5
+                    $stop->FirstAccessiblePipeLogicalKeyNumber=25;
+                    break;
+            }
         }
+        
         $this->getSwitch(20070)->DisplayInInvertedState="Y";
         
         foreach ($this->getManuals() as $manualid=>$manual) {
@@ -270,6 +280,112 @@ class Nancy extends PGOrgan {
                 }
             }
         }
+        
+        /* // Read tuning from Front rank
+        static $pitchtuning=[];
+        if (sizeof($pitchtuning)==0) {
+            foreach($this->getStops() as $stopid=>$stop) { // Direct
+                if (($rank=$this->getRank(1000+$stopid))) {
+                    foreach($rank->Pipes() as $key=>$pipe) {
+                        $pitchtuning[$stopid][$key]=$pipe->PitchTuning;
+                    }
+                }
+            }
+        }
+  
+        // Apply to Front perspective
+        foreach($this->getStops() as $stopid=>$stop) { // Direct
+            if (($rank=$this->getRank($stopid))) {
+                foreach($rank->Pipes() as $key=>$pipe) {
+                    $pipe->PitchTuning=$pitchtuning[$stopid][$key];
+                }
+            }
+        } */
+
+        foreach($this->getStops() as $stopid=>$stop) {
+            if ($stopid>80) {continue;}
+            foreach([0,1000,2000,3000] as $rbase) {
+                if (($rank=$this->getRank($stopid+$rbase))) {
+                    //echo $stopid+$rbase, "\t", $rank->Name, "\n";
+                    foreach($rank->Pipes() as $key=>$pipe) {
+                        $skey=$this->sampleMidiKey(["SampleFilename"=>$pipe->Attack]);
+                        if ($skey==$key) {continue;}
+                        $pt=$rank->Pipe($skey)->PitchTuning;
+                        //if ($key==90) echo $key, "\t", $skey, "\t", $pipe->PitchTuning, "\t";
+                        $pipe->PitchTuning=(empty($pt) ? 0 : $pt) + (100*($key-$skey));
+                        //if ($key==90) echo $pipe->PitchTuning, "\t", $pt, "\t", $pipe->Attack, "\n";
+                    }
+                }
+            }
+        }
+
+        /* foreach($this->getStops() as $stopid=>$stop) {
+            $close=$this->getRank($stopid);
+            $front=$this->getRank(1000+$stopid);
+            $middle=$this->getRank(2000+$stopid);
+            $rear=$this->getRank(3000+$stopid);
+            for($key=86; $key<=99; $key++) {
+                if ($close && ($pipe=$close->Pipe($key))) {
+                    echo "Close\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
+                }
+                if ($front && ($pipe=$front->Pipe($key))) {
+                    echo "Front\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
+                }
+                if ($middle && ($pipe=$middle->Pipe($key))) {
+                    echo "Middle\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
+                }
+                if ($rear && ($pipe=$rear->Pipe($key))) {
+                    echo "Rear\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
+                }
+            }
+        } */
+        
+        /* foreach($this->getStops() as $stopid=>$stop) {
+            //
+            $pipes=[];
+            foreach([0,1000,2000,3000] as $rbase) {
+                if (($rank=$this->getRank($stopid+$rbase)) && sizeof($rank->Pipes())>0) {
+                    $pipes[]=$rank->Pipes();
+                }
+            }
+            
+            if (sizeof($pipes)>0) {
+                //foreach ($pipes as $p) {
+                //    echo sizeof($p), "\t";
+                //}
+                //echo $stop->Name, "\n";
+                
+                foreach ($pipes as $ps) {
+                    foreach ($ps as $k=>$p) {
+                        if ($p->PitchTuning != $pipes[0][$k]->PitchTuning) {
+                            echo $k, ":\t", $p->PitchTuning, " (", $p->Attack, ") != ",
+                                 $pipes[0][$k]->PitchTuning, " (", $pipes[0][$k]->Attack, ")\n";
+                        }
+                    }
+                }
+            }
+        } */
+        
+        foreach ($this->getStops() as $stopid=>$stop) {
+            if ($stopid>80) continue;
+            $direct=$this->getRank($stopid)->Pipes();
+            $front=$this->getRank(1000+$stopid)->Pipes();
+            $middle=$this->getRank(2000+$stopid)->Pipes();
+            $rear=$this->getRank(3000+$stopid)->Pipes();
+            foreach ($direct as $key=>$pipe) {
+                $d=$direct[$key]->PitchTuning;
+                $f=$front[$key]->PitchTuning;
+                $m=$middle[$key]->PitchTuning;
+                $r=$rear[$key]->PitchTuning;
+                
+                if (!(($d==$f) && ($d==$m) && ($d==$r))) {
+                    echo "$stopid\t$key\t$d\t$f\t$m\t$r\t", $stop->Name, "\n";
+                }
+            }
+            
+        }
+        
+        exit();
     }
 
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
@@ -303,6 +419,14 @@ class Nancy extends PGOrgan {
         if ($hwdata["DestKeyboardID"]==6) $hwdata["DestKeyboardID"]=3;
         return parent::createCoupler($hwdata);
     }
+    
+    protected function configurePanelSwitchImage
+            (\GOClasses\Panel $panel, 
+            \GOClasses\Sw1tch $switch, 
+            int $switchid, int $layout) : ? \GOClasses\PanelElement {
+        if ($switchid==142) {return NULL;}
+        return parent::configurePanelSwitchImage($panel, $switch, $switchid, $layout);
+    }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
         $data["SwitchID"]=$data["SwitchID"] % 1000;
@@ -310,10 +434,21 @@ class Nancy extends PGOrgan {
     }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
+        static $trem=[15,17,18,19,20,21,22,23,24,25,26,27,28,29];
         unset($hwdata["LoadSampleRange_EndPositionValue"]);
         if (!isset($hwdata["PipeLayerNumber"])) {$hwdata["PipeLayerNumber"]=1;}
-        if ($hwdata["PipeLayerNumber"]==2) $hwdata["IsTremulant"]=1;
-        return parent::processSample($hwdata, $isattack);
+        if (!isset($hwdata["NormalMIDINoteNumber"])) $hwdata["NormalMIDINoteNumber"]=60;
+        if (in_array($hwdata["RankID"] % 100, $trem)) {
+            $hwdata["IsTremulant"]=$hwdata["PipeLayerNumber"]==2 ? 1 : 0;
+        }
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && $isattack && (($hwdata["RankID"] % 100)<80)) {
+            $pipe->MIDIKeyOverride=$or=floor($key=$this->samplePitchMidi($hwdata));
+            $pipe->MIDIPitchFraction=100*($key-$or);
+            //echo $this->readSamplePitch(self::ROOT . $pipe->Attack), "\t", $hwdata["Pitch_ExactSamplePitch"], "\t",
+            //        $pipe->Attack, "\n";
+        }
+        return $pipe;
     }
 }
 
@@ -334,7 +469,7 @@ class NancyDemo extends Nancy {
             $hwi->save(sprintf(self::TARGET, $target), sprintf(self::COMMENTS, self::ODF));
         }
         else { /*
-             self::Nancy(
+            self::Nancy(
                     [1=>"(close)"],
                     "close");
             self::Nancy(
@@ -371,6 +506,9 @@ class NancyFull extends Nancy {
         }
         else {
             self::Nancy(
+                    [1=>"(close)", 2=>"(front)", 3=> "(middle)", 4=>"(rear)"],
+                    "surround");
+            self::Nancy(
                     [1=>"(close)"],
                     "close");
             self::Nancy(
@@ -382,9 +520,6 @@ class NancyFull extends Nancy {
             self::Nancy(
                     [4=>"(rear)"],
                     "rear");
-            self::Nancy(
-                    [1=>"(close)", 2=>"(front)", 3=> "(middle)", 4=>"(rear)"],
-                    "surround");
         }
     }
 }

@@ -31,7 +31,7 @@ class Sepsiszentgyorgy extends AVOrgan {
         "Ziegler surround"  =>[1=>"Near", 2=>"Far", 3=>"Rear"],
     ];
     
-    protected int $releaseCrossfadeLengthMs=-1;
+    protected ?int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

@@ -46,12 +46,17 @@ class Rank extends GOObject {
     private function storePipes() : void {
         if (!$this->sorted) ksort($this->pipes, SORT_NUMERIC);
         $this->sorted=TRUE;
-        if (($this->NumberOfLogicalPipes=sizeof($this->pipes)))
-            $this->FirstMidiNoteNumber=array_key_first($this->pipes);
+        if (($this->NumberOfLogicalPipes=sizeof($this->pipes))) {
+            $firstMidi=array_key_first($this->pipes);
+        }
+            
         else {
-            $this->FirstMidiNoteNumber=36;
+            $firstMidi=36;
             $this->NumberOfLogicalPipes=1;
             $this->Pipe001="DUMMY";
+        }
+        if (empty($this->FirstMidiNoteNumber)) {
+            $this->FirstMidiNoteNumber=$firstMidi;
         }
     }    
 

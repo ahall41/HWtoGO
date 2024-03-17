@@ -24,7 +24,7 @@ class Monaster extends \Import\Organ {
 
     private $divisions=[
         0=>"Pedale",
-        1=>"Hauptwewrk",
+        1=>"Hauptwerk",
         2=>"Positiv",
         3=>"Oberwerk",
         4=>"Schwellwerk",
@@ -38,7 +38,7 @@ class Monaster extends \Import\Organ {
 
     private $manuals=[ 
         0=>"Pedale", 
-        1=>"Hauptwewrk",
+        1=>"Hauptwerk",
         2=>"Positiv",
         3=>"Oberwerk",
         4=>"Schwellwerk",
@@ -46,7 +46,7 @@ class Monaster extends \Import\Organ {
     ];
 
     private $tremulants=[ 
-        4=>["Name"=>"IV",  "SwitchID"=>1740, "Type"=>"Switched", "Panel"=>0, "Position"=>[3, 4]],
+        4=>["TremulantID"=>4, "Name"=>"IV",  "SwitchID"=>1740, "Type"=>"Switched", "Panel"=>0, "Position"=>[3, 4]],
     ];
 
     private $couplers=[
@@ -174,6 +174,7 @@ class Monaster extends \Import\Organ {
         $this->buildRanks();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
+        $this->addVirtualKeyboards(5, [1,2,3,4,5], [1,2,3,4,5]);
     }
 
     protected function buildOrgan() : void {

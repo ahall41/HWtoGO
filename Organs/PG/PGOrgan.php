@@ -55,6 +55,18 @@ abstract class PGOrgan extends \Import\Organ {
         }
     }
     
+    protected function configurePanelSwitchImage
+            (\GOClasses\Panel $panel, 
+            \GOClasses\Sw1tch $switch, 
+            int $switchid, int $layout) : ? \GOClasses\PanelElement {
+        $panelelement=$panel->GUIElement($switch);
+        $this->configureImage(
+                $panelelement, 
+                ["SwitchID"=>$switchid], 
+                $layout);
+        return $panelelement;
+    }
+    
     /*
      * Compare with AVOrgan ...
      */
@@ -93,11 +105,7 @@ abstract class PGOrgan extends \Import\Organ {
                                         ["SwitchID"=>$switchid, "ImageIDX"=>2], 
                                         $layout);
                             else {
-                                $panelelement=$panel->GUIElement($switch);
-                                $this->configureImage(
-                                        $panelelement, 
-                                        ["SwitchID"=>$switchid], 
-                                        $layout);
+                                $this->configurePanelSwitchImage($panel, $switch, $switchid, $layout);
                             }
                         }
                     }

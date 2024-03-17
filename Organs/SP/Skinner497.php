@@ -19,12 +19,27 @@ require_once __DIR__ . "/SPOrgan.php";
  * - Enclosure MinAmp=20 + add to Console and Left pages
  * - Manual Bass
  * - Mixer Panel
+ * 
+ * sounds like some stops drop an octave when non-original temperament is selected.
  *  
  * @author andrew
  */
 class Skinner497 extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Skinner497Full/";
+    const VERSION="1.3";
+    const COMMENTS=
+              "Skinner, opus 497 (1924), San Francisco, CA\n"
+            . "https://www.sonusparadisi.cz/en/organs/u-s-a/skinner-opus-497-1924.html"
+            . "\n"
+            . "\n"
+            . "1.1 Added mixer panel\n"
+            . "1.2 Removed LoopCrossFade lengths\n"
+            . "1.3 Added FULL version\n"
+            . "    Reinstated (correct) Loop and Release CrossFade lengths\n"
+            . "\n";
 
+    protected ?int $releaseCrossfadeLengthMs=NULL;
+    
     protected $combinations=[
         "crescendos"=>[
             "A"=>[1501,1503,1505,1507,1509,1511,1513,1515,1517,1519,
@@ -148,19 +163,36 @@ class Skinner497 extends SPOrgan {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         parent::import();
-        foreach ($this->getStops() as $id=>$stop) {
-            for ($rn=1; $rn<10; $rn++) {
-                $pc=sprintf("Rank%03dPipeCount", $rn);
-                switch ($id) {
+        foreach ($this->getStops() as $stopid=>$stop) {
+            for ($r=1; $r<=$stop->NumberOfRanks; $r++) {
+                $rn=sprintf("%03d", $r);
+                switch ($stopid) {
                     case 8:     // P. Bourdon 32
                     case 91:    // G. Second Diapason 8
                         break;
                     
                     default:
-                        $stop->unset($pc);
+                        $stop->unset("Rank{$rn}PipeCount");
                         break;
                 }
            }
+        }
+        
+        foreach ($this->getRanks() as $rankid=>$rank) {
+            switch (intval($rankid/10)) {
+                case 54: // E chimes
+                case 83: // Ch. Celest
+                case 84: // Ch. Harp
+                case 93: // G chimes
+                    $rank->Percussive="Y";
+                    break;
+            }
+            if (array_key_first($rank->Pipes())!==24) {
+                continue;
+            }
+            foreach($rank->Pipes() as $pipe) {
+                $pipe->HarmonicNumber*=2;
+            }              
         }
         
         foreach ($this->crescendo as $instanceid=>$pageid) {
@@ -305,16 +337,30 @@ class Skinner497 extends SPOrgan {
         return NULL;
     }
     
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]); // =30;
-        return parent::processSample($hwdata, $isattack);
+    public function xxprocessSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
+        $pipe=parent::processSample($hwdata, $isattack);
+        if ($pipe && $isattack ) {
+            //if (!isset($hwdata["Pitch_Tempered_RankBasePitch64ftHarmonicNum"])) {
+            //    print_r($hwdata); exit();
+            //}
+            //$pipe->MIDIKeyOverride=$or=floor($key=$this->samplePitchMidi($hwdata));
+            //$pipe->MIDIPitchFraction=100*($key-$or);
+            echo ($sp=$this->HzToMidi($this->readSamplePitch(self::ROOT . $pipe->Attack))), "\t", 
+                 ($midi=isset($hwdata["NormalMIDINoteNumber"]) ? $hwdata["NormalMIDINoteNumber"] : 60), "\t",
+                 ($hn=isset($hwdata["Pitch_Tempered_RankBasePitch64ftHarmonicNum"]) ? $hwdata["Pitch_Tempered_RankBasePitch64ftHarmonicNum"] : 8), "\t",
+                 $midi-36+(12*log($hn)/log(2)), "\t",
+                 floor($sp+0.5), "\t",
+                 isset($hwdata["Pitch_ExactSamplePitch"]) ? $hwdata["Pitch_ExactSamplePitch"] : "-", "\t",
+                    $pipe->Attack, "\n";
+        }
+        return $pipe;
     }
 }
 
 class Skinner497Demo extends Skinner497 {
     
     const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) 1.3";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (Demo - %s) " . self::VERSION;
     
     /**
      * Run the import
@@ -327,7 +373,7 @@ class Skinner497Demo extends Skinner497 {
             $hwi->getOrgan()->ChurchName=str_replace(", Demo", " ($target)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->save(sprintf(self::TARGET, $target));
+            $hwi->save(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else { /*
             self::Skinner497(
@@ -353,7 +399,7 @@ class Skinner497Demo extends Skinner497 {
 class Skinner497Full extends Skinner497 {
     
     const SOURCE="OrganDefinitions/San Francisco, Skinner op. 497.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (%s) 1.3";
+    const TARGET=self::ROOT . "San Francisco, Skinner op. 497 (%s) " . self::VERSION;
     
     /**
      * Run the import
@@ -366,7 +412,7 @@ class Skinner497Full extends Skinner497 {
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;
-            $hwi->save(sprintf(self::TARGET, $target));
+            $hwi->save(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
             self::Skinner497(
