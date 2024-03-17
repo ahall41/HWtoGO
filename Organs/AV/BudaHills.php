@@ -25,7 +25,7 @@ class BudaHills extends AVOrgan{
             . "\n"
             . "Version 1.1 Correct reed tuning and organ gain\n"
             . "Version 1.2 Add key action noises\n"
-            . "Version 1.2 Remove unused pipes\n"
+            . "Version 1.3 Remove unused pipes\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const TARGET=self::ROOT . "Lutheran Buda_%s.1.3.organ";

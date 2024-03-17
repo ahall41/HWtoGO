@@ -124,6 +124,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
         $this->buildStops();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
+        $this->addVirtualKeyboards(2, [1,2,3], [1,2]);
     }
 
     protected function buildOrgan() : void {
@@ -283,10 +284,10 @@ class BillerbeckExtStudio170 extends \Import\Organ {
     }
    
     public function processSample(array $hwdata, bool $isattack) : ?\GOClasses\Pipe {
-        if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
+        /* if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
+        unset($hwdata["ReleaseCrossfadeLengthMs"]); */
         switch (($rankid=$hwdata["RankID"]) % 10) {
             case 9:
                 $hwdata["RankID"]-=9;
@@ -331,7 +332,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
             $hwi=new BillerbeckExtStudio170(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->build();
-            $hwi->getOrgan()->ChurchName=str_replace("8ch Demo", "$target (Extended Demo)", $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("8ch. Demo", "$target (Extended Demo)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getPanel(0)->Name="Billerbeck Dom Extended ($target)";
             $hwi->saveODF(sprintf(self::TARGET, $target));
@@ -348,7 +349,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
                      "Diffuse");
             self::BillerbeckExtStudio170(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear"); /*
+                    "Rear");
             self::BillerbeckExtStudio170(
                     [
                         self::RANKS_DIRECT=>"Direct", 
@@ -356,7 +357,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "8ch"); */
+                   "8ch");
         }
     }
 }

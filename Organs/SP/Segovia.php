@@ -14,23 +14,23 @@ require_once __DIR__ . "/SPOrganV2.php";
 /**
  * Import Sonus Paradisi Segovia Cathedral: Echevarria organ (1772)
  * 
- * @todo: Permanent couple pedal
- *        "Toys
- * 
- * @author andrewZ`
+ * @author andrew e hall
  */
 class Segovia extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/SegoviaFull/";
+    const VERSION="1.3";
     const REVISIONS="\n"
             . "1.1 Corrected releases on ranks without tremmed samples\n"
             . "1.2 Corrected panel image placement\n"
-            . "1.3 Added 'Toys' (to full surround)\n"
+            . "1.3 Added full surround\n"
             . "\n";
     
     const RANKS_DIRECT=1;
     const RANKS_DIFFUSE=2;
     const RANKS_DISTANT=3;
     const RANKS_REAR=4;
+    
+    protected ?int $releaseCrossfadeLengthMs=NULL;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -108,17 +108,17 @@ class Segovia extends SPOrganV2 {
    ];
 
     protected $patchStops=[
-        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
-        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
-        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>250, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
-        -111=>["StopID"=>-110, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -112=>["StopID"=>-111, "DivisionID"=>2, "Name"=>"1 Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -113=>["StopID"=>-112, "DivisionID"=>3, "Name"=>"2 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -114=>["StopID"=>-113, "DivisionID"=>4, "Name"=>"3 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"1 Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"2 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"3 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
+        -101=>["StopID"=>-101, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>999, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>601],
+        -102=>["StopID"=>-102, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>999, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>602],
+        -104=>["StopID"=>-104, "DivisionID"=>1, "Name"=>"Blower",     "ControllingSwitchID"=>999, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>604],
+        -111=>["StopID"=>-110, "DivisionID"=>1, "Name"=>"P Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -112=>["StopID"=>-111, "DivisionID"=>2, "Name"=>"1 Key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -113=>["StopID"=>-112, "DivisionID"=>3, "Name"=>"2 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -114=>["StopID"=>-113, "DivisionID"=>4, "Name"=>"3 key On",   "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -121=>["StopID"=>-121, "DivisionID"=>1, "Name"=>"P Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -122=>["StopID"=>-122, "DivisionID"=>2, "Name"=>"1 Key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -123=>["StopID"=>-123, "DivisionID"=>3, "Name"=>"2 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
+        -124=>["StopID"=>-124, "DivisionID"=>4, "Name"=>"3 key Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y", "GCState"=>1],
         
            1=>["StopID"=>1,   "DivisionID"=>1, "Name"=>"Paxaros",  "ControllingSwitchID"=>19001, "Ambient"=>TRUE, "GroupID"=>1001],
           65=>["StopID"=>65,  "DivisionID"=>1, "Name"=>"Tambor D", "ControllingSwitchID"=>19065, "Ambient"=>TRUE, "GroupID"=>901],
@@ -182,13 +182,31 @@ class Segovia extends SPOrganV2 {
         998392=>["Noise"=>"KeyOff",  "GroupID"=>704, "StopIDs"=>[-124]],
     ];
 
+    public function import(): void {
+        parent::import();
+        
+        foreach($this->getStops() as $stop) {
+            unset($stop->Rank001PipeCount);
+            unset($stop->Rank002PipeCount);
+            unset($stop->Rank003PipeCount);
+            unset($stop->Rank004PipeCount);
+            unset($stop->Rank005PipeCount);
+            unset($stop->Rank006PipeCount);
+        }
+
+        $this->getManual(1)->NumberOfLogicalKeys=
+                 $this->getManual(1)->NumberOfAccessibleKeys=32;
+        
+        $this->addPanelImages(5, 12998, 2); // CompassSelection
+    }
+    
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         /* Uncomment to determine image instances on each page ...
         $instances=$this->hwdata->imageSetInstances();
         foreach ($instances as $instance) {
             if (!isset($instance["ImageSetInstanceID"])) continue;
             switch ($instance["DisplayPageID"]) {
-                case 2:
+                case 5:
                     echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
                          isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
                          isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
@@ -217,7 +235,7 @@ class Segovia extends SPOrganV2 {
     public function createStops(array $stopsdata) : void {
         parent::createStops($stopsdata);
         
-        $switch=$this->getSwitch(250); // Blower
+        $switch=$this->getSwitch(999); // Blower
         $panel=$this->getPanel(50);
         $pe=$panel->GUIElement($switch);
         $this->configureImage($pe, ["SwitchID"=>1050], 0);
@@ -268,10 +286,30 @@ class Segovia extends SPOrganV2 {
     }
     
     protected function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
-        if (isset($data["StopID"])) {
-            if (($stopid=$data["StopID"])>100) {$data["StopID"]=$stopid % 100;}
+        if (isset($data["StopID"])) $switchid=$data["StopID"];
+        elseif (isset($data["CouplerID"])) $switchid=$data["CouplerID"];
+        elseif (isset($data["TremulantID"])) $switchid=$data["TremulantID"];
+        else return;
+        if ($switchid<0) return;
+        
+        foreach($this->patchDisplayPages as $pageid=>$layouts) {
+            if (!is_array($layouts)) continue;
+            foreach($layouts as $layoutid=>$layout) {
+                if (!isset($layout["Instance"])) continue;
+                $id=$switchid+$layout["Instance"];
+                if ($id==1050) {continue;}
+                $instance=$this->hwdata->imageSetInstance($id, TRUE);
+                if ($instance!==NULL 
+                        && $this->hwdata->switch($id, TRUE)!==NULL
+                        && $instance["DisplayPageID"]==$pageid) {
+                    $panel=$this->getPanel(($pageid*10)+$layoutid, FALSE);
+                    if ($panel!==NULL) {
+                        $pe=$panel->GUIElement($switch);
+                        $this->configureImage($pe, ["SwitchID"=>$id], $layoutid);
+                    }
+                }
+            }
         }
-        parent::configurePanelSwitchImages($switch, $data);
     }
     
     public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
@@ -335,6 +373,12 @@ class Segovia extends SPOrganV2 {
         }
 
         $pipe=parent::processSample($hwdata, $isattack);
+/*      if (isset($hwdata["AttackSelCriteria_HighestVelocity"])) {
+            $pipe->AttackVelocity=$hwdata["AttackSelCriteria_HighestVelocity"];
+        }
+         if (isset($hwdata["AttackSelCriteria_MinTimeSincePrevPipeCloseMs"])) {
+            $pipe->MaxTimeSinceLastReleasey=$hwdata["AttackSelCriteria_MinTimeSincePrevPipeCloseMs"];
+        }*/
         return $pipe;
     }
     
@@ -342,7 +386,7 @@ class Segovia extends SPOrganV2 {
 
 class SegoviaDemo extends Segovia {
     const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s).1.3.organ";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Demo (%s) " . self::VERSION . ".organ";
 
     /**
      * Run the import
@@ -354,17 +398,6 @@ class SegoviaDemo extends Segovia {
             $hwi=new SegoviaDemo(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-            }
-            
-            $hwi->getManual(1)->NumberOfLogicalKeys=
-                     $hwi->getManual(1)->NumberOfAccessibleKeys=32;
             $hwi->getOrgan()->ChurchName.= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
@@ -398,7 +431,7 @@ class SegoviaDemo extends Segovia {
 
 class SegoviaFull extends Segovia {
     const SOURCE=self::ROOT . "OrganDefinitions/Segovia, Echevarria Organ, Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Full (%s).1.3.organ";
+    const TARGET=self::ROOT . "Segovia, Echevarria Organ, Full (%s)" . self::VERSION . ".organ";
 
     /**
      * Run the import
@@ -410,19 +443,8 @@ class SegoviaFull extends Segovia {
             $hwi=new SegoviaFull(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            foreach($hwi->getStops() as $stop) {
-                unset($stop->Rank001PipeCount);
-                unset($stop->Rank002PipeCount);
-                unset($stop->Rank003PipeCount);
-                unset($stop->Rank004PipeCount);
-                unset($stop->Rank005PipeCount);
-                unset($stop->Rank006PipeCount);
-            }
-            
-            $hwi->getManual(1)->NumberOfLogicalKeys=
-                     $hwi->getManual(1)->NumberOfAccessibleKeys=32;
-            $hwi->getOrgan()->ChurchName.= " ($target)";
             $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            $hwi->getOrgan()->ChurchName.= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }

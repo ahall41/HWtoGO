@@ -209,9 +209,9 @@ class Billerbeck extends SPOrgan {
             $hwi->saveODF(sprintf(self::TARGET, $target));
         }
         else {
-            /* self::Billerbeck(
+            self::Billerbeck(
                     [self::RANKS_DIRECT=>"Direct"],
-                    "Direct"); */
+                    "Direct");
             self::Billerbeck(
                     [self::RANKS_SEMI_DRY=>"Semi-dry"],
                     "Semi-Dry");
@@ -223,12 +223,12 @@ class Billerbeck extends SPOrgan {
                     "Rear");
              self::Billerbeck(
                     [
-                        // self::RANKS_DIRECT=>"Direct", 
+                        self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_SEMI_DRY=>"Semi-dry",
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "6ch");
+                   "8ch");
         }
     }
 }

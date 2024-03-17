@@ -23,10 +23,11 @@ class Buckeburg extends SPOrgan {
     const REVISIONS="\n"
             . "1.1 Remove additional attacks\n"
             . "1.2 Reinstate additional attacks\n"
-            . "1.3 Coupler manuals\n"
+            . "1.3 Add coupler manuals + correct cross fades\n"
             . "\n";
     
     public static bool $singleRelease=FALSE;
+    protected ?int $releaseCrossfadeLengthMs=NULL;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[

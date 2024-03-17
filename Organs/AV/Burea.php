@@ -23,8 +23,10 @@ class Burea extends AVOrgan {
     const COMMENTS=
               "Burea composite set\n"
             . "https://hauptwerk-augustine.info/Large_Dutch.php\n"
+            . "\n"
+            . "1.1 Added Virtual Keyboards\n"
             . "\n";
-    const TARGET=self::ROOT . "Burea.1.0.organ";
+    const TARGET=self::ROOT . "Burea.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -342,6 +344,8 @@ class Burea extends AVOrgan {
             $hwi->label(860,  30, "POSITIVE");
             $hwi->label( 75, 290, "PEDAL");
             $hwi->label(860, 290, "SWELL");
+            
+            $hwi->addVirtualKeyboards(3,[1,2,3],[1,2,3]);
             
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }

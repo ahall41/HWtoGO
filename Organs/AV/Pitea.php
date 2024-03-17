@@ -23,8 +23,10 @@ class Pitea extends AVOrgan {
     const COMMENTS=
               "Pitea composite set\n"
             . "https://hauptwerk-augustine.info/Large_Dutch.php\n"
+            . "\n"
+            . "1.1 Added virtual keyboards\n"
             . "\n";
-    const TARGET=self::ROOT . "Pitea.1.0.organ";
+    const TARGET=self::ROOT . "Pitea.1.1.organ";
 
     protected int $releaseCrossfadeLengthMs=0;
     
@@ -387,6 +389,8 @@ class Pitea extends AVOrgan {
             $hwi->label(900,  30, "POSITIVE");
             $hwi->label(175, 290, "PEDAL");
             $hwi->label(900, 290, "SWELL");
+            
+            $hwi->addVirtualKeyboards(3,[1,2,3],[1,2,3]);
             
             $hwi->saveODF(self::TARGET, self::COMMENTS);
         }

@@ -83,13 +83,13 @@ class Warrington extends SPOrganV2 {
 
     protected $patchEnclosures=[
         901=>["Panels"=>[5=>[800]], "EnclosureID"=>901, "Name"=>"Direct",
-            "GroupIDs"=>[101,201,301,401,601,701,801.901], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[101,201,301,401,601,701,801,901], "AmpMinimumLevel"=>1],
         902=>["Panels"=>[5=>[810]], "EnclosureID"=>903,"Name"=>"Diffuse",
-            "GroupIDs"=>[102,202,302,402,602,702,802.902], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[102,202,302,402,602,702,802,902], "AmpMinimumLevel"=>1],
         903=>["Panels"=>[5=>[820]], "EnclosureID"=>903,"Name"=>"Distant",
-            "GroupIDs"=>[103,203,303,403,603,703,803.903], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[103,203,303,403,603,703,803,903], "AmpMinimumLevel"=>1],
         904=>["Panels"=>[5=>[830]], "EnclosureID"=>904,"Name"=>"Rear",
-            "GroupIDs"=>[104,204,304,404,604,704,804.904], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[104,204,304,404,604,704,804,904], "AmpMinimumLevel"=>1],
 
         906=>["Panels"=>[5=>[1691]], "EnclosureID"=>906,"Name"=>"Blower",
             "GroupIDs"=>[601,602,603,604], "AmpMinimumLevel"=>1],
