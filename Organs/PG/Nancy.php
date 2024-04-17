@@ -281,111 +281,29 @@ class Nancy extends PGOrgan {
             }
         }
         
-        /* // Read tuning from Front rank
-        static $pitchtuning=[];
-        if (sizeof($pitchtuning)==0) {
-            foreach($this->getStops() as $stopid=>$stop) { // Direct
-                if (($rank=$this->getRank(1000+$stopid))) {
-                    foreach($rank->Pipes() as $key=>$pipe) {
-                        $pitchtuning[$stopid][$key]=$pipe->PitchTuning;
-                    }
-                }
-            }
-        }
-  
-        // Apply to Front perspective
-        foreach($this->getStops() as $stopid=>$stop) { // Direct
-            if (($rank=$this->getRank($stopid))) {
-                foreach($rank->Pipes() as $key=>$pipe) {
-                    $pipe->PitchTuning=$pitchtuning[$stopid][$key];
-                }
-            }
-        } */
-
-        foreach($this->getStops() as $stopid=>$stop) {
-            if ($stopid>80) {continue;}
-            foreach([0,1000,2000,3000] as $rbase) {
-                if (($rank=$this->getRank($stopid+$rbase))) {
-                    //echo $stopid+$rbase, "\t", $rank->Name, "\n";
-                    foreach($rank->Pipes() as $key=>$pipe) {
-                        $skey=$this->sampleMidiKey(["SampleFilename"=>$pipe->Attack]);
-                        if ($skey==$key) {continue;}
-                        $pt=$rank->Pipe($skey)->PitchTuning;
-                        //if ($key==90) echo $key, "\t", $skey, "\t", $pipe->PitchTuning, "\t";
-                        $pipe->PitchTuning=(empty($pt) ? 0 : $pt) + (100*($key-$skey));
-                        //if ($key==90) echo $pipe->PitchTuning, "\t", $pt, "\t", $pipe->Attack, "\n";
-                    }
-                }
-            }
-        }
-
-        /* foreach($this->getStops() as $stopid=>$stop) {
-            $close=$this->getRank($stopid);
-            $front=$this->getRank(1000+$stopid);
-            $middle=$this->getRank(2000+$stopid);
-            $rear=$this->getRank(3000+$stopid);
-            for($key=86; $key<=99; $key++) {
-                if ($close && ($pipe=$close->Pipe($key))) {
-                    echo "Close\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
-                }
-                if ($front && ($pipe=$front->Pipe($key))) {
-                    echo "Front\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
-                }
-                if ($middle && ($pipe=$middle->Pipe($key))) {
-                    echo "Middle\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
-                }
-                if ($rear && ($pipe=$rear->Pipe($key))) {
-                    echo "Rear\t$key\t", $pipe->PitchTuning, "\t", $pipe->Attack, "\n";
-                }
-            }
-        } */
-        
-        /* foreach($this->getStops() as $stopid=>$stop) {
-            //
-            $pipes=[];
-            foreach([0,1000,2000,3000] as $rbase) {
-                if (($rank=$this->getRank($stopid+$rbase)) && sizeof($rank->Pipes())>0) {
-                    $pipes[]=$rank->Pipes();
-                }
-            }
-            
-            if (sizeof($pipes)>0) {
-                //foreach ($pipes as $p) {
-                //    echo sizeof($p), "\t";
-                //}
-                //echo $stop->Name, "\n";
-                
-                foreach ($pipes as $ps) {
-                    foreach ($ps as $k=>$p) {
-                        if ($p->PitchTuning != $pipes[0][$k]->PitchTuning) {
-                            echo $k, ":\t", $p->PitchTuning, " (", $p->Attack, ") != ",
-                                 $pipes[0][$k]->PitchTuning, " (", $pipes[0][$k]->Attack, ")\n";
+        // Fix cloned pipes
+        foreach($this->getRanks() as $rankid=>$rank) {
+            foreach($rank->Pipes() as $key=>$pipe) {
+                $sampleKey=$this->sampleMidiKey(["SampleFilename"=>$pipe->Attack]);
+                if ($sampleKey != $key) {
+                    $pipePitch=$pipe->MIDIKeyOverride+($pipe->MIDIPitchFraction/100);
+                    $sample=$rank->Pipe($sampleKey);
+                    if ($sample) {
+                        $samplePitch=$sample->MIDIKeyOverride+($sample->MIDIPitchFraction/100);
+                        if (abs($pipePitch-$samplePitch)>0.0001) {
+                            $pipe->MIDIKeyOverride=$sample->MIDIKeyOverride;
+                            $pipe->MIDIPitchFraction=$sample->MIDIPitchFraction;
+                            $original=$pipe->PitchTuning;
+                            $pipe->PitchTuning=100*($pipe->PipePitch-$samplePitch);
+                            $adjustment=$pipe->PitchTuning-$original;
+                            // echo "$rankid\t$key\t$sampleKey\t$pipePitch\t$samplePitch\t" . $pipe->PipePitch . "\t" . $pipe->PitchTuning . "\n";
+                            //if ($adjustment!=0) {echo "$key\t$adjustment\t" . $rank->Name. "\n";}
                         }
                     }
                 }
+                unset($pipe->PipePitch);
             }
-        } */
-        
-        foreach ($this->getStops() as $stopid=>$stop) {
-            if ($stopid>80) continue;
-            $direct=$this->getRank($stopid)->Pipes();
-            $front=$this->getRank(1000+$stopid)->Pipes();
-            $middle=$this->getRank(2000+$stopid)->Pipes();
-            $rear=$this->getRank(3000+$stopid)->Pipes();
-            foreach ($direct as $key=>$pipe) {
-                $d=$direct[$key]->PitchTuning;
-                $f=$front[$key]->PitchTuning;
-                $m=$middle[$key]->PitchTuning;
-                $r=$rear[$key]->PitchTuning;
-                
-                if (!(($d==$f) && ($d==$m) && ($d==$r))) {
-                    echo "$stopid\t$key\t$d\t$f\t$m\t$r\t", $stop->Name, "\n";
-                }
-            }
-            
         }
-        
-        exit();
     }
 
     public function configureKeyboardKey(\GOClasses\Manual $manual, $switchid, $midikey): void {
@@ -447,6 +365,7 @@ class Nancy extends PGOrgan {
             $pipe->MIDIPitchFraction=100*($key-$or);
             //echo $this->readSamplePitch(self::ROOT . $pipe->Attack), "\t", $hwdata["Pitch_ExactSamplePitch"], "\t",
             //        $pipe->Attack, "\n";
+            $pipe->PipePitch=$this->pipePitchMidi($hwdata);
         }
         return $pipe;
     }
