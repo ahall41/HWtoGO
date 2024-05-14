@@ -159,6 +159,21 @@ class Pipe extends GOBase {
                 parent::set("MIDIKeyNumber", $value);
                 break;
             
+            case "ReleaseCrossfadeLength":
+                if ($this->storeRelease) {
+                    parent::set(
+                            $this->release() . $property, 
+                            $value);
+                }
+                break;    
+                
+            
+            case "LoopCrossfadeLength":
+                parent::set(
+                        $this->attack() . $property,
+                        $value);
+                break;    
+
             default:
                 parent::set($property, $value);
 
