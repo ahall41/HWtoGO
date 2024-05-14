@@ -104,6 +104,13 @@ class Objects {
             return NULL;
     }
 
+    public function getWindchestGroups() : array {
+        if (isset($this->Model[self::WindchestGroups])) 
+            return($this->Model[self::WindchestGroups]);
+        else
+            return[];
+    }
+    
     protected function newEnclosure($id, $name) : \GOClasses\Enclosure {
         return $this->Model[self::Enclosures][$id]=new \GOClasses\Enclosure($name);
     }
