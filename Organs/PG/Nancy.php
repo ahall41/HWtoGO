@@ -13,73 +13,12 @@ require_once __DIR__ . "/PGOrgan.php";
 
 /**
  * Import Nancy Demo
- *
- * @todo: Corrections from Scott Hostetler
-
-Positiv:
-Montre 8'
-94 	0 -300 +300 0
-95 	0 +100 -100 0
-96 	0 +100 0 0
-
-Prestant 4'
-94 	-300 0 0 -100
-95 	+300 0 +200 -200
-96 	0 0 -200 +300
-
-Doublette 2'
-94 	+100 -200 -200 -100
-95 	-100 0 -100 -200
-96 	0 +200 +300 +300
-
-Bourdon 8'
-94 	0 0 0 +100
-95 	0 +100 +200 0
-96 	0 -100 -200 -100
-
-Nazard
-94 	-100 +300 +100 +100
-95 	0 -100 0 -200
-96 	+100 -200 -200 +100
-
-Tierce
-94 	-150 -100 0 0
-95 	+250 +100 0 0
-96 	-100 0 0 0
-
-Larigot
-94 	-300 +150 +100 0
-95 	0 0 0 -300
-96 	+300 -100 -100 +300
-
-Cromorne 8'
-46 	+200 +200 +200 +200
-
-Bombarde:
-Cornet
-93 	-200 -200 0 0
-94 	0 0 0 0
-95 	-200 -200 0 0
-96 	0 0 0 0
-
-Recit:
-Octavin 2'
-90 	+200 0 +200 0
-91 	0 +200 0 +200
-92 	0 0 0 0
-93 	0 0 0 0
-94 	0 +200 0 0
-95 	0 0 0 +200
-96 	0 0 0 0
-
-Cornet
-65 	-200 -200 -200 -200
  * 
  */
 
 class Nancy extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/PG/NancyFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Nancy/";
     const COMMENTS=
               "Nancy, Cathédrale Notre-Dame-de-l'Annonciation, France (%s)\n"
             . "https://piotrgrabowski.pl/nancy/\n"
@@ -87,9 +26,10 @@ class Nancy extends PGOrgan {
             . "1.1 Functional couplers; Wave based tremulant (on Positif)\n"
             . "1.2 Added full surround\n"
             . "    Added crescendo program\n"
+            . "1.3 Cross fades corrected for GO 3.14\n"
             . "\n";
     
-    const VERSION="1.2";
+    const VERSION="1.3";
 
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     protected bool $switchedtremulants=FALSE;
