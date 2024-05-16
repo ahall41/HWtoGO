@@ -17,7 +17,7 @@ require_once __DIR__ . "/AVOrgan.php";
  * @author andrew
  */
 class BudaHills extends AVOrgan{
-    const ROOT="/GrandOrgue/Organs/AV//BudaHills/";
+    const ROOT="/GrandOrgue/Organs/AV/BudaHills/";
     const ODF="Lutheran Buda_surround.Organ_Hauptwerk_xml";
     const COMMENTS=
               "POM Lutheran's Organ from the Buda Hills Area (" . self::ODF . ")\n"
@@ -25,7 +25,7 @@ class BudaHills extends AVOrgan{
             . "\n"
             . "Version 1.1 Correct reed tuning and organ gain\n"
             . "Version 1.2 Add key action noises\n"
-            . "Version 1.3 Remove unused pipes\n"
+            . "Version 1.3 Removed unused pipes and cross fades\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const TARGET=self::ROOT . "Lutheran Buda_%s.1.3.organ";
@@ -178,12 +178,12 @@ class BudaHills extends AVOrgan{
             self::BudaHills(
                     [1=>"Far", 2=>"Near", 3=>"Rear"],
                     "surround");
-            self::BudaHills(
+            /* self::BudaHills(
                     [1=>"Far"],
                     "wet");
             self::BudaHills(
                     [2=>"Near"],
-                    "dry");
+                    "dry"); */
         }
     }   
 }
