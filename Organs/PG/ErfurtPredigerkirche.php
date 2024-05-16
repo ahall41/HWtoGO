@@ -12,7 +12,7 @@ namespace Organs\PG;
 require_once __DIR__ . "/PGOrgan.php";
 
 /**
- * Import Gogh Demo
+ * Import Erfurt Predigerkirche Demo
  */
 
 class ErfurtPredigerkirche extends PGOrgan {
@@ -22,9 +22,11 @@ class ErfurtPredigerkirche extends PGOrgan {
     const COMMENTS=
               "Predigerkirche in Erfurt, Germany (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/goch/\n"
+            . "\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Erfurt Predigerkirche (demo - %s) 1.0.organ";
+    const TARGET=self::ROOT . "Erfurt Predigerkirche (demo - %s) 1.1.organ";
     
     protected int $loopCrossfadeLengthInSrcSampleMs=5;
     
@@ -238,9 +240,7 @@ class ErfurtPredigerkirche extends PGOrgan {
     }
    
     public static function ErfurtPredigerkirche(array $positions=[], string $target="") {
-        \GOClasses\Noise::$blankloop=
-                \GOClasses\Ambience::$blankloop=
-                "OrganInstallationPackages/002524/Noises/BlankLoop.wav";
+        \GOClasses\Noise::$blankloop="OrganInstallationPackages/002524/Noises/BlankLoop.wav";
         if (sizeof($positions)>0) {
             $hwi=new ErfurtPredigerkirche(self::SOURCE);
             $hwi->positions=$positions;
