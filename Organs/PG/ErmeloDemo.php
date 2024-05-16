@@ -17,17 +17,18 @@ require_once __DIR__ . "/Ermelo.php";
 
 class ErmeloDemo extends Ermelo {
 
-    const ROOT="/GrandOrgue/Organs/PG/ErmeloFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Ermelo/";
     const ODF="Ermelo (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Immanuelkerk in Ermelo, Netherlands (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/ermelo/\n"
             . "\n"
-            . "1.1 Corrected pitch for other temperaments\n"
+            . "1.1 Corrected pitch for other temperaments\n\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (demo - %s) 1.1.organ";
+    const TARGET=self::ROOT . "Ermelo (demo - %s) 1.2.organ";
     
     public static function ErmeloDemo(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=

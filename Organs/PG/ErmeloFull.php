@@ -17,42 +17,18 @@ require_once __DIR__ . "/Ermelo.php";
 
 class ErmeloFull extends Ermelo {
 
-    const ROOT="/GrandOrgue/Organs/PG/ErmeloFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Ermelo/";
     const ODF="Ermelo.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Immanuelkerk in Ermelo, Netherlands (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/ermelo/\n"
             . "\n"
             . "1.1 Corrected pitch for other temperaments\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Ermelo (%s) 1.1.organ";
+    const TARGET=self::ROOT . "Ermelo (%s) 1.2.organ";
     
-    // Create dummy sample file for testing ...
-    public function createSample($hwdata) {
-        $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
-        if (!file_exists($file)) {
-            $dir=dirname($file);
-            if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
-            symlink($blank, $file);
-        }
-    }
-
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $noise=parent::processNoise($hwdata, $isattack);
-        if ($noise) $this->createSample($hwdata);
-        return $noise;
-    }
-
-    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
-                && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120) $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe) $this->createSample($hwdata);
-        return $pipe;
-    }
-   
     public static function ErmeloFull(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
                 "OrganInstallationPackages/002521/Noises/BlankLoop.wav";
