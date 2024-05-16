@@ -17,41 +17,19 @@ require_once __DIR__ . "/Nitra.php";
 
 class NitraFull extends Nitra {
 
-    const ROOT="/GrandOrgue/Organs/PG/NitraFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Nitra/";
     const ODF="Nitra.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Nitra, Katedrála sv. Emeráma, Slovakia (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/nitra/\n"
             . "\n"
             . "1.1 Corrected pitch for other temperaments\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Nitra (%s) 1.1.organ";
+    const TARGET=self::ROOT . "Nitra (%s) 1.2.organ";
   
-    // Create dummy sample file for testing ...
-    public function createSample($hwdata) {
-        $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
-        if (!file_exists($file)) {
-            $dir=dirname($file);
-            if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
-            symlink($blank, $file);
-        }
-    }
-
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $noise=parent::processNoise($hwdata, $isattack);
-        if ($noise) $this->createSample($hwdata);
-        return $noise;
-    }
-
-    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe) $this->createSample($hwdata);
-        return $pipe;
-    }
-    
     public static function NitraFull(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
                 "./OrganInstallationPackages/002515/Noises/BlankLoop.wav";
