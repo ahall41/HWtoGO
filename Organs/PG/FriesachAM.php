@@ -19,8 +19,10 @@ require_once __DIR__ . "/../../Import/Organ.php";
 class FriesachAM extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/PG/Friesach/";
     const SOURCE=self::ROOT . "OrganDefinitions/FriesachExtendV2.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Friesach Extended (Al Morse) 1.0.organ";
-    const COMMENTS="\n";
+    const TARGET=self::ROOT . "Friesach Extended (Al Morse) 1.1.organ";
+    const COMMENTS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     const WIDTH=1900;
     const HEIGHT=1000;
     const FONTSIZE=10;
