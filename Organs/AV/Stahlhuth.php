@@ -26,7 +26,7 @@ class Stahlhuth extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Stahlhuth_positive_ext_four_channels.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

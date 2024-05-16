@@ -22,11 +22,11 @@ class Szombathely extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Jehmlich Organ from Szombathely\n"
-            . "https://hauptwerk-augustine.info/Jehmlich_Szombathely.php\n"
+            . "https://hauptwerk-augustine.info/Jehmlich_Szombathely_v2.php\n"
             . "\n";
     const TARGET=self::ROOT . "Jehmlich_Szombathely_surround.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

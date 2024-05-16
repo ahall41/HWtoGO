@@ -23,10 +23,12 @@ class Vorosbereny extends AVOrgan {
     const COMMENTS=
               "Silbermann style  Organ from Vörösberény (Hungary)\n"
             . "https://hauptwerk-augustine.info/Vorosbereny.php\n"
+            . "\n"
+            . "1.1 Removed Cross Fades\n"
             . "\n";
-    const TARGET=self::ROOT . "Vorosbereny Surround Demo.1.0.organ";
+    const TARGET=self::ROOT . "Vorosbereny Surround Demo.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=30;
+    // protected int $releaseCrossfadeLengthMs=30;
     
     // SetID derived from ImageSetElement object for surround.jpg and extend.jpg
     protected $patchDisplayPages=[

@@ -28,7 +28,7 @@ class Zenta extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Zenta surround_demo.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>27],

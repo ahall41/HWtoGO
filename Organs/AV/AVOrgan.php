@@ -130,6 +130,7 @@ abstract class AVOrgan extends \Import\Organ {
             $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
             foreach($this->hwdata->read("StopRank") as $sr) {
                 if ($sr["RankID"]==$rankid && 
+                    isset($sr["MIDINoteNumIncrementFromDivisionToRank"]) && 
                     $sr["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
                     if ($stopdata=$this->hwdata->stop($sr["StopID"], FALSE)) {
                         $switchid=$stopdata["ControllingSwitchID"];
@@ -195,6 +196,9 @@ abstract class AVOrgan extends \Import\Organ {
             }
         }
 
+        if (isset($hwdata["ReleaseCrossfadeLengthMs"])) {
+            echo $hwdata["ReleaseCrossfadeLengthMs"], "\n";
+        }
         if ($this->releaseCrossfadeLengthMs===0) {
             $hwdata["ReleaseCrossfadeLengthMs"]=0;
         }

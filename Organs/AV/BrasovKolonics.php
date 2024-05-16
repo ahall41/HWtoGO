@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class BrasovKolonics extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV/BrasovKolonics/";
+    const ROOT="/GrandOrgue/Organs/AV/Kolonics_Brasov/";
     const ODF="Kolonics Brasov Surround.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
@@ -26,7 +26,7 @@ class BrasovKolonics extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Kolonics Brasov %s.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=100;
+    //protected int $releaseCrossfadeLengthMs=100;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Console"],

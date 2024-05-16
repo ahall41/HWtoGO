@@ -26,7 +26,7 @@ class Farkasret extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Italian Baroque Organ Budapest sur native_demoo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

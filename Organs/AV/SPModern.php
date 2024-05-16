@@ -28,7 +28,7 @@ class SPModern extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "SP Modern demo composite.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=0;
+    // protected int $releaseCrossfadeLengthMs=0;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

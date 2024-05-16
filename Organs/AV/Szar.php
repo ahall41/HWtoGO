@@ -26,7 +26,7 @@ class Szar extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Szar-surround two manuals_demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

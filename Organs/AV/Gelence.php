@@ -26,7 +26,7 @@ class Gelence extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Gelence extended %s.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Ujpest extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Ujpest/";
+    const ROOT="/GrandOrgue/Organs/AV/Ujpest/";
     const SOURCE=self::ROOT . "OrganDefinitions/Ujpest surround_demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Ujpest surround demo 1.0.organ";
     const COMMENTS=
@@ -25,7 +25,7 @@ class Ujpest extends AVOrgan {
             . "https://hauptwerk-augustine.info/Ujpest-POM.php\n"
             . "\n";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1]

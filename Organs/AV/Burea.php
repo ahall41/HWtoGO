@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Burea extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Swedish/";
+    const ROOT="/GrandOrgue/Organs/AV/Swedish/";
     const ODF="Big_Burea.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=

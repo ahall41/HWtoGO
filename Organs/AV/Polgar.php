@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Polgar extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Polgar/";
+    const ROOT="/GrandOrgue/Organs/AV/Polgar/";
     const ODF="Polgar surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
@@ -26,7 +26,7 @@ class Polgar extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Polgar %s_demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

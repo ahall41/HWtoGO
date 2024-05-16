@@ -28,7 +28,7 @@ class SPBaroque extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "SP Great Baroque.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=0;
+    // protected int $releaseCrossfadeLengthMs=0;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>27],

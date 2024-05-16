@@ -22,11 +22,11 @@ class WalckerMiskolc extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Walcker organ of Miskolc Catholic church of Iron factory (from Bad Ems)\n"
-            . "https://hauptwerk-augustine.info/WalckerMiskolc.php\n"
+            . "https://hauptwerk-augustine.info/Walcker_Miskolc.php\n"
             . "\n";
     const TARGET=self::ROOT . "Walcker_Miskolc %s_demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

@@ -25,7 +25,7 @@ class Esztergom extends AVOrgan {
             . "https://hauptwerk-augustine.info/Rieger_Esztergom.php\n"
             . "\n";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=-1;
     //protected bool $surroundNoises=TRUE;
     
     protected $patchDisplayPages=[

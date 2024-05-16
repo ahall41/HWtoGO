@@ -25,7 +25,7 @@ class Szentgotthard extends AVOrgan {
             . "https://hauptwerk-augustine.info/Szentgotthard.php\n"
             . "\n";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Extended"],

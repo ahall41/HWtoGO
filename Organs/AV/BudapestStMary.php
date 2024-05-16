@@ -17,7 +17,7 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class BudapestStMary extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV/BudapestStMary/";
+    const ROOT="/GrandOrgue/Organs/AV/Budapest_StMary/";
     const ODF="Mary the Virgin Budapest surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
@@ -28,7 +28,7 @@ class BudapestStMary extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Mary the Virgin Budapest %s_demo.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    //protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

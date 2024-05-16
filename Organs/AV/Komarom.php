@@ -28,7 +28,7 @@ class Komarom extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Buckow-Rieger Komarom_v2_surround.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>27],

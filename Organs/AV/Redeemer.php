@@ -21,7 +21,7 @@ require_once(__DIR__ . "/AVOrgan.php");
 class Redeemer extends AVOrgan {
 
     const ROOT="/GrandOrgue/Organs/AV/New Haven/";
-    const VERSION="1.2";
+    const VERSION="1.3";
     const COMMENTS=
               "Aeolian-Skinner Organ (Op 1132) of the Redeemer church of New Haven\n"
             . "https://hauptwerk-augustine.info/Aeolian-Skinner.php\n"
@@ -29,9 +29,11 @@ class Redeemer extends AVOrgan {
             . "1.1 Added chimes, AmpMinDepth=1\n"
             . "1.2 Added chimes to choir enclosure\n"
             . "    Added positive to near/far enclosures\n"
+            . "1.3 Updated release cross fades for #1760 (release 3.1.14)\n"
+            . "    Remove Virtual Keyboards panel\n"
             . "\n";
 
-    protected ?int $releaseCrossfadeLengthMs=200;
+    // protected ?int $releaseCrossfadeLengthMs=200;
         
     protected $patchDisplayPages=[
         1=>["SetID"=>1],
@@ -239,7 +241,6 @@ class Extended extends Redeemer {
             $hwi=new Extended(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target, self::VERSION), self::COMMENTS);

@@ -26,7 +26,7 @@ class Kecskemet extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Jehmlich_Kecskemet_surround.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

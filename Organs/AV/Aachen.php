@@ -26,7 +26,7 @@ class Aachen extends AVOrgan {
             . "\n";
     const TARGET=self::ROOT . "Stahlhuth_surround_demo.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1],

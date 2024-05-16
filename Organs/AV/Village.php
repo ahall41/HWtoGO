@@ -22,11 +22,11 @@ class Village extends AVOrgan {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Hungarian village organs composite\n"
-            . "https://hauptwerk-augustine.info/Village.php\n"
+            . "https://hauptwerk-augustine.info/Hungarian_village.php\n"
             . "\n";
     const TARGET=self::ROOT . "Hungarian Village Organs.1.0.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    // protected int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>27],
