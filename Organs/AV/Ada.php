@@ -21,7 +21,9 @@ class Ada extends AVOrgan{
     const ODF="Ada demo surround.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Romantic Organ from Ada (Serbia-Vojvodina) (" . self::ODF . ")\n"
-            . "https://hauptwerk-augustine.info/Ada.php"
+            . "https://hauptwerk-augustine.info/Ada.php\n"
+            . "\n"
+            . "1.1 Removed cross fades\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const TARGET=self::ROOT . "Ada demo %s 1.1.organ";
@@ -233,6 +235,9 @@ class Ada extends AVOrgan{
             $hwi=new Ada(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
+            foreach($hwi->getManuals() as $manual) {
+                unset($manual->DisplayKeys);
+            }
             $hwi->getOrgan()->ChurchName=str_replace("surround", $target, $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::COMMENTS);
