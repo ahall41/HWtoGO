@@ -12,22 +12,23 @@ namespace Organs\PG;
 require_once __DIR__ . "/Duren.php";
 
 /**
- * Import Gogh Demo
+ * Import Duren Demo
  */
 
 class DurenDemo extends Duren {
 
-    const ROOT="/GrandOrgue/Organs/PG/DurenFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Duren/";
     const ODF="Duren (demo).Organ_Hauptwerk_xml";
     const COMMENTS=
               "Annakirche in Düren, Germany (" . self::ODF . ")\n"
             . "https://piotrgrabowski.pl/duren/\n"
             . "\n"
             . "1.1 Pitch correction for other temperaments\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (demo - %s) 1.1.organ";
+    const TARGET=self::ROOT . "Duren (demo - %s) 1.2.organ";
     
     public static function DurenDemo(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
