@@ -12,12 +12,12 @@ namespace Organs\PG;
 require_once __DIR__ . "/Duren.php";
 
 /**
- * Import Gogh Demo
+ * Import Duren Full
  */
 
 class DurenFull extends Duren {
 
-    const ROOT="/GrandOrgue/Organs/PG/DurenFull/";
+    const ROOT="/GrandOrgue/Organs/PG/Duren/";
     const ODF="Duren.Organ_Hauptwerk_xml";
     const COMMENTS=
               "Annakirche in Düren, Germany (" . self::ODF . ")\n"
@@ -25,9 +25,10 @@ class DurenFull extends Duren {
             . "\n"
             . "1.1 Added crescendo program\n"
             . "1.2 Pitch correction for other temperaments\n"
+            . "1.3 Cross fades corrected for GO 3.14\n"
             . "\n";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;    
-    const TARGET=self::ROOT . "Duren (%s) 1.2";
+    const TARGET=self::ROOT . "Duren (%s) 1.3";
  
     protected $combinations=[
         "crescendos"=>[
@@ -72,29 +73,6 @@ class DurenFull extends Duren {
         } 
     }
     
-    // Create dummy sample file for testing ...
-    public function createSample($hwdata) {
-        $file=getenv("HOME") . self::ROOT . $this->sampleFilename($hwdata);
-        if (!file_exists($file)) {
-            $dir=dirname($file);
-            if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
-            $blank=getenv("HOME") . self::ROOT . \GOClasses\Noise::$blankloop;
-            symlink($blank, $file);
-        }
-    }
-
-    public function processNoise(array $hwdata, $isattack): ?\GOClasses\Noise {
-        $noise=parent::processNoise($hwdata, $isattack);
-        if ($noise) $this->createSample($hwdata);
-        return $noise;
-    }
-
-    public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipe=parent::processSample($hwdata, $isattack);
-        if ($pipe) $this->createSample($hwdata);
-        return $pipe;
-    }
-
     public static function DurenFull(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop=
                 "OrganInstallationPackages/002525/Noises/BlankLoop.wav";
