@@ -19,9 +19,10 @@ require_once __DIR__ . "/../../Import/Organ.php";
 class FriesachLD extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/PG/Friesach/";
     const SOURCE=self::ROOT . "OrganDefinitions/Friesach.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Friesach Extended 1.1.organ";
+    const TARGET=self::ROOT . "Friesach Extended (Les Deutch) 1.2.organ";
     const COMMENTS="\n"
             . "1.1 Extended pedals to 32\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     const WIDTH=1500;
     const HEIGHT=800;
