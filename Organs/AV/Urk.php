@@ -24,7 +24,7 @@ class Urk extends AVOrgan {
               "Dam & Zonen Organ from Urk - Kerkje aan de Zee (Netherlands) (" . self::ODF . ")\n"
             . "https://hauptwerk-augustine.info/Urk.php\n"
             . "\n"
-            . "1.1 Corrected volume controls\n"
+            . "1.1 Corrected volume controls; removed cross fades\n"
             . "\n";
     const TARGET=self::ROOT . "Urk - Kerk aan de Zee %s.1.1.organ";
     
@@ -123,10 +123,10 @@ class Urk extends AVOrgan {
         else {
             self::Urk(
                     [1=>"Far", 2=>"Near"], "Surround");
-            self::Urk(
+            /* self::Urk(
                     [1=>"Far"], "Wet");
             self::Urk(
-                    [2=>"Near"], "Dry");
+                    [2=>"Near"], "Dry"); */
         }
     }   
 }
