@@ -17,8 +17,8 @@ require_once __DIR__ . "/PGOrgan.php";
 
 class Goch extends PGOrgan {
 
-    const ROOT="/GrandOrgue/Organs/PG/GochFull/";
-    const VERSION="1.1";
+    const ROOT="/GrandOrgue/Organs/PG/Goch/";
+    const VERSION="1.2";
     const COMMENTS=
               "Pfarrkirche St. Maria Magdalena in Goch, Germany (%s)\n"
             . "https://piotrgrabowski.pl/goch/\n"
@@ -26,6 +26,7 @@ class Goch extends PGOrgan {
             . "1.1 wave based tremulant model\n"
             . "    full surround included\n"
             . "    added crescendo control and program\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
 
     protected $combinations=[
