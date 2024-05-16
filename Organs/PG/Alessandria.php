@@ -12,7 +12,7 @@ namespace Organs\PG;
 require_once __DIR__ . "/../../Import/Organ.php";
 
 /**
- * Import Alessandria Demo. This is primarily a test, as the Alessandria set
+ * Import Alessandria Demo. This is primarily a test, as Alessandria
  * is already available for GO. 
  */
 
