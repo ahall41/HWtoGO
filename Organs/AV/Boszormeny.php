@@ -17,16 +17,18 @@ require_once(__DIR__ . "/AVOrgan.php");
  * @author andrew
  */
 class Boszormeny extends AVOrgan {
-    const ROOT="/GrandOrgue/Organs/AV//Boszormeny/";
+    const ROOT="/GrandOrgue/Organs/AV/Boszormeny/";
     const ODF="Boszormeny surround_demo.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const COMMENTS=
               "Angster Organ from Reformed Church in Hajdúböszörmény (Hungary)\n"
             . "https://hauptwerk-augustine.info/Boszormeny.php\n"
+            . "\n"
+            . "1.1 Removed cross fades\n"
             . "\n";
-    const TARGET=self::ROOT . "Boszormeny %s demo.1.0.organ";
+    const TARGET=self::ROOT . "Boszormeny %s demo.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=0;
+    //protected int $releaseCrossfadeLengthMs=0;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Console"],
