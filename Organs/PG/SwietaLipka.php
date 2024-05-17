@@ -12,15 +12,13 @@ namespace Organs\PG;
 require_once __DIR__ . "/PGOrgan.php";
 
 /**
- * Import SwietaLipka Demo
- *
- * @todo: Nachtigall etc.
+ * Import SwietaLipka
  */
 
 class SwietaLipka extends PGOrgan {
 
     const ROOT="/GrandOrgue/Organs/PG/SwietaLipka/";
-    const VERSION="1.3";
+    const VERSION="1.4";
     const COMMENTS=
               "Święta Lipka, Sanktuarium Nawiedzenia Najświętszej Maryi Panny, Poland (%s)\n"
             . "https://piotrgrabowski.pl/swieta-lipka/\n"
@@ -31,6 +29,7 @@ class SwietaLipka extends PGOrgan {
             . "    Added tremulant samples\n"
             . "    Corrected console swell images\n"
             . "    Added swell superoctave extension\n"
+            . "1.4 Cross fades corrected for GO 3.14\n"
             . "\n";
 
     protected static bool $synthTremulant=FALSE;
@@ -372,7 +371,25 @@ class SwietaLipkaDemo extends SwietaLipka {
 
     const ODF="Swieta Lipka (demo).Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Swieta Lipka (demo - %s)" . self::VERSION;
+    const TARGET=self::ROOT . "Swieta Lipka (demo - %s) " . self::VERSION;
+
+    public function xxpatchData(\HWClasses\HWData $hwd): void {
+        $index=10000;
+        foreach ([3,4,7,14,17,19,21,22,30,34,35,38] as $stopid) {
+            $nodes=($stopid<10 ? 29 : 61);
+            $increment=($stopid==5 ? 12 : 0);
+            foreach([0, 500, 1000, 1500, 2000, 2500, 3000, 3500] as $baseid) {
+                $rankid=$baseid + ($stopid==5 ? 2 : $stopid);
+                $this->patchStopRanks[$index++]=[
+                    "StopID"=>$stopid,
+                    "RankID"=>$rankid,
+                    "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
+                    "NumberOfMappedDivisionInputNodes"=>$nodes,
+                        "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+            }
+        }
+        parent::patchData($hwd);
+    }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $hwdata["IsTremulant"]=$hwdata["PipeLayerNumber"]==2 ? 1 : 0;
@@ -419,7 +436,52 @@ class SwietaLipkaFull extends SwietaLipka {
 
     const ODF="Swieta Lipka.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Swieta Lipka (%s)" . self::VERSION;
+    const TARGET=self::ROOT . "Swieta Lipka (%s) " . self::VERSION;
+
+    public function xxpatchData(\HWClasses\HWData $hwd): void {
+        $index=10000;
+        for ($stopid=1; $stopid<=42; $stopid++) {
+            // if ($stopid>=25 && $stopid!=36) continue;
+            $nodes=($stopid<10 ? 29 : 61);
+            $increment=($stopid==5 ? 12 : 0);
+            foreach([0, 1000, 2000] as $baseid) {
+                switch ($stopid) {
+                    case  3: // P Flûte 16
+                        $rankid=$baseid + 11;
+                        $increment=0;
+                        break;
+
+                    case  4: // P Violonbasse 16’
+                        $rankid=$baseid + 1;
+                        $increment=12;
+                        break;
+
+                    case  5: // P Soubasse 16
+                        $rankid=$baseid + 2;
+                        $increment=12;
+                        break;
+
+                    case 36: // SL Montre 8
+                        $rankid=$baseid + 11;
+                        $increment=12;
+                        break;
+
+                    default:
+                        $rankid=$baseid + $stopid;
+                        $increment=0;
+                        break;
+                }
+
+                $this->patchStopRanks[$index++]=[
+                    "StopID"=>$stopid,
+                    "RankID"=>$rankid,
+                    "MIDINoteNumOfFirstMappedDivisionInputNode"=>36,
+                    "NumberOfMappedDivisionInputNodes"=>$nodes,
+                    "MIDINoteNumIncrementFromDivisionToRank"=>$increment];
+            }
+        }
+        parent::patchData($hwd);
+    }
 
     public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
         $tremmed=$hwdata["IsTremulant"]=(intval($hwdata["RankID"]/100) % 10)==5 ? 1 : 0;
