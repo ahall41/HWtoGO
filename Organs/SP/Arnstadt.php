@@ -18,11 +18,12 @@ require_once __DIR__ . "/SPOrganV2.php";
  */
 
 class Arnstadt extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/SP/ArnstadtFull/";
-    const VERSION="1.1";
+    const ROOT="/GrandOrgue/Organs/SP/Arnstadt/";
+    const VERSION="1.2";
     const REVISIONS="\n"
             . "1.1 Added full surround\n"
             . "    Added Calcant to demo version\n"
+            . "1.2 Cross fades corrected for GO 3.14\n"
             . "\n";
     
     const RANKS_DIRECT=1;
@@ -30,8 +31,8 @@ class Arnstadt extends SPOrganV2 {
     const RANKS_DISTANT=3;
     const RANKS_REAR=4;
 
-    protected ?int $releaseCrossfadeLengthMs=NULL;
-    protected ?int $loopCrossfadeLengthMs=NULL;
+    //protected ?int $releaseCrossfadeLengthMs=NULL;
+    //protected ?int $loopCrossfadeLengthMs=NULL;
     
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,      9=>self::RANKS_DIRECT,
