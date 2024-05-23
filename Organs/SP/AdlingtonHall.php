@@ -17,10 +17,12 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrewZ`
  */
 class AdlingtonHall extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/SP/AdlingtonHall/";
+    const ROOT="/GrandOrgue/Organs/SP/Adlington_Hall/";
     const SOURCE="OrganDefinitions/Adlington Hall, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Adlington Hall %s Demo 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Adlington Hall %s Demo 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -230,11 +232,6 @@ class AdlingtonHall extends SPOrganV2 {
 
     protected function sampleTuning(array $hwdata) : ?float {
         return NULL;
-    }
-    
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        return parent::processSample($hwdata, $isattack);
     }
     
     /**
