@@ -25,8 +25,8 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Skinner497 extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/Skinner497Full/";
-    const VERSION="1.3";
+    const ROOT="/GrandOrgue/Organs/SP/Skinner497/";
+    const VERSION="1.4";
     const COMMENTS=
               "Skinner, opus 497 (1924), San Francisco, CA\n"
             . "https://www.sonusparadisi.cz/en/organs/u-s-a/skinner-opus-497-1924.html"
@@ -36,6 +36,7 @@ class Skinner497 extends SPOrgan {
             . "1.2 Removed LoopCrossFade lengths\n"
             . "1.3 Added FULL version\n"
             . "    Reinstated (correct) Loop and Release CrossFade lengths\n"
+            . "1.4 Cross fades corrected for GO 3.14\n"
             . "\n";
 
     protected ?int $releaseCrossfadeLengthMs=NULL;

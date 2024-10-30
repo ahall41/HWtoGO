@@ -292,7 +292,6 @@ class BuckeburgExtStsAugustine extends \Import\Organ {
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
         switch ($hwdata["RankID"] % 10) {
             case 9:
                 $hwdata["RankID"]-=9;

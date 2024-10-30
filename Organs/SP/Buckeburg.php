@@ -24,10 +24,10 @@ class Buckeburg extends SPOrgan {
             . "1.1 Remove additional attacks\n"
             . "1.2 Reinstate additional attacks\n"
             . "1.3 Add coupler manuals + correct cross fades\n"
+            . "1.4 Remove coupler manuals + cross fades corrected for GO 3.14\n"
             . "\n";
     
     public static bool $singleRelease=FALSE;
-    protected ?int $releaseCrossfadeLengthMs=NULL;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -203,7 +203,6 @@ class Buckeburg extends SPOrgan {
     }
             
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
         /* Single Release */
         if (self::$singleRelease &&
             isset($hwdata["ReleaseSelCriteria_LatestKeyReleaseTimeMs"]) &&
@@ -243,7 +242,7 @@ class Buckeburg extends SPOrgan {
             $hwi->positions=$positions;
             $hwi->balance=$balance;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            // $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->getManual(4)->NumberOfLogicalKeys=73;

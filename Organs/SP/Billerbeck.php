@@ -21,7 +21,7 @@ require_once __DIR__ . "/SPOrgan.php";
 class Billerbeck extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.3.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Demo - %s) 0.4.organ";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -127,23 +127,29 @@ class Billerbeck extends SPOrgan {
         else
             return NULL;
     }
+    
+    private function treeWalk($root, $dir="", &$results=[]) {
+        $files=scandir("$root$dir");
+        foreach ($files as $key => $value) {
+            if (!is_dir("$root$dir/$value")) {
+                $results[strtolower("$dir/$value")] = "$dir/$value";
+            } else if ($value != "." && $value != "..") {
+                $this->treeWalk($root, ltrim("$dir/$value", "/"), $results);
+            }
+        }
+        return $results;
+    }
 
     protected function correctFileName(string $filename): string {
-        $root=getenv("HOME") . self::ROOT;
-        $filename=str_replace(
-                ["\\", "/keyboard_console.bmp", "Pos_HolzFl4TREM/", "SW_GeigenPrinc8TREM/", "AB_SW_nazard223TREM/"],
-                ["/" , "/keyboard_console.png", "Pos_HolzFl4trem/", "SW_GeigenPrinc8Trem/", "AB_SW_nazard223Trem/"],
-                $filename
-        );
-        if (file_exists("$root/$filename")) 
-            return $filename;
-
-        foreach([".bmp", ".BMP", ".jpg"] as $sfx) {
-            $newfile=substr($filename, 0, -strlen($sfx)) . $sfx;
-            if (file_exists("$root/$newfile")) 
-                return $newfile;        
-        }
-        throw new \Exception ("File $filename does not exist!");
+        static $files=[];
+        if (sizeof($files)==0)
+            $files=$this->treeWalk(getenv("HOME") . self::ROOT);
+        
+        $filename=str_replace("\\", "/", $filename);
+        if (isset($files[strtolower($filename)]))
+            return $files[strtolower($filename)];
+        else
+            throw new \Exception ("File $filename does not exist!");
     }
 
     public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $hwdata): void {

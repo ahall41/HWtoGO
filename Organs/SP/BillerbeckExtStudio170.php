@@ -19,7 +19,7 @@ require_once __DIR__ . "/../../Import/Organ.php";
 class BillerbeckExtStudio170 extends \Import\Organ {
     const ROOT="/GrandOrgue/Organs/SP/Billerbeck/";
     const SOURCE="OrganDefinitions/Billerbeck, Fleiter Surr.Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.6.organ";
+    const TARGET=self::ROOT . "Billerbeck, Fleiter Surr (Extended Demo - %s) 0.7.organ";
 
     const RANKS_DIRECT=1;
     const RANKS_SEMI_DRY=2;
@@ -124,7 +124,7 @@ class BillerbeckExtStudio170 extends \Import\Organ {
         $this->buildStops();
         $this->processSamples($hwd->attacks(), TRUE);
         $this->processSamples($hwd->releases(), FALSE);
-        $this->addVirtualKeyboards(2, [1,2,3], [1,2]);
+        //$this->addVirtualKeyboards(2, [1,2,3], [1,2]);
     }
 
     protected function buildOrgan() : void {
@@ -284,10 +284,6 @@ class BillerbeckExtStudio170 extends \Import\Organ {
     }
    
     public function processSample(array $hwdata, bool $isattack) : ?\GOClasses\Pipe {
-        /* if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
-                && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
-                $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        unset($hwdata["ReleaseCrossfadeLengthMs"]); */
         switch (($rankid=$hwdata["RankID"]) % 10) {
             case 9:
                 $hwdata["RankID"]-=9;

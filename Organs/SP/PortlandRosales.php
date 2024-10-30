@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPOrganV2.php";
 class PortlandRosales extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/PortlandRosales/";
     const SOURCE="OrganDefinitions/Portland, Rosales op.11, DEMO.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Portland, Rosales op.11 %s Demo 0.1.organ";
+    const TARGET=self::ROOT . "Portland, Rosales op.11 %s Demo 0.2.organ";
     const REVISIONS="";
     
     const RANKS_DIRECT=1;
@@ -177,7 +177,6 @@ class PortlandRosales extends SPOrganV2 {
     }
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        // unset($hwdata["ReleaseCrossfadeLengthMs"]);
         $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
             case 9:

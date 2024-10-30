@@ -3,6 +3,8 @@
 /*
  * Copyright (C) 2022 Andrew E Hall (ahall.ahall.41@gmail.com)
  * 
+ * @todo incomplete !!!
+ * 
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
@@ -19,39 +21,32 @@ require_once __DIR__ . "/SPOrgan.php";
 class Menesterol extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Menesterol/";
     const SOURCE="OrganDefinitions/Menesterol 4-chan Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Menesterol 4-chan Surround (%s) 1.0.organ";
+    const TARGET=self::ROOT . "Menesterol (%s) 1.0.organ";
+    const REVISIONS="";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
-        1=>self::RANKS_DIRECT,   
-        0=>self::RANKS_DIFFUSE,  9=>self::RANKS_DIFFUSE,
-        4=>self::RANKS_REAR,     8=>self::RANKS_REAR
+        0=>self::RANKS_DIFFUSE,
+        4=>self::RANKS_REAR
     ];
     
     public $positions=[];
 
     protected $patchDisplayPages=[ // Set is for background, Switch/Layout is for controls
             1=>[
-                0=>["SetID"=>1030]
+                0=>["Instance"=>13000, "SetID"=>1030]
                ],
             2=>"DELETE",
-            3=>"DELETE", 
-            4=>"DELETE", 
+            3=>[
+                0=>["Instance"=>0, "SetID"=>1034],
+               ],
+            4=>[
+                0=>["Instance"=>12000, "SetID"=>1031],
+               ],
             5=>[
-                0=>["Name"=>"Stops", "Instance"=>13000, "SetID"=>1035],
+                0=>["Instance"=>12000, "SetID"=>1032],
                ],
-            6=>[
-                0=>["Name"=>"Mixer", "SetID"=>1038],
-               ],
-            7=>"DELETE",
-            8=>[
-                0=>["Name"=>"Simple", "Instance"=>11000, "SetID"=>1040],
-               ],
-            9=>"DELETE", 
-           10=>"DELETE",
-           11=>"DELETE",
-           12=>"DELETE",
-    ];
+        ];
 
     protected $patchDivisions=[
             4=>"DELETE",
@@ -61,25 +56,17 @@ class Menesterol extends SPOrgan {
     ];
 
     protected $patchTremulants=[
-         31=>["Type"=>"Switched", "DivisionID"=>3], // II - but not Dry !!!
-        120=>"DELETE", // III
-         45=>"DELETE", // IV
+         92=>["Type"=>"Synth", "DivisionID"=>3, "GroupIDs"=>[303,304]],
     ];
 
     protected $patchEnclosures=[
-        996=>"DELETE", // IV
-        997=>"DELETE", // III
-        998=>["GroupIDs"=>[301,303,304], "AmpMinimumLevel"=>40], // II
-        
-        901=>["Panels"=>[6=>[800]], "EnclosureID"=>901, "Name"=>"Direct Mixer",
-            "GroupIDs"=>[101,201,301], "AmpMinimumLevel"=>0],
-        903=>["Panels"=>[6=>[810]], "EnclosureID"=>903,"Name"=>"Diffuse Mixer",
+        903=>["Panels"=>[3=>[1610]], "EnclosureID"=>903,"Name"=>"Diffuse Mixer",
             "GroupIDs"=>[103,203,303], "AmpMinimumLevel"=>0],
-        904=>["Panels"=>[6=>[820]], "EnclosureID"=>903,"Name"=>"Rear Mixer",
+        904=>["Panels"=>[3=>[1620]], "EnclosureID"=>903,"Name"=>"Rear Mixer", 
             "GroupIDs"=>[104,204,304], "AmpMinimumLevel"=>0],
-        908=>["Panels"=>[6=>[1595]], "EnclosureID"=>908,"Name"=>"Blower Mixer",
+        908=>["Panels"=>[3=>[1595]], "EnclosureID"=>908,"Name"=>"Blower Mixer",
             "GroupIDs"=>[800], "AmpMinimumLevel"=>0],
-        909=>["Panels"=>[6=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker Mixer",
+        909=>["Panels"=>[3=>[1599]], "EnclosureID"=>909,"Name"=>"Tracker Mixer",
             "GroupIDs"=>[900], "AmpMinimumLevel"=>0],
     ];
 
@@ -96,22 +83,13 @@ class Menesterol extends SPOrgan {
     protected $patchRanks=[
           8=>["Noise"=>"StopOn",  "GroupID"=>900, "StopIDs"=>[]],
           9=>["Noise"=>"StopOff", "GroupID"=>900, "StopIDs"=>[]],
-        160=>["GroupID"=>300+self::RANKS_DIFFUSE],
-        161=>["GroupID"=>300+self::RANKS_DIRECT],
-        164=>["GroupID"=>300+self::RANKS_REAR],
-        168=>["GroupID"=>300+self::RANKS_REAR],
-        169=>["GroupID"=>300+self::RANKS_DIFFUSE],
         950=>["Noise"=>"Ambient", "GroupID"=>800, "StopIDs"=>[124]],
         981=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-111]],
         982=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-112]],
         983=>["Noise"=>"KeyOn",   "GroupID"=>900, "StopIDs"=>[-113]],
-        984=>"DELETE",
-        985=>"DELETE",
         991=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-121]],
         992=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-122]],
         993=>["Noise"=>"KeyOff",  "GroupID"=>900, "StopIDs"=>[-123]],
-        994=>"DELETE",
-        995=>"DELETE",
     ];
 
     public function import(): void {
@@ -126,7 +104,24 @@ class Menesterol extends SPOrgan {
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
-        $hwdata["Identification_UniqueOrganID"]=1307; 
+        /* Uncomment to determine image instances on each page ...
+        $instances=$this->hwdata->imageSetInstances();
+        foreach ($instances as $instance) {
+            if (!isset($instance["ImageSetInstanceID"])) continue;
+            switch ($instance["DisplayPageID"]) {
+                case 3:
+                    echo ($instanceID=$instance["ImageSetInstanceID"]), " ",
+                         $instance["Name"], "\n";
+                    foreach ($this->hwdata->switches() as $switch) {
+                        if (isset($switch["Disp_ImageSetInstanceID"]) && 
+                                $switch["Disp_ImageSetInstanceID"]==$instance)
+                            echo "\t", $switch["SwitchID"], " ",
+                                 $switch["Name"], "\n";
+                    }
+            }
+        } 
+        exit(); //*/
+        $hwdata["Identification_UniqueOrganID"]=880;
         return parent::createOrgan($hwdata);
     }
     
@@ -188,21 +183,10 @@ class Menesterol extends SPOrgan {
             parent::configurePanelEnclosureImages($enclosure, $data);
     }
     
-    protected function samplePitchMidi(array $hwdata) : ?float {
-        // The pipes start at 024C but are actually 036C !
-        return parent::samplePitchMidi($hwdata)+12;
-    }
-
     protected function configureAttack(array $hwdata, \GOClasses\Pipe $pipe) : void {
         if (strpos($hwdata["SampleFilename"], "_bis")===FALSE 
                 && strpos($hwdata["SampleFilename"], "_ter")===FALSE )
             parent::configureAttack($hwdata, $pipe);
-    }
-
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        //unset($hwdata["ReleaseCrossfadeLengthMs"]); 
-        //$hwdata["ReleaseCrossfadeLengthMs"]=30;
-        return parent::processSample($hwdata, $isattack);
     }
 
     /**
@@ -215,14 +199,11 @@ class Menesterol extends SPOrgan {
             $hwi=new Menesterol(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->getOrgan()->ChurchName=str_replace(" Demo", " ($target)", $hwi->getOrgan()->ChurchName);
+            $hwi->getOrgan()->ChurchName=str_replace("Surround", " ($target)", $hwi->getOrgan()->ChurchName);
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
-            self::Menesterol(
-                    [self::RANKS_DIRECT=>"Direct"],
-                    "Direct");
             self::Menesterol(
                     [self::RANKS_DIFFUSE=>"Diffuse"],
                      "Diffuse");
@@ -231,11 +212,10 @@ class Menesterol extends SPOrgan {
                     "Rear");
             self::Menesterol(
                     [
-                        self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
-                   "6ch");
+                   "Surround");
         }
     }
 }

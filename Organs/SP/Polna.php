@@ -19,8 +19,10 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Polna extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Polna/";
     const SOURCE="OrganDefinitions/Polna, Sieber Organ, Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Polna, Sieber Organ, Surround %s Demo 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Polna, Sieber Organ, Surround %s Demo 1.1.organ";
+     const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     const RANKS_ORGANIST=1;
     const RANKS_DIFFUSE=2;
@@ -108,6 +110,12 @@ class Polna extends SPOrganV2 {
                     $stop->set($r, 61);
             }
         }
+        
+        foreach ($this->getManuals() as $manual) {
+            for ($k=1; $k<$manual->DisplayKeys; $k++) {
+                $manual->unset(sprintf("Key%03dOffset",$k));
+            }
+        }
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
@@ -175,11 +183,6 @@ class Polna extends SPOrganV2 {
         return NULL;
     }
 
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        return parent::processSample($hwdata, $isattack);
-    }
-    
     /**
      * Run the import
      */

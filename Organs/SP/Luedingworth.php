@@ -17,13 +17,15 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Luedingworth extends SPOrgan {
-    
+
+    const ROOT="/GrandOrgue/Organs/SP/Luedingworth/";    
     const COMMENTS= 
               "\n"
             . "1.1 Added Ventils, Toys and Full surround ODFs\n"
             . "1.2 Reversed 'polarity' n the Ventils\n"
+            . "1.3 Cross fades corrected for GO 3.14\n"
             . "\n";
-    const VERSION="1.2";
+    const VERSION="1.3";
     
     protected array $rankpositions=[
         0=>self::RANKS_DIRECT,  9=>self::RANKS_DIRECT,
@@ -236,7 +238,6 @@ class Luedingworth extends SPOrgan {
     }
     
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        // unset($hwdata["ReleaseCrossfadeLengthMs"]);
         $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
             case 9:
@@ -257,7 +258,6 @@ class Luedingworth extends SPOrgan {
 }
 
 class Demo extends Luedingworth {
-    const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Luedingworth Demo (%s) " . self::VERSION . ".organ";
     
@@ -273,7 +273,7 @@ class Demo extends Luedingworth {
             $hwi=new Demo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            //$hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             foreach($hwi->getStops() as $stop) {
                 unset($stop->Rank001PipeCount);
@@ -317,7 +317,6 @@ class Demo extends Luedingworth {
 }
 
 class Full extends Luedingworth {
-    const ROOT="/GrandOrgue/Organs/SP/LuedingworthFull/";
     const SOURCE="OrganDefinitions/Luedingworth Surround.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Luedingworth Full (%s) " . self::VERSION . ".organ";
     
@@ -333,7 +332,7 @@ class Full extends Luedingworth {
             $hwi=new Full(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            //$hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             foreach($hwi->getStops() as $stop) {
                 unset($stop->Rank001PipeCount);

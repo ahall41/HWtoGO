@@ -19,7 +19,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class Kdousov extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Kdousov/";
     const SOURCE="OrganDefinitions/Kdousov Wet.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Kdousov Wet 1.0.organ";
+    const TARGET=self::ROOT . "Kdousov Wet 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     const RANKS_WET=0;
     
     protected string $root=self::ROOT;
@@ -121,7 +124,7 @@ class Kdousov extends SPOrgan {
                 unset($stop->Rank003PipeCount);
             }
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
              self::Kdousov(

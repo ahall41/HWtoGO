@@ -22,7 +22,10 @@ class Warrington extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Warrington/";
     const SOURCE=self::ROOT . "OrganDefinitions/Warrington, Parr Hall, Cavaille-Coll, Demo.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Warrington, Parr Hall, Cavaille-Coll, Demo (%s).1.1.organ";
-    const REVISIONS="\n1.1 Added tuning information; remove spurious switches for Ped Trumpet\n";
+    const REVISIONS="\n"
+            . "1.1 Added tuning information; remove spurious switches for Ped Trumpet\n"
+            . "    Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     
     const RANKS_DIRECT=1;

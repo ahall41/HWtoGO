@@ -18,15 +18,15 @@ require_once __DIR__ . "/SPOrganV2.php";
  */
 class Hildesheim extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Hildesheim/";
-    const VERSION="1.0";
-    const REVISIONS="";
+    const VERSION="1.1";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     const RANKS_DIRECT=1;
     const RANKS_DIFFUSE=2;
     const RANKS_DISTANT=3;
     const RANKS_REAR=4;
-    
-    protected ?int $releaseCrossfadeLengthMs=NULL;
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -186,7 +186,7 @@ class Hildesheim extends SPOrganV2 {
         $this->getManual(1)->NumberOfLogicalKeys=
                  $this->getManual(1)->NumberOfAccessibleKeys=32;
         
-        $this->addVirtualKeyboards(4, [1,2,3,4],[1,2,3,4]);
+        // $this->addVirtualKeyboards(4, [1,2,3,4],[1,2,3,4]);
     }
     
     public function createOrgan(array $hwdata): \GOClasses\Organ {

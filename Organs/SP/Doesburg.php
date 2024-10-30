@@ -21,7 +21,11 @@ class Doesburg extends SPOrgan {
     const SOURCE="OrganDefinitions/Doesburg, St. Martini, Walcker, DEMO.Organ_Hauptwerk_xml";
     const TARGET=self::ROOT . "Doesburg, St. Martini, Walcker, DEMO (%s) 1.1.organ";
     
-    private static string $Comments="/nVersion 1.1 Ordered releases\n";
+    private static string $Comments="/n"
+            . "1.1 Ordered releases"
+            . "1.2 Cross fades corrected for GO 3.14\n"
+            . "    Added extended pipes for super couplers\n"
+            . "\n";
     protected string $root=self::ROOT;
     protected array $rankpositions=[
         1=>self::RANKS_DIRECT,   
@@ -117,13 +121,27 @@ class Doesburg extends SPOrgan {
 
     public function import(): void {
         parent::import();
-        foreach ($this->getStops() as $stop) {
+        foreach ($this->getStops() as $id=>$stop) {
             for ($rn=1; $rn<10; $rn++) {
                 $r=sprintf("Rank%03dPipeCount", $rn);
-                if ($stop->isset($r) && $stop->get($r)>61)
-                    $stop->set($r, 61);
+                if ($stop->isset($r)) {
+                    if ($id==72) { // Ped Mixture
+                        $stop->set($r,32);
+                    }
+                    elseif ($id==27) { // Piccolo 2'
+                        $stop->set($r,68);
+                    }
+                    if ($stop->get($r)>$stop->get("NumberOfAccessiblePipes")) {
+                        $stop->set("NumberOfAccessiblePipes", $stop->get($r));
+                    }
+                }
             }
         }
+        
+        $this->getManual(3)->NumberOfLogicalKeys=73;
+        $this->getManual(4)->NumberOfLogicalKeys=73;
+        $this->getManual(5)->NumberOfLogicalKeys=73;
+            
     }
 
     public function createOrgan(array $hwdata): \GOClasses\Organ {
@@ -198,12 +216,6 @@ class Doesburg extends SPOrgan {
         if (strpos($hwdata["SampleFilename"], "_bis")===FALSE 
                 && strpos($hwdata["SampleFilename"], "_ter")===FALSE )
             parent::configureAttack($hwdata, $pipe);
-    }
-
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]); 
-        //$hwdata["ReleaseCrossfadeLengthMs"]=30;
-        return parent::processSample($hwdata, $isattack);
     }
 
     /**

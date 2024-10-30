@@ -20,12 +20,14 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlinFull extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinFull/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.3";
-    const COMMENTS="/n"
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.4";
+    const COMMENTS="\n"
             . "1.1 Corrected tremulants and Diffuse expression\n"
             . "1.2 Added virtual keyboards for 2 keyboard operation\n"
             . "    Corrected surround channels\n"
             . "1.3 Includes crescendo (for program see .yaml)\n"
+            . "1.4 Updated release cross fades for GO 3.14\n"
+            . "    Remove virtual keyboards\n"
             . "\n";
     
     protected $combinations=[
@@ -164,7 +166,7 @@ class BurtonBerlinFull extends SPOrgan {
                     $cr=$panel->Element();
                     $cr->Type="CrescendoNext";
                     $this->configureImage($cr, ["SwitchID"=>$switchid], $layoutid);
-                    echo $cr; exit();
+                    //echo $cr; exit();
                 }
             }
         }
@@ -272,7 +274,6 @@ class BurtonBerlinFull extends SPOrgan {
             $hwi=new BurtonBerlinFull(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
             $hwi->getSwitch(250)->DisplayInInvertedState="Y";
             foreach($hwi->getStops() as $stop) {

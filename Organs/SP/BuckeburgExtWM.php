@@ -263,7 +263,6 @@ class BuckeburgExtWM extends \Import\Organ {
         if (isset($hwdata["LoopCrossfadeLengthInSrcSampleMs"]) 
                 && $hwdata["LoopCrossfadeLengthInSrcSampleMs"]>120)
                 $hwdata["LoopCrossfadeLengthInSrcSampleMs"]=120;
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
         switch (($rankid=$hwdata["RankID"]) % 10) {
             case 9:
                 $hwdata["RankID"]-=9;

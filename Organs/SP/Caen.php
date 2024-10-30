@@ -21,7 +21,7 @@ require_once __DIR__ . "/SPOrgan.php";
 class Caen extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Caen/";
     const SOURCE="OrganDefinitions/Caen St. Etienne, Cavaille-Coll, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Caen St. Etienne, Cavaille-Coll, Demo (%s) 0.2.organ";
+    const TARGET=self::ROOT . "Caen St. Etienne, Cavaille-Coll, Demo (%s) 0.4.organ";
     
     protected string $root=self::ROOT;
     protected array  $rankpositions=[
@@ -168,11 +168,6 @@ class Caen extends SPOrgan {
             parent::configurePanelSwitchImages ($switch, $hwdata);
     }
 
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        unset($hwdata["ReleaseCrossfadeLengthMs"]);
-        return parent::processSample($hwdata, $isattack);
-    }
-    
     /**
      * Run the import
      */

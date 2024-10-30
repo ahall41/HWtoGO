@@ -21,16 +21,16 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class Casavant extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/CasavantFull/";
-    const VERSION="1.3";
+    const ROOT="/GrandOrgue/Organs/SP/Casavant/";
+    const VERSION="1.4";
     const REVISIONS=
               "\n"
             . "1.1 Correct voix celeste pitch; remove empty tremulant ranks\n"
             . "1.2 Added full surround, Crescendo Pedal and Unison Off couplers\n"
-            . "1.3 Includes crescendo program\n"
+            . "1.3 Added crescendo program\n"
+            . "1.4 Updated release cross fades for GO 3.14\n"
+            . "    Removed Virtual Keyboards\n"
             . "\n";
-
-    protected ?int $releaseCrossfadeLengthMs=NULL;
 
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -131,7 +131,7 @@ class Casavant extends SPOrgan {
             }
         }
         
-        $this->addVirtualKeyboards(3, [1,2,3],[1,2,3]);
+        // $this->addVirtualKeyboards(3, [1,2,3],[1,2,3]);
     }
     
     public function createManuals(array $keyboards): void {

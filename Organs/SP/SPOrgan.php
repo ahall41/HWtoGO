@@ -25,7 +25,7 @@ abstract class SPOrgan extends \Import\Organ {
     protected array  $rankpositions=[];
     protected int    $switchwcg=900;
     
-    protected ?int $releaseCrossfadeLengthMs=0;
+    protected ?int $releaseCrossfadeLengthMs=NULL;
     protected ?int $loopCrossfadeLengthMs=NULL;
     
     const RANKS_DIRECT=1;

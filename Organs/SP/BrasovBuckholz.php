@@ -19,10 +19,12 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class BrasovBuckholz extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/BrasovBuckholz/";
+    const ROOT="/GrandOrgue/Organs/SP/Brasov_Buckholz/";
     const SOURCE="OrganDefinitions/Brasov - Surround DEMO.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Brasov Buckholz (Demo - %s) 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Brasov Buckholz (Demo - %s) 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
 
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -193,11 +195,6 @@ class BrasovBuckholz extends SPOrgan {
             return $files[strtolower($filename)];
         else
             throw new \Exception ("File $filename does not exist!");
-    }
-
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        //$hwdata["ReleaseCrossfadeLengthMs"]=100;
-        return parent::processSample($hwdata, $isattack);
     }
 
     /**

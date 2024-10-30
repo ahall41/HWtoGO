@@ -17,12 +17,13 @@ require_once __DIR__ . "/SPOrganV2.php";
  * @author andrew e hall
  */
 class Segovia extends SPOrganV2 {
-    const ROOT="/GrandOrgue/Organs/SP/SegoviaFull/";
-    const VERSION="1.3";
+    const ROOT="/GrandOrgue/Organs/SP/Segovia/";
+    const VERSION="1.4";
     const REVISIONS="\n"
             . "1.1 Corrected releases on ranks without tremmed samples\n"
             . "1.2 Corrected panel image placement\n"
-            . "1.3 Added full surround\n"
+            . "1.3 Added full surround\n" 
+            . "1.4 Cross fades corrected for GO 3.14\n"
             . "\n";
     
     const RANKS_DIRECT=1;
@@ -443,7 +444,7 @@ class SegoviaFull extends Segovia {
             $hwi=new SegoviaFull(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            //$hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.= " ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);

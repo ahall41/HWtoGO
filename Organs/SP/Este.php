@@ -24,7 +24,8 @@ class Este extends SPOrganV2 {
     const TARGET=self::ROOT . "Este, Mascioni, op. 498, Demo (%s) 1.3.organ";
     const REVISIONS=
             "1.1 Corrected tremulant\n" .
-            "1.2 Add switches to manuals for divisional combinations\n";
+            "1.2 Add switches to manuals for divisional combinations\n" .
+            "1.3 Cross fades corrected for GO 3.14\n";
     
     const RANKS_DISTANT=2;
     
@@ -82,13 +83,13 @@ class Este extends SPOrganV2 {
 
     protected $patchEnclosures=[
         901=>["Panels"=>[5=>[800]], "EnclosureID"=>901, "Name"=>"Direct",
-            "GroupIDs"=>[101,201,301,601,701,801.901], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[101,201,301,601,701,801,901], "AmpMinimumLevel"=>1],
         902=>["Panels"=>[5=>[810]], "EnclosureID"=>903,"Name"=>"Diffuse",
-            "GroupIDs"=>[102,202,302,602,702,802.902], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[102,202,302,602,702,802,902], "AmpMinimumLevel"=>1],
         903=>["Panels"=>[5=>[820]], "EnclosureID"=>903,"Name"=>"Distant",
-            "GroupIDs"=>[103,203,303,603,703,803.903], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[103,203,303,603,703,803,903], "AmpMinimumLevel"=>1],
         904=>["Panels"=>[5=>[830]], "EnclosureID"=>904,"Name"=>"Rear",
-            "GroupIDs"=>[104,204,304,604,704,804.904], "AmpMinimumLevel"=>1],
+            "GroupIDs"=>[104,204,304,604,704,804,904], "AmpMinimumLevel"=>1],
 
         906=>["Panels"=>[5=>[1691]], "EnclosureID"=>906,"Name"=>"Blower",
             "GroupIDs"=>[601,602,603,604], "AmpMinimumLevel"=>1],

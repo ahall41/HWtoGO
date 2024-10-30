@@ -19,8 +19,10 @@ require_once __DIR__ . "/SPOrganV2.php";
 class FrankfurtOder extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/FrankfurtOder/";
     const SOURCE="OrganDefinitions/Frankfurt (Oder), Sauer, op. 2025, 8-channel demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Frankfurt (Oder), Sauer, op. 2025 %s Demo 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Frankfurt (Oder), Sauer, op. 2025 %s Demo 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     const RANKS_DIRECT=1;
     const RANKS_DIFFUSE=2;
@@ -180,7 +182,6 @@ class FrankfurtOder extends SPOrganV2 {
     }
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        // unset($hwdata["ReleaseCrossfadeLengthMs"]);
         $hwdata["IsTremulant"]=0;
         switch ($hwdata["RankID"] % 10) {
             case 9:

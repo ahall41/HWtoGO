@@ -21,8 +21,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class Chapelet extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Chapelet/";
     const SOURCE="OrganDefinitions/Chapelet Spanish Collection DEMO.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Chapelet Spanish Collection (Demo - %s) 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Chapelet Spanish Collection (Demo - %s) 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
 
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -89,11 +91,6 @@ class Chapelet extends SPOrgan {
             return $files[strtolower($filename)];
         else
             throw new \Exception ("File $filename does not exist!");
-    }
-
-    public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        //$hwdata["ReleaseCrossfadeLengthMs"]=100;
-        return parent::processSample($hwdata, $isattack);
     }
 
     /**

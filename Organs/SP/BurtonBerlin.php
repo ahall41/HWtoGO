@@ -21,9 +21,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class BurtonBerlin extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinDemo/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.1.organ";
-    const COMMENTS="/n"
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s Demo.1.2.organ";
+    const COMMENTS="\n"
             . "1.1 Corrected surround channels\n"
+            . "1.2 Updated release cross fades for GO 3.14\n"
             . "\n";
     protected string $root=self::ROOT;
     protected array  $rankpositions=[

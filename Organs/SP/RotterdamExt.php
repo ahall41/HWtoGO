@@ -19,7 +19,7 @@ require_once __DIR__ . "/SPExtended.php";
 class RotterdamExt extends SPExtended {
     const ROOT="/GrandOrgue/Organs/SP/Rotterdam/";
     const SOURCE="OrganDefinitions/Rotterdam - Laurenskerk, Hoofdorgel DEMO.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Rotterdam - Laurenskerk, Hoofdorgel (Extended Demo - %s) 0.1.organ";
+    const TARGET=self::ROOT . "Rotterdam - Laurenskerk, Hoofdorgel (Extended Demo - %s) 0.3.organ";
 
     protected string $rootdir=self::ROOT;
     

@@ -21,8 +21,10 @@ require_once __DIR__ . "/SPOrganV2.php";
 class Noordwolde extends SPOrganV2 {
     const ROOT="/GrandOrgue/Organs/SP/Noordwolde/";
     const SOURCE="OrganDefinitions/Noordwolde, Huis-Freytag-Lohman, Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Noordwolde, Huis-Freytag-Lohma %s Demo 1.0.organ";
-    const REVISIONS="";
+    const TARGET=self::ROOT . "Noordwolde, Huis-Freytag-Lohma %s Demo 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     const RANKS_SEMI_DRY=1;
     const RANKS_DIFFUSE=2;

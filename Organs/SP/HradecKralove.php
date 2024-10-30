@@ -19,7 +19,10 @@ require_once __DIR__ . "/SPOrgan.php";
 class HradecKralove extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/HradecKralove/";
     const SOURCE="OrganDefinitions/Hradec Kralove - Maria - Wet.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Hradec Kralove - Maria - Wet 1.0.organ";
+    const TARGET=self::ROOT . "Hradec Kralove - Maria - Wet 1.1.organ";
+    const REVISIONS="\n"
+            . "1.1 Cross fades corrected for GO 3.14\n"
+            . "\n";
     
     protected string $root=self::ROOT;
     protected array $rankpositions=[
@@ -142,8 +145,6 @@ class HradecKralove extends SPOrgan {
     }
 
     public function processSample(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        //unset($hwdata["ReleaseCrossfadeLengthMs"]); 
-        //$hwdata["ReleaseCrossfadeLengthMs"]=30;
         if (($pipe=parent::processSample($hwdata, $isattack))) {
             unset($pipe->PitchTuning);
         }
@@ -174,7 +175,7 @@ class HradecKralove extends SPOrgan {
                 }
             }
             echo $hwi->getOrgan()->ChurchName, "\n";
-            $hwi->saveODF(sprintf(self::TARGET, $target));
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
         }
         else {
             self::HradecKralove(
