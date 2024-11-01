@@ -18,13 +18,11 @@ require_once __DIR__ . "/SPOrgan.php";
  */
 class Buckeburg extends SPOrgan {
     const ROOT="/GrandOrgue/Organs/SP/Buckeburg/";
-    const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.3.organ";
     const REVISIONS="\n"
             . "1.1 Remove additional attacks\n"
             . "1.2 Reinstate additional attacks\n"
-            . "1.3 Add coupler manuals + correct cross fades\n"
-            . "1.4 Remove coupler manuals + cross fades corrected for GO 3.14\n"
+            . "1.3 Cross fades corrected for GO 3.14\n"
+            . "    Includes full surround\n"
             . "\n";
     
     public static bool $singleRelease=FALSE;
@@ -138,7 +136,7 @@ class Buckeburg extends SPOrgan {
             {return NULL;}
     }
 
-    private function treeWalk($root, $dir="", &$results=[]) {
+    protected function treeWalk($root, $dir="", &$results=[]) {
         $files=scandir("$root$dir");
         foreach ($files as $key => $value) {
             if (!is_dir("$root$dir/$value")) {
@@ -234,13 +232,61 @@ class Buckeburg extends SPOrgan {
     /**
      * Run the import
      */
-    public static function Buckeburg(array $positions=[], string $target="", float $balance=0.0) {
+}
+
+class Demo extends Buckeburg {
+    const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround Demo.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s Demo 1.4.organ";
+    
+    public static function Buckeburg(array $positions=[], string $target="") {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         if (sizeof($positions)>0) {
-            $hwi=new Buckeburg(self::ROOT . self::SOURCE);
+            $hwi=new Demo(self::ROOT . self::SOURCE);
             $hwi->positions=$positions;
-            $hwi->balance=$balance;
+            $hwi->import();
+            // $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
+            echo $hwi->getOrgan()->ChurchName, "\n";
+            $hwi->getManual(4)->NumberOfLogicalKeys=73;
+            $hwi->saveODF(sprintf(self::TARGET, $target), self::REVISIONS);
+        }
+        else {
+            self::$singleRelease=FALSE;
+            /* self::Buckeburg(
+                    [self::RANKS_DIRECT=>"Direct"],
+                    "Direct");
+            self::Buckeburg(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "Diffuse");
+            self::Buckeburg(
+                    [self::RANKS_REAR=>"Rear"],
+                    "Rear"); */
+            self::Buckeburg(
+                    [
+                        self::RANKS_DIRECT=>"Direct", 
+                        self::RANKS_DIFFUSE=>"Diffuse", 
+                        self::RANKS_REAR=>"Rear"
+                    ],
+                   "Surround");
+            /* self::$singleRelease=TRUE;
+            self::Buckeburg(
+                    [self::RANKS_DIFFUSE=>"Diffuse"],
+                     "SR Diffuse"); */
+        }
+    }
+}
+
+class Full extends Buckeburg {
+    const SOURCE="OrganDefinitions/Buckeburg, Janke Organ, Surround.Organ_Hauptwerk_xml";
+    const TARGET=self::ROOT . "Buckeburg, Janke Organ, %s 1.4.organ";
+    
+    public static function Buckeburg(array $positions=[], string $target="") {
+        \GOClasses\Noise::$blankloop="BlankLoop.wav";
+        \GOClasses\Manual::$keys=61;
+        if (sizeof($positions)>0) {
+            $hwi=new Full(self::ROOT . self::SOURCE);
+            $hwi->positions=$positions;
             $hwi->import();
             // $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName=str_replace("Surround", "$target", $hwi->getOrgan()->ChurchName);
@@ -251,26 +297,15 @@ class Buckeburg extends SPOrgan {
         else {
             self::$singleRelease=FALSE;
             self::Buckeburg(
-                    [self::RANKS_DIRECT=>"Direct"],
-                    "Direct");
-            self::Buckeburg(
-                    [self::RANKS_DIFFUSE=>"Diffuse"],
-                     "Diffuse");
-            self::Buckeburg(
-                    [self::RANKS_REAR=>"Rear"],
-                    "Rear");
-            self::Buckeburg(
                     [
                         self::RANKS_DIRECT=>"Direct", 
                         self::RANKS_DIFFUSE=>"Diffuse", 
                         self::RANKS_REAR=>"Rear"
                     ],
                    "Surround");
-            self::$singleRelease=TRUE;
-            self::Buckeburg(
-                    [self::RANKS_DIFFUSE=>"Diffuse"],
-                     "SR Diffuse");
         }
     }
 }
-Buckeburg::Buckeburg();
+
+Demo::Buckeburg();
+Full::Buckeburg();
