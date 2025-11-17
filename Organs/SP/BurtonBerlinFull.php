@@ -18,9 +18,10 @@ require_once __DIR__ . "/SPOrgan.php";
  * @author andrew
  */
 class BurtonBerlinFull extends SPOrgan {
-    const ROOT="/GrandOrgue/Organs/SP/BurtonBerlinFull/";
+    
+    const ROOT="/GrandOrgue/Organs/SP/BurtonBerlin/";
     const SOURCE="OrganDefinitions/Burton-Berlin Hill Surround.Organ_Hauptwerk_xml";
-    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.4";
+    const TARGET=self::ROOT . "Burton-Berlin Hill %s.1.4a";
     const COMMENTS="\n"
             . "1.1 Corrected tremulants and Diffuse expression\n"
             . "1.2 Added virtual keyboards for 2 keyboard operation\n"
@@ -28,6 +29,7 @@ class BurtonBerlinFull extends SPOrgan {
             . "1.3 Includes crescendo (for program see .yaml)\n"
             . "1.4 Updated release cross fades for GO 3.14\n"
             . "    Remove virtual keyboards\n"
+            . "    Add patch for unison off\n"
             . "\n";
     
     protected $combinations=[
@@ -183,12 +185,22 @@ class BurtonBerlinFull extends SPOrgan {
 
     }
     
-    
     public function createOrgan(array $hwdata): \GOClasses\Organ {
         $hwdata["Identification_UniqueOrganID"]=2261; 
         return parent::createOrgan($hwdata);
     }
-
+    
+    public function createManual(array $hwdata): ?\GOClasses\Manual {
+        $manual=parent::createManual($hwdata);
+        switch ($kbid=$hwdata["KeyboardID"]) {
+            case 2:
+            case 4:
+                $cm=$this->newManual(-$kbid, $manual->Name . " (UOFix)");
+                $cm->Displayed="N";
+        }
+        return $manual;
+    }
+    
     public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
         if (($switchid=$hwdata["ControllingSwitchID"])) {
             $switchdata=$this->hwdata->switch($switchid, TRUE);
@@ -296,7 +308,7 @@ class BurtonBerlinFull extends SPOrgan {
             $hwi->save(sprintf(self::TARGET, $target), self::COMMENTS);
         }
         else {
-            self::BurtonBerlinFull(
+            /* self::BurtonBerlinFull(
                     [self::RANKS_DIRECT=>"Direct"],
                     "Direct");
             self::BurtonBerlinFull(
@@ -304,7 +316,7 @@ class BurtonBerlinFull extends SPOrgan {
                      "Diffuse");
             self::BurtonBerlinFull(
                     [self::RANKS_REAR=>"Rear"],
-                    "Rear");
+                    "Rear"); */
              self::BurtonBerlinFull(
                     [self::RANKS_DIRECT=>"Direct", self::RANKS_DIFFUSE=>"Diffuse", self::RANKS_REAR=>"Rear"],
                      "Surround");
