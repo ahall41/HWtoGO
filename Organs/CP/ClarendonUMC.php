@@ -65,8 +65,8 @@ class ClarendonUMC extends CPOrgan {
     
     protected $patchTremulants=[
         1710=>"DELETE",
-        1720=>["Type"=>"Synth", "GroupIDs"=>[4], "Period"=>250, "AmpModDepth"=>18],
-        1730=>["Type"=>"Synth", "GroupIDs"=>[3], "Period"=>220, "AmpModDepth"=>15],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[3], "Period"=>250, "AmpModDepth"=>18],
+        1730=>["Type"=>"Synth", "GroupIDs"=>[4], "Period"=>220, "AmpModDepth"=>15],
         1740=>"DELETE"
     ];
     
@@ -266,8 +266,15 @@ class ClarendonUMC extends CPOrgan {
         foreach($this->getStops() as $stopid=>$stop) {
             switch ($stopid) {
                 case 2305: // Swl: Viole Celeste 8 (TC)
-                case 2311: // Swl: Sesquialtera II
-                    $stop->NumberOfAccessiblePipes=$stop->Rank001PipeCount=49;
+                case 2311: // Swl: Sesquialtera II (TC)
+                    unset($stop->Rank001PipeCount);
+                    $stop->FirstAccessiblePipeLogicalKeyNumber=13;
+                    echo $stop;
+                    break;
+                    
+                case 2112: // Grt: Trumpet 8
+                    $stop->Rank001FirstPipeNumber=13;
+                    break;
             }
         }
     }
@@ -477,7 +484,7 @@ class ClarendonUMCDemo extends ClarendonUMC {
             case 10298: // Antiphonal 
             case 10301:
             case 10304:
-            case 10207:
+            case 10307:
                 return;
         }
         parent::configurePanelSwitchImages($switch, $data);
