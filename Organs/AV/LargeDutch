@@ -245,7 +245,7 @@ class LargeDutch extends AVOrgan {
         }
     }
 
-    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+    /* public function configurePanelImage(\GOClasses\Panel $panel, array $data): ? PanelElement {
         static $map=[
             //["ImageWidthPixels","ImageWidthPixels"],
             //["ImageHeightPixels","ImageHeightPixels"],
@@ -258,7 +258,7 @@ class LargeDutch extends AVOrgan {
             $this->map($map, $imagedata, $panel);
             $image=$panel->Image(reset($imagedata["Images"]));
         }
-    }
+    } */
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         $panel=$this->getPanel(1);

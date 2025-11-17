@@ -359,11 +359,10 @@ abstract Class Configure extends Create {
         $this->configurePanelSwitchImages($switch, $hwdata); 
         $coupler=$this->getCoupler($hwdata["CouplerID"]);
         $manualid=
-                isset($hwdata["DestDivisionID"]) 
+                isset($hwdata["DestDivisionID"]) && $hwdata["DestDivisionID"]
                 ? $hwdata["DestDivisionID"] 
                 : $hwdata["DestKeyboardID"];
-        $coupler->DestinationManual
-                =intval($this->getManual($manualid)->instance());
+        $coupler->Destination($this->getManual($manualid));
         if (isset($hwdata["MIDINoteNumberIncrement"])
                 && !empty($hwdata["MIDINoteNumberIncrement"]))
             $coupler->DestinationKeyshift=$hwdata["MIDINoteNumberIncrement"];
@@ -393,10 +392,43 @@ abstract Class Configure extends Create {
         if (empty($coupler->DestinationKeyshift) &&
                 $hwdata["SourceKeyboardID"]==$manualid) {
             $coupler->UnisonOff="Y";
-            unset($coupler->CouplerType);                
+            unset($coupler->CouplerType);
+        }
+        
+        if ($hwdata["SourceKeyboardID"]==$manualid) {
+            $this->unisonOffPatch($hwdata, $coupler->DestinationKeyshift, $switch);
         }
         $coupler->Displayed="N";
         return $switch;
+    }
+    
+    protected function unisonOffPatch(array $hwdata, ?int $keyshift, \GOClasses\Sw1tch $switch) : void {
+        $manualid=$hwdata["ManualID"];
+        $destmanual=$this->getManual(+$manualid);
+        $manual=$this->getManual(-$manualid, FALSE);
+        if (!empty($manual)) {
+            $coupler=$this->newCoupler($hwdata["CouplerID"], $hwdata["Name"]);
+            $coupler->Switch($switch);
+            $manual->Coupler($coupler);
+            
+            $coupler->Destination($destmanual);
+            $coupler->UnisonOff="N";
+            if ($keyshift) {
+                $coupler->DestinationKeyshift=$keyshift;
+                $coupler->Function="And";
+                $coupler->CoupleToSubsequentUnisonIntermanualCouplers="N";
+            }
+            else {
+                $coupler->Function="Not";
+                unset($coupler->SwitchCount);
+                $coupler->CoupleToSubsequentUnisonIntermanualCouplers="Y";
+            }
+            $coupler->CoupleToSubsequentUpwardIntermanualCouplers="N";
+            $coupler->CoupleToSubsequentDownwardIntermanualCouplers="N";
+            $coupler->CoupleToSubsequentUpwardIntramanualCouplers="N";
+            $coupler->CoupleToSubsequentDownwardIntramanualCouplers="N";
+            $coupler->Displayed="N";
+        }
     }
 
     /**

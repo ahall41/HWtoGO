@@ -20,8 +20,10 @@ class Manual extends GOObject {
     public static $keys=61;
     public static $firstLogicalKey=1;
     public static $firstMidiNote=36;
+    public static $minWidth=10;
     protected string $section="Manual";
     private int $currentX=-1;
+    private int $positionY=0;
     private $switches=[];
     
     public function __construct(string $name) {
@@ -73,7 +75,8 @@ class Manual extends GOObject {
             if (isset($this->DisplayKeys))
                 $key=++$this->DisplayKeys;
             else    
-                $key=$this->DisplayKeys=1;        }
+                $key=$this->DisplayKeys=1;
+        }
         return "Key" . $this->int2str($key);
     }
 
@@ -82,6 +85,11 @@ class Manual extends GOObject {
             case "FirstAccessibleKeyMIDINoteNumber":
             case "NumberOfLogicalKeys":
                 if (empty($value)) return;
+                break;
+                
+            case "PositionY":
+                $this->positionY=intval($value);
+                break;
         }
         parent::set($name, $value);
     }
@@ -93,16 +101,29 @@ class Manual extends GOObject {
      */
     public function KeyWidth(int $x) : void {
         if ($this->DisplayKeys>1) {
-            $key=$this->Key($this->DisplayKeys -1);
+            $key=$this->Key($this->DisplayKeys-1);
             $delta=$x-$this->currentX;
             if ($delta<0) {
-                $this->set("${key}Width",0);
+                $this->set("${key}Width",self::$minWidth);
                 $this->set("${key}Offset",$delta);
+                $this->currentX+=self::$minWidth;
             }
             else {
                 $this->set("${key}Width", $x-$this->currentX);
+                $this->currentX=$x;
             }
         }
-        $this->currentX=$x;
+        else {
+            $this->currentX=$x;
+        }
+        
+    }
+    
+    public function KeyOffsetY(int $y) : void {
+        if ($y!=$this->positionY) {
+            $key=$this->Key($this->DisplayKeys);
+            $this->set("${key}Offset",$this->positionY-$y);
+        }
+        
     }
 }

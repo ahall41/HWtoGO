@@ -87,16 +87,17 @@ abstract class Images extends Configure {
             2=>"AlternateScreenLayout2_", 3=>"AlternateScreenLayout3_"];
 
         $result=[];
-        if (isset($data["InstanceID"]))
+        if (isset($data["InstanceID"])) {
             $instanceid=$data["InstanceID"];
-        elseif (isset($data["SwitchID"])) {
+        } elseif (isset($data["SwitchID"])) {
             $switch=$this->hwdata->switch($data["SwitchID"]);
             $instanceid=$switch["Disp_ImageSetInstanceID"];
             $result["IndexEngaged"]=$switch["Disp_ImageSetIndexEngaged"];
             $result["IndexDisengaged"]=$switch["Disp_ImageSetIndexDisengaged"];
         }
-        else 
+        else {
             $instanceid=FALSE;
+        }
 
         if ($instanceid) {
             $layout=$layouts[$layout];
@@ -124,9 +125,12 @@ abstract class Images extends Configure {
         $images=[];
         if ($setid) {
             $set=$this->hwdata->imageSet($setid);
-            foreach ($map as $fr=>$to)
+            if (!$set) error_log("No set $setid");
+            
+            foreach ($map as $fr=>$to) {
                 if (isset($set[$fr])) $result[$to]=$set[$fr];
-
+            }
+            
             foreach ($this->hwdata->imageSetElement($setid) as $index=>$element) {
                 $filename=
                     sprintf("OrganInstallationPackages/%06d/%s",
@@ -206,7 +210,7 @@ abstract class Images extends Configure {
      * @return void
      * @throws \Exception
      */
-    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+    public function configurePanelImage(\GOClasses\Panel $panel, array $data, int $layout=0): ? \GOClasses\PanelElement {
         static $map=[
             //["ImageWidthPixels","ImageWidthPixels"],
             //["ImageHeightPixels","ImageHeightPixels"],
@@ -215,10 +219,11 @@ abstract class Images extends Configure {
         ];
         if (isset($data["SetID"])) {
             unset($data["SwitchID"]);
-            $imagedata=$this->getImageData($data);
+            $imagedata=$this->getImageData($data, $layout);
             $this->map($map, $imagedata, $panel);
-            $panel->Image(reset($imagedata["Images"]));
+            return $panel->Image(reset($imagedata["Images"]));
         }
+        return NULL;
     }
     
     /**

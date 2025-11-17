@@ -331,7 +331,7 @@ class SPBaroque extends AVOrgan {
         }
     }
 
-    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+    /* public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
         static $map=[
             //["ImageWidthPixels","ImageWidthPixels"],
             //["ImageHeightPixels","ImageHeightPixels"],
@@ -345,7 +345,7 @@ class SPBaroque extends AVOrgan {
             $image=$panel->Image(reset($imagedata["Images"]));
             //echo $image; exit();
         }
-    }
+    } */
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         $panel=$this->getPanel(1);

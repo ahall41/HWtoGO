@@ -31,6 +31,7 @@ class Redeemer extends AVOrgan {
             . "    Added positive to near/far enclosures\n"
             . "1.3 Updated release cross fades for #1760 (release 3.1.14)\n"
             . "    Remove Virtual Keyboards panel\n"
+            . "    Add internal coupler manuals\n"
             . "\n";
 
     // protected ?int $releaseCrossfadeLengthMs=200;
@@ -62,10 +63,22 @@ class Redeemer extends AVOrgan {
     
     public function createManuals(array $keyboards): void {
         foreach ([1,5,2,3,4] as $kbdid) {
-            $this->createManual($keyboards[$kbdid]);
+            $this->createManual($keyboards[$kbdid]);            
         }
     }
-
+    
+    public function createManual(array $hwdata): ?\GOClasses\Manual {
+        $manual=parent::createManual($hwdata);
+        switch ($kbid=$hwdata["KeyboardID"]) {
+            case 2:
+            case 3:
+            case 5:
+                $cm=$this->newManual(-$kbid, $manual->Name . " (UOFix)");
+                $cm->Displayed="N";
+        }
+        return $manual;
+    }
+    
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         unset($data["SwitchID"]);
         $panelelement=$this->getPanel(1)->GUIElement($enclosure);
@@ -195,14 +208,14 @@ class Extended extends Redeemer {
         230=>[                     "Name"=>"PO",    "GroupIDs"=>[401,402], "InstanceID"=>17],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502,9999], "InstanceID"=>19],
          11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401,501], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402,501], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402,502], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
     
     protected $patchTremulants=[
-        1710=>["Type"=>"Synth", "GroupIDs"=>[201,202]],
-        1720=>["Type"=>"Synth", "GroupIDs"=>[301,302]],
-        1730=>["Type"=>"Synth", "GroupIDs"=>[401,402]],
-        1740=>["Type"=>"Synth", "GroupIDs"=>[501,502]]
+        1710=>[/* Gt */ "Type"=>"Synth", "Period"=>220, "AmpModDepth"=>10, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[201,202]],
+        1720=>[/* Sw */ "Type"=>"Synth", "Period"=>200, "AmpModDepth"=> 8, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[301,302]],
+        1730=>[/* PO */ "Type"=>"Synth", "Period"=>220, "AmpModDepth"=>10, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[401,402]],
+        1740=>[/* Ch */ "Type"=>"Synth", "Period"=>220, "AmpModDepth"=> 8, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[501,502]]
     ];
  
     protected $patchStops=[
@@ -247,8 +260,8 @@ class Extended extends Redeemer {
         }
         else {
             self::Redeemer([1=>"Far", 2=>"Near"], "surround");
-            self::Redeemer([1=>"Far"], "wet");
-            self::Redeemer([2=>"Near"], "dry");
+            //self::Redeemer([1=>"Far"], "wet");
+            //self::Redeemer([2=>"Near"], "dry");
         }
     }   
 }
@@ -317,15 +330,15 @@ class Chimes extends Extended {
             $hwi->positions=$positions;
             $hwi->import();
             $hwi->addChimes();
-            $hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
+            //$hwi->addVirtualKeyboards(4, [1,2,3,4], [1,2,3,4]);
             $hwi->getOrgan()->ChurchName.=" ($target)";
             echo $hwi->getOrgan()->ChurchName, "\n";
             $hwi->saveODF(sprintf(self::TARGET, $target, self::VERSION), self::COMMENTS);
         }
         else {
             self::Redeemer([1=>"Far", 2=>"Near"], "surround");
-            self::Redeemer([1=>"Far"], "wet");
-            self::Redeemer([2=>"Near"], "dry");
+            //self::Redeemer([1=>"Far"], "wet");
+            //self::Redeemer([2=>"Near"], "dry");
         }
     }   
     
@@ -339,13 +352,13 @@ class Original extends Redeemer {
     protected $patchEnclosures=[
         220=>[                     "Name"=>"SW",    "GroupIDs"=>[301,302], "InstanceID"=>15],
         240=>[                     "Name"=>"CH",    "GroupIDs"=>[501,502], "InstanceID"=>17],
-         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[101,201,301,401,501], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
-         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[102,202,302,402,502], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
+         11=>["EnclosureID"=>"11", "Name"=>"Near",  "GroupIDs"=>[102,202,302,402,502], "InstanceID"=>85132, "AmpMinimumLevel"=>1],
+         12=>["EnclosureID"=>"12", "Name"=>"Far",   "GroupIDs"=>[101,201,301,401,502], "InstanceID"=>85134, "AmpMinimumLevel"=>1],
     ];
 
     protected $patchTremulants=[
-        1720=>["Type"=>"Synth", "GroupIDs"=>[301,302]],
-        1740=>["Type"=>"Synth", "GroupIDs"=>[501,502]]
+        1720=>[/* Sw */ "Type"=>"Synth", "Period"=>200, "AmpModDepth"=> 8, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[301,302]],
+        1740=>[/* Ch */ "Type"=>"Synth", "Period"=>220, "AmpModDepth"=> 8, "StartRate"=>30, "StopRate"=>50, "GroupIDs"=>[501,502]]
     ];
     
     protected $patchStops=[
@@ -369,7 +382,7 @@ class Original extends Redeemer {
             $hwi=new Original(self::SOURCE);
             $hwi->positions=$positions;
             $hwi->import();
-            $hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
+            //$hwi->addVirtualKeyboards(3, [1,2,3], [1,2,3]);
             $hwi->getOrgan()->ChurchName.=" ($target)";
             foreach($hwi->getManuals() as $manual) unset($manual->DisplayKeys);
             $hwi->getManual(4)->Displayed="N";
@@ -378,8 +391,8 @@ class Original extends Redeemer {
         }
         else {
             self::Redeemer([1=>"Far", 2=>"Near"], "surround");
-            self::Redeemer([1=>"Far"], "wet");
-            self::Redeemer([2=>"Near"], "dry");
+            //self::Redeemer([1=>"Far"], "wet");
+            //self::Redeemer([2=>"Near"], "dry");
         }
     }   
 }

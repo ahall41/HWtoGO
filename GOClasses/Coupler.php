@@ -52,4 +52,8 @@ class Coupler extends Drawstop {
             }
         }
     }
+    
+    public function Destination(Manual $manual) {
+        $this->DestinationManual=intval($manual->instance());
+    }
 }

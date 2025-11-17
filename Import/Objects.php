@@ -13,6 +13,7 @@ require_once(__DIR__ . "/../GOClasses/Organ.php");
 require_once(__DIR__ . "/../GOClasses/Panel.php");
 require_once(__DIR__ . "/../GOClasses/PanelElement.php");
 require_once(__DIR__ . "/../GOClasses/Manual.php");
+require_once(__DIR__ . "/../GOClasses/CouplerManual.php");
 require_once(__DIR__ . "/../GOClasses/WindchestGroup.php");
 require_once(__DIR__ . "/../GOClasses/Enclosure.php");
 require_once(__DIR__ . "/../GOClasses/Drawstop.php");
@@ -80,9 +81,12 @@ class Objects {
     protected function newManual($id, $name) : \GOClasses\Manual {
         return $this->Model[self::Manuals][$id]=new \GOClasses\Manual($name);
     }
-
-    public function getManual($id) : \GOClasses\Manual {
-        return $this->Model[self::Manuals][$id];
+    
+    public function getManual($id, bool $hardfail=TRUE) : ? \GOClasses\Manual {
+        if ($hardfail || isset($this->Model[self::Manuals][$id]))
+            return $this->Model[self::Manuals][$id];
+        else
+            return NULL;
     }
 
     public function getManuals() : array {
@@ -124,7 +128,7 @@ class Objects {
         return $this->Model[self::SwitchNoises][$id]=new \GOClasses\SwitchNoise($name);
     }
 
-    public function getSwitchNoise($id, bool $hardfail=FALSE) : ?\GOClasses\SwitchNoise {
+    public function getSwitchNoise(int $id, bool $hardfail=FALSE) : ?\GOClasses\SwitchNoise {
         if ($hardfail || isset($this->Model[self::SwitchNoises][$id]))
             return $this->Model[self::SwitchNoises][$id];
         else

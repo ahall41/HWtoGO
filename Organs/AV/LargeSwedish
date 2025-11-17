@@ -310,7 +310,7 @@ class LargeSwedish extends AVOrgan {
         }
     }
 
-    public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
+    /* public function configurePanelImage(\GOClasses\Panel $panel, array $data): void {
         static $map=[
             //["ImageWidthPixels","ImageWidthPixels"],
             //["ImageHeightPixels","ImageHeightPixels"],
@@ -323,7 +323,7 @@ class LargeSwedish extends AVOrgan {
             $this->map($map, $imagedata, $panel);
             $image=$panel->Image("Images/background.jpg");
         }
-    }
+    } */
 
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         $panel=$this->getPanel(1);
