@@ -122,8 +122,12 @@ abstract class CPOrgan extends \Import\Organ {
                 $hwdata["GroupID"]=$division;
             }
         }
-        $rank=parent::createRank($hwdata);
-        return $rank;
+        
+        if (isset($hwdata["GroupID"])) {
+            $rank=parent::createRank($hwdata);
+            return $rank;
+        }
+        return NULL;
     }
     
     /*
