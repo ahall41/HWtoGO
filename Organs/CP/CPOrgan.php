@@ -96,7 +96,14 @@ abstract class CPOrgan extends \Import\Organ {
                                         $panelelement, 
                                         ["SwitchID"=>$destid], 
                                         $layout);
-                                // error_log($panelelement . "\n");
+                                if ($panelelement->MouseRectLeft) {
+                                    $panelelement->MouseRectWidth-=$panelelement->MouseRectLeft;
+                                    // error_log($panelelement . "\n");
+                                }
+                                if ($panelelement->MouseRectTop) {
+                                    $panelelement->MouseRectHeight-=$panelelement->MouseRectTop;
+                                    // error_log($panelelement . "\n");
+                                }
                             }
                         }
                     }

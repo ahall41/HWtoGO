@@ -14,7 +14,7 @@ namespace Organs\CP;
 require_once(__DIR__ . "/CPOrgan.php");
 
 /**
- * Import Father Willis Organ of St. Matthew, BethesdaRedeemer to GrandOrgue
+ * Import Di Gennaro-Hart, 2007 of The Episcopal Church of the Redeemer, Bethesda to GrandOrgue
  * 
  * @author andrew
  */
@@ -239,11 +239,10 @@ class BethesdaRedeemer extends CPOrgan {
         // $this->createCombinations();
         // $this->createPistons();
         foreach($this->getStops() as $stopid=>$stop) {
-            echo $stopid, " ", $stop->Name, "\n";
+            // echo $stopid, " ", $stop->Name, "\n";
             switch ($stopid) {
                 case 2220: // Swl: Larigot 1 1/3
                     $stop->Rank001PipeCount=85-32;
-                    echo $stop;
                     break;
             }
         }

@@ -14,96 +14,69 @@ namespace Organs\CP;
 require_once(__DIR__ . "/CPOrgan.php");
 
 /**
- * Import Schlicker, 1967 of Clarendon United Methodist Church, Arlington to GrandOrgue
+ * Import Aeolian-Skinner, 1956, of Washington Hebrew Congregation to GrandOrgue
  * 
  * @author andrew
  */
-class ClarendonUMC extends CPOrgan {
+class WashingtonHC extends CPOrgan {
     
-    const ROOT="/GrandOrgue/Organs/CP/ClarendonUMC/";
+    const ROOT="/GrandOrgue/Organs/CP/WashingtonHC/";
     const COMMENTS=
-              "Schlicker, 1967, Clarendon United Methodist Church, Arlington, MD\n"
-            . "https://coralpipesorgan.wixsite.com/coral-pipes/clarendon-umc\n"
+              "Aeolian-Skinner, 1956, Washington Hebrew Congregation\n"
+            . "https://coralpipesorgan.wixsite.com/coral-pipes/whc\n"
             . "\n";
 
     protected $patchDisplayPages=[
         
         1=>[ // Console
-            0=>["SetID"=>1000]
+            0=>["SetID"=>1]
            ],
-        2=>[ // Center
-            0=>["SetID"=>1001]
+        2=>[
+            0=>["Name"=>"Landscape", "Group"=>"Left", "SetID"=>2], 
+            1=>["Name"=>"Portrait", "Group"=>"Left", "SetID"=>3], 
            ],
         3=>[
-            0=>["Name"=>"Landscape", "Group"=>"Left", "SetID"=>1002], 
-            1=>["Name"=>"Portrait", "Group"=>"Left", "SetID"=>1003], 
+            0=>["Name"=>"Landscape", "Group"=>"Right", "SetID"=>4], 
+            1=>["Name"=>"Portrait", "Group"=>"Right", "SetID"=>5], 
            ],
         4=>[
-            0=>["Name"=>"Landscape", "Group"=>"Right", "SetID"=>1004], 
-            1=>["Name"=>"Portrait", "Group"=>"Right", "SetID"=>1005], 
+            0=>["Name"=>"Landscape", "Group"=>"Simple", "SetID"=>6], 
+            1=>["Name"=>"Portrait", "Group"=>"Simple", "SetID"=>7], 
            ],
-        5=>[
-            0=>["Name"=>"Landscape", "Group"=>"Simple", "SetID"=>1006], 
-            1=>["Name"=>"Portrait", "Group"=>"Simple", "SetID"=>1007], 
+        5=>[ // Pistons
+            0=>["SetID"=>257]
            ],
-        6=>"DELETE",
-        9=>[ // Pistons
-            0=>["SetID"=>1013]
+        6=>[ // Blower
+            0=>["SetID"=>258]
            ],
-        10=>[ // Blower
-            0=>["SetID"=>1014]
-           ],
-        15=>[ 
-            0=>["Name"=>"Landscape", "Group"=>"Info", "SetID"=>1019], 
-            1=>["Name"=>"Portrait", "Group"=>"Info", "SetID"=>1020], 
+        7=>[ 
+            0=>["Name"=>"Landscape", "Group"=>"Info", "SetID"=>259], 
+            1=>["Name"=>"Portrait", "Group"=>"Info", "SetID"=>260], 
            ],
     ];
     
     protected $patchEnclosures=[
-        220=>["GroupIDs"=>[4], "AmpMinimumLevel"=>30],
+        210=>["GroupIDs"=>[2], "AmpMinimumLevel"=>30],
+        220=>["GroupIDs"=>[3], "AmpMinimumLevel"=>30],
     ];
     
     protected $patchTremulants=[
-        1710=>"DELETE",
-        1720=>["Type"=>"Synth", "GroupIDs"=>[3], "Period"=>250, "AmpModDepth"=>18],
-        1730=>["Type"=>"Synth", "GroupIDs"=>[4], "Period"=>220, "AmpModDepth"=>15],
-        1740=>"DELETE"
+        1720=>"DELETE", // Vox Humana
+        2199=>["TremulantID"=>2199, "ControllingSwitchID"=>2199, "Type"=>"Wave", "Name"=>"Chr Tremulant", "GroupIDs"=>[1]],
+        2399=>["TremulantID"=>2399, "ControllingSwitchID"=>2399, "Type"=>"Wave", "Name"=>"Swl Tremulant", "GroupIDs"=>[4]],
     ];
     
     protected $patchStops=[
-    /*  +1=>["Name"=>"Pedal On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +2=>["Name"=>"Choir On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +3=>["Name"=>"Great On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        +4=>["Name"=>"Swell On", "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -1=>["StopID"=>-1, "DivisionID"=>2, "Name"=>"Pedal Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -2=>["StopID"=>-2, "DivisionID"=>1, "Name"=>"Choir Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -3=>["StopID"=>-3, "DivisionID"=>3, "Name"=>"Great Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-        -4=>["StopID"=>-4, "DivisionID"=>4, "Name"=>"Swell Off",  "ControllingSwitchID"=>NULL, "Engaged"=>"Y"],
-      1006=>["DivisionID"=>1], 
-      1011=>["DivisionID"=>1],   
-      1016=>["DivisionID"=>1],  
-      1110=>["DivisionID"=>1],  
-      1111=>["DivisionID"=>1],  
-      1112=>["DivisionID"=>1],   
-      1116=>["DivisionID"=>1], 
-      1720=>["DivisionID"=>4, "Ambient"=>TRUE, "GroupID"=>700], // Tremulant
-      2601=>["DivisionID"=>1, "Engaged"=>"Y", "Ambient"=>TRUE, "GroupID"=>700], // Blower */
-      2402=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>5]
+        2199=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Chr Tremulant
+        2399=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Swl Tremulant
+        2499=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Blower
     ];
-
+    
     // Inspection of Ranks object
     protected $patchRanks=[
-    /*  100=>["Noise"=>"Ambient", "GroupID"=>700, "StopIDs"=>[2601]],
-        101=>["Noise"=>"StopOn",  "GroupID"=>700, "StopIDs"=>[]],
-        102=>["Noise"=>"StopOff", "GroupID"=>700, "StopIDs"=>[]],
-        103=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+2]],
-        104=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-2]],
-        105=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+1]],
-        106=>["Noise"=>"KeyOff",  "GroupID"=>7400, "StopIDs"=>[-1]],
-        107=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+3]],
-        108=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-3]],
-        109=>["Noise"=>"KeyOn",   "GroupID"=>700, "StopIDs"=>[+4]],
-        110=>["Noise"=>"KeyOff",  "GroupID"=>700, "StopIDs"=>[-4]], */
+        1=>["Noise"=>"Ambient", "GroupID"=>1, "StopIDs"=>[2499]], // Blower
+        2=>["Noise"=>"Ambient", "GroupID"=>1, "StopIDs"=>[2199]], // Chr Tremulant
+        3=>["Noise"=>"Ambient", "GroupID"=>1, "StopIDs"=>[2399]], // Swl Tremulant
     ];
     
 //    protected $combinations=[ // Don't show on panel 1 - its a 1x1 .png !!!
@@ -123,7 +96,7 @@ class ClarendonUMC extends CPOrgan {
     ]; */
     
     public function createManuals(array $keyboards): void {
-        foreach([1,2,3,4] as $id) {
+        foreach([1,4,8,9] as $id) {
             $manual=parent::createManual($keyboards[$id]);
             unset($manual->PositionX);
             unset($manual->PositionY);
@@ -141,41 +114,33 @@ class ClarendonUMC extends CPOrgan {
             $manual->PositionX=$x;
             $manual->PositionY=$y; */
         }
-        $manual=parent::createManual($keyboards[5]);
-        unset($manual->PositionX);
-        unset($manual->PositionY);
-        $manual->Displayed="N";
+        foreach([5,6] as $id) {
+            $manual=parent::createManual($keyboards[$id]);
+            unset($manual->PositionX);
+            unset($manual->PositionY);
+            $manual->Displayed="N";
+        }
     }
-    
-    /* public function createStops(array $stopsdata): void {
-        return;
-    }
-
-    public function createRanks(array $ranksdata): void {
-        return;
-    }
-    
-    public function createCouplers(array $keyactions) : void {
-        return;
-    } */
-    
-    /* public function createEnclosures(array $enclosures) : void {        
-        return;
-    } */
-    
+   
     public function configureKeyboardKeys(array $keyboardKeys) : void {
         foreach($this->GetPanels() as $panel) {
             $panel->HasPedals="N";
         }
         $panel=\Import\Configure::createPanel(["PageID"=>0, "Name"=>"Keyboards"]);
         $panel->HasPedals="Y";
+        
         foreach($this->getManuals() as $id=>$manual) {
-            if ($id<5) {
-                $panel->GUIElement($manual);
+            switch ($id) {
+                case 1:
+                case 4:
+                case 8:
+                case 9:
+                    $panel->GUIElement($manual);
+                    break;
             }
         }
-        // echo $panel;
         return;
+
         /* // Reorder source data
         $index=[];
         foreach($keyboardKeys as $keyboardKey) {
@@ -218,6 +183,14 @@ class ClarendonUMC extends CPOrgan {
         } */
     }
 
+    public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
+        switch ($hwdata["ConditionSwitchID"]) {
+            case 24: 
+                return NULL;
+        }
+        return parent::createCoupler($hwdata);
+    }
+    
     public function xxconfigureKeyboardKey(\GOClasses\Manual $manual, int $switchid, int $midikey) : void {
         $manual->DisplayKeys++;
                 $element=
@@ -264,20 +237,46 @@ class ClarendonUMC extends CPOrgan {
         // $this->createCombinations();
         // $this->createPistons();
         foreach($this->getStops() as $stopid=>$stop) {
+            // echo $stopid, " ", $stop->Name, "\n";
             switch ($stopid) {
-                case 2305: // Swl: Viole Celeste 8 (TC)
-                case 2311: // Swl: Sesquialtera II (TC)
-                    unset($stop->Rank001PipeCount);
-                    $stop->FirstAccessiblePipeLogicalKeyNumber=13;
-                    // echo $stop;
-                    break;
-                    
-                case 2112: // Grt: Trumpet 8
-                    $stop->Rank001FirstPipeNumber=13;
+                case 2108: // Swl: Larigot 1 1/3
+                    $stop->Rank001PipeCount=$stop->NumberOfAccessiblePipes;
                     break;
             }
         }
+        
+        /* foreach($this->getRanks() as $rankid=>$rank) {
+            // echo $rankid, " ", $rank->Name, "\n";
+            switch($rankid) {
+                case 303: // Swl Rohrflöte 16, 8 currently 32 bit !!!
+                    foreach($rank->Pipes() as $pipe) {
+                        $this->readLoops($pipe);
+                        echo $pipe, "\n";
+                    }
+                    exit();
+            }
+        } */
+        
     }
+    
+    private function xxreadLoops(\GOClasses\Pipe $pipe) : void {
+        require_once (__DIR__ . "/../../Import/WavReader.php");
+
+        for ($i=0; $i<=$pipe->AttackCount; $i++) {
+            $fn=$pipe->get($pipe->attack($i));
+            $dir=dirname($fn);
+            $base=basename($fn);
+            $reader=new \Import\WavReader(getenv("HOME") . self::ROOT . "$dir/32/$base");
+            $reader->header();
+            while (!$reader->isEof()) {
+                $chunk=$reader->chunk();
+                error_log(print_r($chunk, 1));
+            }
+        }
+    }
+    
+
+    
     
     /* public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
         if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
@@ -452,7 +451,7 @@ class ClarendonUMC extends CPOrgan {
     /**
      * Run the import
      */
-    public static function ClarendonUMC(ClarendonUMC $hwi, string $target) {
+    public static function WashingtonHC(WashingtonHC $hwi, string $target) {
         \GOClasses\Noise::$blankloop="BlankLoop.wav";
         \GOClasses\Manual::$keys=61;
         \GOClasses\Manual::$pedals=32;
@@ -467,38 +466,26 @@ class ClarendonUMC extends CPOrgan {
     }   
 }
 
-class ClarendonUMCDemo extends ClarendonUMC {
-    const ODF="Clarendon United Methodist Church (Demo).Organ_Hauptwerk_xml";
+class WashingtonHCDemo extends WashingtonHC {
+    const ODF="Washington Hebrew Congregation (Demo).Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Clarendon United Methodist Church (Demo).1.0.organ";
+    const TARGET=self::ROOT . "Washington Hebrew Congregation (Demo).1.0.organ";
     
     // protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
     static function Demo() {
-        self::ClarendonUMC(new ClarendonUMCDemo(self::SOURCE), self::TARGET);
+        self::WashingtonHC(new WashingtonHCDemo(self::SOURCE), self::TARGET);
     }
 
-    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
-        $condSwitchID=isset($data["ConditionSwitchID"]) ? $data["ConditionSwitchID"] : 0;
-        switch($condSwitchID) {
-            case 10298: // Antiphonal 
-            case 10301:
-            case 10304:
-            case 10307:
-                return;
-        }
-        parent::configurePanelSwitchImages($switch, $data);
-    }
-    
 }
 
-/* class ClarendonUMCFull extends ClarendonUMC {
-    const ODF="St. Matthew ClarendonUMC.Organ_Hauptwerk_xml";
+/* class WashingtonHCFull extends WashingtonHC {
+    const ODF="St. Matthew WashingtonHC.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "ClarendonUMC full.1.4.organ";
+    const TARGET=self::ROOT . "WashingtonHC full.1.4.organ";
 
     static function Full () {
-        self::ClarendonUMC(new ClarendonUMCFull(self::SOURCE), self::TARGET);
+        self::WashingtonHC(new WashingtonHCFull(self::SOURCE), self::TARGET);
     }
     
 } */
@@ -509,5 +496,5 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
 }
 set_error_handler("Organs\CP\ErrorHandler");
 
-// ClarendonUMCFull::Full();
-ClarendonUMCDemo::Demo();
+// WashingtonHCFull::Full();
+WashingtonHCDemo::Demo();

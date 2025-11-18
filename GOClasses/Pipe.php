@@ -192,7 +192,7 @@ class Pipe extends GOBase {
                 return parent::get($property, $default);
         }
     }
-
+    
     /**
      * Current attack ("", "Attack001" etc) prefix 
      * @param int $attack. Optional override of the current attack number
