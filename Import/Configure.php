@@ -308,7 +308,7 @@ abstract Class Configure extends Create {
                 $hwdata["StopIDs"]=$this->rankStopIDs($hwdata);
             if (!isset($hwdata["GroupID"]))
                 $hwdata["GroupID"]=$this->rankGroupID($hwdata);
-            $rankid=$hwdata["RankID"];
+            $rankid=intval($hwdata["RankID"]);
             $keynoise=isset($hwdata["Noise"])
                     && in_array($hwdata["Noise"], ["KeyOn","KeyOff"]);
             $rank=parent::createRank($hwdata, $keynoise);
@@ -321,7 +321,7 @@ abstract Class Configure extends Create {
                             && !($stop instanceof \GOClasses\SwitchNoise)
                             && !($rank instanceof \GOClasses\KeyNoise)) {
                         $ranknum=$stop->int2str($stop->NumberOfRanks);
-                        if (isset($srdata["MIDINoteNumIncrementFromDivisionToRank"])) {
+                        if (!empty($srdata["MIDINoteNumIncrementFromDivisionToRank"])) {
                                 if ($srdata["MIDINoteNumIncrementFromDivisionToRank"]>0)
                                     $stop->set("Rank${ranknum}FirstPipeNumber", 1+$srdata["MIDINoteNumIncrementFromDivisionToRank"]);
                                 elseif ($srdata["MIDINoteNumIncrementFromDivisionToRank"]<0)

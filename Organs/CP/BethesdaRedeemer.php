@@ -228,4 +228,4 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
 set_error_handler("Organs\CP\ErrorHandler");
 
 BethesdaRedeemerFull::Full();
-//BethesdaRedeemerDemo::Demo();
+BethesdaRedeemerDemo::Demo();
