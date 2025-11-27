@@ -6,7 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Combinations + Reversible Pistons 
+ * @todo: Tuba, Tremulants 
  * 
  */
 
@@ -79,22 +79,6 @@ class BethesdaRedeemer extends CPOrgan {
         6=>"DELETE", // Zymbelstern
     ];
     
-//    protected $combinations=[ // Don't show on panel 1 - its a 1x1 .png !!!
-//        ["SwitchIDs"=>[/* 1=>10068, */ 2=>10069], "ManualID"=>2, "SetterID"=>0],
-//        ["SwitchIDs"=>[/* 1=>10070, */ 2=>10071], "ManualID"=>2, "SetterID"=>1],
-//        ["SwitchIDs"=>[/* 1=>10072, */ 2=>10073], "ManualID"=>2, "SetterID"=>2],
-//        ["SwitchIDs"=>[/* 1=>10074, */ 2=>10075], "ManualID"=>2, "SetterID"=>3],
-//        ["SwitchIDs"=>[/* 1=>10076, */ 2=>10077], "ManualID"=>3, "SetterID"=>0],
-//        ["SwitchIDs"=>[/* 1=>10078, */ 2=>10079], "ManualID"=>3, "SetterID"=>1],
-//        ["SwitchIDs"=>[/* 1=>10080, */ 2=>10081], "ManualID"=>3, "SetterID"=>2],
-//    ];
-    
-    /** protected $pistons=[
-        ["SwitchIDs"=>[1=>10230, 2=>10231], "SwitchID"=>10207, "Name"=>"Sw to Gt"],
-        ["SwitchIDs"=>[1=>10233, 2=>10234], "SwitchID"=>10103, "Name"=>"Ped Reed 16"],
-        ["SwitchIDs"=>[1=>10236, 2=>10237], "SwitchID"=>10216, "Name"=>"Gt to Ped"],
-    ]; */
-    
     public function createManuals(array $keyboards): void {
         foreach([1,2,3] as $id) {
             $manual=parent::createManual($keyboards[$id]);
@@ -102,17 +86,6 @@ class BethesdaRedeemer extends CPOrgan {
             unset($manual->PositionY);
             $manual->Displayed="N";
             $manual->NumberOfAccessibleKeys=$manual->NumberOfLogicalKeys;
-            /* $x=999999;
-            $y=999999;
-            foreach($this->hwdata->keyboardKeys() as $keyboardKey) {
-                if ($keyboardKey["KeyboardID"]==$id) {
-                    $imagedata=$this->getImageData(["SwitchID"=>$keyboardKey["SwitchID"]]);
-                    $x=min($x, $imagedata["ImageWidthPixels"] + $imagedata["PositionX"]);
-                    $y=min($y, $imagedata["ImageHeightPixels"] + $imagedata["PositionY"]);
-                }
-            }
-            $manual->PositionX=$x;
-            $manual->PositionY=$y; */
         }
         foreach([8,9,10] as $id) {
             $manual=parent::createManual($keyboards[$id]);
@@ -121,22 +94,6 @@ class BethesdaRedeemer extends CPOrgan {
             $manual->Displayed="N";
         }
     }
-    
-    /* public function createStops(array $stopsdata): void {
-        return;
-    }
-
-    public function createRanks(array $ranksdata): void {
-        return;
-    }
-    
-    public function createCouplers(array $keyactions) : void {
-        return;
-    } */
-    
-    /* public function createEnclosures(array $enclosures) : void {        
-        return;
-    } */
     
     public function configureKeyboardKeys(array $keyboardKeys) : void {
         foreach($this->GetPanels() as $panel) {
@@ -149,69 +106,7 @@ class BethesdaRedeemer extends CPOrgan {
                 $panel->GUIElement($manual);
             }
         }
-        // echo $panel;
         return;
-        /* // Reorder source data
-        $index=[];
-        foreach($keyboardKeys as $keyboardKey) {
-            $switch=$this->hwdata->switch($keyboardKey["SwitchID"]);
-            if (isset($switch["Disp_ImageSetInstanceID"])
-                    && isset($keyboardKey["NormalMIDINoteNumber"]))
-                $index[$keyboardKey["KeyboardID"]][$keyboardKey["NormalMIDINoteNumber"]]
-                        =$keyboardKey["SwitchID"];
-        }
-
-        $manuals=$this->getManuals();
-        foreach($manuals as $manid=>$manual) {
-            if (isset($index[$manid])) {
-                $midikeys=$index[$manid];
-                asort($midikeys);
-                $first=TRUE;
-                foreach($midikeys as $midikey=>$switchid) {
-                    $key=$manual->Key();
-                    $switch=$this->hwdata->switch($switchid);
-                    $imagedata=$this->getImageData(["SwitchID"=>$switchid]);
-                    $disengaged=$imagedata["Images"][$switch["Disp_ImageSetIndexEngaged"]];
-                    $engaged=$imagedata["Images"][$switch["Disp_ImageSetIndexDisengaged"]];
-                    if ($first) {
-                        $manual->PositionX=$imagedata["PositionX"];
-                        $manual->PositionY=$imagedata["PositionY"];
-                        $manual->FirstAccessibleKeyMIDINoteNumber=$midikey;
-                        $first=FALSE;
-                    }
-                    $manual->KeyWidth($imagedata["PositionX"]);
-                    $manual->KeyOffsetY($imagedata["PositionY"]);
-                    $manual->set("Display${key}", $midikey);
-                    $manual->set("${key}ImageOn", $engaged);
-                    $manual->set("${key}ImageOff", $disengaged);
-                    if ($manual->DisplayKeys>3) {break;}
-                }
-                $manual->NumberOfAccessibleKeys=$manual->DisplayKeys;
-                //echo $manual;
-                //exit();
-            }
-        } */
-    }
-
-    public function xxconfigureKeyboardKey(\GOClasses\Manual $manual, int $switchid, int $midikey) : void {
-        $manual->DisplayKeys++;
-                $element=
-        $key="Key" . $manual->int2str($manual->DisplayKeys);
-        if ($manual->FirstAccessibleKeyMIDINoteNumber>$midikey)
-            $manual->FirstAccessibleKeyMIDINoteNumber=$midikey;
-        $switchdata=$this->hwdata->switch($switchid);
-        $imagedata=$this->getImageData(["SwitchID"=>$switchid]);
-        $engaged=$imagedata["Images"][$switchdata["Disp_ImageSetIndexEngaged"]];
-        $disengaged=$imagedata["Images"][$switchdata["Disp_ImageSetIndexDisengaged"]];
-        if (!isset($manual->PositionX)) $manual->PositionX=$imagedata["PositionX"];
-        if (!isset($manual->PositionY)) $manual->PositionY=$imagedata["PositionY"];
-        //print_r($switchdata);
-        //print_r($imagedata);/
-        $manual->KeyWidth($imagedata["ImageWidthPixels"]);
-        $manual->set("Display${
-                $element=key}", $midikey);
-        $manual->set("${key}ImageOn", $engaged);
-        $manual->set("${key}ImageOff", $disengaged);
     }
 
     public function import() : void {
@@ -236,112 +131,41 @@ class BethesdaRedeemer extends CPOrgan {
         } 
         exit(); //*/
         parent::import();
-        // $this->createCombinations();
-        // $this->createPistons();
+        
         foreach($this->getStops() as $stopid=>$stop) {
-            // echo $stopid, " ", $stop->Name, "\n";
+            //echo $stopid, ": ", $stop->Name, "\n";
             switch ($stopid) {
-                case 2220: // Swl: Larigot 1 1/3
-                    $stop->Rank001PipeCount=85-32;
+                case 2014: // Ped: Chimes
+                    $stop->Rank001FirstPipeNumber=1;
                     break;
+
+                case 2111: // Seventeenth 1 3/5
+                    unset($stop->Rank001FirstAccessibleKeyNumber);
+                    unset($stop->Rank001PipeCount);
+                    break;
+
+                case 2103: // Grt: Violes Celestes II
+                    $stop->Rank001FirstPipeNumber=8;
+                    break;
+                
+                case 2220: // Swl: Larigot 1 1/3
+                    unset($stop->Rank001PipeCount);
+                    break;
+            }
+        }
+        
+        foreach ($this->getRanks() as $rankid=>$rank) {
+            switch ($rankid) {
+                case 17: // Grt: Seventeenth 1 3/5
+                    $rankxv=$this->getRank(15);
+                    for ($m=36; $m<93; $m++) {
+                        $rank->Pipe($m, $rankxv->Pipe($m+4));
+                    }
+                    //echo $rank; exit();
             }
         }
     }
     
-    /* public function createRank(array $hwdata, bool $keynoise = FALSE): ?\GOClasses\Rank {
-        if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient")
-            return NULL;
-        else
-            return parent::createRank($hwdata, $keynoise);
-    } */
-  
-    /* private function createCombinations() : void {
-        foreach ($this->combinations as $combinationdata) {
-            foreach($combinationdata["SwitchIDs"] as $panelid=>$switchid) {
-                $panel=$this->getPanel($panelid);
-                $pe=$panel->Element();
-                $pe->Type=sprintf("Setter%03dDivisional%03d",$combinationdata["ManualID"],$combinationdata["SetterID"]);
-                $this->configurePanelSwitchImage($pe, ["SwitchID"=>$switchid]);
-            }
-        }
-    } */
-
-    /* private function createPistons() : void {
-        foreach ($this->pistons as $pistondata) {
-            $switch=$this->getSwitch($pistondata["SwitchID"]);
-            $piston=new \GOClasses\ReversiblePiston($pistondata["Name"]);
-            $piston->Switch($this->getSwitch($pistondata["SwitchID"]));
-            foreach($pistondata["SwitchIDs"] as $panelid=>$switchid) {
-                $panel=$this->getPanel($panelid);
-                $pe=$panel->GUIElement($piston);
-                $this->configurePanelSwitchImage($pe, ["SwitchID"=>$switchid]);
-            }
-        }
-    } */
-
-    /* public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
-        $switchid=$data["SwitchID"];
-        $slinkid=$this->hwdata->switchLink($switchid)["D"][0]["SourceSwitchID"];
-        foreach($this->hwdata->switchLink($slinkid)["S"] as $link) {
-            $switchdata=$this->hwdata->switch($destid=$link["DestSwitchID"]);
-            if (isset($switchdata["Disp_ImageSetInstanceID"])) {
-                $instancedata=$this->hwdata->imageSetInstance($instanceid=$switchdata["Disp_ImageSetInstanceID"]);
-                $panel=$this->getPanel($instancedata["DisplayPageID"]);
-                $panelelement=$panel->GUIElement($switch);
-                $this->configureImage($panelelement, ["SwitchID"=>$destid]);
-                foreach($this->hwdata->textInstance($instanceid) as $textInstance) {
-                    $panelelement->DispLabelText=str_replace("\n", " ", $textInstance["Text"]);
-                    switch ($textInstance["TextStyleID"]) {
-                        
-                        case 4:
-                            $panelelement->DispLabelColour="Dark Red";
-                            break;
-                            
-                        case 5:
-                            $panelelement->DispLabelColour="Dark Blue";
-                            break;
-                        
-                        case 6:
-                            $panelelement->DispLabelColour="Dark Green";
-                            break;
-                        
-                        default:
-                            $panelelement->DispLabelColour="Black";
-                            
-                    }
-                    break; // Only the one?
-                }
-                if (!isset($panelelement->PositionX)) $panelelement->PositionX=0;
-                $panelelement->DispLabelFontSize=12;
-            }
-        }
-    } */
-
-    /* public function configureKeyImages(array $keyImageSets, array $keyboards) : void {
-        foreach($keyboards as $keyboardid=>$keyboard) {
-            if (isset($keyboard["KeyGen_DisplayPageID"])) {
-                $panel=$this->getPanel($keyboard["KeyGen_DisplayPageID"]);
-                if ($panel!==NULL) {
-                    foreach($this->hwdata->keyActions() as $keyaction) {
-                        if ($keyaction["SourceKeyboardID"]==$keyboardid) {
-                            $manual=$this->getManual($keyaction["DestKeyboardID"]);
-                            $panelelement=$panel->GUIElement($manual);
-                            $keyImageset=$keyImageSets[$keyboard["KeyGen_KeyImageSetID"]];
-                            $keyImageset["ManualID"]=$keyaction["DestKeyboardID"];
-                            $keyImageset["PositionX"]=$keyboard["KeyGen_DispKeyboardLeftXPos"];
-                            $keyImageset["PositionY"]=$keyboard["KeyGen_DispKeyboardTopYPos"];
-                            $this->configureKeyImage($panelelement, $keyImageset);
-                            $panelelement->ImageOn_FirstC=$panelelement->ImageOn_C;
-                            $panelelement->ImageOff_FirstC=$panelelement->ImageOff_C;
-                            $manual->Displayed="N";
-                            unset($manual->DisplayKeys);
-                        }
-                    }
-                }
-            }
-        }
-    } */
-
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         $panel=$this->getPanel(0);
         $panel->GUIElement($enclosure);
@@ -357,66 +181,6 @@ class BethesdaRedeemer extends CPOrgan {
         else
             throw new \Exception ("File $filename does not exist!");
     }
-
-    /* public function processNoise(array $hwdata, bool $isattack): ?\GOClasses\Pipe {
-        $hwdata["SampleFilename"]=$this->sampleFilename($hwdata);
-        $rankdata=$this->patchRanks[$rankid=$hwdata["RankID"]];
-        
-        if ($rankdata["Noise"]=="Ambient") {
-            $stop=$this->getStop($rankdata["StopIDs"][0]);
-            if ($stop!==NULL) {
-                $ambience=$stop->Ambience();
-                if ($isattack) {
-                    $this->configureAttack($hwdata, $ambience);
-                    $ambience->LoadRelease="Y";
-                }
-                else {
-                    $this->configureRelease($hwdata, $ambience);
-                    $ambience->LoadRelease="N";
-                }
-                return $ambience;
-            }
-        }
-        else {
-            $midikey=$hwdata["Pitch_NormalMIDINoteNumber"];
-            foreach($this->hwdata->rankStop($rankid) as $stopid=>$rsdata) {
-                if ($rsdata["MIDINoteNumIncrementFromDivisionToRank"]==$midikey) {
-                    $stop=NULL;
-                    $stopdata=$this->hwdata->stop($stopid, FALSE);
-                    if ($stopdata) {
-                        $stop=$this->getSwitchNoise(($isattack ? 1 : -1) * $stopdata["ControllingSwitchID"]);
-                        if ($stop) {
-                            $noise=$stop->Noise();
-                            if ($noise->AttackCount<1) {
-                                $this->configureAttack($hwdata, $noise);
-                            }
-                            return $noise;
-                        }
-                        return NULL;
-                    }
-                }
-            }
-        }
-        return NULL;
-    } */
-    
-    
-    /* public function processSample(array $hwdata, $isattack): ?\GOClasses\Pipe {
-        $pipe=parent::processSample($hwdata, $isattack);
-        $rankdata=$this->hwdata->rank($hwdata["RankID"], FALSE);
-        if ($isattack 
-                && $pipe 
-                && !isset($rankdata["Noise"])
-                && !isset($pipe->MIDIKeyOverride) 
-                && $pipe->AttackCount==0) {
-            if ($hwdata["RankID"]==21) {$pipe->HarmonicNumber=36;}
-            $pipe->MIDIKeyOverride=$this->sampleMidiKey(["SampleFilename"=>$hwdata["SampleFilename"]])
-                    + intval(12*log($pipe->HarmonicNumber,2)) - 36;
-            $this->MIDIPraat($pipe);
-            //echo $pipe->MIDIKeyOverride, "\t", $hwdata["SampleFilename"], "\n";
-        }
-        return $pipe;
-    } */
     
     /**
      * Run the import
@@ -441,24 +205,21 @@ class BethesdaRedeemerDemo extends BethesdaRedeemer {
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
     const TARGET=self::ROOT . "Bethesda Redeemer Di Gennaro-Hart Organ (Demo).1.0.organ";
     
-    // protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
-
     static function Demo() {
         self::BethesdaRedeemer(new BethesdaRedeemerDemo(self::SOURCE), self::TARGET);
     }
 
 }
 
-/* class BethesdaRedeemerFull extends BethesdaRedeemer {
-    const ODF="St. Matthew BethesdaRedeemer.Organ_Hauptwerk_xml";
+class BethesdaRedeemerFull extends BethesdaRedeemer {
+    const ODF="Bethesda Redeemer Di Gennaro-Hart Organ.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "BethesdaRedeemer full.1.4.organ";
+    const TARGET=self::ROOT . "Bethesda Redeemer Di Gennaro-Hart Organ.1.0.organ";
 
     static function Full () {
         self::BethesdaRedeemer(new BethesdaRedeemerFull(self::SOURCE), self::TARGET);
     }
-    
-} */
+}
 
 function ErrorHandler($errno, $errstr, $errfile, $errline) {
     throw new \Exception("Error $errstr");
@@ -466,5 +227,5 @@ function ErrorHandler($errno, $errstr, $errfile, $errline) {
 }
 set_error_handler("Organs\CP\ErrorHandler");
 
-// BethesdaRedeemerFull::Full();
-BethesdaRedeemerDemo::Demo();
+BethesdaRedeemerFull::Full();
+//BethesdaRedeemerDemo::Demo();

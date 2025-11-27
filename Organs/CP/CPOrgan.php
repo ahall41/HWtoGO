@@ -120,7 +120,7 @@ abstract class CPOrgan extends \Import\Organ {
             return NULL;
         }
         
-        $rankid=$hwdata["RankID"];
+        $rankid=intval($hwdata["RankID"]);
         if (!isset($hwdata["StopIDs"])) {
             $hwdata["StopIDs"]=[];
             foreach ($this->hwdata->rankStop($rankid) as $rankstop) {
