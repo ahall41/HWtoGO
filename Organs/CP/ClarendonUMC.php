@@ -142,7 +142,7 @@ class ClarendonUMC extends CPOrgan {
         parent::import();
         
         foreach($this->getStops() as $stopid=>$stop) {
-            echo $stopid, ": ", $stop->Name, "\n";
+            // echo $stopid, ": ", $stop->Name, "\n";
             switch ($stopid) {
                 case 2110: // Grt: Blockfloete 2
                     $stop->Rank001FirstPipeNumber=1;
