@@ -6,7 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Tuba, Tremulants 
+ * @todo: Tremulants 
  * 
  */
 
@@ -42,12 +42,12 @@ class BethesdaRedeemer extends CPOrgan {
         4=>[ // Simple
             0=>["SetID"=>5], 
            ],
-        5=>[ // Pistons
+        5=>"DELETE", /* [ // Pistons
             0=>["SetID"=>256]
-           ],
-        6=>[ // Blower
+           ], */
+        6=>"DELETE", /* [ // Blower
             0=>["SetID"=>6]
-           ],
+           ], */
         7=>[ 
             0=>["Name"=>"Landscape", "Group"=>"Info", "SetID"=>257], 
             1=>["Name"=>"Portrait", "Group"=>"Info", "SetID"=>258], 
@@ -65,8 +65,12 @@ class BethesdaRedeemer extends CPOrgan {
     ];
     
     protected $patchStops=[
-        2218=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Swl Tremulant
-        2121=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Grt Tremulant
+        2122=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1, "ControllingSwitchID"=>10245], // Zymbelstern
+        2121=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Grt Tremulant
+        2221=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: Organ Current
+        2222=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North Blower
+        2223=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North South
+        2218=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Swl Tremulant
     ];
     
     // Inspection of Ranks object
@@ -95,6 +99,17 @@ class BethesdaRedeemer extends CPOrgan {
         }
     }
     
+    public function createCoupler(array $hwdata): ?\GOClasses\Sw1tch {
+        switch ($hwdata["ConditionSwitchID"]) {
+            case 11265: // Coupler: Great to Pedal 8 D
+            case 11268: // Coupler: Swell to Pedal 8 D
+            case 11271: // Coupler: Great to Pedal 4 D
+            case 11275: // Coupler: Swell to Pedal 4 D
+                return NULL;
+        }
+        return parent::createCoupler($hwdata);
+    }
+    
     public function configureKeyboardKeys(array $keyboardKeys) : void {
         foreach($this->GetPanels() as $panel) {
             $panel->HasPedals="N";
@@ -108,37 +123,21 @@ class BethesdaRedeemer extends CPOrgan {
         }
         return;
     }
-
+    
     public function import() : void {
-        /* Uncomment to determine image instances on each page ...
-        $instances=$this->hwdata->imageSetInstances();
-        foreach ($instances as $instance) {
-            if (!isset($instance["ImageSetInstanceID"])) continue;
-            switch ($instance["DisplayPageID"]) {
-                case 2:
-                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
-                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
-                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
-                         $instance["Name"], ": ";
-                    foreach ($this->hwdata->switches() as $switch) {
-                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
-                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
-                            echo $switch["SwitchID"], " ",
-                                 $switch["Name"], ", ";
-                    }
-                    echo "\n";
-            }
-        } 
-        exit(); //*/
         parent::import();
         
         foreach($this->getStops() as $stopid=>$stop) {
-            // echo $stopid, ": ", $stop->Name, "\n";
+            //printf("%d %s\n", $stopid, $stop->Name);
             switch ($stopid) {
                 case 2014: // Ped: Chimes
                     $stop->Rank001FirstPipeNumber=1;
                     break;
-
+                
+                case 2104: // Grt: Principal 8
+                    $stop->Rank001FirstPipeNumber=13;
+                    break;
+                
                 case 2111: // Seventeenth 1 3/5
                     unset($stop->Rank001FirstAccessibleKeyNumber);
                     unset($stop->Rank001PipeCount);
@@ -150,6 +149,13 @@ class BethesdaRedeemer extends CPOrgan {
                 
                 case 2220: // Swl: Larigot 1 1/3
                     unset($stop->Rank001PipeCount);
+                    break;
+                
+                case 2122: // Noises: Zymbelstern
+                    $stop->Ambience()->Attack="OrganInstallationPackages/002901/Noises/Zymbelstern/060-c.wav";
+                    $stop->Ambience()->Gain=32;
+                    $stop->WindchestGroup($this->getWindchestGroup(1));
+                    // echo $stop;
                     break;
             }
         }
@@ -164,6 +170,41 @@ class BethesdaRedeemer extends CPOrgan {
                     //echo $rank; exit();
             }
         }
+        
+        foreach ($this->getSwitches() as $switchid=>$switch) {
+            // printf("%d %s\n", $switchid, $switch->Name);
+            switch($switchid) {
+                case 10298: // Tuba Pedal
+                case 10299: // Tuba Great
+                case 10300: // Tuba Swell
+                    $switch->DefaultToEngaged="Y";
+                    $switch->GCState=1;
+                    break;
+            }
+            $switch->Name=str_replace(" ND", "", $switch->Name);
+            $switch->Name=str_replace("Coupler Coupler", "Coupler", $switch->Name);
+            $switch->Name=str_replace("Stop Stop", "Stop", $switch->Name);
+            $switch->Name=str_replace("Tremulant Tremulant", "Tremulant", $switch->Name);
+        }
+        
+        foreach ($this->getCouplers() as $couplerid=>$coupler) {
+            // printf("%d %s\n", $couplerid, $coupler->Name);
+            switch ($couplerid) {
+                case 10298: // Tuba Pedal
+                case 10299: // Tuba Great
+                case 10300: // Tuba Swell
+                case 10265: // Great to Pedal 8 ND
+                case 10268: // Swell to Pedal 8 ND
+                case 10271: // Great to Pedal 4 ND
+                case 10274: // Swell to Pedal 4 ND
+                    unset($coupler->FirstMIDINoteNumber);
+                    unset($coupler->NumberOfKeys);
+                    break;
+                
+                
+            }
+        }
+
     }
     
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {

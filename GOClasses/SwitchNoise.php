@@ -11,7 +11,6 @@ require_once(__DIR__ . "/Stop.php");
 
 /**
  * Representation of a GrandOrgue Stop Noise
- * @todo: Rename as SwitchNoise!
  *
  * @author andrew
  */

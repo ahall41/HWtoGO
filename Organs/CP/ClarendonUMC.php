@@ -6,7 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Crescendo + Tremulants 
+ * @todo: Crescendo, Tremulants, Swl/Pos Unison Off 
  * 
  */
 
