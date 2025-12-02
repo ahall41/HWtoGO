@@ -107,8 +107,10 @@ abstract Class Create extends Objects {
             if ($stop instanceof \GOClasses\AmbientNoise)
             $stop->WindchestGroup($wcg);
         }
-        else
+        else {
             $stop=$this->newStop($stopdata["StopID"], $name);
+        }
+        
         $this->getManual($stopdata["DivisionID"])->Stop($stop);
         if (isset($stopdata["SwitchID"])
                 && !empty($stopdata["SwitchID"])) {

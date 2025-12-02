@@ -6,7 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Crescendo, Tremulants, Swl/Pos Unison Off 
+ * @todo: Crescendo, Unison Off, Blower
  * 
  */
 
@@ -46,13 +46,13 @@ class ClarendonUMC extends CPOrgan {
             0=>["Name"=>"Landscape", "Group"=>"Simple", "SetID"=>1006], 
             1=>["Name"=>"Portrait", "Group"=>"Simple", "SetID"=>1007], 
            ],
-        6=>"DELETE",
-        9=>[ // Pistons
+        6=>"DELETE", // Orig Center Jamb
+        9=>"DELETE", /* // Pistons
             0=>["SetID"=>1013]
-           ],
-        10=>[ // Blower
+           ], */
+        10=>"DELETE", /*[ // Blower
             0=>["SetID"=>1014]
-           ],
+           ], */
         15=>[ 
             0=>["Name"=>"Landscape", "Group"=>"Info", "SetID"=>1019], 
             1=>["Name"=>"Portrait", "Group"=>"Info", "SetID"=>1020], 
@@ -65,9 +65,10 @@ class ClarendonUMC extends CPOrgan {
     
     protected $patchTremulants=[
         1710=>"DELETE",
-        1720=>["Type"=>"Synth", "GroupIDs"=>[3], "Period"=>250, "AmpModDepth"=>18],
-        1730=>["Type"=>"Synth", "GroupIDs"=>[4], "Period"=>220, "AmpModDepth"=>15],
-        1740=>"DELETE"
+        1720=>"DELETE",
+        1730=>"DELETE",
+        1740=>"DELETE",
+        2299=>["TremulantID"=>2299, "ControllingSwitchID"=>10151, "Type"=>"Switched", "Name"=>"Pos Tremulant", "DivisionID"=>3]
     ];
     
     protected $patchStops=[
@@ -106,44 +107,12 @@ class ClarendonUMC extends CPOrgan {
         return;
     }
 
-    public function configurePanelSwitchImages(?\GOClasses\Sw1tch $switch, array $data): void {
-        $condSwitchID=isset($data["ConditionSwitchID"]) ? $data["ConditionSwitchID"] : 0;
-        switch($condSwitchID) {
-            case 10298: // Antiphonal 
-            case 10301:
-            case 10304:
-            case 10307:
-                return;
-        }
-        parent::configurePanelSwitchImages($switch, $data);
-    }
-
     public function import() : void {
-        /* Uncomment to determine image instances on each page ...
-        $instances=$this->hwdata->imageSetInstances();
-        foreach ($instances as $instance) {
-            if (!isset($instance["ImageSetInstanceID"])) continue;
-            switch ($instance["DisplayPageID"]) {
-                case 2:
-                    echo ($instanceID=$instance["ImageSetInstanceID"]), "\t",
-                         isset($instance["AlternateScreenLayout1_ImageSetID"]) ? 1 : "", "\t",
-                         isset($instance["AlternateScreenLayout2_ImageSetID"]) ? 2 : "", "\t",
-                         $instance["Name"], ": ";
-                    foreach ($this->hwdata->switches() as $switch) {
-                        if (isset($switch["Disp_ImageSetInstanceID"])  && 
-                               $switch["Disp_ImageSetInstanceID"]==$instanceID)
-                            echo $switch["SwitchID"], " ",
-                                 $switch["Name"], ", ";
-                    }
-                    echo "\n";
-            }
-        } 
-        exit(); //*/
         parent::import();
         
         foreach($this->getStops() as $stopid=>$stop) {
             // echo $stopid, ": ", $stop->Name, "\n";
-            switch ($stopid) {
+            switch (abs($stopid)) {
                 case 2110: // Grt: Blockfloete 2
                     $stop->Rank001FirstPipeNumber=1;
                     break;
@@ -165,6 +134,73 @@ class ClarendonUMC extends CPOrgan {
                     break;
             }
         }
+        
+        foreach ($this->getRanks() as $rankid=>$rank) {
+            switch ($rankid) {
+                case 41: // Pos: Principal 4
+                case 42: // Pos: Principal 4 trem
+                    // Move pipes up by 3 places
+                    for ($pipeid=96; $pipeid>38; $pipeid--) {
+                        $rank->Pipe($pipeid+3, $rank->Pipe($pipeid));
+                        $rank->Pipe($pipeid+3)->PitchTuning-=900;
+                    }
+                    
+                    // Now fix the bottom 3
+                    switch ($rankid) {
+                        case 41: 
+                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/036-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/036-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/036-c.wav";
+                            $rank->Pipe(36)->PitchTuning=0;
+
+                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/037-c#.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/037-c#.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/037-c#.wav";
+                            $rank->Pipe(37)->PitchTuning=0;
+
+                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/038-d.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/038-d.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/038-d.wav";
+                            $rank->Pipe(38)->PitchTuning=0;
+                            break;
+
+                        case 42:
+                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
+                            $rank->Pipe(36)->PitchTuning=0;
+
+                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
+                            $rank->Pipe(37)->PitchTuning=100;
+
+                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
+                            $rank->Pipe(38)->PitchTuning=200;
+                            break;
+                    }
+                    
+                    /* foreach ([36, 38, 39, 96] as $pipeid) {
+                        printf("Pipe %d\n%s\n", $pipeid, $rank->Pipe($pipeid));
+                    } */
+            }
+        }
+        
+        foreach ($this->getSwitches() as $switchid=>$switch) {
+            // printf("%d %s\n", $switchid, $switch->Name);
+            switch($switchid) {
+                case 10244: // Ant: Antiphonal Trumpet 8
+                    $switch->DefaultToEngaged="Y";
+                    $switch->GCState=1;
+                    break;
+            }
+            $switch->Name=str_replace("Coupler Coupler", "Coupler", $switch->Name);
+            $switch->Name=str_replace("Stop Stop", "Stop", $switch->Name);
+            $switch->Name=str_replace("Tremulant Tremulant", "Tremulant", $switch->Name);
+        }
+
     }
     
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {

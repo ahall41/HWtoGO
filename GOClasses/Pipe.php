@@ -48,6 +48,10 @@ class Pipe extends GOBase {
                 parent::set($attack,$value);
                 break;
             
+            case "Attack000":
+                parent::set("",$value);
+                break;
+
             case "Release":
                 // HW release is same as attack ?
                 $matched=FALSE;

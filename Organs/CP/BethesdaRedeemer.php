@@ -6,7 +6,7 @@
  * Released under the Creative Commons Non-Commercial 4.0 licence
  * (https://creativecommons.org/licenses/by-nc/4.0/)
  * 
- * @todo: Tremulants 
+ * @todo: Unison Off, Blower
  * 
  */
 
@@ -60,8 +60,8 @@ class BethesdaRedeemer extends CPOrgan {
     ];
     
     protected $patchTremulants=[
-        2218=>["TremulantID"=>2218, "ControllingSwitchID"=>2218, "Type"=>"Switched", "Name"=>"Swl Tremulant", "DivisionID"=>3],
-        2121=>["TremulantID"=>2121, "ControllingSwitchID"=>2121, "Type"=>"Switched", "Name"=>"Grt Tremulant", "DivisionID"=>2],
+        2218=>["TremulantID"=>2218, "ControllingSwitchID"=>10119, "Type"=>"Switched", "Name"=>"Swl Tremulant", "DivisionID"=>3],
+        2121=>["TremulantID"=>2121, "ControllingSwitchID"=>10242, "Type"=>"Switched", "Name"=>"Grt Tremulant", "DivisionID"=>2],
     ];
     
     protected $patchStops=[
@@ -129,11 +129,13 @@ class BethesdaRedeemer extends CPOrgan {
         
         foreach($this->getStops() as $stopid=>$stop) {
             //printf("%d %s\n", $stopid, $stop->Name);
-            switch ($stopid) {
+            switch (abs($stopid)) {
                 case 2014: // Ped: Chimes
                     $stop->Rank001FirstPipeNumber=1;
                     break;
                 
+                case 2011: // Ped: Trumpet 8
+                case 2217: // Swl: Trumpet 8
                 case 2104: // Grt: Principal 8
                     $stop->Rank001FirstPipeNumber=13;
                     break;
@@ -146,17 +148,22 @@ class BethesdaRedeemer extends CPOrgan {
                 case 2103: // Grt: Violes Celestes II
                     $stop->Rank001FirstPipeNumber=8;
                     break;
-                
-                case 2220: // Swl: Larigot 1 1/3
-                    unset($stop->Rank001PipeCount);
-                    break;
-                
+
                 case 2122: // Noises: Zymbelstern
                     $stop->Ambience()->Attack="OrganInstallationPackages/002901/Noises/Zymbelstern/060-c.wav";
                     $stop->Ambience()->Gain=32;
                     $stop->WindchestGroup($this->getWindchestGroup(1));
                     // echo $stop;
                     break;
+                
+                case 2216: // Swl: Clarion 4
+                    $stop->Rank001FirstPipeNumber=25;
+                    break;
+
+                case 2220: // Swl: Larigot 1 1/3
+                    unset($stop->Rank001PipeCount);
+                    break;
+                
             }
         }
         

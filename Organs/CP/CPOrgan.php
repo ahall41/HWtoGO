@@ -21,35 +21,14 @@ abstract class CPOrgan extends \Import\Organ {
     
     // protected array $positions=[1=>""];
 
-    /*
-     * Create Windchest Groups. 1 per position/division + 1 for all noise effects
-     */
-    /* public function createWindchestGroup(array $divisiondata): ?\GOClasses\WindchestGroup {
-        if (($divid=$divisiondata["DivisionID"])<7) {
-            $divname=$divisiondata["Name"];
-            foreach($this->positions as $posid=>$posname) {
-                $divisiondata["Name"]="$divname $posname";
-                $divisiondata["GroupID"]=$posid + ($divid*100);
-                parent::createWindchestGroup($divisiondata);
-            }
-        }
-        else {
-            $divisiondata["GroupID"]=$divid*100;
-            parent::createWindchestGroup($divisiondata);
-        }
-        return NULL;
-    } */
-
     public function createPanel($hwdata): ?\GOClasses\Panel {
         $pageid=$hwdata["PageID"];
-        // error_log($hwdata["Name"]);
         $hwdata["AlternateConsoleScreenLayout0_Include"]="Y";
         foreach([0,1,2,3] as $layout) {
             if (isset($hwdata["AlternateConsoleScreenLayout{$layout}_Include"])
                     && $hwdata["AlternateConsoleScreenLayout{$layout}_Include"]=="Y") {
                 $paneldata=array_merge($hwdata, $hwdata[$layout]);
                 $paneldata["PanelID"]=(10*$pageid)+$layout;
-                // error_log(print_r($hwdata,1));
                 $panel=parent::createPanel($paneldata);
                 $this->configurePanelImage($panel, $paneldata, $layout);
             }
@@ -75,16 +54,12 @@ abstract class CPOrgan extends \Import\Organ {
         if (!$switch) {return;}
         $switchid=intval($data["SwitchID"]);
         if (!$switchid) {return;}
-        
         foreach ($this->hwdata->switchLink($switchid)["D"] as $dlink) {
             $slinkid=$dlink["SourceSwitchID"];
             foreach($this->hwdata->switchLink($slinkid)["S"] as $slink) {
                 $switchdata=$this->hwdata->switch($destid=$slink["DestSwitchID"]);
                 if (isset($switchdata["Disp_ImageSetInstanceID"]) && $switchdata["Disp_ImageSetInstanceID"]) {
-                    // error_log(print_r($switchdata,1));
                     $instance=$this->hwdata->imageSetInstance($switchdata["Disp_ImageSetInstanceID"]);
-                    // $set=$this->get()
-                    // error_log(print_r($instance, 1));
                     foreach($layouts as $layout=>$prefix) {
                         if (isset($instance["${prefix}ImageSetID"]) &&
                                 !empty($instance["${prefix}ImageSetID"])) {
@@ -98,11 +73,9 @@ abstract class CPOrgan extends \Import\Organ {
                                         $layout);
                                 if ($panelelement->MouseRectLeft) {
                                     $panelelement->MouseRectWidth-=$panelelement->MouseRectLeft;
-                                    // error_log($panelelement . "\n");
                                 }
                                 if ($panelelement->MouseRectTop) {
-                                    $panelelement->MouseRectHeight-=$panelelement->MouseRectTop;
-                                    // error_log($panelelement . "\n");
+                                    $panelelement->MouseRectHeight-=$panelelement->MouseRectTop; 
                                 }
                             }
                         }
@@ -112,16 +85,36 @@ abstract class CPOrgan extends \Import\Organ {
         }
     }
 
-    /*
-     * May be OK for other providers
-     */
+    public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
+        $switch=parent::createStop($hwdata);
+        if ($switch) {
+            $stopranks=$this->hwdata->stopRank($hwdata["StopID"]);
+            foreach($stopranks as $sr) {
+                if (!empty($sr["SwitchIDToSwitchToAlternateRank"])) {
+                    $switchid=$sr["SwitchIDToSwitchToAlternateRank"];
+                    if ($this->getSwitch(-$switchid, FALSE)) {
+                        $stopid=$hwdata["StopID"];
+                        $hwdata["StopID"]=-$stopid;
+                        $hwdata["Name"] .= " (trem)";
+                        parent::createStop($hwdata);
+                        $this->getStop(+$stopid)->Switch($this->getSwitch(-$switchid));
+                        $this->getStop(-$stopid)->Switch($this->getSwitch(+$switchid));
+                        break;
+                    }
+                }
+            }
+        }
+        return $switch;
+    }
+    
     public function createRank(array $hwdata, bool $keynoise=FALSE): ?\GOClasses\Rank {
         if (isset($hwdata["Noise"]) && $hwdata["Noise"]=="Ambient") {
             return NULL;
         }
-        
         $rankid=intval($hwdata["RankID"]);
-        if (!isset($hwdata["StopIDs"])) {
+        $stopids=isset($hwdata["StopIDs"]);
+
+        if (!$stopids) {
             $hwdata["StopIDs"]=[];
             foreach ($this->hwdata->rankStop($rankid) as $rankstop) {
                 $hwdata["StopIDs"][]=$stopid=$rankstop["StopID"];
@@ -132,19 +125,26 @@ abstract class CPOrgan extends \Import\Organ {
         
         if (isset($hwdata["GroupID"])) {
             $rank=parent::createRank($hwdata);
-            return $rank;
+            if ($rank) {return $rank;}
         }
-        return NULL;
-    }
+        
     
-    /*
-     * For AVO, stops in the range 1000-1999 are for noises
-     * As we create our own we filter them out
-     */
-    public function createStop(array $hwdata): ?\GOClasses\Sw1tch {
-        $stopid=$hwdata["StopID"];
-        // error_log($stopid . " - " . $hwdata["Name"]);
-        return parent::createStop($hwdata);
+        if (!$stopids) {
+            $hwdata["StopIDs"]=[];
+            unset($hwdata["GroupID"]);
+            foreach ($this->hwdata->altRankStop($rankid) as $rankstop) {
+                $hwdata["StopIDs"][]=-($stopid=$rankstop["StopID"]);
+                $division=$this->hwdata->stop($stopid)["DivisionID"];
+                $hwdata["GroupID"]=$division;
+            }
+            if (isset($hwdata["GroupID"])) {
+                $rank=parent::createRank($hwdata);
+                if ($rank) {return $rank;}
+            }
+        }
+        
+        return NULL;
+        
     }
     
     /*
