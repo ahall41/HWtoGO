@@ -109,6 +109,13 @@ class ClarendonUMC extends CPOrgan {
 
     public function import() : void {
         parent::import();
+        $trem=$this->createTremulant(
+                ["TremulantID"=>1730, 
+                 "Name"=>"Tremolo: Swell", 
+                 "Type"=>"Synth",
+                 "ControllingSwitchID"=>10310,
+                 "GroupIDs"=>[4]]);
+        echo $this->getTremulant(1730);
         
         foreach($this->getStops() as $stopid=>$stop) {
             // echo $stopid, ": ", $stop->Name, "\n";
