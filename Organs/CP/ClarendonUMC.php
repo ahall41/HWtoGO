@@ -115,7 +115,6 @@ class ClarendonUMC extends CPOrgan {
                  "Type"=>"Synth",
                  "ControllingSwitchID"=>10310,
                  "GroupIDs"=>[4]]);
-        echo $this->getTremulant(1730);
         
         foreach($this->getStops() as $stopid=>$stop) {
             // echo $stopid, ": ", $stop->Name, "\n";
