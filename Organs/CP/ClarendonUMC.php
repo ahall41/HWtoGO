@@ -66,17 +66,18 @@ class ClarendonUMC extends CPOrgan {
     protected $patchTremulants=[
         1710=>"DELETE",
         1720=>"DELETE",
-        1730=>"DELETE",
+        1730=>["Type"=>"Synth", "GroupIDs"=>[4]],
         1740=>"DELETE",
         2299=>["TremulantID"=>2299, "ControllingSwitchID"=>10151, "Type"=>"Switched", "Name"=>"Pos Tremulant", "DivisionID"=>3]
     ];
     
     protected $patchStops=[
-      2402=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>5]
+        2402=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>5] 
     ];
 
     // Inspection of Ranks object
     protected $patchRanks=[
+        100=>"DELETE" // Noises: Blower
     ];
     
     public function createManuals(array $keyboards): void {
@@ -109,16 +110,16 @@ class ClarendonUMC extends CPOrgan {
 
     public function import() : void {
         parent::import();
-        $trem=$this->createTremulant(
-                ["TremulantID"=>1730, 
-                 "Name"=>"Tremolo: Swell", 
-                 "Type"=>"Synth",
-                 "ControllingSwitchID"=>10310,
-                 "GroupIDs"=>[4]]);
         
         foreach($this->getStops() as $stopid=>$stop) {
             // echo $stopid, ": ", $stop->Name, "\n";
             switch (abs($stopid)) {
+                case 2402: // Noises: Blower
+                    $stop->Ambience()->Attack="OrganInstallationPackages/002903/blower/060-c.wav";
+                    $stop->Ambience()->Gain=13;
+                    $stop->WindchestGroup($this->getWindchestGroup(5));
+                    break;
+                
                 case 2110: // Grt: Blockfloete 2
                     $stop->Rank001FirstPipeNumber=1;
                     break;
@@ -143,6 +144,11 @@ class ClarendonUMC extends CPOrgan {
         
         foreach ($this->getRanks() as $rankid=>$rank) {
             switch ($rankid) {
+                case 5: // Grt: Hohlfloete 4
+                    $rank->Pipe(72, $rank->Pipe(70));
+                    $rank->Pipe(72)->PitchTuning+=200;
+                    break;
+                
                 case 41: // Pos: Principal 4
                 case 42: // Pos: Principal 4 trem
                     // Move pipes up by 3 places
@@ -187,10 +193,7 @@ class ClarendonUMC extends CPOrgan {
                             $rank->Pipe(38)->PitchTuning=200;
                             break;
                     }
-                    
-                    /* foreach ([36, 38, 39, 96] as $pipeid) {
-                        printf("Pipe %d\n%s\n", $pipeid, $rank->Pipe($pipeid));
-                    } */
+                    break;
             }
         }
         
@@ -198,6 +201,7 @@ class ClarendonUMC extends CPOrgan {
             // printf("%d %s\n", $switchid, $switch->Name);
             switch($switchid) {
                 case 10244: // Ant: Antiphonal Trumpet 8
+                case 10245: // Noises: Main Wind
                     $switch->DefaultToEngaged="Y";
                     $switch->GCState=1;
                     break;

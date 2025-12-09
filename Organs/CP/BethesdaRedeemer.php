@@ -65,12 +65,12 @@ class BethesdaRedeemer extends CPOrgan {
     ];
     
     protected $patchStops=[
-        2122=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1, "ControllingSwitchID"=>10245], // Zymbelstern
-        2121=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Grt Tremulant
-        2221=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: Organ Current
-        2222=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North Blower
-        2223=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North South
-        2218=>"DELETE", // ["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Swl Tremulant
+        2121=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1, "ControllingSwitchID"=>10242], // Grt Tremulant
+        2122=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Zymbelstern
+        2218=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1, "ControllingSwitchID"=>10119], // Swl Tremulant
+        2221=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: Organ Current
+        2222=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North Blower
+        2223=>["Ambient"=>TRUE, "DivisionID"=>1, "GroupID"=>1], // Noises: North South
     ];
     
     // Inspection of Ranks object
@@ -96,6 +96,13 @@ class BethesdaRedeemer extends CPOrgan {
             unset($manual->PositionX);
             unset($manual->PositionY);
             $manual->Displayed="N";
+        }
+    }
+    
+    public function createWindchestGroups(array $divisions): void {
+        foreach([1,2,3,9] as $id) {
+            $wcg=$this->createWindchestGroup($divisions[$id]);
+            if ($id==9) {$wcg->Name="TUBA";}
         }
     }
     
@@ -128,7 +135,6 @@ class BethesdaRedeemer extends CPOrgan {
         parent::import();
         
         foreach($this->getStops() as $stopid=>$stop) {
-            //printf("%d %s\n", $stopid, $stop->Name);
             switch (abs($stopid)) {
                 case 2014: // Ped: Chimes
                     $stop->Rank001FirstPipeNumber=1;
@@ -149,13 +155,21 @@ class BethesdaRedeemer extends CPOrgan {
                     $stop->Rank001FirstPipeNumber=8;
                     break;
 
+                case 2121: // Noises: Grt Tremulant
                 case 2122: // Noises: Zymbelstern
-                    $stop->Ambience()->Attack="OrganInstallationPackages/002901/Noises/Zymbelstern/060-c.wav";
+                case 2218: // Noises: Swl Tremulant
+                case 2221: // Noises: Organ Current
+                case 2222: // Noises: North Blower
+                case 2223: // Noises: North South
+                    static $folders=
+                        [2121=>"Grt_Trem", 2122=>"Zymbelstern", 2218=>"Swl_Trem",
+                         2221=>"Organ_current", 2222=>"North_Blower_Swell", 2223=>"South_Blower_Great"];
+                    $folder=$folders["$stopid"];
+                    $stop->Ambience()->Attack="OrganInstallationPackages/002901/Noises/$folder/060-c.wav";
                     $stop->Ambience()->Gain=32;
                     $stop->WindchestGroup($this->getWindchestGroup(1));
-                    // echo $stop;
                     break;
-                
+
                 case 2216: // Swl: Clarion 4
                     $stop->Rank001FirstPipeNumber=25;
                     break;
@@ -181,6 +195,9 @@ class BethesdaRedeemer extends CPOrgan {
         foreach ($this->getSwitches() as $switchid=>$switch) {
             // printf("%d %s\n", $switchid, $switch->Name);
             switch($switchid) {
+                case 10126: // Noises: Organ Current
+                case 10128: // Noises: North Blower
+                case 10130: // Noises: North South    
                 case 10298: // Tuba Pedal
                 case 10299: // Tuba Great
                 case 10300: // Tuba Swell
