@@ -135,6 +135,7 @@ class BethesdaRedeemer extends CPOrgan {
         parent::import();
         
         foreach($this->getStops() as $stopid=>$stop) {
+            // printf("%d %s\n", $stopid, $stop->Name);
             switch (abs($stopid)) {
                 case 2014: // Ped: Chimes
                     $stop->Rank001FirstPipeNumber=1;
@@ -147,6 +148,8 @@ class BethesdaRedeemer extends CPOrgan {
                     break;
                 
                 case 2111: // Seventeenth 1 3/5
+                case 2117: // Grt: Double Trumpet 16
+                case 2213: // Swl: Bassoon 16
                     unset($stop->Rank001FirstAccessibleKeyNumber);
                     unset($stop->Rank001PipeCount);
                     break;
@@ -184,11 +187,19 @@ class BethesdaRedeemer extends CPOrgan {
         foreach ($this->getRanks() as $rankid=>$rank) {
             switch ($rankid) {
                 case 17: // Grt: Seventeenth 1 3/5
-                    $rankxv=$this->getRank(15);
-                    for ($m=36; $m<93; $m++) {
-                        $rank->Pipe($m, $rankxv->Pipe($m+4));
+                case 18: // Grt: Seventeenth 1 3/5 Trem
+                    $rankxv=$this->getRank($rankid-2); // Grt Fifteenth ...
+                    for ($m=36; $m<=92; $m++) {
+                        $pipe=clone $rankxv->Pipe($m+4);
+                        $pipe->HarmonicNumber=40;
+                        $rank->Pipe($m, $pipe);
                     }
-                    //echo $rank; exit();
+                    for ($m=93; $m<=96; $m++) {
+                        $pipe=clone $rankxv->Pipe($m);
+                        $pipe->HarmonicNumber=40;
+                        $pipe->PitchTuning+=400;
+                        $rank->Pipe($m, $pipe);
+                    }
             }
         }
         
@@ -230,7 +241,7 @@ class BethesdaRedeemer extends CPOrgan {
         }
 
     }
-    
+
     public function configurePanelEnclosureImages(\GOClasses\Enclosure $enclosure, array $data): void {
         $panel=$this->getPanel(0);
         $panel->GUIElement($enclosure);
