@@ -124,15 +124,11 @@ class ClarendonUMC extends CPOrgan {
                     $stop->Rank001FirstPipeNumber=1;
                     break;
                 
-                case 2112: // Grt: Trumpet 8
-                    $stop->Rank001FirstPipeNumber=13;
-                    break;
-                
                 case 2114: // Grt: Chimes
                     unset($stop->Rank001PipeCount);
                     $stop->Rank001FirstAccessibleKeyNumber=22;
                     break;
-                    
+                
                 case 2305: // Swl: Viole Celeste 8 (TC)
                 case 2307: // Swl: Dolce Celeste 8 (TC)
                 case 2311: // Swl: Sesquialtera II (TC)
@@ -152,7 +148,7 @@ class ClarendonUMC extends CPOrgan {
                 case 41: // Pos: Principal 4
                 case 42: // Pos: Principal 4 trem
                     // Move pipes up by 3 places
-                    for ($pipeid=96; $pipeid>38; $pipeid--) {
+                    for ($pipeid=93; $pipeid>=36; $pipeid--) {
                         $rank->Pipe($pipeid+3, $rank->Pipe($pipeid));
                         $rank->Pipe($pipeid+3)->PitchTuning-=900;
                     }
@@ -160,37 +156,37 @@ class ClarendonUMC extends CPOrgan {
                     // Now fix the bottom 3
                     switch ($rankid) {
                         case 41: 
-                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/036-c.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/036-c.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/036-c.wav";
+                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/024-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/024-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/024-c.wav";
                             $rank->Pipe(36)->PitchTuning=0;
 
-                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/037-c#.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/037-c#.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/037-c#.wav";
+                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/025-c#.wav";
+                            $rank->Pipe(37)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/025-c#.wav";
+                            $rank->Pipe(37)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/025-c#.wav";
                             $rank->Pipe(37)->PitchTuning=0;
 
-                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/038-d.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/038-d.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/038-d.wav";
+                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/026-d.wav";
+                            $rank->Pipe(38)->Release001="OrganInstallationPackages/002904/pos_principal_2/shortrel/026-d.wav";
+                            $rank->Pipe(38)->Release002="OrganInstallationPackages/002904/pos_principal_2/longrel/026-d.wav";
                             $rank->Pipe(38)->PitchTuning=0;
                             break;
 
                         case 42:
-                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
+                            $rank->Pipe(36)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/024-c.wav";
+                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/024-c.wav";
+                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/024-c.wav";
                             $rank->Pipe(36)->PitchTuning=0;
 
-                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
+                            $rank->Pipe(37)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/024-c.wav";
+                            $rank->Pipe(37)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/024-c.wav";
+                            $rank->Pipe(37)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/024-c.wav";
                             $rank->Pipe(37)->PitchTuning=100;
 
-                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/036-c.wav";
-                            $rank->Pipe(36)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/036-c.wav";
-                            $rank->Pipe(36)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/036-c.wav";
-                            $rank->Pipe(38)->PitchTuning=200;
+                            $rank->Pipe(38)->Attack000="OrganInstallationPackages/002904/pos_principal_2/trem/027-d#.wav";
+                            $rank->Pipe(38)->Release001="OrganInstallationPackages/002904/pos_principal_2/trem/shortrel/027-d#.wav";
+                            $rank->Pipe(38)->Release002="OrganInstallationPackages/002904/pos_principal_2/trem/longrel/027-d#.wav";
+                            $rank->Pipe(38)->PitchTuning=-100;
                             break;
                     }
                     break;
