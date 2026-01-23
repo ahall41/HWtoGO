@@ -94,6 +94,15 @@ class Rank extends GOObject {
         unset($this->pipes[$midikey]);
     }
     
+    public function Substitute(int $fromKey, int $toKey) : ?Pipe {
+        $pipe=$this->Pipe($fromKey);
+        if ($pipe) {
+            $pipe=$this->Pipe($toKey, $pipe);
+            $pipe->PitchTuning+=100*($toKey-$fromKey);
+        }
+        return $pipe;
+    }
+    
     public function __toString() : string {
         $this->storePipes();
         $result=parent::__toString();

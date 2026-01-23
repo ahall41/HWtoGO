@@ -24,6 +24,8 @@ class ClarendonUMC extends CPOrgan {
     const COMMENTS=
               "Schlicker, 1967, Clarendon United Methodist Church, Arlington, MD\n"
             . "https://coralpipesorgan.wixsite.com/coral-pipes/clarendon-umc\n"
+            . "\n1.1 Fixed Grt Octave 084-C release (cloned from 082 A#)"
+            . "\n    Extended, and added PitchCorrection to, Grt Chimes"
             . "\n";
 
     protected $patchDisplayPages=[
@@ -126,7 +128,7 @@ class ClarendonUMC extends CPOrgan {
                 
                 case 2114: // Grt: Chimes
                     unset($stop->Rank001PipeCount);
-                    $stop->Rank001FirstAccessibleKeyNumber=22;
+                    $stop->Rank001FirstAccessibleKeyNumber=20;
                     break;
                 
                 case 2305: // Swl: Viole Celeste 8 (TC)
@@ -139,10 +141,29 @@ class ClarendonUMC extends CPOrgan {
         }
         
         foreach ($this->getRanks() as $rankid=>$rank) {
+            // printf("%d %s\n", $rankid, $rank->Name);
             switch ($rankid) {
+                
+                case 4: // Grt: Octave 4
+                    $rank->Substitute(82,84); // Broken release?
+                    break;
+                    
                 case 5: // Grt: Hohlfloete 4
                     $rank->Pipe(72, $rank->Pipe(70));
                     $rank->Pipe(72)->PitchTuning+=200;
+                    break;
+                
+                
+                case 11: // Grt: Chimes
+                    $rank->Substitute(57, 55);
+                    $rank->Substitute(58, 56);
+                    $rank->Substitute(74, 78);
+                    $rank->Substitute(75, 79);
+                    foreach ($rank->Pipes() as $pipe) {
+                        if ($pipe->PitchTuning) {
+                            $pipe->PitchCorrection=$pipe->PitchTuning;
+                        }
+                    }
                     break;
                 
                 case 41: // Pos: Principal 4
@@ -246,7 +267,7 @@ class ClarendonUMC extends CPOrgan {
 class ClarendonUMCDemo extends ClarendonUMC {
     const ODF="Clarendon United Methodist Church (Demo).Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Clarendon United Methodist Church (Demo).1.0.organ";
+    const TARGET=self::ROOT . "Clarendon United Methodist Church (Demo).1.1.organ";
     
     // protected $usedstops=[1,2,3,4,-1,-2,-3,-4,2002,2004,2005,2103,2105,2105,2201,2205,2209,2302,2303,2601,1720];
 
@@ -258,7 +279,7 @@ class ClarendonUMCDemo extends ClarendonUMC {
 class ClarendonUMCFull extends ClarendonUMC {
     const ODF="Clarendon United Methodist Church.Organ_Hauptwerk_xml";
     const SOURCE=self::ROOT . "OrganDefinitions/" . self::ODF;
-    const TARGET=self::ROOT . "Clarendon United Methodist.1.0.organ";
+    const TARGET=self::ROOT . "Clarendon United Methodist.1.1.organ";
 
     static function Full () {
         self::ClarendonUMC(new ClarendonUMCFull(self::SOURCE), self::TARGET);

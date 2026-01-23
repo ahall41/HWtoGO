@@ -57,4 +57,16 @@ class RankTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(2, sizeof($rank->Pipes()));
     }
+    
+    public function testSubstitute() {
+        new Organ("Test");
+        $rank=new Rank("Test Rank");
+        $p36=$rank->Pipe(36,TRUE);
+        
+        $p38=$rank->Substitute(36, 38);
+        $this->assertEquals(200, $p38->PitchTuning);
+        
+        $p39=$rank->Substitute(37, 39);
+        $this->assertNull($p39);
+    } 
 }
