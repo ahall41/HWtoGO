@@ -14,8 +14,6 @@ require_once(__DIR__ . "/AVOrgan.php");
 /**
  * Import Rieger Organ of the Name of Mary Church from Dreischor (Serbia) to GrandOrgue
  * 
- * @todo: virtual keyboards
- * 
  * @author andrew
  */
 class Dreischor extends AVOrgan {
@@ -26,11 +24,11 @@ class Dreischor extends AVOrgan {
               "Vierdag Organ from Adriaanskerk in Dreischor (Netherlands)\n"
             . "https://hauptwerk-augustine.info/Dreischor.php\n"
             . "\n"
-            . "1.1 Added virtual keyboards\n"
+            . "1.1 Add Pitch Correction\n"
             . "\n";
     const TARGET=self::ROOT . "Dreischor %s.1.1.organ";
 
-    protected int $releaseCrossfadeLengthMs=-1;
+    protected ?int $releaseCrossfadeLengthMs=-1;
     
     protected $patchDisplayPages=[
         1=>["SetID"=>1, "Name"=>"Original"],
@@ -46,9 +44,9 @@ class Dreischor extends AVOrgan {
     ];
     
     protected $patchTremulants=[
-        1710=>["Type"=>"Synth", "GroupIDs"=>[201,202]],
-        1720=>["Type"=>"Synth", "GroupIDs"=>[301,302]],
-        1730=>["Type"=>"Synth", "GroupIDs"=>[401,402]]
+        1710=>["Type"=>"Synth", "GroupIDs"=>[201,202], "Period"=>250, "AmpModDepth"=>15],
+        1720=>["Type"=>"Synth", "GroupIDs"=>[301,302], "Period"=>225, "AmpModDepth"=>20],
+        1730=>["Type"=>"Synth", "GroupIDs"=>[401,402], "Period"=>200, "AmpModDepth"=>25]
     ];
     
     protected $patchStops=[
@@ -163,8 +161,6 @@ class Dreischor extends AVOrgan {
         else {
             self::Dreischor(
                     [1=>"Far", 2=>"Near"], "Surround");
-            self::Dreischor(
-                    [2=>"Near"], "Dry");
         }
     }   
 }
