@@ -6,8 +6,8 @@
  * Based on WaveFileReader (C)2012 Rob Janssen / https://github.com/RobThree
  * Based on https://ccrma.stanford.edu/courses/422/projects/WaveFormat/
  * 
- * Released under the Creative Commons Non-Commercial 4.0 licence
- * (https://creativecommons.org/licenses/by-nc/4.0/)
+ * Released under the Creative Commons BY-NC-CA licence
+ * https://creativecommons.org/licenses/by-nc-sa/4.0/
  * 
  */
 
